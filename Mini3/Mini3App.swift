@@ -12,6 +12,7 @@ struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
             QuebraCabecaStartView(color: .orange)
+                .environmentObject(Profile(teste: true))
         }
     }
 }

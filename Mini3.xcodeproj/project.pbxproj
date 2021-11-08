@@ -17,6 +17,8 @@
 		FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */; };
 		FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */; };
 		FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB11B2735BB130027D188 /* ImagePicker.swift */; };
+		FA9356FE273999550005776C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FD273999550005776C /* ImageExtension.swift */; };
+		FA93570027399B2E0005776C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FF27399B2E0005776C /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaSettingsView.swift; sourceTree = "<group>"; };
 		FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImageView.swift; sourceTree = "<group>"; };
 		FA4EB11B2735BB130027D188 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FA9356FD273999550005776C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		FA9356FF27399B2E0005776C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +74,10 @@
 				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
 				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
 				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
+				FA9356FF27399B2E0005776C /* Profile.swift */,
 				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
 				FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */,
+				FA9356FD273999550005776C /* ImageExtension.swift */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
 			);
 			path = Mini3;
@@ -156,12 +162,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */,
+				FA93570027399B2E0005776C /* Profile.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
+				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

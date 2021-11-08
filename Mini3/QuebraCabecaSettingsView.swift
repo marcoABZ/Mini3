@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct QuebraCabecaSettingsView: View {
+    @EnvironmentObject var student: Profile
     @State var qtdDivisoes: Int = 2
     @State var som: Bool = true
     @State var animacoes: Bool = true
     @State var ordenacao: Bool = false
-    var color: Color
+    var color: Color = .orange
+    
+    func loadConfigs() {
+        if let cfg = student.configs[.quebraCabeca] as? MemoryGameConfiguration {
+            qtdDivisoes = cfg.verticalDivision
+            som = cfg.som
+            animacoes = cfg.animacao
+            ordenacao = cfg.ordenacao
+        }
+    }
     
     var body: some View {
         VStack (spacing: 30) {
@@ -28,16 +38,24 @@ struct QuebraCabecaSettingsView: View {
                 
                 Button
                     { qtdDivisoes = max(2, qtdDivisoes - 1) }
-            label: {
-                Image(systemName: "minus.circle")
-            }.foregroundColor(color)
+                    label: { Image(systemName: "minus.circle") }
+                        .foregroundColor(qtdDivisoes > 2 ? color : .gray)
+                        .disabled(qtdDivisoes <= 2)
+                        //TODO: Rever configurações de botão
+                        .font(.system(size: 24, weight: .regular, design: .default))
                 
             
                 Text(String(describing: qtdDivisoes))
+                    //TODO: Rever configurações do texto
+                    .font(.system(size: 24, weight: .semibold, design: .default))
                 
                 Button
-                { qtdDivisoes = min(10, qtdDivisoes + 1) }
-            label: { Image(systemName: "plus.circle") }.foregroundColor(color)
+                    { qtdDivisoes = min(10, qtdDivisoes + 1) }
+                    label: { Image(systemName: "plus.circle") }
+                        .foregroundColor(qtdDivisoes < 10 ? color : .gray)
+                        .disabled(qtdDivisoes >= 10)
+                        //TODO: Rever configurações de botão
+                        .font(.system(size: 24, weight: .regular, design: .default))
                 
                 
             }
@@ -72,17 +90,19 @@ struct QuebraCabecaSettingsView: View {
                 }
             }.toggleStyle(SwitchToggleStyle(tint: color))
 
-        }
+        }.onAppear(perform: loadConfigs)
     }
 }
 
 struct QuebraCabecaSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 15.0, *) {
-            QuebraCabecaSettingsView(qtdDivisoes: 1, som: true, animacoes: true, ordenacao: true, color: .red)
+            QuebraCabecaSettingsView()
                 .previewInterfaceOrientation(.landscapeLeft)
+                .environmentObject(Profile(teste: true))
         } else {
-            QuebraCabecaSettingsView(qtdDivisoes: 1, som: true, animacoes: true, ordenacao: true, color: .red)
+            QuebraCabecaSettingsView()
+                .environmentObject(Profile(teste: true))
         }
     }
 }
