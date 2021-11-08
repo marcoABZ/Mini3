@@ -11,7 +11,7 @@ import SwiftUI
 struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            QuebraCabecaStartView(color: .orange)
         }
     }
 }
