@@ -10,6 +10,7 @@ import SwiftUI
 struct QuebraCabecaImageView: View {
     @State private var image: Image?
     @State private var showingImagePicker = false
+    @State private var showingAlert = false
     @State private var inputImage: UIImage?
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     private var color: Color
@@ -28,7 +29,7 @@ struct QuebraCabecaImageView: View {
                 .frame(width: imageFrameWidth, height: imageFrameHeight)
             
             Button {
-                self.showingImagePicker = true
+                self.showingAlert.toggle()
             } label: {
                 Image(systemName: "camera")
                     .foregroundColor(.white)
@@ -38,7 +39,19 @@ struct QuebraCabecaImageView: View {
                         Circle()
                             .foregroundColor(color)
                     }
-            }.offset(x: cameraIconXOffset, y: cameraIconYOffset)
+            }
+            .offset(x: cameraIconXOffset, y: cameraIconYOffset)
+            //TODO: Rever mensagem do alerta
+            .alert("Selecionar Imagem", isPresented: $showingAlert) {
+                Button("Tirar Foto") {
+                    self.sourceType = .camera
+                    self.showingImagePicker.toggle()
+                }
+                Button("Escolher Foto") {
+                    self.sourceType = .photoLibrary
+                    self.showingImagePicker.toggle()
+                }
+            }
         }
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
@@ -69,5 +82,6 @@ struct QuebraCabecaImageView: View {
 struct QuebraCabecaImageView_Previews: PreviewProvider {
     static var previews: some View {
         QuebraCabecaImageView(color: .purple)
+.previewInterfaceOrientation(.landscapeRight)
     }
 }
