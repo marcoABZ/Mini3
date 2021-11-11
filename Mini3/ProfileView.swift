@@ -10,7 +10,19 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @State var niver = Date()
+    
+    //Apagar
+    @State private var image: Image?
+    @State private var showingImagePicker = false
+    @State private var showingAlert = false
+    @State private var inputImage: UIImage?
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    
     var body: some View {
+        //Apagar
+        let im: Image? = image ?? Image("placeholder")
+        
         ZStack {
             Color.gray.opacity(0.5).ignoresSafeArea()
             
@@ -45,11 +57,12 @@ struct ProfileView: View {
                             .padding(.top, 56)
                         
                         Button(action: {
-                            
+                            //Apagar
+                            self.showingAlert.toggle()
                             
                         }) {
                             ZStack {
-                                Image(systemName: "photo.fill")
+                                im
                                     .font(.system(size: 70))
                                     .foregroundColor(.gray)
                                     .frame(width: 210, height: 210)
@@ -67,6 +80,17 @@ struct ProfileView: View {
                                         .offset(x: 105, y: 105)
                                     }
                                 }
+                            }
+                        }
+                        //Apagar
+                        .alert("Selecionar Imagem", isPresented: $showingAlert) {
+                            Button("Tirar Foto") {
+                                self.sourceType = .camera
+                                self.showingImagePicker.toggle()
+                            }
+                            Button("Escolher Foto") {
+                                self.sourceType = .photoLibrary
+                                self.showingImagePicker.toggle()
                             }
                         }
                         
@@ -191,10 +215,21 @@ struct ProfileView: View {
         }
         .ignoresSafeArea()
         //TODO: Criar um manager para as imagens
-//        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-//            ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
-//        }
+        //Apagar
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
+        }
     }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+        
+        image = Image(uiImage: inputImage)
+    }
+    
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {
