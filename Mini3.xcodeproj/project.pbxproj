@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
+		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
+		5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03C273C50640045AAEB /* DashboardManager.swift */; };
+		5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */; };
+		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
+		5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF043273C70D70045AAEB /* ProfileManager.swift */; };
 		FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */; };
 		FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1032735A4870027D188 /* Mini3App.swift */; };
 		FA4EB1062735A4870027D188 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1052735A4870027D188 /* ContentView.swift */; };
@@ -23,6 +28,11 @@
 
 /* Begin PBXFileReference section */
 		5B2403F12735B39800141388 /* MiniGame1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame1Test.swift; sourceTree = "<group>"; };
+		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		5B5BF03C273C50640045AAEB /* DashboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardManager.swift; sourceTree = "<group>"; };
+		5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoverModel.swift; sourceTree = "<group>"; };
+		5B5BF041273C66760045AAEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5B5BF043273C70D70045AAEB /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaStartView.swift; sourceTree = "<group>"; };
 		FA4EB1002735A4870027D188 /* Mini3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mini3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4EB1032735A4870027D188 /* Mini3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mini3App.swift; sourceTree = "<group>"; };
@@ -48,6 +58,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B5BF03B273C4FFD0045AAEB /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5B5BF03C273C50640045AAEB /* DashboardManager.swift */,
+				5B5BF043273C70D70045AAEB /* ProfileManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		5B5BF040273C5BD30045AAEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FA4EB0F72735A4870027D188 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +94,8 @@
 		FA4EB1022735A4870027D188 /* Mini3 */ = {
 			isa = PBXGroup;
 			children = (
+				5B5BF040273C5BD30045AAEB /* Model */,
+				5B5BF03B273C4FFD0045AAEB /* Manager */,
 				FA4EB1032735A4870027D188 /* Mini3App.swift */,
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
@@ -79,6 +108,8 @@
 				FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */,
 				FA9356FD273999550005776C /* ImageExtension.swift */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
+				5B290317273AF45300F52700 /* DashboardView.swift */,
+				5B5BF041273C66760045AAEB /* ProfileView.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -162,15 +193,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */,
+				5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */,
 				FA93570027399B2E0005776C /* Profile.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
+				5B290318273AF45300F52700 /* DashboardView.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
+				5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */,
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,
+				5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */,
+				5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
