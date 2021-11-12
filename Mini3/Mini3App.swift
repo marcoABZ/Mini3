@@ -11,8 +11,11 @@ import SwiftUI
 struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
-            QuebraCabecaStartView(color: .orange)
-                .environmentObject(Profile(teste: true))
+            DashboardView()
+                .environmentObject(ProfileManager())
+                .environmentObject(DashboardManager())
+//            QuebraCabecaStartView(color: .orange)
+//                .environmentObject(Profile(teste: true))
         }
     }
 }

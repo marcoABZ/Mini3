@@ -12,6 +12,7 @@ class Profile: ObservableObject {
     @Published var color: Color = .blue
     @Published var configs: [Game: Configuration] = [:]
     
+    
     init(teste: Bool) {
         addConfig(MemoryGameConfiguration(verticalDivision: 7, som: true, animacao: false, ordenacao: true), forGame: .quebraCabeca)
     }

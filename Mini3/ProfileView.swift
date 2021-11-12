@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var profileManager: ProfileManager
-    @State var niver = Date()
-    
+
     //Apagar
     @State private var image: Image?
     @State private var showingImagePicker = false
@@ -21,22 +20,24 @@ struct ProfileView: View {
     
     var body: some View {
         //Apagar
-        let im: Image? = image ?? Image("placeholder")
+        let im: Image? = image ?? profileManager.editingProfile.image
         
         ZStack {
-            Color.gray.opacity(0.5).ignoresSafeArea()
+            profileManager.editingProfile.selectedColor.opacity(0.5).ignoresSafeArea()
             
             VStack {
                 ZStack {
                     HStack {
-                        Button(action: {}) {
+                        Button(action: {
+                            profileManager.dismissProfileView()
+                        }) {
                             Image(systemName: "arrow.left.circle")
                                 .font(.system(size: 28).bold())
                             Text("voltar")
                                 .padding(.horizontal)
                                 .font(.system(size: 24).bold())
                         }
-                        .foregroundColor(.gray)
+                        .foregroundColor(profileManager.editingProfile.selectedColor)
                         .frame(width: 200, height: 55)
                         .background(.white)
                         .cornerRadius(30)
@@ -44,7 +45,7 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal,105)
                     Text("Novo Perfil")
-                        .foregroundColor(.gray)
+                        .foregroundColor(profileManager.editingProfile.selectedColor)
                         .font(.system(size: 24).bold())
                 }
                 .padding(.vertical,16)
@@ -75,7 +76,7 @@ struct ProfileView: View {
                                             .font(.system(size: 32, weight: .bold))
                                             .foregroundColor(.white)
                                         .frame(width: 64, height: 64)
-                                        .background(.gray)
+                                        .background(profileManager.editingProfile.selectedColor)
                                         .cornerRadius(32)
                                         .offset(x: 105, y: 105)
                                     }
@@ -101,35 +102,47 @@ struct ProfileView: View {
                             .padding(.bottom, 42)
                         
                         HStack(spacing: 24) {
-                            Rectangle()
-                                .fill(.clear)
-                                .frame(width: 64, height: 64)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.gray, lineWidth: 3)
-                                        .overlay(
-                                            Path { path in
-                                                path.move(to: CGPoint(x: 48, y: 16))
-                                                path.addLine(to: CGPoint(x: 16, y: 48))
-                                            }
-                                            .stroke(Color.gray, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                                        )
-                                )
+                            Button(action: {
+                                profileManager.editingProfile.selectedColor = profileManager.neutralColor
+                            }) {
+                                Rectangle()
+                                    .fill(.clear)
+                                    .frame(width: 64, height: 64)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color.gray, lineWidth: 3)
+                                            .overlay(
+                                                Path { path in
+                                                    path.move(to: CGPoint(x: 48, y: 16))
+                                                    path.addLine(to: CGPoint(x: 16, y: 48))
+                                                }
+                                                    .stroke(Color.gray, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                                            )
+                                    )
+                            }
                             VStack(spacing: 24) {
                                 HStack(spacing: 24) {
                                     ForEach(0..<profileManager.availableColors.count/2) { i in
-                                        Rectangle()
-                                            .fill(profileManager.availableColors[i])
-                                            .frame(width: 64, height: 64)
-                                            .cornerRadius(16)
+                                        Button(action: {
+                                            profileManager.editingProfile.selectedColor = profileManager.availableColors[i]
+                                        }) {
+                                            Rectangle()
+                                                .fill(profileManager.availableColors[i])
+                                                .frame(width: 64, height: 64)
+                                                .cornerRadius(16)
+                                        }
                                     }
                                 }
                                 HStack(spacing: 24) {
                                     ForEach(0..<profileManager.availableColors.count/2) { i in
-                                        Rectangle()
-                                            .fill(profileManager.availableColors[i + profileManager.availableColors.count/2])
-                                            .frame(width: 64, height: 64)
-                                            .cornerRadius(16)
+                                        Button(action: {
+                                            profileManager.editingProfile.selectedColor = profileManager.availableColors[i+3]
+                                        }) {
+                                            Rectangle()
+                                                .fill(profileManager.availableColors[i + profileManager.availableColors.count/2])
+                                                .frame(width: 64, height: 64)
+                                                .cornerRadius(16)
+                                        }
                                     }
                                 }
                             }
@@ -155,7 +168,7 @@ struct ProfileView: View {
                             Text("Nome")
                                 .font(.system(size: 24, design: .rounded).bold())
                             
-                            TextField("Nome", text: .constant(""))
+                            TextField("Nome", text: $profileManager.editingProfile.name)
                                 .padding(.leading)
                                 .padding(12)
                                 .background(.gray.opacity(0.2))
@@ -165,7 +178,7 @@ struct ProfileView: View {
                                         .stroke(Color.gray.opacity(0.5), lineWidth: 1)
                                 )
                             
-                            DatePicker("Data de Nascimento", selection: $niver, in: ...Date(), displayedComponents: .date)
+                            DatePicker("Data de Nascimento", selection: $profileManager.editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
                                 .font(.system(size: 24, design: .rounded).bold())
                                 .padding(.top, 24)
                             
@@ -186,7 +199,7 @@ struct ProfileView: View {
                                 }
                             }
                             
-                            Toggle("Modo escuro", isOn: .constant(true))
+                            Toggle("Modo escuro", isOn: $profileManager.editingProfile.darkModeEnabled)
                                 .font(.system(size: 24, design: .rounded).bold())
                                 .padding(.top, 24)
                             
@@ -194,8 +207,11 @@ struct ProfileView: View {
                         .foregroundColor(.gray)
                         
             
-                        Button(action: {}) {
-                            Text("Criar")
+                        Button(action: {
+                            profileManager.saveProfile(image: im!)
+                            
+                        }) {
+                            Text(profileManager.addingProfile ? "Criar" : "Salvar")
                                 .font(.system(size: 24).bold())
                                 .foregroundColor(.white)
                         }
@@ -212,6 +228,9 @@ struct ProfileView: View {
                 .cornerRadius(32)
             }
             .frame(maxHeight: 640)
+        }
+        .onAppear() {
+            profileManager.getProfile()
         }
         .ignoresSafeArea()
         //TODO: Criar um manager para as imagens

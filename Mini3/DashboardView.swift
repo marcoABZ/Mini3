@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SideBarView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
-    let alunos = ["Marco","Ana","Deborah","Pablo","Carol"]
-    
+    @EnvironmentObject var profileManager: ProfileManager
     var body: some View {
         VStack {
             HStack {
@@ -24,20 +23,35 @@ struct SideBarView: View {
                 .foregroundColor(.black)
                 .font(.system(size: 20, design: .rounded).bold())
             }
-            List(0..<alunos.count) { i in
-                Button(action: {}) {
-                    if dashboardManager.profileListShowing {
-                        Text(alunos[i])
+            
+            .padding()
+            if profileManager.isEditingProfile || profileManager.addingProfile {
+                makeList()
+            } else {
+                makeList()
+            }
+        }
+        .navigationTitle("Astronimautas")
+        .background(profileManager.neutralColor)
+    }
+    
+    @ViewBuilder func makeList() -> some View {
+        List(0..<profileManager.profiles.count) { i in
+            Button(action: {
+                profileManager.selectedProfile = profileManager.profiles[i]
+            }) {
+                if dashboardManager.profileListShowing {
+                    HStack {
+                        Text(profileManager.profiles[i].name)
+                        Spacer()
                     }
                 }
             }
-            .listStyle(SidebarListStyle())
-            .onAppear(perform: {
-                    UITableView.appearance().contentInset.top = -35
-                })
+            .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : .clear)
         }
-        .padding()
-        .navigationTitle("Astronimautas")
+        .if(dashboardManager.profileListShowing) { view in
+            view.listStyle(PlainListStyle())
+        }
     }
 }
 
@@ -46,75 +60,115 @@ struct SideBarView: View {
 struct MainView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
+    @EnvironmentObject var profileManager: ProfileManager
+    
+    
+    //Apagar animacao e variavel abaixo
+    @State var pct: Double = 0.0
+
+//    var animation: Animation {
+//        Animation.default(
+//        Animation.basic(duration: 1.5).repeatForever(autoreverses: false)
+//    }
+
+    
     
     var body: some View {
-        VStack {
-            HStack(alignment: .top) {
-                Button(action: {}) {
-                    ZStack {
-                        Image(systemName: "photo.fill")
-                            .font(.system(size: 70))
-                            .foregroundColor(.gray)
-                            .frame(width: 110, height: 110)
-                            .background(.gray.opacity(0.5))
-                            .cornerRadius(12)
-                        
-                        VStack {
-                            HStack {
-                                Image(systemName: "gearshape")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(.white)
-                                .frame(width: 36, height: 36)
-                                .background(dashboardManager.selectedColor)
-                                .cornerRadius(18)
-                                .offset(x: 55, y: 55)
+        GeometryReader { geometry in
+            VStack {
+                HStack(alignment: .top) {
+                    Button(action: {
+                        profileManager.isEditingProfile = true
+                    }) {
+                        ZStack {
+                            if profileManager.selectedProfile == nil {
+                                Image(systemName: "photo.fill")
+                                    .font(.system(size: 70))
+                                    .foregroundColor(.gray)
+                                    .frame(width: 110, height: 110)
+                                    .background(.gray.opacity(0.5))
+                                    .cornerRadius(12)
+                            } else {
+                                profileManager.selectedProfile?.image
+                                    .font(.system(size: 70))
+                                    .foregroundColor(.gray)
+                                    .frame(width: 110, height: 110)
+                                    .background(.gray.opacity(0.5))
+                                    .cornerRadius(12)
+                            }
+                            
+                            
+                            
+                            VStack {
+                                HStack {
+                                    Image(systemName: "gearshape")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .foregroundColor(.white)
+                                    .frame(width: 36, height: 36)
+                                    .background(profileManager.selectedProfile?.selectedColor)
+                                    .cornerRadius(18)
+                                    .offset(x: 55, y: 55)
+                                }
                             }
                         }
+                        
                     }
-                    
-                }
-                .padding()
-                //TODO: Usar padding adaptavel pra quando esconder a side bar
-//                .padding(.leading, 36)
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Maria")
-                        Image(systemName: "gamecontroller")
-                    }
-                    .font(.system(size: 24, design: .rounded).bold())
-                    
-                    Text("8 anos")
-                        .font(.system(size: 14, design: .rounded))
-                        .padding(.vertical, 2)
-                    Text("Interesse: balas de goma")
-                        .font(.system(size: 14, design: .rounded))
+                    .padding()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
+                            Image(systemName: "gamecontroller")
+                        }
+                        .font(.system(size: 24, design: .rounded).bold())
+                        
+                        Text("8 anos")
+                            .font(.system(size: 14, design: .rounded))
+                            .padding(.vertical, 2)
+                        Text("Interesse: balas de goma")
+                            .font(.system(size: 14, design: .rounded))
 
-                }
-                .padding()
-                
-                Picker("Visualização", selection: $dashboardManager.pickerSelection) {
-                    ForEach(0..<ViewModes.allCases.count) {
-                        Text(ViewModes.allCases[$0].rawValue)
-                            .fontWeight(.bold)
-                            .tag(ViewModes.allCases[$0])
+                    }
+                    .padding()
+                    if dashboardManager.renderView {
+                        makePicker()
+                    } else {
+                        makePicker()
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.leading,64)
-                .padding(.trailing,64)
-                .padding(.vertical,34)
+                
+                generateContent()
             }
-            
-            generateContent()
+            .padding(.leading, geometry.size.width > 900 ? 80 : 0)
+            .onChange(of: profileManager.selectedProfile) { _ in
+                dashboardManager.renderView.toggle()
+            }
+            .onAppear() {
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+                
+                // TODO: Linkar com a cor do perfil selecionado
+//                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
+                
+                UISegmentedControl.appearance().selectedSegmentTintColor = .white
+            }
         }
+    }
+    
+    @ViewBuilder func makePicker() -> some View {
+        Picker("Visualização", selection: $dashboardManager.pickerSelection) {
+            ForEach(0..<ViewModes.allCases.count) {
+                Text(ViewModes.allCases[$0].rawValue)
+                    .fontWeight(.bold)
+                    .tag(ViewModes.allCases[$0])
+            }
+        }
+        .pickerStyle(SegmentedPickerStyle())
+//                    .colorMultiply(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.selectedColor : .clear)
+        .padding(.leading,64)
+        .padding(.trailing,64)
+        .padding(.vertical,34)
         .onAppear() {
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-            
-            // TODO: Linkar com a cor do perfil selecionado
-            UISegmentedControl.appearance().backgroundColor = UIColor(dashboardManager.selectedColor)
-            
-            UISegmentedControl.appearance().selectedSegmentTintColor = .white
+            UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.selectedColor : .gray)
         }
     }
     
@@ -152,24 +206,81 @@ struct MainView: View {
             Text("Desempenho")
                 .font(.system(size: 32, design: .rounded).bold())
             ScrollView(.horizontal) {
+                ZStack(alignment: .topLeading) {
+                    GeometryReader { geometry in
+                        ZStack {
+                            Path { path in
+                                path.addArc(center: CGPoint(x: geometry.size.width/2, y: geometry.size.width/2),
+                                    radius: geometry.size.width/2,
+                                    startAngle: Angle(degrees: 0),
+                                    endAngle: Angle(degrees: 360),
+                                    clockwise: true)
+                            }
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 30)
+                            if dashboardManager.pickerSelection == .games {
+                                InnerRing(pct: self.pct).stroke(Color.green, style: StrokeStyle(lineWidth: 35, lineCap: .round, lineJoin: .round))
+                    
+                                Text("67%")
+                                    .font(.system(size: 30).bold())
+                            } else {
+                                InnerRing(pct: self.pct).stroke(profileManager.getProfileColor(), style: StrokeStyle(lineWidth: 30, lineCap: .round, lineJoin: .round))
+                                Text("67%")
+                                    .font(.system(size: 26).bold())
+                            }
+                        }
+
+                    }
+                    .frame(width: 110, height: 110)
+                    .padding(.leading,40)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(20)
                 
+                    Image("perfPlaceholder")
+                        .padding()
+                    }
+                    .onAppear() {
+                        withAnimation(.easeInOut(duration: 3)) {
+                            self.pct = 0.67
+                            
+                        }
+                    }
+               
+                }
             }
         }
-    }
 }
+
 
 struct DashboardView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
+    @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
         NavigationView {
-            SideBarView()
-                .environmentObject(dashboardManager)
+            if profileManager.addingProfile{
+                SideBarView()
+                    .environmentObject(dashboardManager)
+                    .environmentObject(profileManager)
+            } else {
+                SideBarView()
+                    .environmentObject(dashboardManager)
+                    .environmentObject(profileManager)
+            }
+            
             MainView()
                 .environmentObject(dashboardManager)
+                .environmentObject(profileManager)
         }
-        
+        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
+            SplashView()
+                .environmentObject(profileManager)
+        }
+        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
+            ProfileView()
+                .environmentObject(dashboardManager)
+                .environmentObject(profileManager)
+        }
     }
 }
 
@@ -177,6 +288,7 @@ struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardView()
             .environmentObject(DashboardManager())
+            .environmentObject(ProfileManager())
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }

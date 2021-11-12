@@ -18,6 +18,9 @@ class DashboardManager: ObservableObject {
     @Published var profileListShowing: Bool
     @Published var pickerSelection: ViewModes
     
+    //Forçar update do picker
+    @Published var renderView: Bool = false
+    
 //    TODO: Linkar a cor com o perfil
     let selectedColor: Color
     

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B232D77273D8E4300C157BE /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D76273D8E4300C157BE /* SplashView.swift */; };
+		5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7B273DB18600C157BE /* ProfileModel.swift */; };
+		5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */; };
+		5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D85273DDD1600C157BE /* InnerRing.swift */; };
 		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
 		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
 		5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03C273C50640045AAEB /* DashboardManager.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B232D76273D8E4300C157BE /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		5B232D7B273DB18600C157BE /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
+		5B232D85273DDD1600C157BE /* InnerRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerRing.swift; sourceTree = "<group>"; };
 		5B2403F12735B39800141388 /* MiniGame1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame1Test.swift; sourceTree = "<group>"; };
 		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		5B5BF03C273C50640045AAEB /* DashboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardManager.swift; sourceTree = "<group>"; };
@@ -58,6 +66,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B232D7D273DBE9800C157BE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5B232D82273DDCE200C157BE /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				5B232D85273DDD1600C157BE /* InnerRing.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		5B5BF03B273C4FFD0045AAEB /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */,
+				5B232D7B273DB18600C157BE /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +119,8 @@
 		FA4EB1022735A4870027D188 /* Mini3 */ = {
 			isa = PBXGroup;
 			children = (
+				5B232D82273DDCE200C157BE /* Shapes */,
+				5B232D7D273DBE9800C157BE /* Extensions */,
 				5B5BF040273C5BD30045AAEB /* Model */,
 				5B5BF03B273C4FFD0045AAEB /* Manager */,
 				FA4EB1032735A4870027D188 /* Mini3App.swift */,
@@ -110,6 +137,7 @@
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
 				5B290317273AF45300F52700 /* DashboardView.swift */,
 				5B5BF041273C66760045AAEB /* ProfileView.swift */,
+				5B232D76273D8E4300C157BE /* SplashView.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -193,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */,
+				5B232D77273D8E4300C157BE /* SplashView.swift in Sources */,
 				5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */,
 				FA93570027399B2E0005776C /* Profile.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
@@ -200,10 +229,13 @@
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
 				5B290318273AF45300F52700 /* DashboardView.swift in Sources */,
+				5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */,
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
+				5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
+				5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */,
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,
 				5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */,
 				5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */,
@@ -337,15 +369,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mini3/Preview Content\"";
-				DEVELOPMENT_TEAM = 8KLVK79M3G;
+				DEVELOPMENT_TEAM = P9DY7C7A5F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "O App precisa de acesso a camera para utilizar fotos personalizadas";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -357,7 +390,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -369,15 +402,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mini3/Preview Content\"";
-				DEVELOPMENT_TEAM = 8KLVK79M3G;
+				DEVELOPMENT_TEAM = P9DY7C7A5F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "O App precisa de acesso a camera para utilizar fotos personalizadas";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -389,7 +423,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
