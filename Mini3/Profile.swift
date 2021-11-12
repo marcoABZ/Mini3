@@ -9,11 +9,15 @@ import SwiftUI
 
 class Profile: ObservableObject {
     
-    @Published var color: Color = .blue
+    @Published var color: Color = .orange
     @Published var configs: [Game: Configuration] = [:]
+    @Published var image: UIImage = UIImage(named: "placeholder")!
+    @Published var hd: Int = 3
+    @Published var vd: Int = 1
+    @Published var or: Bool = false
     
     init(teste: Bool) {
-        addConfig(MemoryGameConfiguration(verticalDivision: 7, som: true, animacao: false, ordenacao: true), forGame: .quebraCabeca)
+        addConfig(MemoryGameConfiguration(verticalDivision: 1, som: true, animacao: true, ordenacao: false), forGame: .quebraCabeca)
     }
     
     func addConfig(_ config: Configuration, forGame game: Game) {
@@ -23,20 +27,26 @@ class Profile: ObservableObject {
 
 struct MemoryGameConfiguration: Configuration {
     
-    @State var verticalDivision: Int = 1
-    @State var horizontalDivision: Int = 3
-    @State var som: Bool = false
-    @State var animacao: Bool = false
-    @State var ordenacao: Bool = false
-    @State var tipoOrdenacao: Int = 0
+    var verticalDivision: Int = 1
+    var horizontalDivision: Int = 3
+    var som: Bool = false
+    var animacao: Bool = false
+    var ordenacao: Bool = false
+    var tipoOrdenacao: Int = 0
+    var image: UIImage = UIImage(named: "placeholder")!
     
-    init(verticalDivision: Int = 1, horizontalDivision: Int = 3, som: Bool = false, animacao: Bool = false, ordenacao: Bool = false, tipoOrdenacao: Int = 0) {
+    init(verticalDivision: Int = 1, horizontalDivision: Int = 3, som: Bool = false, animacao: Bool = false, ordenacao: Bool = false, tipoOrdenacao: Int = 0, image: UIImage = UIImage(named: "placeholder")!) {
         self.verticalDivision = verticalDivision
         self.horizontalDivision = horizontalDivision
         self.som = som
         self.animacao = animacao
         self.ordenacao = ordenacao
         self.tipoOrdenacao = tipoOrdenacao
+        self.image = image
+    }
+    
+    mutating func setImage(_ im: UIImage) {
+        image = im
     }
 }
 

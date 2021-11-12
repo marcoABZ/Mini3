@@ -1,10 +1,3 @@
-//
-//  PuzzlePiece.swift
-//  Mini3
-//
-//  Created by Marco Zulian on 11/11/21.
-//
-
 import SwiftUI
 
 struct PuzzlePiece: View {

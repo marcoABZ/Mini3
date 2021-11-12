@@ -11,6 +11,8 @@ struct QuebraCabecaStartView: View {
     @EnvironmentObject var student: Profile
     
     var body: some View {
+        NavigationView {
+
         student.color
             .ignoresSafeArea(.all)
             .overlay {
@@ -28,13 +30,17 @@ struct QuebraCabecaStartView: View {
                         QuebraCabecaSettingsView()
                             .padding(.horizontal, settingsItemsSpacing)
                             .frame(maxWidth: settingsWidth)
-                            .environmentObject(student)
                     }
                     .frame(height: settingsHeight)
                     .background()
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
+                    
                 }.frame(width: settingsPlusImageWidth)
             }
+            
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true)
     }
     
     //MARK: Constantes

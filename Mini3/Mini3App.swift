@@ -11,7 +11,7 @@ import SwiftUI
 struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
-            SliceTest(horizontalPieces: 5, verticalPieces: 5)
+            QuebraCabecaStartView()
                 .environmentObject(Profile(teste: true))
         }
     }

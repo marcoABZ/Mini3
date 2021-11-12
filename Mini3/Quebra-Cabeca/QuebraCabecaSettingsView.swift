@@ -29,34 +29,73 @@ struct QuebraCabecaSettingsView: View {
             HStack {
                 VStack (alignment: .leading) {
                     Text("Quantidade de divisoes")
-                        .font(.title3)
+                        .font(.title2)
                     Text("Quantidade de pedaços que a imagem será divididada.")
                         .font(.footnote)
                         .foregroundColor(.gray)
+                    HStack {
+                        Text("Divisões horizontais")
+                        Spacer()
+                        Button
+                        { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
+                            student.hd = settings.horizontalDivision
+                        }
+                            label: { Image(systemName: "minus.circle") }
+                            .foregroundColor(settings.horizontalDivision > 1 ? student.color : .gray)
+                            .disabled(settings.horizontalDivision <= 1)
+                                //TODO: Rever configurações de botão
+                                .font(.system(size: 24, weight: .regular, design: .default))
+                        
+                    
+                        Text(String(describing: settings.horizontalDivision))
+                            //TODO: Rever configurações do texto
+                            .font(.system(size: 24, weight: .semibold, design: .default))
+                        
+                        Button
+                        { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
+                            student.hd = settings.horizontalDivision
+                        }
+                            label: { Image(systemName: "plus.circle") }
+                            .foregroundColor(settings.horizontalDivision < 10 ? student.color : .gray)
+                            .disabled(settings.horizontalDivision >= 10)
+                                //TODO: Rever configurações de botão
+                                .font(.system(size: 24, weight: .regular, design: .default))
+                        
+                    }.padding([.top, .leading], 8)
+                    
+                    HStack {
+                        Text("Divisões verticais")
+                        Spacer()
+                        Button
+                        { settings.verticalDivision = max(1, settings.verticalDivision - 1)
+                            student.vd = settings.verticalDivision
+                        }
+                            label: { Image(systemName: "minus.circle") }
+                            .foregroundColor(settings.verticalDivision > 1 ? student.color : .gray)
+                            .disabled(settings.verticalDivision <= 1)
+                                //TODO: Rever configurações de botão
+                                .font(.system(size: 24, weight: .regular, design: .default))
+                        
+                    
+                        Text(String(describing: settings.verticalDivision))
+                            //TODO: Rever configurações do texto
+                            .font(.system(size: 24, weight: .semibold, design: .default))
+                        
+                        Button
+                        { settings.verticalDivision = min(10, settings.verticalDivision + 1)
+                            student.vd = settings.verticalDivision
+                        }
+                            label: { Image(systemName: "plus.circle") }
+                            .foregroundColor(settings.verticalDivision < 10 ? student.color : .gray)
+                            .disabled(settings.verticalDivision >= 10)
+                                //TODO: Rever configurações de botão
+                                .font(.system(size: 24, weight: .regular, design: .default))
+                        
+                    }.padding([.top, .leading], 8)
+                    
                 }
                 Spacer()
-                
-                Button
-                { settings.horizontalDivision = max(2, settings.horizontalDivision - 1) }
-                    label: { Image(systemName: "minus.circle") }
-                    .foregroundColor(settings.horizontalDivision > 2 ? student.color : .gray)
-                    .disabled(settings.horizontalDivision <= 2)
-                        //TODO: Rever configurações de botão
-                        .font(.system(size: 24, weight: .regular, design: .default))
-                
-            
-                Text(String(describing: settings.horizontalDivision))
-                    //TODO: Rever configurações do texto
-                    .font(.system(size: 24, weight: .semibold, design: .default))
-                
-                Button
-                { settings.horizontalDivision = min(10, settings.horizontalDivision + 1) }
-                    label: { Image(systemName: "plus.circle") }
-                    .foregroundColor(settings.horizontalDivision < 10 ? student.color : .gray)
-                    .disabled(settings.horizontalDivision >= 10)
-                        //TODO: Rever configurações de botão
-                        .font(.system(size: 24, weight: .regular, design: .default))
-                
+
                 
             }
             
@@ -84,17 +123,20 @@ struct QuebraCabecaSettingsView: View {
                 VStack (alignment: .leading) {
                     Text("Incluir ordenaçao")
                         .font(.title3)
-                    Text("Ordene as pecas do quebra-cabeca com  letras ou números")
+                    Text("Ordene as pecas do quebra-cabeca com letras ou números")
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
             }.toggleStyle(SwitchToggleStyle(tint: student.color))
-
-            Button("Começar") {
-                isGameOn.toggle()
-            }.fullScreenCover(isPresented: $isGameOn, content: SliceTest.init)
-
+                .onChange(of: settings.ordenacao) { _isOn in
+                    student.or = settings.ordenacao
+                }
+            
+            NavigationLink(destination: SliceTest(horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao, imagem: student.image)) {
+                Text("Começar")
+            }
         }.onAppear(perform: loadSettings)
+            .navigationBarHidden(true)
     }
 }
 
