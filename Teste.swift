@@ -63,7 +63,7 @@ struct CompositeConfiguration: Configuration_ {
 //            selector: .wheel,
 //            value: 0)]
 //}
-//
+
 //class PuzzleManager: ObservableObject {
 //    @Published var model: Puzzle = Puzzle()
 //}

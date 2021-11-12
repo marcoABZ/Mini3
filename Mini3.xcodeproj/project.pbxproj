@@ -37,6 +37,7 @@
 		FA30811F273D079B007D94D2 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		FA308121273D11BF007D94D2 /* PuzzleBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleBoard.swift; sourceTree = "<group>"; };
 		FA308127273D652D007D94D2 /* SliceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliceTest.swift; sourceTree = "<group>"; };
+		FA308129273DA6CE007D94D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaStartView.swift; sourceTree = "<group>"; };
 		FA4EB1002735A4870027D188 /* Mini3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mini3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4EB1032735A4870027D188 /* Mini3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mini3App.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		FA30811C273D0077007D94D2 /* Quebra-Cabeça */ = {
 			isa = PBXGroup;
 			children = (
+				FA308127273D652D007D94D2 /* SliceTest.swift */,
 				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
 				FA30811D273D0514007D94D2 /* PuzzlePiece.swift */,
 				FA30811F273D079B007D94D2 /* Puzzle.swift */,
@@ -87,7 +89,6 @@
 		FA4EB0F72735A4870027D188 = {
 			isa = PBXGroup;
 			children = (
-				FA308127273D652D007D94D2 /* SliceTest.swift */,
 				FA24B5A0273CA72A00364D00 /* Teste.swift */,
 				FA4EB1022735A4870027D188 /* Mini3 */,
 				FA4EB1012735A4870027D188 /* Products */,
@@ -105,6 +106,7 @@
 		FA4EB1022735A4870027D188 /* Mini3 */ = {
 			isa = PBXGroup;
 			children = (
+				FA308129273DA6CE007D94D2 /* Info.plist */,
 				FA4EB1032735A4870027D188 /* Mini3App.swift */,
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
@@ -349,12 +351,13 @@
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mini3/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "O App precisa de acesso a camera para utilizar fotos personalizadas";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -366,7 +369,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -381,12 +384,13 @@
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mini3/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "O App precisa de acesso a camera para utilizar fotos personalizadas";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -398,7 +402,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

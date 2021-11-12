@@ -10,6 +10,7 @@ import SwiftUI
 struct QuebraCabecaSettingsView: View {
     @EnvironmentObject var student: Profile
     @State var settings: MemoryGameConfiguration
+    @State var isGameOn : Bool = false
     
     init() {
         settings = MemoryGameConfiguration(verticalDivision: 1, horizontalDivision: 2, som: true, animacao: true, ordenacao: false, tipoOrdenacao: 0)
@@ -88,6 +89,10 @@ struct QuebraCabecaSettingsView: View {
                         .foregroundColor(.gray)
                 }
             }.toggleStyle(SwitchToggleStyle(tint: student.color))
+
+            Button("Começar") {
+                isGameOn.toggle()
+            }.fullScreenCover(isPresented: $isGameOn, content: SliceTest.init)
 
         }.onAppear(perform: loadSettings)
     }
