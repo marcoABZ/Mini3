@@ -43,6 +43,7 @@ class MemoryGameConfiguration: Configuration {
 
 enum Game {
     case quebraCabeca
+    case formas
 }
 
 protocol Configuration {}

@@ -22,6 +22,7 @@ class ProfileManager: ObservableObject {
     
     let neutralColor = Color.init(red: 242/255, green: 242/255, blue: 247/255)
     
+    @Published var coverUpdate: Bool = false
     
     let availableColors = [
         Color.init(red: 123/255, green: 86/255, blue: 202/255),
@@ -80,11 +81,13 @@ class ProfileManager: ObservableObject {
             for i in 0..<profiles.count {
                 if profiles[i] == selectedProfile! {
                     profiles[i] = editingProfile
+                    selectedProfile = editingProfile
                 }
             }
         } else if addingProfile {
             editingProfile.image = image
             profiles.append(editingProfile)
+            selectedProfile = editingProfile
         }
         dismissProfileView()
     }

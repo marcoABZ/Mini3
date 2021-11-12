@@ -8,11 +8,29 @@
 import Foundation
 import SwiftUI
 
+enum Mascotes: CaseIterable {
+    case coelho
+    case chiba
+    case gato
+    
+    static func getImageIconName(animal: Mascotes) -> String {
+        switch animal {
+        case .coelho:
+            return "coelhoSquare"
+        case .chiba:
+            return "chibaSquare"
+        case .gato:
+            return "gatoSquare"
+        }
+    }
+}
+
 struct ProfileModel: Equatable {
     var name: String
     var birthdate: Date
     var selectedColor: Color
     var darkModeEnabled: Bool
+    var mascote: Mascotes
     //TODO: Interesses
     
     var image: Image
@@ -23,5 +41,6 @@ struct ProfileModel: Equatable {
         self.selectedColor = color
         self.image = Image(image)
         self.darkModeEnabled = darkModeEnabled
+        self.mascote = .coelho
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileListView: View {
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var dashboardManager: DashboardManager
 //    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -41,6 +42,7 @@ struct ProfileListView: View {
                         Button(action: {
                             profileManager.profileNotSelected = false
                             profileManager.selectedProfile = profileManager.profiles[index]
+                            dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
                         }) {
                             profileManager.profiles[index].image
                                 .frame(width: 165, height: 165)
@@ -71,6 +73,8 @@ struct ProfileListView: View {
 
 struct SplashView: View {
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var dashboardManager: DashboardManager
+    
     var body: some View {
         ZStack {
             Image("SplashBackground")
@@ -95,6 +99,7 @@ struct SplashView: View {
         .fullScreenCover(isPresented: $profileManager.addingProfile, onDismiss: {profileManager.addingProfile = false}) {
             ProfileView()
                 .environmentObject(profileManager)
+                .environmentObject(dashboardManager)
         }
     }
 }
@@ -104,5 +109,6 @@ struct SplashView_Previews: PreviewProvider {
         SplashView()
             .previewInterfaceOrientation(.landscapeLeft)
             .environmentObject(ProfileManager())
+            .environmentObject(DashboardManager())
     }
 }

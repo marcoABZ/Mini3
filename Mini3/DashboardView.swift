@@ -39,6 +39,9 @@ struct SideBarView: View {
         List(0..<profileManager.profiles.count) { i in
             Button(action: {
                 profileManager.selectedProfile = profileManager.profiles[i]
+                dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
+                profileManager.coverUpdate.toggle()
+                
             }) {
                 if dashboardManager.profileListShowing {
                     HStack {
@@ -65,12 +68,6 @@ struct MainView: View {
     
     //Apagar animacao e variavel abaixo
     @State var pct: Double = 0.0
-
-//    var animation: Animation {
-//        Animation.default(
-//        Animation.basic(duration: 1.5).repeatForever(autoreverses: false)
-//    }
-
     
     
     var body: some View {
@@ -81,7 +78,7 @@ struct MainView: View {
                         profileManager.isEditingProfile = true
                     }) {
                         ZStack {
-                            if profileManager.selectedProfile == nil {
+                            if profileManager.isEditingProfile {
                                 Image(systemName: "photo.fill")
                                     .font(.system(size: 70))
                                     .foregroundColor(.gray)
@@ -182,12 +179,26 @@ struct MainView: View {
                     HStack(alignment: .top, spacing: 36) {
                         ForEach(0..<10) { i in
                             VStack(alignment: .leading, spacing: 6) {
-                                if i <= dashboardManager.gamesAvailable.count - 1 {
-                                    Image("\(dashboardManager.gamesAvailable[i].imageName)")
-                                        .padding(.bottom, 10)
-                                    Text("\(dashboardManager.gamesAvailable[i].title)")
+                                if i <= dashboardManager.covers.count - 1 {
+                                    if profileManager.coverUpdate {
+                                        dashboardManager.covers[i].image
+                                            .resizable()
+                                            .cornerRadius(16)
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 220, height: 320)
+                                            .padding(.bottom, 10)
+                                    } else {
+                                        dashboardManager.covers[i].image
+                                            .resizable()
+                                            .cornerRadius(16)
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 220, height: 320)
+                                            .padding(.bottom, 10)
+                                    }
+                                    
+                                    Text("\(dashboardManager.covers[i].title)")
                                         .font(.system(size: 17).bold())
-                                    Text("\(dashboardManager.gamesAvailable[i].description)")
+                                    Text("\(dashboardManager.covers[i].description)")
                                 } else {
                                     Rectangle()
                                         .frame(width: 233, height: 326)
@@ -275,6 +286,7 @@ struct DashboardView: View {
         .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
             SplashView()
                 .environmentObject(profileManager)
+                .environmentObject(dashboardManager)
         }
         .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
             ProfileView()

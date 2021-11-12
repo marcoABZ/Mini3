@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var profileManager: ProfileManager
-
+    @EnvironmentObject var dashboardManager: DashboardManager
+    
     //Apagar
     @State private var image: Image?
     @State private var showingImagePicker = false
@@ -188,14 +189,22 @@ struct ProfileView: View {
                             
                             HStack(spacing: 35) {
                                 Spacer()
-                                ForEach(0..<3) { _ in
-                                    Rectangle().frame(width: 94, height: 94)
-                                        .foregroundColor(.gray.opacity(0.2))
-                                        .cornerRadius(16)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .stroke(.gray.opacity(0.5))
-                                        )
+                                ForEach(0..<Mascotes.allCases.count) { i in
+                                    Button(action: {
+                                        profileManager.editingProfile.mascote = Mascotes.allCases[i]
+                                    }) {
+                                        Image(Mascotes.getImageIconName(animal: Mascotes.allCases[i]))
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 94, height: 94)
+                                            .foregroundColor(.gray.opacity(0.2))
+                                            .cornerRadius(16)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 19)
+                                                    .stroke(profileManager.editingProfile.selectedColor, lineWidth: profileManager.editingProfile.mascote == Mascotes.allCases[i] ? 8 : 0)
+                                                    .frame(width: 100, height: 100)
+                                            )
+                                    }
                                 }
                             }
                             
@@ -209,7 +218,7 @@ struct ProfileView: View {
             
                         Button(action: {
                             profileManager.saveProfile(image: im!)
-                            
+                            dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
                         }) {
                             Text(profileManager.addingProfile ? "Criar" : "Salvar")
                                 .font(.system(size: 24).bold())
