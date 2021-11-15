@@ -9,20 +9,8 @@ import SwiftUI
 
 struct QuebraCabecaSettingsView: View {
     @EnvironmentObject var student: Profile
-    @State var settings: MemoryGameConfiguration
+    @ObservedObject var settings: MemoryGameConfiguration
     @State var isGameOn : Bool = false
-    
-    init() {
-        settings = MemoryGameConfiguration(verticalDivision: 1, horizontalDivision: 2, som: true, animacao: true, ordenacao: false, tipoOrdenacao: 0)
-    }
-    
-    func loadSettings() {
-        if let cfg = student.configs[.quebraCabeca] as? MemoryGameConfiguration {
-            settings = cfg
-        } else {
-            student.configs[.quebraCabeca] = settings
-        }
-    }
     
     var body: some View {
         VStack (spacing: 30) {
@@ -38,7 +26,8 @@ struct QuebraCabecaSettingsView: View {
                         Spacer()
                         Button
                         { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
-                            student.hd = settings.horizontalDivision
+//                            student.hd = settings.horizontalDivision
+                            print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
                             .foregroundColor(settings.horizontalDivision > 1 ? student.color : .gray)
@@ -53,7 +42,8 @@ struct QuebraCabecaSettingsView: View {
                         
                         Button
                         { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
-                            student.hd = settings.horizontalDivision
+//                            student.hd = settings.horizontalDivision
+                            print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
                             .foregroundColor(settings.horizontalDivision < 10 ? student.color : .gray)
@@ -68,7 +58,8 @@ struct QuebraCabecaSettingsView: View {
                         Spacer()
                         Button
                         { settings.verticalDivision = max(1, settings.verticalDivision - 1)
-                            student.vd = settings.verticalDivision
+//                            student.vd = settings.verticalDivision
+                            print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
                             .foregroundColor(settings.verticalDivision > 1 ? student.color : .gray)
@@ -83,7 +74,8 @@ struct QuebraCabecaSettingsView: View {
                         
                         Button
                         { settings.verticalDivision = min(10, settings.verticalDivision + 1)
-                            student.vd = settings.verticalDivision
+//                            student.vd = settings.verticalDivision
+                            print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
                             .foregroundColor(settings.verticalDivision < 10 ? student.color : .gray)
@@ -128,22 +120,25 @@ struct QuebraCabecaSettingsView: View {
                         .foregroundColor(.gray)
                 }
             }.toggleStyle(SwitchToggleStyle(tint: student.color))
-                .onChange(of: settings.ordenacao) { _isOn in
-                    student.or = settings.ordenacao
-                }
+//                .onChange(of: settings.ordenacao) { _isOn in
+//                    student.or = settings.ordenacao
+//                }
             
-            NavigationLink(destination: SliceTest(horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao, imagem: student.image)) {
-                Text("Começar")
+//            NavigationLink(destination: SliceTest(horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao, imagem: student.image)) {
+//                Text("Começar")
+                
+                NavigationLink(destination:
+                                SliceTest(student: _student, puzzleManager: PuzzleManager(settings: settings), horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao)) {
+                    Text("Começar")
             }
-        }.onAppear(perform: loadSettings)
-            .navigationBarHidden(true)
+        }.navigationBarHidden(true)
     }
 }
 
-struct QuebraCabecaSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuebraCabecaSettingsView()
-            .previewInterfaceOrientation(.landscapeLeft)
-            .environmentObject(Profile(teste: true))
-    }
-}
+//struct QuebraCabecaSettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuebraCabecaSettingsView()
+//            .previewInterfaceOrientation(.landscapeLeft)
+//            .environmentObject(Profile(teste: true))
+//    }
+//}

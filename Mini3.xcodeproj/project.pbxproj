@@ -11,6 +11,7 @@
 		FA24B59A273C29E700364D00 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B599273C29E700364D00 /* Preview.swift */; };
 		FA24B59F273C5D9800364D00 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B59E273C5D9800364D00 /* SettingsView.swift */; };
 		FA24B5A1273CA72A00364D00 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B5A0273CA72A00364D00 /* Teste.swift */; };
+		FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */; };
 		FA30811E273D0514007D94D2 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811D273D0514007D94D2 /* PuzzlePiece.swift */; };
 		FA308120273D079B007D94D2 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811F273D079B007D94D2 /* Puzzle.swift */; };
 		FA308122273D11BF007D94D2 /* PuzzleBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308121273D11BF007D94D2 /* PuzzleBoard.swift */; };
@@ -33,6 +34,7 @@
 		FA24B599273C29E700364D00 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		FA24B59E273C5D9800364D00 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FA24B5A0273CA72A00364D00 /* Teste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
+		FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaPreview.swift; sourceTree = "<group>"; };
 		FA30811D273D0514007D94D2 /* PuzzlePiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
 		FA30811F273D079B007D94D2 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		FA308121273D11BF007D94D2 /* PuzzleBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleBoard.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
 				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
 				FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */,
+				FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */,
 			);
 			path = "Quebra-Cabeca";
 			sourceTree = "<group>";
@@ -76,8 +79,8 @@
 		FA30811C273D0077007D94D2 /* Quebra-Cabeça */ = {
 			isa = PBXGroup;
 			children = (
-				FA308127273D652D007D94D2 /* SliceTest.swift */,
 				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
+				FA308127273D652D007D94D2 /* SliceTest.swift */,
 				FA30811D273D0514007D94D2 /* PuzzlePiece.swift */,
 				FA30811F273D079B007D94D2 /* Puzzle.swift */,
 				FA308121273D11BF007D94D2 /* PuzzleBoard.swift */,
@@ -210,6 +213,7 @@
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA30811E273D0514007D94D2 /* PuzzlePiece.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */,
+				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA308128273D652D007D94D2 /* SliceTest.swift in Sources */,
@@ -369,7 +373,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -402,7 +406,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

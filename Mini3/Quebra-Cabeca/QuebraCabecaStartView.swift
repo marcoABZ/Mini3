@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuebraCabecaStartView: View {
     @EnvironmentObject var student: Profile
+    @State var puzzleManager: PuzzleManager
     
     var body: some View {
         NavigationView {
@@ -20,24 +21,22 @@ struct QuebraCabecaStartView: View {
                     GameHeaderView(gameName: "Quebra-cabeça")
                     HStack {
                         Spacer()
-                        QuebraCabecaImageView(color: student.color)
+                        QuebraCabecaImageView(cfg: puzzleManager.settings)
                         Spacer()
                         
                         //TODO: Estudar possibilidade/complexidade de trocar Divider por uma linha
                         Divider()
                             .background(student.color)
                         
-                        QuebraCabecaSettingsView()
+                        QuebraCabecaSettingsView(settings: puzzleManager.settings)
                             .padding(.horizontal, settingsItemsSpacing)
                             .frame(maxWidth: settingsWidth)
                     }
                     .frame(height: settingsHeight)
                     .background()
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
-                    
                 }.frame(width: settingsPlusImageWidth)
             }
-            
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
@@ -55,7 +54,10 @@ struct QuebraCabecaStartView: View {
 
 struct QuebraCabecaStartView_Previews: PreviewProvider {
     static var previews: some View {
-        QuebraCabecaStartView()
+        let cfg = MemoryGameConfiguration()
+        let manager = PuzzleManager(settings: cfg)
+        
+        QuebraCabecaStartView(puzzleManager: manager)
             .previewInterfaceOrientation(.landscapeLeft)
             .environmentObject(Profile(teste: true))
     }

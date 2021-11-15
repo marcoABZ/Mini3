@@ -14,44 +14,11 @@ struct QuebraCabecaImageView: View {
     @State private var showingAlert = false
     @State private var inputImage: UIImage?
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    private var color: Color
-    @State private var cfg: MemoryGameConfiguration
-    private var slices: [UIImage] {
-        if let inputImage = inputImage {
-            return inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!.slice(verticalPieces: student.vd, horizontalPieces: student.hd)
-        }
-        else {
-            return []
-        }
-    }
-    init(color: Color) {
-        self.color = color
-        cfg = MemoryGameConfiguration(verticalDivision: 1, horizontalDivision: 2, som: true, animacao: true, ordenacao: false, tipoOrdenacao: 0)
-    }
+    @ObservedObject var cfg: MemoryGameConfiguration
     
     var body: some View {
-        let im: Image? = image ?? Image("placeholder")
-        
         ZStack {
-            if !slices.isEmpty {
-                
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 35), count: student.hd)) {
-                // TODO: Setar ordenação com letras
-                ForEach(0..<slices.count, id: \.self) { i in
-                    PuzzlePiece(color: student.color, image: Image(uiImage: slices[i]), index: i + 1, ordered: student.or, targetPos: CGRect())
-
-                }
-            }
-            .frame(width: imageFrameWidth, height: imageFrameHeight)
-                
-            } else {
-                
-            im?
-                .resizable()
-                .aspectRatio(imageAspectRatio, contentMode: .fit)
-                .frame(width: imageFrameWidth, height: imageFrameHeight)
-                
-            }
+            QuebraCabecaPreview(settings: cfg)
 //
             Button {
                 self.showingAlert.toggle()
@@ -62,7 +29,7 @@ struct QuebraCabecaImageView: View {
                     .padding()
                     .background {
                         Circle()
-                            .foregroundColor(color)
+                            .foregroundColor(student.color)
                     }
             }
             .offset(x: cameraIconXOffset, y: cameraIconYOffset)
@@ -76,37 +43,24 @@ struct QuebraCabecaImageView: View {
                     self.sourceType = .photoLibrary
                     self.showingImagePicker.toggle()
                 }
+                Button("Cancelar", role: .cancel) {}
             }
         }
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
         }
         .navigationBarHidden(true)
-        .onAppear {
-            loadCfg()
-        }
-        
     }
     
     func loadImage() {
+        print("chamou")
         guard let inputImage = inputImage else {
+            print("gl falhou")
             return
         }
         
+        cfg.setImage(inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!)
         image = Image(uiImage: inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!)
-        student.image = inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!
-        if var cfg = student.configs[.quebraCabeca] as? MemoryGameConfiguration {
-            print("in")
-            cfg.setImage(inputImage)
-        }
-    }
-    
-    func loadCfg() {
-        if let cfg = student.configs[.quebraCabeca] as? MemoryGameConfiguration {
-            self.cfg = cfg
-        } else {
-            student.configs[.quebraCabeca] = cfg
-        }
     }
     
     //MARK: Constantes
@@ -121,9 +75,9 @@ struct QuebraCabecaImageView: View {
     let cameraIconYOffset: CGFloat = 226
 }
 
-struct QuebraCabecaImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuebraCabecaImageView(color: .purple)
-.previewInterfaceOrientation(.landscapeRight)
-    }
-}
+//struct QuebraCabecaImageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuebraCabecaImageView()
+//.previewInterfaceOrientation(.landscapeRight)
+//    }
+//}
