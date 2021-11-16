@@ -16,6 +16,11 @@ struct Mini3App: App {
             
             QuebraCabecaStartView(puzzleManager: manager)
                 .environmentObject(Profile(teste: true))
+            DashboardView()
+                .environmentObject(ProfileManager())
+                .environmentObject(DashboardManager())
+//            QuebraCabecaStartView(color: .orange)
+//                .environmentObject(Profile(teste: true))
         }
     }
 }

@@ -12,6 +12,7 @@ class Profile: ObservableObject {
     @Published var color: Color = .orange
     @Published var configs: [Game: Configuration] = [:]
     
+    
     init(teste: Bool) {
         addConfig(PuzzleConfiguration(verticalDivision: 1, som: true, animacao: true, ordenacao: false), forGame: .quebraCabeca)
     }
@@ -24,6 +25,7 @@ class Profile: ObservableObject {
 
 enum Game {
     case quebraCabeca
+    case formas
 }
 
 protocol Configuration {}
