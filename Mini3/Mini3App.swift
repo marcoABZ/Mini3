@@ -11,7 +11,7 @@ import SwiftUI
 struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
-            let cfg = MemoryGameConfiguration()
+            let cfg = PuzzleConfiguration()
             let manager = PuzzleManager(settings: cfg)
             
             QuebraCabecaStartView(puzzleManager: manager)

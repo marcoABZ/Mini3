@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct QuebraCabecaImageView: View {
+struct QuebraCabecaImagePickerView: View {
     @EnvironmentObject private var student: Profile
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var showingAlert = false
     @State private var inputImage: UIImage?
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @ObservedObject var cfg: MemoryGameConfiguration
+    @ObservedObject var cfg: PuzzleConfiguration
     
     var body: some View {
         ZStack {

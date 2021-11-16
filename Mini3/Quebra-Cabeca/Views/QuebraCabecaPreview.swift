@@ -10,7 +10,7 @@ import SwiftUI
 
 struct QuebraCabecaPreview: View {
     @EnvironmentObject var student: Profile
-    @ObservedObject var settings: MemoryGameConfiguration
+    @ObservedObject var settings: PuzzleConfiguration
     
     private var slices: [UIImage] {
         if !settings.image.isEqual(UIImage(named: "placeholder")) {
@@ -27,8 +27,8 @@ struct QuebraCabecaPreview: View {
                 // TODO: Setar ordenação com letras
                 ForEach(0..<slices.count, id: \.self) { i in
                     //TODO: Rever argumento PuzzleManager nesse contexto
-                    PuzzlePiece(puzzleManager: PuzzleManager(settings: settings),
-                                piece: PuzzlePiece_<UIImage>(content: slices[i], index: i),
+                    PuzzlePieceView(puzzleManager: PuzzleManager(settings: settings),
+                                piece: PuzzlePieceManager<UIImage>(content: slices[i], index: i),
                                 preview: true)
                 }
             }

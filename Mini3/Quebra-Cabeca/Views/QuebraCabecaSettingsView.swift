@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuebraCabecaSettingsView: View {
     @EnvironmentObject var student: Profile
-    @ObservedObject var settings: MemoryGameConfiguration
+    @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
     
     var body: some View {
@@ -122,7 +122,7 @@ struct QuebraCabecaSettingsView: View {
             }.toggleStyle(SwitchToggleStyle(tint: student.color))
             
                 NavigationLink(destination:
-                                SliceTest(puzzleManager: PuzzleManager(settings: settings))) {
+                                QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
                     Text("Começar")
             }
         }.navigationBarHidden(true)

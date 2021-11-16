@@ -21,7 +21,7 @@ struct QuebraCabecaStartView: View {
                     GameHeaderView(gameName: "Quebra-cabeça")
                     HStack {
                         Spacer()
-                        QuebraCabecaImageView(cfg: puzzleManager.settings)
+                        QuebraCabecaImagePickerView(cfg: puzzleManager.settings)
                         Spacer()
                         
                         //TODO: Estudar possibilidade/complexidade de trocar Divider por uma linha
@@ -54,7 +54,7 @@ struct QuebraCabecaStartView: View {
 
 struct QuebraCabecaStartView_Previews: PreviewProvider {
     static var previews: some View {
-        let cfg = MemoryGameConfiguration()
+        let cfg = PuzzleConfiguration()
         let manager = PuzzleManager(settings: cfg)
         
         QuebraCabecaStartView(puzzleManager: manager)

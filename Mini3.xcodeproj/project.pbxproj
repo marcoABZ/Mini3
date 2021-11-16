@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
-		FA24B59A273C29E700364D00 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B599273C29E700364D00 /* Preview.swift */; };
 		FA24B59F273C5D9800364D00 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B59E273C5D9800364D00 /* SettingsView.swift */; };
-		FA24B5A1273CA72A00364D00 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B5A0273CA72A00364D00 /* Teste.swift */; };
 		FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */; };
 		FA2A3C322743C9FB00DD26AA /* PuzzleBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C312743C9FB00DD26AA /* PuzzleBoardView.swift */; };
-		FA30811E273D0514007D94D2 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811D273D0514007D94D2 /* PuzzlePiece.swift */; };
+		FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */; };
+		FA2A3C39274417C100DD26AA /* PuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C38274417C100DD26AA /* PuzzleManager.swift */; };
+		FA2A3C3B2744182500DD26AA /* PuzzleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C3A2744182500DD26AA /* PuzzleConfiguration.swift */; };
+		FA30811E273D0514007D94D2 /* PuzzlePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811D273D0514007D94D2 /* PuzzlePieceView.swift */; };
 		FA308120273D079B007D94D2 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811F273D079B007D94D2 /* Puzzle.swift */; };
-		FA308128273D652D007D94D2 /* SliceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308127273D652D007D94D2 /* SliceTest.swift */; };
+		FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */; };
 		FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */; };
 		FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1032735A4870027D188 /* Mini3App.swift */; };
 		FA4EB1062735A4870027D188 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1052735A4870027D188 /* ContentView.swift */; };
@@ -23,7 +24,7 @@
 		FA4EB10B2735A48A0027D188 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4EB10A2735A48A0027D188 /* Preview Assets.xcassets */; };
 		FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */; };
 		FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */; };
-		FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */; };
+		FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */; };
 		FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB11B2735BB130027D188 /* ImagePicker.swift */; };
 		FA9356FE273999550005776C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FD273999550005776C /* ImageExtension.swift */; };
 		FA93570027399B2E0005776C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FF27399B2E0005776C /* Profile.swift */; };
@@ -31,14 +32,15 @@
 
 /* Begin PBXFileReference section */
 		5B2403F12735B39800141388 /* MiniGame1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame1Test.swift; sourceTree = "<group>"; };
-		FA24B599273C29E700364D00 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		FA24B59E273C5D9800364D00 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		FA24B5A0273CA72A00364D00 /* Teste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
 		FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaPreview.swift; sourceTree = "<group>"; };
 		FA2A3C312743C9FB00DD26AA /* PuzzleBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleBoardView.swift; sourceTree = "<group>"; };
-		FA30811D273D0514007D94D2 /* PuzzlePiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
+		FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceManager.swift; sourceTree = "<group>"; };
+		FA2A3C38274417C100DD26AA /* PuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleManager.swift; sourceTree = "<group>"; };
+		FA2A3C3A2744182500DD26AA /* PuzzleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleConfiguration.swift; sourceTree = "<group>"; };
+		FA30811D273D0514007D94D2 /* PuzzlePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceView.swift; sourceTree = "<group>"; };
 		FA30811F273D079B007D94D2 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
-		FA308127273D652D007D94D2 /* SliceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliceTest.swift; sourceTree = "<group>"; };
+		FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaGameView.swift; sourceTree = "<group>"; };
 		FA308129273DA6CE007D94D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaStartView.swift; sourceTree = "<group>"; };
 		FA4EB1002735A4870027D188 /* Mini3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mini3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +50,7 @@
 		FA4EB10A2735A48A0027D188 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeaderView.swift; sourceTree = "<group>"; };
 		FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaSettingsView.swift; sourceTree = "<group>"; };
-		FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImageView.swift; sourceTree = "<group>"; };
+		FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImagePickerView.swift; sourceTree = "<group>"; };
 		FA4EB11B2735BB130027D188 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FA9356FD273999550005776C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		FA9356FF27399B2E0005776C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -68,31 +70,48 @@
 		FA24B59B273C394C00364D00 /* Quebra-Cabeca */ = {
 			isa = PBXGroup;
 			children = (
-				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
-				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
-				FA4EB1172735B85E0027D188 /* QuebraCabecaImageView.swift */,
-				FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */,
+				FA2A3C34274416F300DD26AA /* Model */,
+				FA2A3C352744177D00DD26AA /* ViewModels */,
+				FA2A3C33274416E400DD26AA /* Views */,
 			);
 			path = "Quebra-Cabeca";
 			sourceTree = "<group>";
 		};
-		FA30811C273D0077007D94D2 /* Quebra-Cabeça */ = {
+		FA2A3C33274416E400DD26AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
-				FA308127273D652D007D94D2 /* SliceTest.swift */,
-				FA30811D273D0514007D94D2 /* PuzzlePiece.swift */,
-				FA30811F273D079B007D94D2 /* Puzzle.swift */,
+				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
+				FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */,
+				FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */,
+				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
+				FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */,
 				FA2A3C312743C9FB00DD26AA /* PuzzleBoardView.swift */,
+				FA30811D273D0514007D94D2 /* PuzzlePieceView.swift */,
 			);
-			name = "Quebra-Cabeça";
-			path = "Quebra-Cabeça";
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA2A3C34274416F300DD26AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA30811F273D079B007D94D2 /* Puzzle.swift */,
+				FA2A3C3A2744182500DD26AA /* PuzzleConfiguration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA2A3C352744177D00DD26AA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */,
+				FA2A3C38274417C100DD26AA /* PuzzleManager.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		FA4EB0F72735A4870027D188 = {
 			isa = PBXGroup;
 			children = (
-				FA24B5A0273CA72A00364D00 /* Teste.swift */,
 				FA4EB1022735A4870027D188 /* Mini3 */,
 				FA4EB1012735A4870027D188 /* Products */,
 			);
@@ -113,14 +132,13 @@
 				FA4EB1032735A4870027D188 /* Mini3App.swift */,
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
-				FA4EB1092735A48A0027D188 /* Preview Content */,
-				FA30811C273D0077007D94D2 /* Quebra-Cabeça */,
-				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
 				FA9356FF27399B2E0005776C /* Profile.swift */,
+				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
+				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
+				FA4EB1092735A48A0027D188 /* Preview Content */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
 				FA9356FD273999550005776C /* ImageExtension.swift */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
-				FA24B599273C29E700364D00 /* Preview.swift */,
 				FA24B59E273C5D9800364D00 /* SettingsView.swift */,
 			);
 			path = Mini3;
@@ -205,22 +223,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA308120273D079B007D94D2 /* Puzzle.swift in Sources */,
+				FA2A3C39274417C100DD26AA /* PuzzleManager.swift in Sources */,
 				FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */,
 				FA93570027399B2E0005776C /* Profile.swift in Sources */,
-				FA24B59A273C29E700364D00 /* Preview.swift in Sources */,
-				FA24B5A1273CA72A00364D00 /* Teste.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
+				FA2A3C3B2744182500DD26AA /* PuzzleConfiguration.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
-				FA30811E273D0514007D94D2 /* PuzzlePiece.swift in Sources */,
-				FA4EB1182735B85E0027D188 /* QuebraCabecaImageView.swift in Sources */,
+				FA30811E273D0514007D94D2 /* PuzzlePieceView.swift in Sources */,
+				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
 				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA2A3C322743C9FB00DD26AA /* PuzzleBoardView.swift in Sources */,
-				FA308128273D652D007D94D2 /* SliceTest.swift in Sources */,
+				FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */,
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
 				FA24B59F273C5D9800364D00 /* SettingsView.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
+				FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */,
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
