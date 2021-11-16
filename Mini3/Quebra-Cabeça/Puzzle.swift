@@ -9,41 +9,59 @@ import Foundation
 import SwiftUI
 
 struct Puzzle<Element> {
-    let pieces: [PuzzlePiece_<Element>]
+    var pieces: [PuzzlePiece_<Element>]
     
     func isDone() -> Bool {
         pieces.allSatisfy { $0.isCorrect }
     }
 }
 
-struct PuzzlePiece_<Element> {
+class PuzzlePiece_<Element>: ObservableObject {
     let content: Element
     let index: Int
-//    let originalPosition: CGRect
-//    var displacement: CGSize = .zero
-//    let targetPosition: CGRect
-    var isCorrect: Bool = false
+    @Published var originalPosition: CGRect?
+    @Published var displacement: CGSize = .zero
+    var targetPosition: CGRect?
+    @Published var isCorrect: Bool = false
     
-//    mutating func checkPiece(returnIfWrong: Bool) {
-//        let pos = CGPoint(x: originalPosition.midX + displacement.width, y: originalPosition.midY + displacement.height)
-//        print("pos: \(pos)")
-//        if targetPosition.contains(pos) {
-//            isCorrect = true
-//            displacement = CGSize(width: targetPosition.minX - targetPosition.minX, height: targetPosition.minY - targetPosition.minY)
-//        } else if returnIfWrong {
-//            displacement = .zero
-//        }
-//    }
-    
-    mutating func dropPiece(atIndex index: Int) {
-        isCorrect = (self.index == index)
+    init(content: Element, index: Int) {
+        self.content = content
+        self.index = index
     }
+    
+    func setGoalPosition(at position: CGRect) {
+        targetPosition = position
+    }
+    
+    func setStartPosition(at position: CGRect) {
+        originalPosition = position
+    }
+    
+    func drag(forDistance distance: CGSize) {
+        displacement = distance
+    }
+    
+    func drop() {
+        guard let tp = targetPosition,
+              let op = originalPosition
+        else { return }
+        
+        let dropPos = CGPoint(x: op.midX + displacement.width, y: op.midY + displacement.height)
+        
+        if tp.contains(dropPos) {
+            isCorrect = true
+            displacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
+        } else {
+            displacement = .zero
+        }
+    
+    }
+    
 }
 
 class PuzzleManager: ObservableObject {
     var settings: MemoryGameConfiguration {
         didSet {
-            print("Setando")
             let pieces = settings.image.slice(verticalPieces: settings.verticalDivision, horizontalPieces: settings.horizontalDivision)
             let puzzlePieces = (0..<pieces.count).map { PuzzlePiece_<UIImage>(content: pieces[$0], index: $0) }
             
@@ -54,9 +72,13 @@ class PuzzleManager: ObservableObject {
     
     @Published var puzzle: Puzzle<UIImage>
     private(set) var shuffledPieces: [(piece: PuzzlePiece_<UIImage>, i: Int)] = []
+    var pieces: [PuzzlePiece_<UIImage>] { puzzle.pieces }
+
     var piecesCount: Int {
         puzzle.pieces.count
     }
+    
+    @Published var isOver: Bool = false
     
     init(settings: MemoryGameConfiguration) {
         self.settings = settings
@@ -68,12 +90,7 @@ class PuzzleManager: ObservableObject {
         self.shuffledPieces = getShuffledPieces()
     }
     
-    func getPieces() -> [PuzzlePiece_<UIImage>] {
-        return puzzle.pieces
-    }
-    
     func getImageForPiece(atIndex i: Int) -> UIImage {
-        let pieces = getPieces()
         return pieces[i].content
     }
     
@@ -83,7 +100,6 @@ class PuzzleManager: ObservableObject {
     
     private func getShuffledPieces() -> [(piece: PuzzlePiece_<UIImage>, i: Int)] {
         let shuffledPositions = getPiecesPositions()
-        let pieces = getPieces()
         var shuffledPieces: [(PuzzlePiece_<UIImage>, Int)] = []
         
         for i in shuffledPositions {
@@ -93,4 +109,7 @@ class PuzzleManager: ObservableObject {
         return shuffledPieces
     }
     
+    func updateGameStatus() {
+        isOver = puzzle.isDone()
+    }
 }

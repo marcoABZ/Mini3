@@ -120,25 +120,11 @@ struct QuebraCabecaSettingsView: View {
                         .foregroundColor(.gray)
                 }
             }.toggleStyle(SwitchToggleStyle(tint: student.color))
-//                .onChange(of: settings.ordenacao) { _isOn in
-//                    student.or = settings.ordenacao
-//                }
             
-//            NavigationLink(destination: SliceTest(horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao, imagem: student.image)) {
-//                Text("Começar")
-                
                 NavigationLink(destination:
-                                SliceTest(student: _student, puzzleManager: PuzzleManager(settings: settings), horizontalPieces: settings.horizontalDivision, verticalPieces: settings.verticalDivision, ordenacao: settings.ordenacao)) {
+                                SliceTest(puzzleManager: PuzzleManager(settings: settings))) {
                     Text("Começar")
             }
         }.navigationBarHidden(true)
     }
 }
-
-//struct QuebraCabecaSettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuebraCabecaSettingsView()
-//            .previewInterfaceOrientation(.landscapeLeft)
-//            .environmentObject(Profile(teste: true))
-//    }
-//}

@@ -24,13 +24,15 @@ struct QuebraCabecaPreview: View {
     var body: some View {
         if !slices.isEmpty {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 35), count: settings.horizontalDivision)) {
-            // TODO: Setar ordenação com letras
-            ForEach(0..<slices.count, id: \.self) { i in
-                PuzzlePiece(color: student.color, image: Image(uiImage: slices[i]), index: i + 1, ordered: settings.ordenacao, targetPos: CGRect())
+                // TODO: Setar ordenação com letras
+                ForEach(0..<slices.count, id: \.self) { i in
+                    //TODO: Rever argumento PuzzleManager nesse contexto
+                    PuzzlePiece(puzzleManager: PuzzleManager(settings: settings),
+                                piece: PuzzlePiece_<UIImage>(content: slices[i], index: i),
+                                preview: true)
+                }
             }
-        }
-        .frame(width: imageFrameWidth, height: imageFrameHeight)
-            
+            .frame(width: imageFrameWidth, height: imageFrameHeight)
         } else {
             Image(uiImage: settings.image)
                 .resizable()

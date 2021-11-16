@@ -27,12 +27,19 @@ protocol Configuration_ {
     
 }
 
-struct BaseConfiguration<T>: Configuration_ {
+class BaseConfiguration<T>: Configuration_, ObservableObject {
     var title: String
     var description: String?
     
     var selector: SelectorType
-    var value: T
+    @Published var value: T
+    
+    init(title: String, description: String?, selector: SelectorType, value: T) {
+        self.title = title
+        self.description = description
+        self.selector = selector
+        self.value = value
+    }
 }
 
 struct CompositeConfiguration: Configuration_ {
@@ -41,39 +48,3 @@ struct CompositeConfiguration: Configuration_ {
     
     var option: [Configuration_]
 }
-
-//struct Puzzle {
-//    var configurations: [Configuration_] = [
-//        CompositeConfiguration(
-//            title: "Quantidade de divisões",
-//            description: "Quantidade de pedaços que a imagem será divididada.",
-//            option: [BaseConfiguration<Int>(title: "Divisoes horizontais", selector: .plusMinus, value: 2),
-//                 BaseConfiguration<Int>(title: "Divisoes verticais", selector: .plusMinus, value: 2)]),
-//        BaseConfiguration<Bool>(
-//            title: "Efeitos sonoros",
-//            description: "Sons de efeito realizados durante  a interação demonstrando simples.",
-//            selector: .toggle,
-//            value: true),
-//        BaseConfiguration<Bool>(
-//            title: "Animações",
-//            selector: .toggle,
-//            value: true),
-//        BaseConfiguration<Int>(
-//            title: "Incluir ordenação",
-//            selector: .wheel,
-//            value: 0)]
-//}
-
-//class PuzzleManager: ObservableObject {
-//    @Published var model: Puzzle = Puzzle()
-//}
-
-//struct PuzzleConfigurationView: View {
-//    @ObservedObject var viewModel: PuzzleManager
-//
-//    var body: some View {
-//        ForEach(viewModel.model.configurations, id: \.self.title) { cfg in
-//
-//        }
-//    }
-//}

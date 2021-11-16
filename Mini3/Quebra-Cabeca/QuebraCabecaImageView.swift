@@ -19,7 +19,7 @@ struct QuebraCabecaImageView: View {
     var body: some View {
         ZStack {
             QuebraCabecaPreview(settings: cfg)
-//
+
             Button {
                 self.showingAlert.toggle()
             } label: {
