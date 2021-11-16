@@ -7,27 +7,19 @@
 
 import SwiftUI
 
-struct QuebraCabecaImageView: View {
+struct QuebraCabecaImagePickerView: View {
+    @EnvironmentObject private var student: Profile
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var showingAlert = false
     @State private var inputImage: UIImage?
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    private var color: Color
-    
-    init(color: Color) {
-        self.color = color
-    }
+    @ObservedObject var cfg: PuzzleConfiguration
     
     var body: some View {
-        let im: Image? = image ?? Image("placeholder")
-        
         ZStack {
-            im?
-                .resizable()
-                .aspectRatio(imageAspectRatio, contentMode: .fit)
-                .frame(width: imageFrameWidth, height: imageFrameHeight)
-            
+            QuebraCabecaPreview(settings: cfg)
+
             Button {
                 self.showingAlert.toggle()
             } label: {
@@ -37,7 +29,7 @@ struct QuebraCabecaImageView: View {
                     .padding()
                     .background {
                         Circle()
-                            .foregroundColor(color)
+                            .foregroundColor(student.color)
                     }
             }
             .offset(x: cameraIconXOffset, y: cameraIconYOffset)
@@ -51,20 +43,24 @@ struct QuebraCabecaImageView: View {
                     self.sourceType = .photoLibrary
                     self.showingImagePicker.toggle()
                 }
+                Button("Cancelar", role: .cancel) {}
             }
         }
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
         }
-        
+        .navigationBarHidden(true)
     }
     
     func loadImage() {
+        print("chamou")
         guard let inputImage = inputImage else {
+            print("gl falhou")
             return
         }
         
-        image = Image(uiImage: inputImage)
+        cfg.setImage(inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!)
+        image = Image(uiImage: inputImage.resizeImageTo(size: CGSize(width: 362, height: 476))!)
     }
     
     //MARK: Constantes
@@ -79,9 +75,9 @@ struct QuebraCabecaImageView: View {
     let cameraIconYOffset: CGFloat = 226
 }
 
-struct QuebraCabecaImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuebraCabecaImageView(color: .purple)
-.previewInterfaceOrientation(.landscapeRight)
-    }
-}
+//struct QuebraCabecaImageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuebraCabecaImageView()
+//.previewInterfaceOrientation(.landscapeRight)
+//    }
+//}

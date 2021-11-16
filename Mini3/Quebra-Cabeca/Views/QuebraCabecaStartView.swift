@@ -9,37 +9,37 @@ import SwiftUI
 
 struct QuebraCabecaStartView: View {
     @EnvironmentObject var student: Profile
-    
-    //TODO: Criar conceito de Perfil e usar o ativo como variável de ambiente. Acessar a cor por essa variável
-    var color: Color = .orange
+    @State var puzzleManager: PuzzleManager
     
     var body: some View {
-        color
+        NavigationView {
+
+        student.color
             .ignoresSafeArea(.all)
             .overlay {
                 VStack (spacing: headerToSettingsSpacing) {
                     GameHeaderView(gameName: "Quebra-cabeça")
                     HStack {
                         Spacer()
-                        QuebraCabecaImageView(color: color)
-                            .padding(.horizontal)
+                        QuebraCabecaImagePickerView(cfg: puzzleManager.settings)
                         Spacer()
                         
                         //TODO: Estudar possibilidade/complexidade de trocar Divider por uma linha
                         Divider()
-                            .background(color)
-                        QuebraCabecaSettingsView(color: color)
+                            .background(student.color)
+                        
+                        QuebraCabecaSettingsView(settings: puzzleManager.settings)
                             .padding(.horizontal, settingsItemsSpacing)
                             .frame(maxWidth: settingsWidth)
-                            .environmentObject(student)
                     }
                     .frame(height: settingsHeight)
                     .background()
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
                 }.frame(width: settingsPlusImageWidth)
-            }.onAppear {
-                print(student)
             }
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true)
     }
     
     //MARK: Constantes
@@ -54,18 +54,23 @@ struct QuebraCabecaStartView: View {
 
 struct QuebraCabecaStartView_Previews: PreviewProvider {
     static var previews: some View {
-        if #available(iOS 15.0, *) {
-            let prof = Profile(teste: true)
-            
-            QuebraCabecaStartView()
-                .previewInterfaceOrientation(.landscapeLeft)
-                .environmentObject(prof)
-        } else {
-            let prof = Profile(teste: true)
-            
-            QuebraCabecaStartView()
-                .environmentObject(prof)
-        }
+        let cfg = PuzzleConfiguration()
+        let manager = PuzzleManager(settings: cfg)
+        
+        QuebraCabecaStartView(puzzleManager: manager)
+            .previewInterfaceOrientation(.landscapeLeft)
+            .environmentObject(Profile(teste: true))
     }
-
 }
+
+//TODO: - QUEBRA-CABEÇA NO GERAL
+//Colocar estrelas para indicar progresso
+//Adicionar configuração para peça voltar ou não para a posição original
+//Adicionar visualização de como o jogo deve ficar no final (figura fixa? botão para ver? opacidade?)
+//Transição do jogo para a animação do fim
+//Integração com a tela de anotações para os professores (precisa desenvolver mais)
+//Abrir com configurações utilizadas anteriormente (precisa de integração maior com outras partes do app)
+//Ajustar o código das configurações (só beneficia o código - prioridade média)
+//Rever aparência da "ordenação" -> cobre muita informação do jeito que está
+//Configurar ordenação com letras ao invés de números
+//Pesquisa na internet por imagens

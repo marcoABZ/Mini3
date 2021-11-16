@@ -11,7 +11,10 @@ import SwiftUI
 struct Mini3App: App {
     var body: some Scene {
         WindowGroup {
-            QuebraCabecaStartView(color: .orange)
+            let cfg = PuzzleConfiguration()
+            let manager = PuzzleManager(settings: cfg)
+            
+            QuebraCabecaStartView(puzzleManager: manager)
                 .environmentObject(Profile(teste: true))
         }
     }
