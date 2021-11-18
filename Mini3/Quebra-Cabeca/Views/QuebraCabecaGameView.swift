@@ -18,6 +18,11 @@ struct QuebraCabecaGameView: View {
             .overlay {
                 HStack {
                     Spacer()
+                    PuzzleBoardView(puzzleManager: puzzleManager)
+                    Spacer()
+                    Divider()
+                        .background(student.getProfileColor())
+                    Spacer()
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
                         // TODO: Setar ordenação com letras
                         ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
@@ -26,11 +31,6 @@ struct QuebraCabecaGameView: View {
                                 piece: piece)
                         }
                     }
-                    Spacer()
-                    Divider()
-                        .background(student.getProfileColor())
-                    Spacer()
-                    PuzzleBoardView(puzzleManager: puzzleManager)
                     Spacer()
                 }
                 .frame(width: settingsPlusImageWidth, height: settingsHeight)

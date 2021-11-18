@@ -39,7 +39,7 @@ struct PuzzlePieceView: View {
             .gesture(
                 DragGesture(coordinateSpace: .global)
                     .onChanged {
-                        if !piece.isCorrect {
+                        if !piece.isCorrect && !preview {
                             piece.drag(forDistance: CGSize(width: $0.translation.width, height: $0.translation.height))                      }
                     }
                     .onEnded { _ in

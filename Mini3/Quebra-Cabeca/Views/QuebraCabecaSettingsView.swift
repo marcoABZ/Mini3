@@ -14,116 +14,88 @@ struct QuebraCabecaSettingsView: View {
     
     var body: some View {
         VStack (spacing: 30) {
-            HStack {
+            HStack (alignment: .top){
+                Image(systemName: "divide.circle")
+                    .font(.system(size: 24, weight: .bold, design: .default))
+                    .foregroundColor(student.getProfileColor())
                 VStack (alignment: .leading) {
                     Text("Quantidade de divisoes")
-                        .font(.title2)
-                    Text("Quantidade de pedaços que a imagem será divididada.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+                        .font(.system(size: 21, weight: .bold, design: .default))
+                    
                     HStack {
                         Text("Divisões horizontais")
                         Spacer()
                         Button
                         { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
-//                            student.hd = settings.horizontalDivision
+        //                            student.hd = settings.horizontalDivision
                             print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
                             .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
                             .disabled(settings.horizontalDivision <= 1)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
                         
                     
                         Text(String(describing: settings.horizontalDivision))
-                            //TODO: Rever configurações do texto
-                            .font(.system(size: 24, weight: .semibold, design: .default))
                         
                         Button
                         { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
-//                            student.hd = settings.horizontalDivision
+        //                            student.hd = settings.horizontalDivision
                             print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
                             .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
                             .disabled(settings.horizontalDivision >= 10)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
+                    }.padding([.top], 8)
                         
-                    }.padding([.top, .leading], 8)
-                    
                     HStack {
                         Text("Divisões verticais")
                         Spacer()
                         Button
                         { settings.verticalDivision = max(1, settings.verticalDivision - 1)
-//                            student.vd = settings.verticalDivision
+        //                            student.vd = settings.verticalDivision
                             print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
                             .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
                             .disabled(settings.verticalDivision <= 1)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
                         
                     
                         Text(String(describing: settings.verticalDivision))
-                            //TODO: Rever configurações do texto
-                            .font(.system(size: 24, weight: .semibold, design: .default))
                         
                         Button
                         { settings.verticalDivision = min(10, settings.verticalDivision + 1)
-//                            student.vd = settings.verticalDivision
+        //                            student.vd = settings.verticalDivision
                             print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
                             .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
                             .disabled(settings.verticalDivision >= 10)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
-                        
-                    }.padding([.top, .leading], 8)
-                    
-                }
-                Spacer()
+                    }.padding(.top, 8)
 
+                        
+                }
+                .font(.system(size: 17, weight: .medium, design: .default))
                 
             }
             
-            Toggle(isOn: $settings.som) {
-                VStack (alignment: .leading) {
-                    Text("Sons")
-                        .font(.title3)
-                    Text("Ative ou desative os sons e interações sonoras dentro do jogo.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
+            Divider()
             
-            Toggle(isOn: $settings.animacao) {
-                VStack (alignment: .leading) {
-                    Text("Animações")
-                        .font(.title3)
-                    Text("Ative ou desative as animações e interrações que podem ocorrer dentro do jogo.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
+            ToggleSettingView(iconName: "speaker.wave.2", title: "Efeitos sonoros", subtitle: "Sons de efeito realizados durante a interação.", controlledVariable: $settings.som)
             
-            Toggle(isOn: $settings.ordenacao) {
-                VStack (alignment: .leading) {
-                    Text("Incluir ordenaçao")
-                        .font(.title3)
-                    Text("Ordene as pecas do quebra-cabeca com letras ou números")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
+            Divider()
             
-                NavigationLink(destination:
-                                QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
-                    Text("Começar")
+            ToggleSettingView(iconName: "circle.grid.cross", title: "Retorno das peças", subtitle: "Permite que as peças retornem ao lugar inicial quando colocadas no lugar incorreto.", controlledVariable: $settings.voltarPeca)
+
+            
+            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
+                Text("começar")
+                    .font(.system(size: 24, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                    .frame(width: 240, height: 56)
+                    .background(
+                        Capsule()
+                            .foregroundColor(student.getProfileColor())
+                    )
             }
         }.navigationBarHidden(true)
     }

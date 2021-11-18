@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PuzzleBoardView: View {
     
+    @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @State var showAnswer: Bool = false
     
@@ -29,21 +30,31 @@ struct PuzzleBoardView: View {
                                         }
                                 }
                             )
-                    }.zIndex(-1)
+                    }
                 }
                 .frame(width: puzzleManager.settings.image.size.width, height: puzzleManager.settings.image.size.height)
-                .zIndex(-1)
             }
-            Text("Ver resposta")
-                .gesture (
-                    DragGesture(minimumDistance: 0)
-                        .onChanged {_ in
-                            showAnswer = true
-                        }
-                        .onEnded {_ in
-                            showAnswer = false
-                        }
-                )
+            HStack {
+                Image(systemName: "eye")
+                Text("imagem")
+            }
+            .font(.system(size: 24, weight: .bold, design: .default))
+            .foregroundColor(.white)
+            .frame(width: 240, height: 56)
+            .background(
+                Capsule()
+                    .foregroundColor(student.getProfileColor())
+            )
+            .gesture (
+                DragGesture(minimumDistance: 0)
+                    .onChanged {_ in
+                        showAnswer = true
+                    }
+                    .onEnded {_ in
+                        showAnswer = false
+                    }
+            )
+//            .offset(x: 0, y: 28)
         }
     }
 }

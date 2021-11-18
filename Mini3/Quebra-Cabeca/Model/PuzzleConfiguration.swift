@@ -16,8 +16,9 @@ class PuzzleConfiguration: Configuration, CustomStringConvertible, ObservableObj
     @Published var ordenacao: Bool = false
     @Published var tipoOrdenacao: Int = 0
     @Published var image: UIImage = UIImage(named: "placeholder")!
+    @Published var voltarPeca: Bool = false
     
-    init(verticalDivision: Int = 1, horizontalDivision: Int = 3, som: Bool = false, animacao: Bool = false, ordenacao: Bool = false, tipoOrdenacao: Int = 0, image: UIImage = UIImage(named: "placeholder")!) {
+    init(verticalDivision: Int = 1, horizontalDivision: Int = 3, som: Bool = false, animacao: Bool = false, ordenacao: Bool = false, tipoOrdenacao: Int = 0, image: UIImage = UIImage(named: "placeholder")!, voltarPeca: Bool = false) {
         self.verticalDivision = verticalDivision
         self.horizontalDivision = horizontalDivision
         self.som = som
@@ -25,6 +26,7 @@ class PuzzleConfiguration: Configuration, CustomStringConvertible, ObservableObj
         self.ordenacao = ordenacao
         self.tipoOrdenacao = tipoOrdenacao
         self.image = image
+        self.voltarPeca = voltarPeca
     }
     
     func setImage(_ im: UIImage) {
