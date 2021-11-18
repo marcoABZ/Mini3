@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuebraCabecaSettingsView: View {
-    @EnvironmentObject var student: Profile
+    @EnvironmentObject var student: ProfileManager
     @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
     
@@ -30,7 +30,7 @@ struct QuebraCabecaSettingsView: View {
                             print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
-                            .foregroundColor(settings.horizontalDivision > 1 ? student.color : .gray)
+                            .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
                             .disabled(settings.horizontalDivision <= 1)
                                 //TODO: Rever configurações de botão
                                 .font(.system(size: 24, weight: .regular, design: .default))
@@ -46,7 +46,7 @@ struct QuebraCabecaSettingsView: View {
                             print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
-                            .foregroundColor(settings.horizontalDivision < 10 ? student.color : .gray)
+                            .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
                             .disabled(settings.horizontalDivision >= 10)
                                 //TODO: Rever configurações de botão
                                 .font(.system(size: 24, weight: .regular, design: .default))
@@ -62,7 +62,7 @@ struct QuebraCabecaSettingsView: View {
                             print(settings)
                         }
                             label: { Image(systemName: "minus.circle") }
-                            .foregroundColor(settings.verticalDivision > 1 ? student.color : .gray)
+                            .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
                             .disabled(settings.verticalDivision <= 1)
                                 //TODO: Rever configurações de botão
                                 .font(.system(size: 24, weight: .regular, design: .default))
@@ -78,7 +78,7 @@ struct QuebraCabecaSettingsView: View {
                             print(settings)
                         }
                             label: { Image(systemName: "plus.circle") }
-                            .foregroundColor(settings.verticalDivision < 10 ? student.color : .gray)
+                            .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
                             .disabled(settings.verticalDivision >= 10)
                                 //TODO: Rever configurações de botão
                                 .font(.system(size: 24, weight: .regular, design: .default))
@@ -99,7 +99,7 @@ struct QuebraCabecaSettingsView: View {
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
-            }.toggleStyle(SwitchToggleStyle(tint: student.color))
+            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
             
             Toggle(isOn: $settings.animacao) {
                 VStack (alignment: .leading) {
@@ -109,7 +109,7 @@ struct QuebraCabecaSettingsView: View {
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
-            }.toggleStyle(SwitchToggleStyle(tint: student.color))
+            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
             
             Toggle(isOn: $settings.ordenacao) {
                 VStack (alignment: .leading) {
@@ -119,7 +119,7 @@ struct QuebraCabecaSettingsView: View {
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
-            }.toggleStyle(SwitchToggleStyle(tint: student.color))
+            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
             
                 NavigationLink(destination:
                                 QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {

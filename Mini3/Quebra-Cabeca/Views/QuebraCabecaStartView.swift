@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct QuebraCabecaStartView: View {
-    @EnvironmentObject var student: Profile
+    @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var student: ProfileManager
     @State var puzzleManager: PuzzleManager
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
 
-        student.color
+        student.getProfileColor()
             .ignoresSafeArea(.all)
             .overlay {
-                VStack (spacing: headerToSettingsSpacing) {
-                    GameHeaderView(gameName: "Quebra-cabeça")
+//                VStack (spacing: headerToSettingsSpacing) {
+//                    GameHeaderView(gameName: "Quebra-cabeça")
                     HStack {
                         Spacer()
                         QuebraCabecaImagePickerView(cfg: puzzleManager.settings)
@@ -26,20 +27,35 @@ struct QuebraCabecaStartView: View {
                         
                         //TODO: Estudar possibilidade/complexidade de trocar Divider por uma linha
                         Divider()
-                            .background(student.color)
+                            .background(student.getProfileColor())
                         
                         QuebraCabecaSettingsView(settings: puzzleManager.settings)
                             .padding(.horizontal, settingsItemsSpacing)
                             .frame(maxWidth: settingsWidth)
                     }
-                    .frame(height: settingsHeight)
+                    .frame(width: settingsPlusImageWidth, height: settingsHeight)
                     .background()
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
-                }.frame(width: settingsPlusImageWidth)
-            }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarHidden(true)
+                }
+//            .frame(width: settingsPlusImageWidth)
+//            }
+            .navigationBarHidden(false)
+            .navigationTitle("Quebra-cabeça")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+               .toolbar(content: {
+                  ToolbarItem (placement: .navigation)  {
+                     Image(systemName: "arrow.backward.circle")
+                     .foregroundColor(.white)
+                     .onTapGesture {
+                         self.presentation.wrappedValue.dismiss()
+                     }
+                  }
+               })
+//        }
+//        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationTitle("Quebra-cabeça")
+//        .navigationBarTitleDisplayMode(.inline)
     }
     
     //MARK: Constantes
