@@ -28,6 +28,9 @@ struct GameDashboardView: View {
                                         .frame(width: 220, height: 320)
                                         .padding(.bottom, 10)
                                 }
+                                .simultaneousGesture(
+                                    TapGesture().onEnded { dashboardManager.isSidebarOpen = false }
+                                )
                                 Text("\(dashboardManager.covers[i].title)")
                                     .font(.system(size: 17).bold())
                                 Text("\(dashboardManager.covers[i].description)")

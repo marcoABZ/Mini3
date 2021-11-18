@@ -62,69 +62,83 @@ struct MainView: View {
     @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                HStack(alignment: .top) {
-                    Button(action: {
-                        profileManager.isEditingProfile = true
-                    }) {
-                        ZStack {
-                            profileManager.selectedProfile?.image
-                                .font(.system(size: 70))
-                                .foregroundColor(.gray)
-                                .frame(width: 110, height: 110)
-                                .background(.gray.opacity(0.5))
-                                .cornerRadius(12)
-                            
-                            VStack {
-                                HStack {
-                                    Image(systemName: "gearshape")
-                                        .font(.system(size: 24, weight: .bold))
-                                        .foregroundColor(.white)
-                                    .frame(width: 36, height: 36)
-                                    .background(profileManager.selectedProfile?.selectedColor)
-                                    .cornerRadius(18)
-                                    .offset(x: 55, y: 55)
+        NavigationView {
+            GeometryReader { geometry in
+                VStack {
+                    HStack(alignment: .top) {
+                        Button(action: {
+                            profileManager.isEditingProfile = true
+                        }) {
+                            ZStack {
+                                profileManager.selectedProfile?.image
+                                    .font(.system(size: 70))
+                                    .foregroundColor(.gray)
+                                    .frame(width: 110, height: 110)
+                                    .background(.gray.opacity(0.5))
+                                    .cornerRadius(12)
+                                
+                                VStack {
+                                    HStack {
+                                        Image(systemName: "gearshape")
+                                            .font(.system(size: 24, weight: .bold))
+                                            .foregroundColor(.white)
+                                        .frame(width: 36, height: 36)
+                                        .background(profileManager.selectedProfile?.selectedColor)
+                                        .cornerRadius(18)
+                                        .offset(x: 55, y: 55)
+                                    }
                                 }
                             }
+                            
                         }
-                        
-                    }
-                    .padding()
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
-                            Image(systemName: "gamecontroller")
-                        }
-                        .font(.system(size: 24, design: .rounded).bold())
-                        
-                        Text("8 anos")
-                            .font(.system(size: 14, design: .rounded))
-                            .padding(.vertical, 2)
-                        Text("Interesse: balas de goma")
-                            .font(.system(size: 14, design: .rounded))
+                        .padding()
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
+                                Image(systemName: "gamecontroller")
+                            }
+                            .font(.system(size: 24, design: .rounded).bold())
+                            
+                            Text("8 anos")
+                                .font(.system(size: 14, design: .rounded))
+                                .padding(.vertical, 2)
+                            Text("Interesse: balas de goma")
+                                .font(.system(size: 14, design: .rounded))
 
+                        }
+                        .padding()
+                        makePicker()
                     }
-                    .padding()
-                    makePicker()
+                    
+                    generateContent()
                 }
-                
-                generateContent()
+                .padding(.leading, geometry.size.width > 900 ? 80 : 0)
+                .onChange(of: profileManager.selectedProfile) { _ in
+                    dashboardManager.renderView.toggle()
+                }
+                .onAppear() {
+                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+                    
+                    // TODO: Linkar com a cor do perfil selecionado
+    //                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
+                    
+                    UISegmentedControl.appearance().selectedSegmentTintColor = .white
+                }
             }
-            .padding(.leading, geometry.size.width > 900 ? 80 : 0)
-            .onChange(of: profileManager.selectedProfile) { _ in
-                dashboardManager.renderView.toggle()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(
+                        action:
+                            { withAnimation(.easeIn(duration: 0.3))
+                                { dashboardManager.isSidebarOpen.toggle() }
+                            },
+                        label:
+                            { Image(systemName: "sidebar.leading") }
+                    )
+                }
             }
-            .onAppear() {
-                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
-                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-                
-                // TODO: Linkar com a cor do perfil selecionado
-//                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
-                
-                UISegmentedControl.appearance().selectedSegmentTintColor = .white
-            }
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
     
     @ViewBuilder func makePicker() -> some View {
@@ -162,10 +176,29 @@ struct DashboardView: View {
     @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
-        NavigationView {
-            SideBarView()
+        HStack {
+            if dashboardManager.isSidebarOpen {
+                SideBarView()
+                    .frame(width: 300)
+            }
             MainView()
         }
+        .gesture (
+            DragGesture()
+                .onChanged({gesture in
+                    if gesture.startLocation.x < CGFloat(100.0) && !dashboardManager.isSidebarOpen {
+                        withAnimation(.easeIn(duration: 0.3)) {
+                            dashboardManager.isSidebarOpen = true
+                        }
+                    }
+                 })
+        )
+
+//        NavigationView {
+////            SplitView(master: SideBarView(), detail: MainView())
+//            SideBarView()
+//            MainView()
+//        }
         .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
             SplashView()
         }
@@ -173,7 +206,7 @@ struct DashboardView: View {
             ProfileView()
         }
         .navigationBarHidden(true)
-        .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
+        .navigationAppearance(foregroundColor: .white, tintColor: .systemBlue, hideSeparator: true)
     }
 }
 
