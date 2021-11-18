@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct QuebraCabecaPreview: View {
-    @EnvironmentObject var student: Profile
     @ObservedObject var settings: PuzzleConfiguration
     
     private var slices: [UIImage] {

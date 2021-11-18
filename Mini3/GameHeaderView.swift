@@ -12,9 +12,7 @@ struct GameHeaderView: View {
     
     var body: some View {
         HStack {
-            Button {
-               //TODO: Navegação do botão voltar
-            } label: {
+            NavigationLink(destination: DashboardView()) {
                 HStack {
                     Image(systemName: "arrow.left.circle")
                         .font(.system(size: 46, weight: .regular, design: .default))

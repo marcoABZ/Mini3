@@ -12,6 +12,14 @@
 		5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */; };
 		5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D85273DDD1600C157BE /* InnerRing.swift */; };
 		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
+		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
+		5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03C273C50640045AAEB /* DashboardManager.swift */; };
+		5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */; };
+		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
+		5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF043273C70D70045AAEB /* ProfileManager.swift */; };
+		FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */; };
+		FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */; };
+		FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */; };
 		FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */; };
 		FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */; };
 		FA2A3C39274417C100DD26AA /* PuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C38274417C100DD26AA /* PuzzleManager.swift */; };
@@ -20,11 +28,6 @@
 		FA2A3C4127441A0600DD26AA /* PuzzlePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C4027441A0600DD26AA /* PuzzlePieceView.swift */; };
 		FA308120273D079B007D94D2 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811F273D079B007D94D2 /* Puzzle.swift */; };
 		FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */; };
-		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
-		5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03C273C50640045AAEB /* DashboardManager.swift */; };
-		5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */; };
-		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
-		5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF043273C70D70045AAEB /* ProfileManager.swift */; };
 		FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */; };
 		FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1032735A4870027D188 /* Mini3App.swift */; };
 		FA4EB1062735A4870027D188 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1052735A4870027D188 /* ContentView.swift */; };
@@ -49,6 +52,9 @@
 		5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoverModel.swift; sourceTree = "<group>"; };
 		5B5BF041273C66760045AAEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5B5BF043273C70D70045AAEB /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDashboardView.swift; sourceTree = "<group>"; };
+		FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoView.swift; sourceTree = "<group>"; };
+		FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavAppearenceModifier.swift; sourceTree = "<group>"; };
 		FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaPreview.swift; sourceTree = "<group>"; };
 		FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceManager.swift; sourceTree = "<group>"; };
 		FA2A3C38274417C100DD26AA /* PuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleManager.swift; sourceTree = "<group>"; };
@@ -196,6 +202,9 @@
 				5B290317273AF45300F52700 /* DashboardView.swift */,
 				5B5BF041273C66760045AAEB /* ProfileView.swift */,
 				5B232D76273D8E4300C157BE /* SplashView.swift */,
+				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
+				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
+				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -288,6 +297,7 @@
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
+				FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */,
 				FA2A3C3D274419B000DD26AA /* PuzzleConfiguration.swift in Sources */,
 				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
@@ -295,6 +305,7 @@
 				5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */,
+				FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */,
 				5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */,
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
 				5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */,
@@ -305,6 +316,7 @@
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,
 				5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */,
 				5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */,
+				FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

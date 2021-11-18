@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PuzzlePieceView: View {
-    @EnvironmentObject var student: Profile
+    @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @ObservedObject var piece: PuzzlePieceManager<UIImage>
     var preview: Bool = false
@@ -18,12 +18,17 @@ struct PuzzlePieceView: View {
                 if puzzleManager.settings.ordenacao {
                     Image(uiImage: piece.content)
                         .overlay (alignment: .bottom) {
-                            Rectangle()
-                                .foregroundColor(student.color)
-                                .frame(height: 50)
+//                            Rectangle()
+//                                .foregroundColor(student.getProfileColor())
+//                                .frame(height: 50)
+//                                .opacity(piece.isCorrect ? 0.7 : 1)
                             Text(String(piece.index + 1))
                                 .foregroundColor(.white)
-                                .font(.system(size: 36, weight: .bold, design: .default))
+                                .font(.system(size: 28, weight: .bold, design: .default))
+                                .frame(width: piece.content.size.width)
+                                .padding(.vertical)
+                                .background(student.getProfileColor())
+
                         }
                 } else {
                     Image(uiImage: piece.content)
@@ -43,7 +48,7 @@ struct PuzzlePieceView: View {
                         print(puzzleManager.isOver)
                     }
             )
-            .shadow(color: student.color, radius: piece.isCorrect ? 10 : 0)
+            .shadow(color: student.getProfileColor(), radius: piece.isCorrect ? 10 : 0)
             .overlay(
                 GeometryReader { geo in
                     Color.clear

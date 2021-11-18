@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct QuebraCabecaGameView: View {
-    @EnvironmentObject var student: Profile
+    @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @State var isGameOver: Bool? = false
 
     var body: some View {
-        student.color
+        student.getProfileColor()
             .ignoresSafeArea(.all)
             .overlay {
                 HStack {
@@ -21,13 +21,14 @@ struct QuebraCabecaGameView: View {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
                         // TODO: Setar ordenação com letras
                         ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
-                            PuzzlePieceView(puzzleManager: puzzleManager,
-                                        piece: piece)
+                            PuzzlePieceView(
+                                puzzleManager: puzzleManager,
+                                piece: piece)
                         }
                     }
                     Spacer()
                     Divider()
-                        .background(student.color)
+                        .background(student.getProfileColor())
                     Spacer()
                     PuzzleBoardView(puzzleManager: puzzleManager)
                     Spacer()
