@@ -2,9 +2,10 @@
 //  Profile.swift
 //  Mini3
 //
-//  Created by Marco Zulian on 08/11/21.
+//  Created by Pablo Penas on 19/11/21.
 //
 
+import Foundation
 import SwiftUI
 
 class Profile: ObservableObject {
@@ -29,4 +30,3 @@ enum Game {
 }
 
 protocol Configuration {}
-
