@@ -10,6 +10,7 @@ import SwiftUI
 struct SideBarView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    
     var body: some View {
         VStack {
             HStack {
