@@ -12,17 +12,20 @@ struct PuzzlePieceView: View {
     @ObservedObject var puzzleManager: PuzzleManager
     @ObservedObject var piece: PuzzlePieceManager<UIImage>
     var preview: Bool = false
+    let letters: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+                            "v", "w", "x", "y", "z"]
     
     var body: some View {
             ZStack {
-                if puzzleManager.settings.ordenacao {
+                if puzzleManager.settings.ordenacao != .none {
                     Image(uiImage: piece.content)
                         .overlay (alignment: .bottom) {
 //                            Rectangle()
 //                                .foregroundColor(student.getProfileColor())
 //                                .frame(height: 50)
 //                                .opacity(piece.isCorrect ? 0.7 : 1)
-                            Text(String(piece.index + 1))
+                            Text(puzzleManager.settings.ordenacao == .number ? String(piece.index + 1) : letters[piece.index])
                                 .foregroundColor(.white)
                                 .font(.system(size: 28, weight: .bold, design: .default))
                                 .frame(width: piece.content.size.width)

@@ -54,7 +54,7 @@ struct QuebraCabecaGameView: View {
 struct SliceTest_Previews: PreviewProvider {
     static var previews: some View {
         let student = Profile(teste: true)
-        let cfg = PuzzleConfiguration(verticalDivision: 3, horizontalDivision: 3, som: false, animacao: true, ordenacao: true, tipoOrdenacao: 0, image: UIImage(named: "placeholder1")!)
+        let cfg = PuzzleConfiguration(verticalDivision: 3, horizontalDivision: 3, som: false, ordenacao: .none, image: UIImage(named: "placeholder1")!)
         
         QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: cfg))
             .previewInterfaceOrientation(.landscapeLeft)

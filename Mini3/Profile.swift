@@ -14,7 +14,7 @@ class Profile: ObservableObject {
     
     
     init(teste: Bool) {
-        addConfig(PuzzleConfiguration(verticalDivision: 1, som: true, animacao: true, ordenacao: false), forGame: .quebraCabeca)
+        addConfig(PuzzleConfiguration(verticalDivision: 1, som: true, ordenacao: .none), forGame: .quebraCabeca)
     }
     
     func addConfig(_ config: Configuration, forGame game: Game) {
