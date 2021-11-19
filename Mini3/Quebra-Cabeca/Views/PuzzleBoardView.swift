@@ -24,7 +24,8 @@ struct PuzzleBoardView: View {
                             .overlay(
                                 GeometryReader { geo in
                                     Rectangle()
-                                        .stroke()
+//                                        .stroke(Color(uiColor: .systemGray2))
+                                        .stroke(student.getProfileColor())
                                         .onAppear {
                                             puzzleManager.pieces[i].setGoalPosition(at: geo.frame(in: .global))
                                         }
@@ -34,27 +35,23 @@ struct PuzzleBoardView: View {
                 }
                 .frame(width: puzzleManager.settings.image.size.width, height: puzzleManager.settings.image.size.height)
             }
-            HStack {
-                Image(systemName: "eye")
-                Text("imagem")
-            }
-            .font(.system(size: 24, weight: .bold, design: .default))
-            .foregroundColor(.white)
-            .frame(width: 240, height: 56)
-            .background(
-                Capsule()
-                    .foregroundColor(student.getProfileColor())
-            )
-            .gesture (
-                DragGesture(minimumDistance: 0)
-                    .onChanged {_ in
-                        showAnswer = true
-                    }
-                    .onEnded {_ in
-                        showAnswer = false
-                    }
-            )
-//            .offset(x: 0, y: 28)
+            Image(systemName: "eye")
+                .font(.system(size: 24, weight: .bold, design: .default))
+                .foregroundColor(.white)
+                .padding()
+                .background(
+                    Capsule()
+                        .foregroundColor(student.getProfileColor())
+                )
+                .gesture (
+                    DragGesture(minimumDistance: 0)
+                        .onChanged {_ in
+                            showAnswer = true
+                        }
+                        .onEnded {_ in
+                            showAnswer = false
+                        }
+                )
         }
     }
 }
