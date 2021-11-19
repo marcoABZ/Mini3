@@ -11,6 +11,7 @@ struct QuebraCabecaSettingsView: View {
     @EnvironmentObject var student: ProfileManager
     @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
+    @State var letterOrderingAvailable: Bool = true
     
     var body: some View {
         VStack (alignment: .center, spacing: 30) {
@@ -27,7 +28,13 @@ struct QuebraCabecaSettingsView: View {
                             Text("Divisões horizontais")
                             Spacer()
                             Button
-                                { settings.horizontalDivision = max(1, settings.horizontalDivision - 1) }
+                                { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
+                                    if settings.verticalDivision * settings.horizontalDivision <= 26 {
+                                          withAnimation {
+                                              letterOrderingAvailable = true
+                                          }
+                                    }
+                                }
                                 label: { Image(systemName: "minus.circle") }
                                 .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
                                 .disabled(settings.horizontalDivision <= 1)
@@ -39,7 +46,16 @@ struct QuebraCabecaSettingsView: View {
                                 .frame(width: 25)
                             
                             Button
-                                { settings.horizontalDivision = min(10, settings.horizontalDivision + 1) }
+                                { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
+                                    if settings.verticalDivision * settings.horizontalDivision > 26 {
+                                        if settings.ordenacao == .letter {
+                                            settings.ordenacao = .none
+                                        }
+                                        withAnimation {
+                                            letterOrderingAvailable = false
+                                        }
+                                    }
+                                }
                                 label: { Image(systemName: "plus.circle") }
                                 .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
                                 .disabled(settings.horizontalDivision >= 10)
@@ -50,7 +66,13 @@ struct QuebraCabecaSettingsView: View {
                             Text("Divisões verticais")
                             Spacer()
                             Button
-                                { settings.verticalDivision = max(1, settings.verticalDivision - 1) }
+                                { settings.verticalDivision = max(1, settings.verticalDivision - 1)
+                                  if settings.verticalDivision * settings.horizontalDivision <= 26 {
+                                        withAnimation {
+                                            letterOrderingAvailable = true
+                                        }
+                                  }
+                                }
                                 label: { Image(systemName: "minus.circle") }
                                 .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
                                 .disabled(settings.verticalDivision <= 1)
@@ -62,7 +84,16 @@ struct QuebraCabecaSettingsView: View {
                                 .frame(width: 25)
                             
                             Button
-                                { settings.verticalDivision = min(10, settings.verticalDivision + 1) }
+                                { settings.verticalDivision = min(10, settings.verticalDivision + 1)
+                                    if settings.verticalDivision * settings.horizontalDivision > 26 {
+                                        if settings.ordenacao == .letter {
+                                            settings.ordenacao = .none
+                                        }
+                                        withAnimation {
+                                            letterOrderingAvailable = false
+                                        }
+                                    }
+                                }
                                 label: { Image(systemName: "plus.circle") }
                                 .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
                                 .disabled(settings.verticalDivision >= 10)
@@ -113,6 +144,8 @@ struct QuebraCabecaSettingsView: View {
                                             .foregroundColor(settings.ordenacao == .none ? student.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
+                        
+                        if (letterOrderingAvailable) {
                         Button
                             { settings.ordenacao = .letter }
                             label: { Text("A")
@@ -125,6 +158,12 @@ struct QuebraCabecaSettingsView: View {
                                             .foregroundColor(settings.ordenacao == .letter ? student.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
+                            .disabled(settings.horizontalDivision * settings.verticalDivision > 26)
+//                            .if(settings.horizontalDivision * settings.verticalDivision > 26) {v in
+//                                v.opacity(0.5)
+//                            }
+                        }
+                        
                         Button
                             { settings.ordenacao = .number }
                             label: { Text("1")
@@ -137,6 +176,7 @@ struct QuebraCabecaSettingsView: View {
                                             .foregroundColor(settings.ordenacao == .number ? student.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
+                        
                     }
                 }
             }

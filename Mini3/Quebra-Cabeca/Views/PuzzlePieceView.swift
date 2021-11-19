@@ -20,16 +20,21 @@ struct PuzzlePieceView: View {
             ZStack {
                 if puzzleManager.settings.ordenacao != .none {
                     Image(uiImage: piece.content)
-                        .overlay (alignment: .bottom) {
+                        .overlay (alignment: puzzleManager.settings.horizontalDivision == 1 ? .leading : .bottom) {
 //                            Rectangle()
 //                                .foregroundColor(student.getProfileColor())
 //                                .frame(height: 50)
 //                                .opacity(piece.isCorrect ? 0.7 : 1)
                             Text(puzzleManager.settings.ordenacao == .number ? String(piece.index + 1) : letters[piece.index])
                                 .foregroundColor(.white)
-                                .font(.system(size: 28, weight: .bold, design: .default))
-                                .frame(width: piece.content.size.width)
-                                .padding(.vertical)
+                                .font(.system(size: getFontSize(), weight: .bold, design: .default))
+                                .padding(puzzleManager.settings.horizontalDivision == 1 ? .horizontal : .vertical, 2)
+                                .if(puzzleManager.settings.horizontalDivision == 1) { v in
+                                    v.frame(width: 50, height: piece.content.size.height)
+                                }
+                                .if(puzzleManager.settings.horizontalDivision != 1) { v in
+                                    v.frame(width: piece.content.size.width)
+                                }
                                 .background(student.getProfileColor())
 
                         }
@@ -62,6 +67,16 @@ struct PuzzlePieceView: View {
                         }
                 }
             )
+    }
+    
+    func getFontSize() -> CGFloat {
+        var size = 24 - 2 * Int(puzzleManager.piecesCount / 20)
+        
+        if size < 12 {
+            size = 12
+        }
+        
+        return CGFloat(size)
     }
 }
 
