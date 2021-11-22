@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct QuebraCabecaGameView: View {
     @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @State var isGameOver: Bool? = false
-
+    @State var sound: AVAudioPlayer?
+    
     var body: some View {
         student.getProfileColor()
             .ignoresSafeArea(.all)
@@ -59,14 +61,4 @@ struct QuebraCabecaGameView: View {
     let settingsHeight: CGFloat = 621
     let cornerRadius: CGFloat = 32
     let settingsPlusImageWidth: CGFloat = 1012
-}
-
-struct SliceTest_Previews: PreviewProvider {
-    static var previews: some View {
-        let cfg = PuzzleConfiguration(verticalDivision: 1, horizontalDivision: 1, som: false, ordenacao: .none, image: UIImage(named: "placeholder1")!)
-        
-        QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: cfg))
-            .previewInterfaceOrientation(.landscapeLeft)
-            .environmentObject(ProfileManager())
-    }
 }

@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import AVFAudio
 
 struct ProfileListView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
 //    @Environment(\.presentationMode) var presentationMode
+    @State var sound: AVAudioPlayer?
     
     var body: some View {
 
@@ -68,6 +70,11 @@ struct ProfileListView: View {
             .padding(.vertical,120)
         }
         .frame(maxHeight: 210)
+        .onAppear {
+            sound = createSoundPlayer(sound: "tiruliru", type: "wav")
+            sound?.numberOfLoops = -1
+            sound?.play()
+        }
     }
 }
 

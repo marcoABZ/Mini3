@@ -15,7 +15,7 @@
 		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
 		5B2CF1CE27480DF6004D2A50 /* FinishMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */; };
 		5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */; };
-		5B2CF1D227481B13004D2A50 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D127481B13004D2A50 /* Profile.swift */; };
+		5B2CF1D227481B13004D2A50 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D127481B13004D2A50 /* Game.swift */; };
 		5B2CF1D427482555004D2A50 /* PlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D327482555004D2A50 /* PlaceholderModifier.swift */; };
 		5B2CF1D627483E16004D2A50 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D527483E16004D2A50 /* RegisterView.swift */; };
 		5B2CF1D827484146004D2A50 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D727484146004D2A50 /* RecordModel.swift */; };
@@ -49,6 +49,10 @@
 		FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */; };
 		FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB11B2735BB130027D188 /* ImagePicker.swift */; };
 		FA9356FE273999550005776C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FD273999550005776C /* ImageExtension.swift */; };
+		FADE63D4274C10E200F0E8E9 /* tiruliru.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D1274C10E200F0E8E9 /* tiruliru.wav */; };
+		FADE63D5274C10E200F0E8E9 /* mimimimimi.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */; };
+		FADE63D6274C10E200F0E8E9 /* ptu.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D3274C10E200F0E8E9 /* ptu.wav */; };
+		FADE63D8274C11B100F0E8E9 /* PlaySoundMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +64,7 @@
 		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMenuView.swift; sourceTree = "<group>"; };
 		5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
-		5B2CF1D127481B13004D2A50 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		5B2CF1D127481B13004D2A50 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5B2CF1D327482555004D2A50 /* PlaceholderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModifier.swift; sourceTree = "<group>"; };
 		5B2CF1D527483E16004D2A50 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		5B2CF1D727484146004D2A50 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -96,6 +100,10 @@
 		FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImagePickerView.swift; sourceTree = "<group>"; };
 		FA4EB11B2735BB130027D188 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FA9356FD273999550005776C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		FADE63D1274C10E200F0E8E9 /* tiruliru.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tiruliru.wav; sourceTree = "<group>"; };
+		FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mimimimimi.wav; sourceTree = "<group>"; };
+		FADE63D3274C10E200F0E8E9 /* ptu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ptu.wav; sourceTree = "<group>"; };
+		FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +244,7 @@
 		FA4EB1022735A4870027D188 /* Mini3 */ = {
 			isa = PBXGroup;
 			children = (
+				FADE63D0274C10D500F0E8E9 /* Sounds */,
 				5B2CFAD2274C108F00239705 /* Effects */,
 				5BE980B12746E23800A49498 /* Records */,
 				5B232D82273DDCE200C157BE /* Shapes */,
@@ -255,10 +264,11 @@
 				5B290317273AF45300F52700 /* DashboardView.swift */,
 				5B5BF041273C66760045AAEB /* ProfileView.swift */,
 				5B232D76273D8E4300C157BE /* SplashView.swift */,
-				5B2CF1D127481B13004D2A50 /* Profile.swift */,
+				5B2CF1D127481B13004D2A50 /* Game.swift */,
 				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
 				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
 				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
+				FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -269,6 +279,16 @@
 				FA4EB10A2735A48A0027D188 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FADE63D0274C10D500F0E8E9 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */,
+				FADE63D3274C10E200F0E8E9 /* ptu.wav */,
+				FADE63D1274C10E200F0E8E9 /* tiruliru.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +349,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADE63D5274C10E200F0E8E9 /* mimimimimi.wav in Resources */,
+				FADE63D4274C10E200F0E8E9 /* tiruliru.wav in Resources */,
+				FADE63D6274C10E200F0E8E9 /* ptu.wav in Resources */,
 				FA4EB10B2735A48A0027D188 /* Preview Assets.xcassets in Resources */,
 				FA4EB1082735A48A0027D188 /* Assets.xcassets in Resources */,
 			);
@@ -352,7 +375,7 @@
 				FA2A3C3F274419DA00DD26AA /* PuzzleBoardView.swift in Sources */,
 				5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
-				5B2CF1D227481B13004D2A50 /* Profile.swift in Sources */,
+				5B2CF1D227481B13004D2A50 /* Game.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
 				FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */,
@@ -366,6 +389,7 @@
 				5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */,
+				FADE63D8274C11B100F0E8E9 /* PlaySoundMethod.swift in Sources */,
 				FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */,
 				5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */,
 				5B2CF1CE27480DF6004D2A50 /* FinishMenuView.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class PuzzleConfiguration: Configuration, CustomStringConvertible, ObservableObject {
+class PuzzleConfiguration: ObservableObject {
     
     @Published var verticalDivision: Int = 1
     @Published var horizontalDivision: Int = 3
@@ -27,14 +27,6 @@ class PuzzleConfiguration: Configuration, CustomStringConvertible, ObservableObj
     
     func setImage(_ im: UIImage) {
         image = im
-    }
-    
-    var description: String {
-        """
-        Vertical Divisions: \(verticalDivision)
-        Horizontal Divisions: \(horizontalDivision)
-        Image: \(image)
-        """
     }
     
     enum Ordenacao {
