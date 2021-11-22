@@ -11,7 +11,7 @@ struct GameFinishView: View {
     @EnvironmentObject var profileManager: ProfileManager
     var body: some View {
         ZStack {
-            profileManager.availableColors[0]
+            profileManager.getProfileColor()
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)

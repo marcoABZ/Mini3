@@ -9,6 +9,11 @@ import SwiftUI
 
 struct FinishMenuView: View {
     @EnvironmentObject var profileManager: ProfileManager
+    @State var registeringProfile: ProfileModel = ProfileModel(name: "", birthdate: Date(), color: .black, image: "") {
+        willSet {
+            updateProfile()
+        }
+    }
     @State var savingProfile = 1
     
     var body: some View {
@@ -21,10 +26,10 @@ struct FinishMenuView: View {
                     .font(.system(size: 17, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                Picker("Perfis", selection: $savingProfile) {
+                Picker("Perfis", selection: $profileManager.selectedProfile) {
                     ForEach(0..<profileManager.profiles.count) { index in
                         Text(profileManager.profiles[index].name)
-                            .tag(index)
+                            .tag(profileManager.profiles[index])
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
@@ -37,7 +42,7 @@ struct FinishMenuView: View {
                 .accentColor(.white)
             }
             ZStack {
-                Image("gatoFinish")
+                profileManager.getFinishImage()
                 profileManager.selectedProfile!.image
                     .resizable()
                     .frame(width: 180, height: 180)
@@ -69,7 +74,7 @@ struct FinishMenuView: View {
                 .padding()
                 
                 Button(action: {}) {
-                    Text("Novo jogo")
+                    Text("Voltar para o início")
                         .foregroundColor(.white)
                 }
                 .frame(width: 220, height: 50)
@@ -80,6 +85,13 @@ struct FinishMenuView: View {
                 .padding()
             }
         }
+        .onAppear {
+            registeringProfile = profileManager.selectedProfile!
+        }
+    }
+    
+    func updateProfile() {
+        profileManager.selectedProfile = registeringProfile
     }
 }
 

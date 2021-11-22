@@ -34,6 +34,7 @@ class ProfileManager: ObservableObject {
     ]
     
     let testProfiles = ["Marco","Ana", "Carol", "Pablo", "Deborah"]
+    
     let testBirthdates = [
         Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
         Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
@@ -41,6 +42,7 @@ class ProfileManager: ObservableObject {
         Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
         Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
     ]
+    
     let testProfilesImages = ["profile1","profile2","profile3","profile4","profile4"]
     
     var profiles: [ProfileModel] = []
@@ -91,5 +93,16 @@ class ProfileManager: ObservableObject {
             selectedProfile = editingProfile
         }
         dismissProfileView()
+    }
+    
+    func getFinishImage() -> Image {
+        switch selectedProfile!.mascote {
+        case .chiba:
+            return Image("chibaFinish")
+        case.gato:
+            return Image("gatoFinish")
+        case .coelho:
+            return Image("coelhoFinish")
+        }
     }
 }
