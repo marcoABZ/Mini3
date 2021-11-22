@@ -51,6 +51,7 @@ class ProfileManager: ObservableObject {
                 ProfileModel(name: testProfiles[i], birthdate: testBirthdates[i]!, color: availableColors.randomElement()!, image: testProfilesImages.randomElement()!)
             )
         }
+        selectedProfile = profiles[0]
     }
     
     func dismissProfileView() {
