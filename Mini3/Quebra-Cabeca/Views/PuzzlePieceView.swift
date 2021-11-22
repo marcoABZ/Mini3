@@ -42,8 +42,8 @@ struct PuzzlePieceView: View {
                     Image(uiImage: piece.content)
                 }
             }
-            .offset(piece.displacement)
-            .zIndex(piece.displacement == .zero ? 0 : 1)
+            .offset(CGSize(width: piece.currentDisplacement.width + piece.acumulatedDisplacement.width, height: piece.currentDisplacement.height + piece.acumulatedDisplacement.height))
+            .zIndex(piece.acumulatedDisplacement == .zero || piece.isCorrect ? 0 : 1)
             .gesture(
                 DragGesture(coordinateSpace: .global)
                     .onChanged {
