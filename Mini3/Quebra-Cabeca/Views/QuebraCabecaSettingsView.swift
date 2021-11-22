@@ -11,119 +11,186 @@ struct QuebraCabecaSettingsView: View {
     @EnvironmentObject var student: ProfileManager
     @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
+    @State var letterOrderingAvailable: Bool = true
     
     var body: some View {
-        VStack (spacing: 30) {
-            HStack {
-                VStack (alignment: .leading) {
-                    Text("Quantidade de divisoes")
-                        .font(.title2)
-                    Text("Quantidade de pedaços que a imagem será divididada.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    HStack {
-                        Text("Divisões horizontais")
-                        Spacer()
-                        Button
-                        { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
-//                            student.hd = settings.horizontalDivision
-                            print(settings)
+        VStack (alignment: .center, spacing: 30) {
+            VStack (alignment: .leading, spacing: 30) {
+                HStack (alignment: .top){
+                    Image(systemName: "divide.circle")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .foregroundColor(student.getProfileColor())
+                    VStack (alignment: .leading, spacing: 5) {
+                        Text("Quantidade de divisoes")
+                            .font(.system(size: 21, weight: .bold, design: .default))
+                        
+                        HStack {
+                            Text("Divisões horizontais")
+                            Spacer()
+                            Button
+                                { settings.horizontalDivision = max(1, settings.horizontalDivision - 1)
+                                    if settings.verticalDivision * settings.horizontalDivision <= 26 {
+                                          withAnimation {
+                                              letterOrderingAvailable = true
+                                          }
+                                    }
+                                }
+                                label: { Image(systemName: "minus.circle") }
+                                .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
+                                .disabled(settings.horizontalDivision <= 1)
+                                .font(.system(size: 21, weight: .medium, design: .default))
+                            
+                        
+                            Text(String(describing: settings.horizontalDivision))
+                                .font(.system(size: 21, weight: .medium, design: .default))
+                                .frame(width: 25)
+                            
+                            Button
+                                { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
+                                    if settings.verticalDivision * settings.horizontalDivision > 26 {
+                                        if settings.ordenacao == .letter {
+                                            settings.ordenacao = .none
+                                        }
+                                        withAnimation {
+                                            letterOrderingAvailable = false
+                                        }
+                                    }
+                                }
+                                label: { Image(systemName: "plus.circle") }
+                                .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
+                                .disabled(settings.horizontalDivision >= 10)
+                                .font(.system(size: 21, weight: .medium, design: .default))
+                        }.padding(.top, 5)
+                            
+                        HStack {
+                            Text("Divisões verticais")
+                            Spacer()
+                            Button
+                                { settings.verticalDivision = max(1, settings.verticalDivision - 1)
+                                  if settings.verticalDivision * settings.horizontalDivision <= 26 {
+                                        withAnimation {
+                                            letterOrderingAvailable = true
+                                        }
+                                  }
+                                }
+                                label: { Image(systemName: "minus.circle") }
+                                .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
+                                .disabled(settings.verticalDivision <= 1)
+                                .font(.system(size: 21, weight: .medium, design: .default))
+                            
+                        
+                            Text(String(describing: settings.verticalDivision))
+                                .font(.system(size: 21, weight: .medium, design: .default))
+                                .frame(width: 25)
+                            
+                            Button
+                                { settings.verticalDivision = min(10, settings.verticalDivision + 1)
+                                    if settings.verticalDivision * settings.horizontalDivision > 26 {
+                                        if settings.ordenacao == .letter {
+                                            settings.ordenacao = .none
+                                        }
+                                        withAnimation {
+                                            letterOrderingAvailable = false
+                                        }
+                                    }
+                                }
+                                label: { Image(systemName: "plus.circle") }
+                                .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
+                                .disabled(settings.verticalDivision >= 10)
+                                .font(.system(size: 21, weight: .medium, design: .default))
                         }
-                            label: { Image(systemName: "minus.circle") }
-                            .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
-                            .disabled(settings.horizontalDivision <= 1)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
-                        
-                    
-                        Text(String(describing: settings.horizontalDivision))
-                            //TODO: Rever configurações do texto
-                            .font(.system(size: 24, weight: .semibold, design: .default))
-                        
-                        Button
-                        { settings.horizontalDivision = min(10, settings.horizontalDivision + 1)
-//                            student.hd = settings.horizontalDivision
-                            print(settings)
-                        }
-                            label: { Image(systemName: "plus.circle") }
-                            .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
-                            .disabled(settings.horizontalDivision >= 10)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
-                        
-                    }.padding([.top, .leading], 8)
-                    
-                    HStack {
-                        Text("Divisões verticais")
-                        Spacer()
-                        Button
-                        { settings.verticalDivision = max(1, settings.verticalDivision - 1)
-//                            student.vd = settings.verticalDivision
-                            print(settings)
-                        }
-                            label: { Image(systemName: "minus.circle") }
-                            .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
-                            .disabled(settings.verticalDivision <= 1)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
-                        
-                    
-                        Text(String(describing: settings.verticalDivision))
-                            //TODO: Rever configurações do texto
-                            .font(.system(size: 24, weight: .semibold, design: .default))
-                        
-                        Button
-                        { settings.verticalDivision = min(10, settings.verticalDivision + 1)
-//                            student.vd = settings.verticalDivision
-                            print(settings)
-                        }
-                            label: { Image(systemName: "plus.circle") }
-                            .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
-                            .disabled(settings.verticalDivision >= 10)
-                                //TODO: Rever configurações de botão
-                                .font(.system(size: 24, weight: .regular, design: .default))
-                        
-                    }.padding([.top, .leading], 8)
-                    
-                }
-                Spacer()
 
+                            
+                    }
+                    .font(.system(size: 17, weight: .medium, design: .default))
+                    
+                }
                 
+                Divider()
+                
+                ToggleSettingView(iconName: "speaker.wave.2", title: "Efeitos sonoros", subtitle: "Sons de efeito realizados durante a interação.", controlledVariable: $settings.som)
+                
+                Divider()
+                
+                ToggleSettingView(iconName: "circle.grid.cross", title: "Retorno das peças", subtitle: "Permite que as peças retornem ao lugar inicial quando colocadas no lugar incorreto.", controlledVariable: $settings.voltarPeca)
+
+                Divider()
+                
+                HStack (alignment: .top){
+                    Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .foregroundColor(student.getProfileColor())
+                    HStack (alignment: .center) {
+                        VStack (alignment: .leading, spacing: 5) {
+                            Text("Incluir ordenação")
+                                .font(.system(size: 21, weight: .bold, design: .default))
+                            Text("Cada pedaço da imagem poderá receber uma letra ou número organizados em ordem.")
+                                .font(.system(size: 14, weight: .regular, design: .default))
+                                .foregroundColor(.gray)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                        }
+                        Spacer()
+                        Button
+                            { settings.ordenacao = .none }
+                            label: { Text("X")
+                                    .font(.system(size: 32, weight: .bold, design: .default))
+                                    .foregroundColor(settings.ordenacao == .none ? .white : .black)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .none ? 0 : 2, cornerRadius: 8)
+                                            .foregroundColor(settings.ordenacao == .none ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                    )
+                            }
+                        
+                        if (letterOrderingAvailable) {
+                        Button
+                            { settings.ordenacao = .letter }
+                            label: { Text("A")
+                                    .font(.system(size: 32, weight: .bold, design: .default))
+                                    .foregroundColor(settings.ordenacao == .letter ? .white : .black)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .letter ? 0 : 2, cornerRadius: 8)
+                                            .foregroundColor(settings.ordenacao == .letter ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                    )
+                            }
+                            .disabled(settings.horizontalDivision * settings.verticalDivision > 26)
+//                            .if(settings.horizontalDivision * settings.verticalDivision > 26) {v in
+//                                v.opacity(0.5)
+//                            }
+                        }
+                        
+                        Button
+                            { settings.ordenacao = .number }
+                            label: { Text("1")
+                                    .font(.system(size: 32, weight: .bold, design: .default))
+                                    .foregroundColor(settings.ordenacao == .number ? .white : .black)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .number ? 0 : 2, cornerRadius: 8)
+                                            .foregroundColor(settings.ordenacao == .number ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                    )
+                            }
+                        
+                    }
+                }
             }
+                
             
-            Toggle(isOn: $settings.som) {
-                VStack (alignment: .leading) {
-                    Text("Sons")
-                        .font(.title3)
-                    Text("Ative ou desative os sons e interações sonoras dentro do jogo.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
-            
-            Toggle(isOn: $settings.animacao) {
-                VStack (alignment: .leading) {
-                    Text("Animações")
-                        .font(.title3)
-                    Text("Ative ou desative as animações e interrações que podem ocorrer dentro do jogo.")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
-            
-            Toggle(isOn: $settings.ordenacao) {
-                VStack (alignment: .leading) {
-                    Text("Incluir ordenaçao")
-                        .font(.title3)
-                    Text("Ordene as pecas do quebra-cabeca com letras ou números")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                }
-            }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
-            
-                NavigationLink(destination:
-                                QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
-                    Text("Começar")
+            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
+                Text("começar")
+                    .font(.system(size: 24, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                    .frame(width: 240, height: 56)
+                    .background(
+                        Capsule()
+                            .foregroundColor(student.getProfileColor())
+                    )
             }
         }.navigationBarHidden(true)
     }

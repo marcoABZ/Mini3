@@ -15,7 +15,9 @@ struct SideBarView: View {
         VStack {
             HStack {
                 Button(action: {
-                    dashboardManager.profileListShowing.toggle()
+                    withAnimation {
+                        dashboardManager.profileListShowing.toggle()
+                    }
                 }) {
                     Text("Perfis")
                     Spacer()
@@ -25,7 +27,15 @@ struct SideBarView: View {
                 .font(.system(size: 20, design: .rounded).bold())
             }
             .padding()
-            makeList()
+            if dashboardManager.profileListShowing {
+                if profileManager.coverUpdate {
+                    makeList()
+                } else {
+                    makeList()
+                }
+            } else {
+                Spacer()
+            }
         }
         .navigationTitle("Animautas")
         .background(profileManager.neutralColor)
@@ -48,6 +58,7 @@ struct SideBarView: View {
             }
             .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : .clear)
         }
+        .listStyle(SidebarListStyle())
         .if(dashboardManager.profileListShowing) { view in
             view.listStyle(PlainListStyle())
         }
@@ -183,22 +194,16 @@ struct DashboardView: View {
             }
             MainView()
         }
-        .gesture (
-            DragGesture()
-                .onChanged({gesture in
-                    if gesture.startLocation.x < CGFloat(100.0) && !dashboardManager.isSidebarOpen {
-                        withAnimation(.easeIn(duration: 0.3)) {
-                            dashboardManager.isSidebarOpen = true
-                        }
-                    }
-                 })
-        )
-
-//        NavigationView {
-////            SplitView(master: SideBarView(), detail: MainView())
-//            SideBarView()
-//            MainView()
-//        }
+//        .gesture (
+//            DragGesture()
+//                .onChanged({gesture in
+//                    if gesture.startLocation.x < CGFloat(100.0) && !dashboardManager.isSidebarOpen {
+//                        withAnimation(.easeIn(duration: 0.3)) {
+//                            dashboardManager.isSidebarOpen = true
+//                        }
+//                    }
+//                 })
+//        )
         .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
             SplashView()
         }

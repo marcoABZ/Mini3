@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PuzzleBoardView: View {
     
+    @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @State var showAnswer: Bool = false
     
@@ -23,18 +24,25 @@ struct PuzzleBoardView: View {
                             .overlay(
                                 GeometryReader { geo in
                                     Rectangle()
-                                        .stroke()
+//                                        .stroke(Color(uiColor: .systemGray2))
+                                        .stroke(student.getProfileColor())
                                         .onAppear {
                                             puzzleManager.pieces[i].setGoalPosition(at: geo.frame(in: .global))
                                         }
                                 }
                             )
-                    }.zIndex(-1)
+                    }
                 }
                 .frame(width: puzzleManager.settings.image.size.width, height: puzzleManager.settings.image.size.height)
-                .zIndex(-1)
             }
-            Text("Ver resposta")
+            Image(systemName: "eye")
+                .font(.system(size: 24, weight: .bold, design: .default))
+                .foregroundColor(.white)
+                .padding()
+                .background(
+                    Capsule()
+                        .foregroundColor(student.getProfileColor())
+                )
                 .gesture (
                     DragGesture(minimumDistance: 0)
                         .onChanged {_ in

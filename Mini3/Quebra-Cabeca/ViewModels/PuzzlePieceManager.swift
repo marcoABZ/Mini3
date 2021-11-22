@@ -10,14 +10,17 @@ import SwiftUI
 class PuzzlePieceManager<Element>: ObservableObject {
     let content: Element
     let index: Int
-    @Published var originalPosition: CGRect?
-    @Published var displacement: CGSize = .zero
+    @Published var currentPosition: CGRect?
+    @Published var acumulatedDisplacement: CGSize = .zero
+    @Published var currentDisplacement: CGSize = .zero
     var targetPosition: CGRect?
     @Published var isCorrect: Bool = false
+    var shouldMoveBack: Bool
     
-    init(content: Element, index: Int) {
+    init(content: Element, index: Int, shouldMoveBack: Bool = false) {
         self.content = content
         self.index = index
+        self.shouldMoveBack = shouldMoveBack
     }
     
     func setGoalPosition(at position: CGRect) {
@@ -25,25 +28,32 @@ class PuzzlePieceManager<Element>: ObservableObject {
     }
     
     func setStartPosition(at position: CGRect) {
-        originalPosition = position
+        currentPosition = position
     }
     
     func drag(forDistance distance: CGSize) {
-        displacement = distance
+        currentDisplacement = distance
     }
     
     func drop() {
         guard let tp = targetPosition,
-              let op = originalPosition
+              let op = currentPosition
         else { return }
         
-        let dropPos = CGPoint(x: op.midX + displacement.width, y: op.midY + displacement.height)
+        let dropPos = CGPoint(x: op.midX + currentDisplacement.width + acumulatedDisplacement.width, y: op.midY + currentDisplacement.height + acumulatedDisplacement.height)
         
         if tp.contains(dropPos) {
             isCorrect = true
-            displacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
+            currentDisplacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
+            acumulatedDisplacement = .zero
         } else {
-            displacement = .zero
+            if shouldMoveBack {
+                acumulatedDisplacement = .zero
+            } else {
+                acumulatedDisplacement = CGSize(width: acumulatedDisplacement.width + currentDisplacement.width, height: acumulatedDisplacement.height + currentDisplacement.height)
+            }
+            
+            currentDisplacement = .zero
         }
     
     }

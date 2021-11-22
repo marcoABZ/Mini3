@@ -16,26 +16,31 @@ struct QuebraCabecaGameView: View {
         student.getProfileColor()
             .ignoresSafeArea(.all)
             .overlay {
-                HStack {
-                    Spacer()
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
-                        // TODO: Setar ordenação com letras
-                        ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
-                            PuzzlePieceView(
-                                puzzleManager: puzzleManager,
-                                piece: piece)
+                ZStack(alignment: .top) {
+                    HStack {
+                        Spacer()
+                        PuzzleBoardView(puzzleManager: puzzleManager)
+                        Spacer()
+                        Divider()
+                            .background(student.getProfileColor())
+                        Spacer()
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
+                            // TODO: Setar ordenação com letras
+                            ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
+                                PuzzlePieceView(
+                                    puzzleManager: puzzleManager,
+                                    piece: piece)
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
-                    Divider()
-                        .background(student.getProfileColor())
-                    Spacer()
-                    PuzzleBoardView(puzzleManager: puzzleManager)
-                    Spacer()
+                    .frame(width: settingsPlusImageWidth, height: settingsHeight)
+                    .background()
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
+                    if (puzzleManager.piecesCount <= 35) {
+                        QuebraCabecaProgressView(puzzleManager: puzzleManager)
+                    }
                 }
-                .frame(width: settingsPlusImageWidth, height: settingsHeight)
-                .background()
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
             }.sheet(isPresented: $puzzleManager.isOver) {
                 Image("fim-jogo-placeholder")
             }
@@ -54,7 +59,7 @@ struct QuebraCabecaGameView: View {
 struct SliceTest_Previews: PreviewProvider {
     static var previews: some View {
         let student = Profile(teste: true)
-        let cfg = PuzzleConfiguration(verticalDivision: 3, horizontalDivision: 3, som: false, animacao: true, ordenacao: true, tipoOrdenacao: 0, image: UIImage(named: "placeholder1")!)
+        let cfg = PuzzleConfiguration(verticalDivision: 3, horizontalDivision: 3, som: false, ordenacao: .none, image: UIImage(named: "placeholder1")!)
         
         QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: cfg))
             .previewInterfaceOrientation(.landscapeLeft)
