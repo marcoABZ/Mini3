@@ -11,4 +11,5 @@ import SwiftUI
 enum Game {
     case quebraCabeca
     case formas
+    case somImagens
 }

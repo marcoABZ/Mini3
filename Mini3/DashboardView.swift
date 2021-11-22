@@ -37,7 +37,6 @@ struct SideBarView: View {
                 Spacer()
             }
         }
-        .navigationTitle("Animautas")
         .background(profileManager.neutralColor)
     }
     
@@ -74,68 +73,66 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                VStack {
-                    HStack(alignment: .top) {
-                        Button(action: {
-                            profileManager.isEditingProfile = true
-                        }) {
-                            ZStack {
-                                profileManager.selectedProfile?.image
-                                    .font(.system(size: 70))
-                                    .foregroundColor(.gray)
-                                    .frame(width: 110, height: 110)
-                                    .background(.gray.opacity(0.5))
-                                    .cornerRadius(12)
-                                
-                                VStack {
-                                    HStack {
-                                        Image(systemName: "gearshape")
-                                            .font(.system(size: 24, weight: .bold))
-                                            .foregroundColor(.white)
-                                        .frame(width: 36, height: 36)
-                                        .background(profileManager.selectedProfile?.selectedColor)
-                                        .cornerRadius(18)
-                                        .offset(x: 55, y: 55)
-                                    }
+            VStack {
+                HStack(alignment: .top) {
+                    Button(action: {
+                        profileManager.isEditingProfile = true
+                    }) {
+                        ZStack {
+                            profileManager.selectedProfile?.image
+                                .font(.system(size: 70))
+                                .foregroundColor(.gray)
+                                .frame(width: 110, height: 110)
+                                .background(.gray.opacity(0.5))
+                                .cornerRadius(12)
+                            
+                            VStack {
+                                HStack {
+                                    Image(systemName: "gearshape")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .foregroundColor(.white)
+                                    .frame(width: 36, height: 36)
+                                    .background(profileManager.selectedProfile?.selectedColor)
+                                    .cornerRadius(18)
+                                    .offset(x: 55, y: 55)
                                 }
                             }
-                            
                         }
-                        .padding()
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
-                                Image(systemName: "gamecontroller")
-                            }
-                            .font(.system(size: 24, design: .rounded).bold())
-                            
-                            Text("8 anos")
-                                .font(.system(size: 14, design: .rounded))
-                                .padding(.vertical, 2)
-                            Text("Interesse: balas de goma")
-                                .font(.system(size: 14, design: .rounded))
-
-                        }
-                        .padding()
-                        makePicker()
+                        
                     }
-                    
-                    generateContent()
+                    .padding()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
+                            Image(systemName: "gamecontroller")
+                        }
+                        .font(.system(size: 24, design: .rounded).bold())
+                        
+                        Text("8 anos")
+                            .font(.system(size: 14, design: .rounded))
+                            .padding(.vertical, 2)
+                        Text("Interesse: balas de goma")
+                            .font(.system(size: 14, design: .rounded))
+
+                    }
+                    .padding()
+                    makePicker()
                 }
-                .padding(.leading, geometry.size.width > 900 ? 80 : 0)
-                .onChange(of: profileManager.selectedProfile) { _ in
-                    dashboardManager.renderView.toggle()
-                }
-                .onAppear() {
-                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
-                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-                    
-                    // TODO: Linkar com a cor do perfil selecionado
-    //                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
-                    
-                    UISegmentedControl.appearance().selectedSegmentTintColor = .white
-                }
+                
+                generateContent()
+            }
+            .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
+            .onChange(of: profileManager.selectedProfile) { _ in
+                dashboardManager.renderView.toggle()
+            }
+            .onAppear() {
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+                
+                // TODO: Linkar com a cor do perfil selecionado
+//                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
+                
+                UISegmentedControl.appearance().selectedSegmentTintColor = .white
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -149,6 +146,7 @@ struct MainView: View {
                     )
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
     
@@ -161,7 +159,6 @@ struct MainView: View {
             }
         }
         .pickerStyle(SegmentedPickerStyle())
-//                    .colorMultiply(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.selectedColor : .clear)
         .padding(.leading,64)
         .padding(.trailing,64)
         .padding(.vertical,34)

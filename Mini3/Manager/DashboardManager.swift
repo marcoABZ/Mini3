@@ -31,8 +31,9 @@ class DashboardManager: ObservableObject {
     
     func getGamesAvailable(mascote: Mascotes) {
         covers = [
-                GameCoverModel(image: getCoverImage(game: .quebraCabeca, mascote: mascote), title: "Alfabetização", description: "Forme palavras e sílabas."),
-                GameCoverModel(image: getCoverImage(game: .formas, mascote: mascote), title: "Quebra-cabeça", description: "Organize e monte a imagem."),
+                GameCoverModel(image: getCoverImage(game: .quebraCabeca, mascote: mascote), title: "Quebra-cabeça", description: "Organize e monte a imagem."),
+                GameCoverModel(image: getCoverImage(game: .formas, mascote: mascote), title: "Formas e cores", description: "Jogo em desenvolvimento"),
+                GameCoverModel(image: getCoverImage(game: .somImagens, mascote: mascote), title: "Som e imagem", description: "Jogo em desenvolvimento")
             ]
     }
     
@@ -55,6 +56,15 @@ class DashboardManager: ObservableObject {
                 return Image("chibaMini2Cover")
             case .gato:
                 return Image("gatoMini2Cover")
+            }
+        case .somImagens:
+            switch mascote {
+            case .coelho:
+                return Image("coelhoMini3Cover")
+            case .chiba:
+                return Image("chibaMini3Cover")
+            case .gato:
+                return Image("gatoMini3Cover")
             }
         }
     }

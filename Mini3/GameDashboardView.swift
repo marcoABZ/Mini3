@@ -14,39 +14,36 @@ struct GameDashboardView: View {
     var body: some View {
         VStack {
             Text("Jogos Disponíveis")
-                .font(.system(size: 32, design: .rounded).bold())
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .foregroundColor(profileManager.getProfileColor())
+                .padding(.bottom)
             ScrollView(.horizontal) {
-                HStack(alignment: .top, spacing: 36) {
-                    ForEach(0..<10) { i in
+                HStack(alignment: .top, spacing: 30) {
+                    ForEach(dashboardManager.covers, id: \.title) { cover in
                         VStack(alignment: .leading, spacing: 6) {
-                            if i <= dashboardManager.covers.count - 1 {
-                                NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
-                                    dashboardManager.covers[i].image
-                                        .resizable()
-                                        .cornerRadius(16)
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 220, height: 320)
-                                        .padding(.bottom, 10)
-                                }
-                                .simultaneousGesture(
-                                    TapGesture().onEnded { dashboardManager.isSidebarOpen = false }
-                                )
-                                Text("\(dashboardManager.covers[i].title)")
-                                    .font(.system(size: 17).bold())
-                                Text("\(dashboardManager.covers[i].description)")
-                            } else {
-                                Rectangle()
-                                    .frame(width: 233, height: 326)
-                                    .foregroundColor(.gray)
+                            NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
+                                cover.image
+                                    .resizable()
                                     .cornerRadius(16)
+                                    .aspectRatio(contentMode: .fit)
+//                                    .frame(width: 220, height: 320)
+                                    .padding(.bottom, 10)
+                                    .shadow(color: .gray, radius: 10, x: 0, y: 0)
                             }
+                            .simultaneousGesture(
+                                TapGesture().onEnded { dashboardManager.isSidebarOpen = false }
+                            )
+                            Text(cover.title)
+                                .font(.system(size: 17, weight: .bold, design: .rounded))
+                            Text(cover.description)
+                                .font(.system(size: 14, weight: .regular, design: .rounded))
                         }
                         .padding(.bottom,32)
                         .padding(.leading)
                     }
                 }
             }
-            Spacer()
+//            Spacer()
         }
     }
 }
