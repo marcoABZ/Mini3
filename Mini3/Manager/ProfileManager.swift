@@ -24,6 +24,8 @@ class ProfileManager: ObservableObject {
     
     @Published var coverUpdate: Bool = false
     
+    @Published var editingIndex: Int = 0
+    
     let availableColors = [
         Color.init(red: 123/255, green: 86/255, blue: 202/255),
         Color.init(red: 94/255, green: 196/255, blue: 214/255),
@@ -54,6 +56,7 @@ class ProfileManager: ObservableObject {
             )
         }
         selectedProfile = profiles[0]
+        profiles[1].mascote = .gato
     }
     
     func dismissProfileView() {
@@ -96,6 +99,7 @@ class ProfileManager: ObservableObject {
     }
     
     func getFinishImage() -> Image {
+//        selectedProfile = profiles[editingIndex]
         switch selectedProfile!.mascote {
         case .chiba:
             return Image("chibaFinish")
@@ -104,5 +108,9 @@ class ProfileManager: ObservableObject {
         case .coelho:
             return Image("coelhoFinish")
         }
+    }
+    
+    func updateProfile(index: Int) {
+        selectedProfile = profiles[index]
     }
 }

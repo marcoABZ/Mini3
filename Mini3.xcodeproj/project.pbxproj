@@ -11,7 +11,6 @@
 		5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7B273DB18600C157BE /* ProfileModel.swift */; };
 		5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */; };
 		5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D85273DDD1600C157BE /* InnerRing.swift */; };
-		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
 		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
 		5B2CF1CE27480DF6004D2A50 /* FinishMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */; };
 		5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */; };
@@ -60,7 +59,6 @@
 		5B232D7B273DB18600C157BE /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		5B232D85273DDD1600C157BE /* InnerRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerRing.swift; sourceTree = "<group>"; };
-		5B2403F12735B39800141388 /* MiniGame1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame1Test.swift; sourceTree = "<group>"; };
 		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMenuView.swift; sourceTree = "<group>"; };
 		5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
 				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
-				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
 				FA4EB1092735A48A0027D188 /* Preview Content */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
 				FA9356FD273999550005776C /* ImageExtension.swift */,
@@ -376,7 +373,6 @@
 				5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
 				5B2CF1D227481B13004D2A50 /* Game.swift in Sources */,
-				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
 				FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */,
 				FA2A3C3D274419B000DD26AA /* PuzzleConfiguration.swift in Sources */,

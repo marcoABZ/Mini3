@@ -25,13 +25,12 @@ enum Mascotes: CaseIterable {
     }
 }
 
-struct ProfileModel: Equatable, Hashable {
+struct ProfileModel: Equatable {
     var name: String
     var birthdate: Date
     var selectedColor: Color
     var darkModeEnabled: Bool
     var mascote: Mascotes
-    var id = UUID()
     //TODO: Interesses
     
     var image: Image
@@ -43,9 +42,5 @@ struct ProfileModel: Equatable, Hashable {
         self.image = Image(image)
         self.darkModeEnabled = darkModeEnabled
         self.mascote = .coelho
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
     }
 }

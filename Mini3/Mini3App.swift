@@ -14,6 +14,7 @@ struct Mini3App: App {
             DashboardView()
                 .environmentObject(ProfileManager())
                 .environmentObject(DashboardManager())
+                .environmentObject(RecordManager())
         }
     }
 }

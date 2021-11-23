@@ -13,12 +13,16 @@ enum Satisfaction {
     case overSatisfied
 }
 
-class RecordModel {
+struct RecordModel {
     var satisfaction: Satisfaction
     var annotation: String
+    var teacher: Teacher
+    var game: Game
     
     init() {
-        self.satisfaction = .satisfied
+        self.satisfaction = .notSatisfied
         self.annotation = ""
+        self.teacher = Teacher(nome: "")
+        self.game = .quebraCabeca
     }
 }

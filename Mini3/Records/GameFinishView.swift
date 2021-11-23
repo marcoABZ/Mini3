@@ -9,17 +9,41 @@ import SwiftUI
 
 struct GameFinishView: View {
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var recordManager: RecordManager
+    
     var body: some View {
         ZStack {
-            profileManager.getProfileColor()
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            FinishMenuView()
-                .environmentObject(profileManager)
+            if profileManager.editingIndex == 1 {
+                profileManager.getProfileColor()
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.white.opacity(0.3), lineWidth: 5)
+                    )
+                    .ignoresSafeArea()
+            } else {
+                profileManager.getProfileColor()
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.white.opacity(0.3), lineWidth: 5)
+                    )
+                    .ignoresSafeArea()
+            }
+            switch recordManager.recordViewMode {
+            case .menu:
+                FinishMenuView()
+                    .environmentObject(profileManager)
+                    .environmentObject(recordManager)
+            case .teacherEdit:
+                TeacherRegisterView()
+                    .environmentObject(profileManager)
+                    .environmentObject(recordManager)
+            case .input:
+                RegisterView()
+                    .environmentObject(profileManager)
+                    .environmentObject(recordManager)
+            }
         }
         
     }
@@ -31,6 +55,7 @@ struct GameFinishView_Previews: PreviewProvider {
         GameFinishView()
             .padding()
             .environmentObject(ProfileManager())
+            .environmentObject(RecordManager())
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }
