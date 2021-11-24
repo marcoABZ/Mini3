@@ -38,6 +38,7 @@ struct GameDashboardView: View {
                                 .simultaneousGesture(
                                     TapGesture().onEnded {
                                         dashboardManager.hasSidebar = false
+                                        recordManager.currentGame = .quebraCabeca
                                     }
                                 )
                             } else {
