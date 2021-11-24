@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 struct GameCoverModel {
+    let game: Game
     let image: Image
     let title: String
     let description: String
     
-    init(image: Image, title: String, description: String) {
+    init(game: Game, image: Image, title: String, description: String) {
+        self.game = game
         self.image = image
         self.title = title
         self.description = description

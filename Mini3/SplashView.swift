@@ -18,10 +18,9 @@ struct ProfileListView: View {
 
         ScrollView(.horizontal) {
             HStack {
-                VStack {
-                    Button(action: {
-                        profileManager.addingProfile = true
-                    }) {
+                
+                NavigationLink(destination: ProfileView()) {
+                    VStack {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0)]), startPoint: .topTrailing, endPoint: .bottomLeading))
                             .frame(width: 204, height: 204)
@@ -30,15 +29,18 @@ struct ProfileListView: View {
                             .overlay(
                                 Image(systemName: "plus").font(.system(size: 90).bold())).foregroundColor(Color("SplashPurple")
                                 )
-                    }
                         
-                    Text("Novo perfil")
-                        .foregroundColor(.white)
-                        .font(.system(size: 21).bold())
-                        .padding(.top, 16)
-                }
-                .padding(.leading,profileManager.profiles.count > 4 ? 120 : 0)
-                .padding(.trailing,16)
+                        Text("Novo perfil")
+                            .foregroundColor(.white)
+                            .font(.system(size: 21).bold())
+                            .padding(.top, 16)
+                    }
+                    .padding(.leading,profileManager.profiles.count > 4 ? 120 : 0)
+                    .padding(.trailing,16)
+                }.simultaneousGesture(
+                    TapGesture().onEnded { profileManager.addingProfile = true }
+                )
+                
                 ForEach(0..<profileManager.profiles.count) { index in
 
                     NavigationLink(destination: DashboardView()) {
@@ -112,6 +114,7 @@ struct SplashView: View {
 //                    .environmentObject(dashboardManager)
 //            }
         }.navigationViewStyle(StackNavigationViewStyle())
+        .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
     }
 }
 

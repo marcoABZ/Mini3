@@ -12,4 +12,12 @@ enum Game {
     case quebraCabeca
     case formas
     case somImagens
+    
+    func isAvailable() -> Bool {
+        if self == .quebraCabeca {
+            return true
+        }
+        
+        return false
+    }
 }

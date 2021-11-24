@@ -36,11 +36,11 @@ class ProfileManager: ObservableObject {
     let testProfiles = ["Marco","Ana", "Carol", "Pablo", "Deborah"]
     
     let testBirthdates = [
+        Calendar.current.date(from: DateComponents(year: 1996, month: 5, day: 27)),
         Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
-        Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
-        Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
-        Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
-        Calendar.current.date(from: DateComponents(year: 1999, month: 5, day: 27)),
+        Calendar.current.date(from: DateComponents(year: 2001, month: 12, day: 27)),
+        Calendar.current.date(from: DateComponents(year: 2000, month: 11, day: 30)),
+        Calendar.current.date(from: DateComponents(year: 1995, month: 5, day: 27)),
     ]
     
     let testProfilesImages = ["profile1","profile2","profile3","profile4","profile4"]
@@ -79,22 +79,8 @@ class ProfileManager: ObservableObject {
     }
     
     func saveProfile(image: Image) {
-        
-//        editingProfile.image = image
-        
-//        for i in 0..<profiles.count {
-//            if profiles[i] == selectedProfile! {
-//                profiles[i] = editingProfile
-//                selectedProfile = editingProfile
-//                return
-//            }
-//        }
-//
-//        profiles.append(editingProfile)
-//        selectedProfile = editingProfile
-        
         if isEditingProfile {
-            editingProfile.image = image
+//            editingProfile.image = image
             for i in 0..<profiles.count {
                 if profiles[i] == selectedProfile! {
                     profiles[i] = editingProfile
@@ -102,7 +88,7 @@ class ProfileManager: ObservableObject {
                 }
             }
         } else if addingProfile {
-            editingProfile.image = image
+//            editingProfile.image = image
             profiles.append(editingProfile)
             selectedProfile = editingProfile
         }
@@ -118,5 +104,21 @@ class ProfileManager: ObservableObject {
         case .coelho:
             return Image("coelhoFinish")
         }
+    }
+    
+    func getIdade() -> Int? {
+        if let selectedProfile = selectedProfile {
+            let calendar = Calendar.current
+            let birthdate = calendar.dateComponents([.year, .month, .day], from: selectedProfile.birthdate)
+            let age: Int
+            //Calculate age
+            let now = calendar.dateComponents([.year, .month, .day], from: Date())
+            let ageComponents = calendar.dateComponents([.year], from: birthdate, to: now)
+            age = ageComponents.year!
+            
+            return age
+        }
+        
+        return nil
     }
 }

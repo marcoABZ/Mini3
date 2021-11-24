@@ -21,9 +21,6 @@ struct ProfileView: View {
     
     
     var body: some View {
-        //Apagar
-        let im: Image? = image ?? profileManager.editingProfile.image
-        
         profileManager.editingProfile.selectedColor
             .ignoresSafeArea(.all)
             .overlay {
@@ -64,6 +61,7 @@ struct ProfileView: View {
                     .cornerRadius(30)
                     .onTapGesture {
                         dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile?.mascote ?? .coelho)
+                        dashboardManager.hasSidebar = true
                         self.presentation.wrappedValue.dismiss()
                     }
                 }
@@ -73,13 +71,14 @@ struct ProfileView: View {
             .navigationTitle(profileManager.addingProfile ? "Novo Perfil" : "Editar Perfil")
             .onAppear() {
                 profileManager.getProfile()
+                dashboardManager.hasSidebar = false
             }
             .ignoresSafeArea()
             //TODO: Criar um manager para as imagens
             //Apagar
-            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
-            }
+//            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+//                ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
+//            }
     }
         
 //        ZStack {
@@ -307,14 +306,14 @@ struct ProfileView: View {
 //            ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
 //        }
 //    }
-    
-    func loadImage() {
-        guard let inputImage = inputImage else {
-            return
-        }
-        
-        image = Image(uiImage: inputImage)
-    }
+//    
+//    func loadImage() {
+//        guard let inputImage = inputImage else {
+//            return
+//        }
+//        
+//        image = Image(uiImage: inputImage)
+//    }
     
     
 }

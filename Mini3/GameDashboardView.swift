@@ -19,20 +19,42 @@ struct GameDashboardView: View {
                 .padding(.bottom)
             ScrollView(.horizontal) {
                 HStack(alignment: .top, spacing: 30) {
+                    //TODO: Iterar sobre os casos de Game ao invés de covers
                     ForEach(dashboardManager.covers, id: \.title) { cover in
                         VStack(alignment: .leading, spacing: 6) {
-                            NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
-                                cover.image
-                                    .resizable()
-                                    .cornerRadius(16)
-                                    .aspectRatio(contentMode: .fit)
-//                                    .frame(width: 220, height: 320)
-                                    .padding(.bottom, 10)
-                                    .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                            if cover.game.isAvailable() {
+                                NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
+                                        cover.image
+                                            .resizable()
+                                            .cornerRadius(16)
+                                            .aspectRatio(contentMode: .fit)
+        //                                    .frame(width: 220, height: 320)
+                                            .padding(.bottom, 10)
+                                            .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                                }
+                                .simultaneousGesture(
+                                    TapGesture().onEnded {
+                                        dashboardManager.hasSidebar = false
+                                    }
+                                )
+                            } else {
+                                ZStack {
+                                    cover.image
+                                        .resizable()
+                                        .cornerRadius(16)
+                                        .aspectRatio(contentMode: .fit)
+    //                                    .frame(width: 220, height: 320)
+                                        .padding(.bottom, 10)
+                                        .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                                    Color.black
+                                        .cornerRadius(16)
+                                        .opacity(0.5)
+                                        .padding(.bottom, 10)
+                                    Image(systemName: "lock.slash.fill")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 64))
+                                }
                             }
-                            .simultaneousGesture(
-                                TapGesture().onEnded { dashboardManager.isSidebarOpen = false }
-                            )
                             Text(cover.title)
                                 .font(.system(size: 17, weight: .bold, design: .rounded))
                             Text(cover.description)

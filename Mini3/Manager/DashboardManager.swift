@@ -18,6 +18,7 @@ class DashboardManager: ObservableObject {
     @Published var profileListShowing: Bool
     @Published var pickerSelection: ViewModes
     @Published var isSidebarOpen: Bool = false
+    @Published var hasSidebar: Bool = true
     
     //Forçar update do picker
     @Published var renderView: Bool = false
@@ -31,9 +32,9 @@ class DashboardManager: ObservableObject {
     
     func getGamesAvailable(mascote: Mascotes) {
         covers = [
-                GameCoverModel(image: getCoverImage(game: .quebraCabeca, mascote: mascote), title: "Quebra-cabeça", description: "Organize e monte a imagem."),
-                GameCoverModel(image: getCoverImage(game: .formas, mascote: mascote), title: "Formas e cores", description: "Jogo em desenvolvimento"),
-                GameCoverModel(image: getCoverImage(game: .somImagens, mascote: mascote), title: "Som e imagem", description: "Jogo em desenvolvimento")
+            GameCoverModel(game:.quebraCabeca, image: getCoverImage(game: .quebraCabeca, mascote: mascote), title: "Quebra-cabeça", description: "Organize e monte a imagem."),
+            GameCoverModel(game:.formas, image: getCoverImage(game: .formas, mascote: mascote), title: "Formas e cores", description: "Jogo em desenvolvimento"),
+            GameCoverModel(game:.somImagens, image: getCoverImage(game: .somImagens, mascote: mascote), title: "Som e imagem", description: "Jogo em desenvolvimento")
             ]
     }
     

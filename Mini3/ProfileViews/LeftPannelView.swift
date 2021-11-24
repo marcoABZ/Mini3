@@ -71,6 +71,18 @@ struct LeftPannelView: View {
         }
         .frame(maxWidth: 492)
         .font(.system(size: 24, weight: .bold, design: .rounded))
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+        
+        image = Image(uiImage: inputImage.resizeImageTo(size: CGSize(width: 165, height: 165)) ?? inputImage)
+        profileManager.editingProfile.image = image!
     }
 }
 
