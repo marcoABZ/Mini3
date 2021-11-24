@@ -44,6 +44,6 @@ struct GameDashboardView: View {
                 }
             }
 //            Spacer()
-        }
+        }.onAppear { dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile?.mascote ?? .chiba) }
     }
 }

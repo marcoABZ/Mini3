@@ -23,7 +23,6 @@ struct SideBarView: View {
                     Spacer()
                     Image(systemName: dashboardManager.profileListShowing ? "chevron.up" : "chevron.down")
                 }
-                .foregroundColor(.black)
                 .font(.system(size: 20, design: .rounded).bold())
             }
             .padding()
@@ -37,7 +36,7 @@ struct SideBarView: View {
                 Spacer()
             }
         }
-        .background(profileManager.neutralColor)
+        .background(Color("neutralColor"))
     }
     
     @ViewBuilder func makeList() -> some View {
@@ -75,9 +74,11 @@ struct MainView: View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    Button(action: {
-                        profileManager.isEditingProfile = true
-                    }) {
+                    NavigationLink(destination: ProfileView()) {
+                    
+//                    Button(action: {
+//                        profileManager.isEditingProfile = true
+//                    }) {
                         ZStack {
                             profileManager.selectedProfile?.image
                                 .font(.system(size: 70))
@@ -99,7 +100,9 @@ struct MainView: View {
                             }
                         }
                         
-                    }
+                    }.simultaneousGesture(
+                        TapGesture().onEnded {profileManager.isEditingProfile = true}
+                    )
                     .padding()
                     VStack(alignment: .leading) {
                         HStack {
@@ -116,10 +119,17 @@ struct MainView: View {
 
                     }
                     .padding()
-                    makePicker()
+                    if dashboardManager.renderView {
+                        makePicker()
+                    } else {
+                        makePicker()
+                    }
                 }
-                
-                generateContent()
+                if dashboardManager.renderView {
+                    generateContent()
+                } else {
+                    generateContent()
+                }
             }
             .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
             .onChange(of: profileManager.selectedProfile) { _ in
@@ -142,7 +152,9 @@ struct MainView: View {
                                 { dashboardManager.isSidebarOpen.toggle() }
                             },
                         label:
-                            { Image(systemName: "sidebar.leading") }
+                            { Image(systemName: "sidebar.leading")
+                                .foregroundColor(.primary)
+                            }
                     )
                 }
             }
@@ -184,7 +196,7 @@ struct DashboardView: View {
     @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             if dashboardManager.isSidebarOpen {
                 SideBarView()
                     .frame(width: 300)
@@ -201,22 +213,22 @@ struct DashboardView: View {
 //                    }
 //                 })
 //        )
-        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
-            SplashView()
-        }
-        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
-            ProfileView()
-        }
+//        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
+//            SplashView()
+//        }
+//        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
+//            ProfileView()
+//        }
         .navigationBarHidden(true)
-        .navigationAppearance(foregroundColor: .white, tintColor: .systemBlue, hideSeparator: true)
+        .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView()
-            .environmentObject(DashboardManager())
-            .environmentObject(ProfileManager())
-            .previewInterfaceOrientation(.landscapeLeft)
-    }
-}
+//struct DashboardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DashboardView()
+//            .environmentObject(DashboardManager())
+//            .environmentObject(ProfileManager())
+//            .previewInterfaceOrientation(.landscapeLeft)
+//    }
+//}

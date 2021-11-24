@@ -9,11 +9,16 @@ import SwiftUI
 
 @main
 struct Mini3App: App {
+    
+    @ObservedObject var profileManager: ProfileManager = ProfileManager()
+    
     var body: some Scene {
         WindowGroup {
-            DashboardView()
-                .environmentObject(ProfileManager())
+            SplashView()
+                .environmentObject(profileManager)
                 .environmentObject(DashboardManager())
+                .environment(\.colorScheme, profileManager.selectedProfile?.darkModeEnabled ?? false ? .dark : .light)
+                .accentColor(.primary)
         }
     }
 }

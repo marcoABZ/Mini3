@@ -79,6 +79,20 @@ class ProfileManager: ObservableObject {
     }
     
     func saveProfile(image: Image) {
+        
+//        editingProfile.image = image
+        
+//        for i in 0..<profiles.count {
+//            if profiles[i] == selectedProfile! {
+//                profiles[i] = editingProfile
+//                selectedProfile = editingProfile
+//                return
+//            }
+//        }
+//
+//        profiles.append(editingProfile)
+//        selectedProfile = editingProfile
+        
         if isEditingProfile {
             editingProfile.image = image
             for i in 0..<profiles.count {
