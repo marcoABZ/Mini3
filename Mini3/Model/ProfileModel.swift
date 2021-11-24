@@ -23,9 +23,20 @@ enum Mascotes: CaseIterable {
             return "gatoSquare"
         }
     }
+    
+    static func getCardCoverImages(animal: Mascotes, jogo: Game) -> String {
+        switch animal {
+        case .coelho:
+            return "coelhoRegistroCover\(jogo)"
+        case .chiba:
+            return "chibaRegistroCover\(jogo)"
+        case .gato:
+            return "gatoRegistroCover\(jogo)"
+        }
+    }
 }
 
-struct ProfileModel: Equatable, Hashable {
+struct ProfileModel: Equatable {
     var name: String
     var birthdate: Date
     var selectedColor: Color
@@ -43,9 +54,5 @@ struct ProfileModel: Equatable, Hashable {
         self.image = Image(image)
         self.darkModeEnabled = darkModeEnabled
         self.mascote = .coelho
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
     }
 }

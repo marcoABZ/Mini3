@@ -36,7 +36,9 @@ struct AddTeacherView: View {
                 }
             Spacer()
             HStack(spacing: 30) {
-                Button(action: {}) {
+                Button(action: {
+                    recordManager.returnToView()
+                }) {
                     Text("Voltar")
                         .font(.system(size: 17, weight: .bold))
                         .frame(width: 220, height: 50)
@@ -47,7 +49,9 @@ struct AddTeacherView: View {
                 }
                 
                 
-                Button(action: {}) {
+                Button(action: {
+                    recordManager.registerTeacher()
+                }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
                         .foregroundColor(profileManager.getProfileColor())
@@ -59,6 +63,7 @@ struct AddTeacherView: View {
                                 .stroke(.white.opacity(0.5), lineWidth: 2)
                         )
                 }
+                .disabled(recordManager.addingTeacher.isEmpty)
             }
             Spacer()
         }
@@ -82,22 +87,32 @@ struct ManageTeacherView: View {
                 Spacer()
             }
             List {
-                ForEach(0..<recordManager.registeredTeachers.count) { index in
+                ForEach(recordManager.registeredTeachers, id: \.self) { teacher in
                     VStack {
                         HStack {
-                            Text("\(recordManager.registeredTeachers[index].nome)")
-                            Spacer()
-                            Button(action: {}) {
-                                Image(systemName: "trash")
+                            if recordManager.selectedTeacher.nome == teacher.nome {
+                                Image(systemName: "checkmark.seal.fill")
                             }
+                            Text(" Prof. \(teacher.nome)")
+                                .onTapGesture {
+                                    recordManager.selectedTeacher = teacher
+                                }
+                            Spacer()
+
+                            Image(systemName: "trash")
+                                .onTapGesture {
+                                    recordManager.eraseTeacher(teacher: teacher)
+                                }
+
                         }
                         .font(.system(size: 17, design: .rounded).bold())
                         .padding()
+                        
                         Path { path in
                             path.move(to: CGPoint(x: 17, y: 0))
                             path.addLine(to: CGPoint(x: 790, y: 0))
                         }
-                        .stroke(profileManager.availableColors[0], style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                        .stroke(profileManager.getProfileColor(), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         .frame(height: 3)
                     }
                 }
@@ -106,7 +121,7 @@ struct ManageTeacherView: View {
             }
             .listStyle(PlainListStyle())
             .background(
-                profileManager.availableColors[0].overlay(Color.black.opacity(0.2))
+                profileManager.getProfileColor().overlay(Color.black.opacity(0.2))
             )
             .cornerRadius(24)
             .overlay(
@@ -129,7 +144,9 @@ struct ManageTeacherView: View {
                         .padding(.leading,20)
                 }
             HStack(spacing: 30) {
-                Button(action: {}) {
+                Button(action: {
+                    recordManager.returnToView()
+                }) {
                     Text("Voltar")
                         .font(.system(size: 17, weight: .bold))
                         .frame(width: 220, height: 50)
@@ -139,7 +156,9 @@ struct ManageTeacherView: View {
                         )
                 }
                 
-                Button(action: {}) {
+                Button(action: {
+                    recordManager.registerTeacher()
+                }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
                         .foregroundColor(profileManager.getProfileColor())
@@ -151,6 +170,7 @@ struct ManageTeacherView: View {
                                 .stroke(.white.opacity(0.5), lineWidth: 2)
                         )
                 }
+                .disabled(recordManager.addingTeacher.isEmpty)
             }
             .padding(.top, 24)
 

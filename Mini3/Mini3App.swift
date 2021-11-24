@@ -17,6 +17,7 @@ struct Mini3App: App {
             SplashView()
                 .environmentObject(profileManager)
                 .environmentObject(DashboardManager())
+                .environmentObject(RecordManager())
                 .environment(\.colorScheme, profileManager.selectedProfile?.darkModeEnabled ?? false ? .dark : .light)
                 .accentColor(.primary)
         }

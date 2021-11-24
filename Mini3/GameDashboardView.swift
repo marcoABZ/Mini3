@@ -11,6 +11,9 @@ struct GameDashboardView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
     
+    //recordmanager instanciado para poder captar o dado do jogo atual
+    @EnvironmentObject var recordManager: RecordManager
+    
     var body: some View {
         VStack {
             Text("Jogos Disponíveis")

@@ -9,13 +9,7 @@ import SwiftUI
 
 struct FinishMenuView: View {
     @EnvironmentObject var profileManager: ProfileManager
-    @State var registeringProfile: ProfileModel = ProfileModel(name: "", birthdate: Date(), color: .black, image: "") {
-        willSet {
-            updateProfile()
-        }
-    }
-    @State var savingProfile = 1
-    
+    @EnvironmentObject var recordManager: RecordManager
     var body: some View {
         VStack {
             Text("Parabéns!")
@@ -26,20 +20,29 @@ struct FinishMenuView: View {
                     .font(.system(size: 17, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                Picker("Perfis", selection: $profileManager.selectedProfile) {
+                Picker("Perfis", selection: $profileManager.editingIndex) {
                     ForEach(0..<profileManager.profiles.count) { index in
-                        Text(profileManager.profiles[index].name)
-                            .tag(profileManager.profiles[index])
+                        HStack {
+                            Text(profileManager.profiles[index].name)
+                                .tag(index)
+                        }
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
-                .padding(.horizontal,25)
+                .accentColor(profileManager.getProfileColor())
+                .padding(.leading, 20)
+                .padding(.trailing, 40)
+                .background(.white)
+                .cornerRadius(20)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(.white, lineWidth: 2)
-                        .frame(width: 70, height: 30)
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .offset(x: 30)
                 )
-                .accentColor(.white)
+            }
+            .onChange(of: profileManager.editingIndex) { newValue in
+                profileManager.updateProfile(index: newValue)
             }
             ZStack {
                 profileManager.getFinishImage()
@@ -53,9 +56,11 @@ struct FinishMenuView: View {
                     .offset(x: 120, y: -60)
             }
             HStack {
-                Button(action: {}) {
+                Button(action: {
+                    recordManager.updateViewMode()
+                }) {
                     Text("Registrar atividade")
-                        .foregroundColor(.purple)
+                        .foregroundColor(profileManager.getProfileColor())
                 }
                 .frame(width: 220, height: 50)
                 .background(.white)
@@ -85,13 +90,6 @@ struct FinishMenuView: View {
                 .padding()
             }
         }
-        .onAppear {
-            registeringProfile = profileManager.selectedProfile!
-        }
-    }
-    
-    func updateProfile() {
-        profileManager.selectedProfile = registeringProfile
     }
 }
 
@@ -106,6 +104,7 @@ struct FinishMenuView_Previews: PreviewProvider {
                 )
                 .ignoresSafeArea()
             FinishMenuView()
+                .environmentObject(RecordManager())
                 .environmentObject(ProfileManager())
         }
         .previewInterfaceOrientation(.landscapeLeft)

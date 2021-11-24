@@ -8,13 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum Game: Int {
-    case quebraCabeca = 1
-    case formas
-    case somImagens
-    case palheta
-    case imagemFormas
-    
     func isAvailable() -> Bool {
         if self == .quebraCabeca {
             return true
@@ -22,4 +15,8 @@ enum Game: Int {
         
         return false
     }
+enum Game: String, CaseIterable {
+    case quebraCabeca = "Quebra-Cabeça"
+    case formas = "Formas"
+    case sonsEimagens = "Sons e Imagens"
 }

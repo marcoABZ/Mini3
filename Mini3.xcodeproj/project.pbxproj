@@ -11,8 +11,8 @@
 		5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7B273DB18600C157BE /* ProfileModel.swift */; };
 		5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */; };
 		5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D85273DDD1600C157BE /* InnerRing.swift */; };
-		5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2403F12735B39800141388 /* MiniGame1Test.swift */; };
 		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
+		5B2AB098274EB9BC0001B90C /* DesempenhoDetalheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */; };
 		5B2CF1CE27480DF6004D2A50 /* FinishMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */; };
 		5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */; };
 		5B2CF1D227481B13004D2A50 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1D127481B13004D2A50 /* Game.swift */; };
@@ -64,8 +64,8 @@
 		5B232D7B273DB18600C157BE /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		5B232D85273DDD1600C157BE /* InnerRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerRing.swift; sourceTree = "<group>"; };
-		5B2403F12735B39800141388 /* MiniGame1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame1Test.swift; sourceTree = "<group>"; };
 		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoDetalheView.swift; sourceTree = "<group>"; };
 		5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMenuView.swift; sourceTree = "<group>"; };
 		5B2CF1CF27480F74004D2A50 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
 		5B2CF1D127481B13004D2A50 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -284,7 +284,6 @@
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
 				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
-				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
 				FA4EB1092735A48A0027D188 /* Preview Content */,
 				FA21EAD1274D37BA0009AAC0 /* ProfileViews */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
@@ -297,6 +296,7 @@
 				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
 				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
 				FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */,
+				5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -414,6 +414,7 @@
 				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				5B2CF1D827484146004D2A50 /* RecordModel.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
+				5B2AB098274EB9BC0001B90C /* DesempenhoDetalheView.swift in Sources */,
 				5B2CFAD4274C10A600239705 /* BackgroundBlurView.swift in Sources */,
 				5B31D8B327457A090066FE4F /* GameFinishView.swift in Sources */,
 				5B290318273AF45300F52700 /* DashboardView.swift in Sources */,

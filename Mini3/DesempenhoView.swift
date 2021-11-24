@@ -7,56 +7,116 @@
 
 import SwiftUI
 
+struct SatisfactionView: View {
+    @EnvironmentObject var profileManager: ProfileManager
+    
+    let fractions: [Float]
+    let width = 254
+    var body: some View {
+        VStack {
+            HStack(spacing: 0) {
+                ForEach(Satisfaction.allCases, id: \.self) { satisfaction in
+                    Rectangle()
+                        .fill(Color("\(satisfaction)Color"))
+                        .frame(width: Double(fractions[Satisfaction.allCases.firstIndex(of: satisfaction)!]) * Double(width), height: 10)
+                }
+            }
+            .cornerRadius(10)
+            HStack(spacing: 12) {
+                ForEach(Satisfaction.allCases, id: \.self) { satisfaction in
+                    HStack {
+                        
+                        Image("\(satisfaction)Colored")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .background(Color("satisfactionGray"))
+                            .cornerRadius(12)
+                        Text("\(fractions[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100, specifier: "%.f")%")
+                    }
+                    .frame(width: 80, height: 36)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(profileManager.getProfileColor(), lineWidth: 2)
+                    )
+                }
+            }
+            .padding(.vertical, 30)
+        }
+    }
+}
+
 struct DesempenhoView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var recordManager: RecordManager
     
     //Apagar animacao e variavel abaixo
     @State var pct: Double = 0.0
     
     var body: some View {
-        Text("Desempenho")
-            .font(.system(size: 32, design: .rounded).bold())
-        ScrollView(.horizontal) {
-            ZStack(alignment: .topLeading) {
-                GeometryReader { geometry in
-                    ZStack {
-                        Path { path in
-                            path.addArc(center: CGPoint(x: geometry.size.width/2, y: geometry.size.width/2),
-                                radius: geometry.size.width/2,
-                                startAngle: Angle(degrees: 0),
-                                endAngle: Angle(degrees: 360),
-                                clockwise: true)
-                        }
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 30)
-                        if dashboardManager.pickerSelection == .games {
-                            InnerRing(pct: self.pct).stroke(Color.green, style: StrokeStyle(lineWidth: 35, lineCap: .round, lineJoin: .round))
-                
-                            Text("67%")
-                                .font(.system(size: 30).bold())
-                        } else {
-                            InnerRing(pct: self.pct).stroke(profileManager.getProfileColor(), style: StrokeStyle(lineWidth: 30, lineCap: .round, lineJoin: .round))
-                            Text("67%")
-                                .font(.system(size: 26).bold())
-                        }
-                    }
-
-                }
-                .frame(width: 110, height: 110)
-                .padding(.leading,40)
-                .aspectRatio(1, contentMode: .fit)
-                .padding(20)
+        VStack {
+            Text("Registro dos jogos")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
             
-                Image("perfPlaceholder")
-                    .padding()
-            }
-            .onAppear() {
-                withAnimation(.easeInOut(duration: 3)) {
-                    self.pct = 0.67
+            ScrollView(.horizontal) {
+                HStack(spacing: 24) {
+                    ForEach(Game.allCases, id: \.self) { game in
+                        createCardViews(jogo: game)
+                    }
                 }
+                .padding(40)
             }
-           
         }
+    }
+    
+    func createCardViews(jogo: Game) -> some View {
+        return VStack {
+            Image(Mascotes.getCardCoverImages(animal: profileManager.selectedProfile!.mascote, jogo: jogo))
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Jogo \(jogo.rawValue)")
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    Text(recordManager.getLastRecordDate(game: jogo) ?? "Nenhum registro")
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
+                }
+                Spacer()
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 22)
+            
+            SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo))
+    
+            Text(recordManager.getLastRecordTeacher(game: jogo) ?? "Nenhum registro")
+            Button(action: {}) {
+                Text("Acessar anotações")
+                    .foregroundColor(.white)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .frame(width: 246, height: 36)
+                    .background(profileManager.getProfileColor())
+                    .cornerRadius(17)
+            }
+            .padding(.vertical, 30)
+            .disabled(recordManager.checkRecordsSaved(game: jogo))
+        }
+        .cornerRadius(24)
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white)
+                .shadow(color: .black.opacity(0.2), radius: 20, x: 0, y: 4)
+        )
+        .frame(width: 300)
+        
+    }
+    
+}
+
+struct DesempenhoView_Previews: PreviewProvider {
+    static var previews: some View {
+        DesempenhoView()
+            .previewInterfaceOrientation(.landscapeLeft)
+            .environmentObject(ProfileManager())
+            .environmentObject(DashboardManager())
+            .environmentObject(RecordManager())
     }
 }
