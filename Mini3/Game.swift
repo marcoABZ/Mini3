@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-enum Game {
-    case quebraCabeca
-    case formas
+enum Game: String, CaseIterable {
+    case quebraCabeca = "Quebra-Cabeça"
+    case formas = "Formas"
+    case sonsEimagens = "Sons e Imagens"
 }

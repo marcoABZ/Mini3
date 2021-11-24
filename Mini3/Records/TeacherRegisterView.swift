@@ -98,14 +98,16 @@ struct ManageTeacherView: View {
                                     recordManager.selectedTeacher = teacher
                                 }
                             Spacer()
-                            Button(action: {
-                                recordManager.eraseTeacher(teacher: teacher)
-                            }) {
-                                Image(systemName: "trash")
-                            }
+
+                            Image(systemName: "trash")
+                                .onTapGesture {
+                                    recordManager.eraseTeacher(teacher: teacher)
+                                }
+
                         }
                         .font(.system(size: 17, design: .rounded).bold())
                         .padding()
+                        
                         Path { path in
                             path.move(to: CGPoint(x: 17, y: 0))
                             path.addLine(to: CGPoint(x: 790, y: 0))

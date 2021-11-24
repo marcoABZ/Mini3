@@ -56,6 +56,15 @@ class DashboardManager: ObservableObject {
             case .gato:
                 return Image("gatoMini2Cover")
             }
+        case .sonsEimagens:
+            switch mascote {
+            case .coelho:
+                return Image("coelhoMini3Cover")
+            case .chiba:
+                return Image("chibaMini3Cover")
+            case .gato:
+                return Image("gatoMini3Cover")
+            }
         }
     }
 }

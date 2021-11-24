@@ -87,7 +87,7 @@ struct RegisterView: View {
                 }
                 
                 Button(action: {
-                    recordManager.saveRecord()
+                    recordManager.saveRecord(student: profileManager.selectedProfile!)
                     presentation.wrappedValue.dismiss()
                 }) {
                     Text("Salvar informações")

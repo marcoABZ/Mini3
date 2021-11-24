@@ -45,8 +45,9 @@ struct GameFinishView: View {
                     .environmentObject(recordManager)
             }
         }
-        
+        .frame(width: 1014, height: 660)
     }
+    
     
 }
 

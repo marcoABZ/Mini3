@@ -11,6 +11,9 @@ struct GameDashboardView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
     
+    //recordmanager instanciado para poder captar o dado do jogo atual
+    @EnvironmentObject var recordManager: RecordManager
+    
     var body: some View {
         VStack {
             Text("Jogos Disponíveis")
@@ -27,9 +30,13 @@ struct GameDashboardView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 220, height: 320)
                                         .padding(.bottom, 10)
+
                                 }
                                 .simultaneousGesture(
-                                    TapGesture().onEnded { dashboardManager.isSidebarOpen = false }
+                                    TapGesture().onEnded {
+                                        dashboardManager.isSidebarOpen = false
+                                        recordManager.currentGame = .quebraCabeca
+                                    }
                                 )
                                 Text("\(dashboardManager.covers[i].title)")
                                     .font(.system(size: 17).bold())
