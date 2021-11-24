@@ -29,6 +29,10 @@
 		FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */; };
 		FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */; };
 		FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */; };
+		FA21EAD4274D37DC0009AAC0 /* RightPannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD3274D37DC0009AAC0 /* RightPannelView.swift */; };
+		FA21EAD6274D3B0B0009AAC0 /* LeftPannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD5274D3B0B0009AAC0 /* LeftPannelView.swift */; };
+		FA21EAD8274D3BCB0009AAC0 /* BackgroundColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */; };
+		FA21EADA274D4DDE0009AAC0 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */; };
 		FA261AB2274818AC00890053 /* QuebraCabecaProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */; };
 		FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */; };
 		FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */; };
@@ -78,6 +82,10 @@
 		FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDashboardView.swift; sourceTree = "<group>"; };
 		FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoView.swift; sourceTree = "<group>"; };
 		FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavAppearenceModifier.swift; sourceTree = "<group>"; };
+		FA21EAD3274D37DC0009AAC0 /* RightPannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightPannelView.swift; sourceTree = "<group>"; };
+		FA21EAD5274D3B0B0009AAC0 /* LeftPannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPannelView.swift; sourceTree = "<group>"; };
+		FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorPickerView.swift; sourceTree = "<group>"; };
+		FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaProgressView.swift; sourceTree = "<group>"; };
 		FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaPreview.swift; sourceTree = "<group>"; };
 		FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceManager.swift; sourceTree = "<group>"; };
@@ -173,6 +181,33 @@
 			path = Records;
 			sourceTree = "<group>";
 		};
+		FA21EAD0274D379F0009AAC0 /* QuebraCabecaViews */ = {
+			isa = PBXGroup;
+			children = (
+				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
+				FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */,
+				FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */,
+				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
+				FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */,
+				FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */,
+				FA2A3C3E274419DA00DD26AA /* PuzzleBoardView.swift */,
+				FA2A3C4027441A0600DD26AA /* PuzzlePieceView.swift */,
+			);
+			path = QuebraCabecaViews;
+			sourceTree = "<group>";
+		};
+		FA21EAD1274D37BA0009AAC0 /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				5B5BF041273C66760045AAEB /* ProfileView.swift */,
+				FA21EAD3274D37DC0009AAC0 /* RightPannelView.swift */,
+				FA21EAD5274D3B0B0009AAC0 /* LeftPannelView.swift */,
+				FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */,
+				FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */,
+			);
+			path = ProfileViews;
+			sourceTree = "<group>";
+		};
 		FA24B59B273C394C00364D00 /* Quebra-Cabeca */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,15 +221,8 @@
 		FA2A3C33274416E400DD26AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA21EAD0274D379F0009AAC0 /* QuebraCabecaViews */,
 				FA34DE472746DB3300559930 /* SettingsViews */,
-				FA49159E27396B1D004F410B /* QuebraCabecaStartView.swift */,
-				FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */,
-				FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */,
-				FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */,
-				FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */,
-				FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */,
-				FA2A3C3E274419DA00DD26AA /* PuzzleBoardView.swift */,
-				FA2A3C4027441A0600DD26AA /* PuzzlePieceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,11 +286,11 @@
 				FA4EB1112735AFBD0027D188 /* GameHeaderView.swift */,
 				5B2403F12735B39800141388 /* MiniGame1Test.swift */,
 				FA4EB1092735A48A0027D188 /* Preview Content */,
+				FA21EAD1274D37BA0009AAC0 /* ProfileViews */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
 				FA9356FD273999550005776C /* ImageExtension.swift */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
 				5B290317273AF45300F52700 /* DashboardView.swift */,
-				5B5BF041273C66760045AAEB /* ProfileView.swift */,
 				5B232D76273D8E4300C157BE /* SplashView.swift */,
 				5B2CF1D127481B13004D2A50 /* Game.swift */,
 				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
@@ -365,6 +393,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2CF1D627483E16004D2A50 /* RegisterView.swift in Sources */,
+				FA21EAD6274D3B0B0009AAC0 /* LeftPannelView.swift in Sources */,
+				FA21EAD8274D3BCB0009AAC0 /* BackgroundColorPickerView.swift in Sources */,
 				FA308120273D079B007D94D2 /* Puzzle.swift in Sources */,
 				FA2A3C39274417C100DD26AA /* PuzzleManager.swift in Sources */,
 				FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */,
@@ -376,6 +406,7 @@
 				5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,
 				5B2CF1D227481B13004D2A50 /* Game.swift in Sources */,
+				FA21EADA274D4DDE0009AAC0 /* ColorPickerView.swift in Sources */,
 				5B2403F22735B39800141388 /* MiniGame1Test.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
 				FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */,
@@ -399,6 +430,7 @@
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
 				FA261AB2274818AC00890053 /* QuebraCabecaProgressView.swift in Sources */,
 				FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */,
+				FA21EAD4274D37DC0009AAC0 /* RightPannelView.swift in Sources */,
 				FA2A3C4127441A0600DD26AA /* PuzzlePieceView.swift in Sources */,
 				5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */,
 				FA4EB1122735AFBD0027D188 /* GameHeaderView.swift in Sources */,

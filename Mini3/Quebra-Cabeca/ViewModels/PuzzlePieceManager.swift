@@ -18,13 +18,13 @@ class PuzzlePieceManager<Element>: ObservableObject {
     @Published var isCorrect: Bool = false
     var shouldMoveBack: Bool
     var shouldPlaySound: Bool
-    var sound: AVAudioPlayer?
+//    var sound: AVAudioPlayer?
     
     init(content: Element, index: Int, shouldMoveBack: Bool = false, shouldPlaySound: Bool = false) {
         self.content = content
         self.index = index
         self.shouldMoveBack = shouldMoveBack
-        self.sound = createSoundPlayer(sound: "ptu", type: "wav")
+//        self.sound = createSoundPlayer(sound: "ptu", type: "wav")
         self.shouldPlaySound = shouldPlaySound
     }
     
@@ -51,9 +51,9 @@ class PuzzlePieceManager<Element>: ObservableObject {
             isCorrect = true
             currentDisplacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
             acumulatedDisplacement = .zero
-            if shouldPlaySound {
-                sound?.play()
-            }
+//            if shouldPlaySound {
+//                sound?.play()
+//            }
         } else {
             if shouldMoveBack {
                 acumulatedDisplacement = .zero

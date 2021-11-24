@@ -12,40 +12,70 @@ struct SideBarView: View {
     @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        dashboardManager.profileListShowing.toggle()
+        VStack (alignment: .leading){
+            if (dashboardManager.isSidebarOpen) {
+                Image("logoSidebar")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 200)
+                    .padding(.top, 70)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            dashboardManager.profileListShowing.toggle()
+                        }
+                    }) {
+                        Text("Perfis")
+                        Spacer()
+                        Image(systemName: dashboardManager.profileListShowing ? "chevron.up" : "chevron.down")
                     }
-                }) {
-                    Text("Perfis")
-                    Spacer()
-                    Image(systemName: dashboardManager.profileListShowing ? "chevron.up" : "chevron.down")
+                    .padding(.horizontal)
+                    .font(.system(size: 20, design: .rounded).bold())
                 }
-                .foregroundColor(.black)
-                .font(.system(size: 20, design: .rounded).bold())
-            }
-            .padding()
-            if dashboardManager.profileListShowing {
-                if profileManager.coverUpdate {
-                    makeList()
+                if dashboardManager.profileListShowing {
+                    if profileManager.coverUpdate {
+                        makeList()
+                    } else {
+                        makeList()
+                    }
                 } else {
-                    makeList()
+                    Spacer()
                 }
-            } else {
+            }
+            else {
                 Spacer()
             }
         }
-        .background(profileManager.neutralColor)
+        .frame(width: dashboardManager.isSidebarOpen ? 300 : 60)
+        .background(dashboardManager.isSidebarOpen ? Color("neutralColor") : profileManager.getProfileColor())
+        .overlay(alignment: .topLeading) {
+            Button(
+                action:
+                    { withAnimation(.easeIn(duration: 0.3))
+                        { dashboardManager.isSidebarOpen.toggle() }
+                    },
+                label:
+                    { Image(systemName: "sidebar.leading")
+                        .foregroundColor(.primary)
+                        .padding()
+                        .font(.system(size: 24))
+                    }
+            )
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+//        .background(Color("neutralColor"))
     }
     
     @ViewBuilder func makeList() -> some View {
-        List(0..<profileManager.profiles.count) { i in
+        List(0 ..< profileManager.profiles.count) { i in
             Button(action: {
-                profileManager.selectedProfile = profileManager.profiles[i]
-                dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
-                profileManager.coverUpdate.toggle()
+                if profileManager.selectedProfile != profileManager.profiles[i] {
+                    profileManager.selectedProfile = profileManager.profiles[i]
+                    dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
+                    profileManager.coverUpdate.toggle()
+                }
                 
             }) {
                 if dashboardManager.profileListShowing {
@@ -55,7 +85,7 @@ struct SideBarView: View {
                     }
                 }
             }
-            .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : .clear)
+            .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
         }
         .listStyle(SidebarListStyle())
         .if(dashboardManager.profileListShowing) { view in
@@ -75,9 +105,7 @@ struct MainView: View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    Button(action: {
-                        profileManager.isEditingProfile = true
-                    }) {
+                    NavigationLink(destination: ProfileView()) {
                         ZStack {
                             profileManager.selectedProfile?.image
                                 .font(.system(size: 70))
@@ -98,29 +126,37 @@ struct MainView: View {
                                 }
                             }
                         }
-                        
-                    }
+                    }.simultaneousGesture(
+                        TapGesture().onEnded {
+                            dashboardManager.hasSidebar = false
+                            profileManager.isEditingProfile = true
+                        }
+                    )
                     .padding()
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
-                            Image(systemName: "gamecontroller")
-                        }
-                        .font(.system(size: 24, design: .rounded).bold())
+                        Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
+                            .font(.system(size: 24, design: .rounded).bold())
                         
-                        Text("8 anos")
+                        if let age = profileManager.getIdade() {
+                        Text("\(age) anos")
                             .font(.system(size: 14, design: .rounded))
                             .padding(.vertical, 2)
-                        Text("Interesse: balas de goma")
-                            .font(.system(size: 14, design: .rounded))
-
+                        }
                     }
                     .padding()
-                    makePicker()
+                    if dashboardManager.renderView {
+                        makePicker()
+                    } else {
+                        makePicker()
+                    }
                 }
-                
-                generateContent()
+                if dashboardManager.renderView {
+                    generateContent()
+                } else {
+                    generateContent()
+                }
             }
+            .padding(.top)
             .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
             .onChange(of: profileManager.selectedProfile) { _ in
                 dashboardManager.renderView.toggle()
@@ -134,18 +170,7 @@ struct MainView: View {
                 
                 UISegmentedControl.appearance().selectedSegmentTintColor = .white
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action:
-                            { withAnimation(.easeIn(duration: 0.3))
-                                { dashboardManager.isSidebarOpen.toggle() }
-                            },
-                        label:
-                            { Image(systemName: "sidebar.leading") }
-                    )
-                }
-            }
+            .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
@@ -184,10 +209,10 @@ struct DashboardView: View {
     @EnvironmentObject var profileManager: ProfileManager
     
     var body: some View {
-        HStack {
-            if dashboardManager.isSidebarOpen {
+        HStack(spacing: 0) {
+            if dashboardManager.hasSidebar {
                 SideBarView()
-                    .frame(width: 300)
+//                    .frame(width: 300)
             }
             MainView()
         }
@@ -201,22 +226,21 @@ struct DashboardView: View {
 //                    }
 //                 })
 //        )
-        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
-            SplashView()
-        }
-        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
-            ProfileView()
-        }
+//        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
+//            SplashView()
+//        }
+//        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
+//            ProfileView()
+//        }
         .navigationBarHidden(true)
-        .navigationAppearance(foregroundColor: .white, tintColor: .systemBlue, hideSeparator: true)
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView()
-            .environmentObject(DashboardManager())
-            .environmentObject(ProfileManager())
-            .previewInterfaceOrientation(.landscapeLeft)
-    }
-}
+//struct DashboardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DashboardView()
+//            .environmentObject(DashboardManager())
+//            .environmentObject(ProfileManager())
+//            .previewInterfaceOrientation(.landscapeLeft)
+//    }
+//}

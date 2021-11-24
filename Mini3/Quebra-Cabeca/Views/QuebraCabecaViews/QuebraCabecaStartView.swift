@@ -10,6 +10,7 @@ import SwiftUI
 struct QuebraCabecaStartView: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var dashboardManager: DashboardManager
     @State var puzzleManager: PuzzleManager
     
     var body: some View {
@@ -46,6 +47,7 @@ struct QuebraCabecaStartView: View {
                      Image(systemName: "arrow.backward.circle")
                      .foregroundColor(.white)
                      .onTapGesture {
+                         dashboardManager.hasSidebar = true
                          self.presentation.wrappedValue.dismiss()
                      }
                   }
