@@ -26,6 +26,9 @@ class ProfileManager: ObservableObject {
     
     @Published var editingIndex: Int = 0
     
+    //GAMBIARRA ABSURDA REFAZER!:
+//    @Published var unwindToDashboard = true
+    
     let availableColors = [
         Color.init(red: 123/255, green: 86/255, blue: 202/255),
         Color.init(red: 94/255, green: 196/255, blue: 214/255),
@@ -72,6 +75,10 @@ class ProfileManager: ObservableObject {
         }
     }
     
+    func getEditingProfileColor() -> Color {
+        return editingProfile.selectedColor
+    }
+    
     func getProfile() {
         if selectedProfile != nil {
             editingProfile = selectedProfile!
@@ -110,8 +117,8 @@ class ProfileManager: ObservableObject {
         }
     }
     
-    func updateProfile(index: Int) {
-        selectedProfile = profiles[index]
+    func updateEditingProfile(index: Int) {
+        editingProfile = profiles[index]
     }
     
     func getIdade() -> Int? {

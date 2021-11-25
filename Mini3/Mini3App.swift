@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct Mini3App: App {
-    @ObservedObject var profileManager: ProfileManager = ProfileManager()
+    
+    @StateObject var profileManager: ProfileManager = ProfileManager()
     
     var body: some Scene {
         WindowGroup {

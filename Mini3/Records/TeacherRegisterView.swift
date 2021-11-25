@@ -124,6 +124,7 @@ struct ManageTeacherView: View {
                 profileManager.getProfileColor().overlay(Color.black.opacity(0.2))
             )
             .cornerRadius(24)
+            .frame(maxHeight: 250)
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
                     .stroke(.white.opacity(0.5), lineWidth: 2)

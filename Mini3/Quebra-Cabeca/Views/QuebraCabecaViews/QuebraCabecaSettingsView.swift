@@ -183,7 +183,7 @@ struct QuebraCabecaSettingsView: View {
                 
             
             NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
-                Text("começar")
+                Text("Começar")
                     .font(.system(size: 24, weight: .bold, design: .default))
                     .foregroundColor(.white)
                     .frame(width: 240, height: 56)

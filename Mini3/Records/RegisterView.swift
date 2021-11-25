@@ -10,7 +10,8 @@ import SwiftUI
 struct RegisterView: View {
     @EnvironmentObject var recordManager: RecordManager
     @EnvironmentObject var profileManager: ProfileManager
-    @Environment(\.presentationMode) var presentation
+
+//    @Environment(\.presentationMode) var presentation
     var body: some View {
         VStack {
             HStack {
@@ -88,7 +89,7 @@ struct RegisterView: View {
                 
                 Button(action: {
                     recordManager.saveRecord(student: profileManager.selectedProfile!)
-                    presentation.wrappedValue.dismiss()
+//                    profileManager.unwindToDashboard = false
                 }) {
                     Text("Salvar informações")
                         .font(.system(size: 17, weight: .bold))

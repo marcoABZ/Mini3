@@ -14,7 +14,7 @@ struct GameFinishView: View {
     var body: some View {
         ZStack {
             if profileManager.editingIndex == 1 {
-                profileManager.getProfileColor()
+                profileManager.getEditingProfileColor()
                     .cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
@@ -22,7 +22,7 @@ struct GameFinishView: View {
                     )
                     .ignoresSafeArea()
             } else {
-                profileManager.getProfileColor()
+                profileManager.getEditingProfileColor()
                     .cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
@@ -46,6 +46,10 @@ struct GameFinishView: View {
             }
         }
         .frame(width: 1014, height: 660)
+        .onAppear {   
+            recordManager.recordViewMode = .menu
+            recordManager.savingProfile = profileManager.selectedProfile!
+        }
     }
     
     

@@ -11,6 +11,7 @@ import AVFoundation
 struct QuebraCabecaGameView: View {
     @EnvironmentObject var student: ProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
+    @Environment(\.presentationMode) var presentationMode
     @State var isGameOver: Bool? = false
     @State var sound: AVAudioPlayer?
     
@@ -45,7 +46,6 @@ struct QuebraCabecaGameView: View {
                 }
             }.fullScreenCover(isPresented: $puzzleManager.isOver) {
                 GameFinishView()
-                    .environmentObject(student)
                     .padding(.horizontal, 90)
                     .padding(.vertical, 80)
                     .background(BackgroundBlurView())

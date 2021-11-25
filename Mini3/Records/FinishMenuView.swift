@@ -29,7 +29,7 @@ struct FinishMenuView: View {
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
-                .accentColor(profileManager.getProfileColor())
+                .accentColor(profileManager.getEditingProfileColor())
                 .padding(.leading, 20)
                 .padding(.trailing, 40)
                 .background(.white)
@@ -42,7 +42,7 @@ struct FinishMenuView: View {
                 )
             }
             .onChange(of: profileManager.editingIndex) { newValue in
-                profileManager.updateProfile(index: newValue)
+                profileManager.updateEditingProfile(index: newValue)
             }
             ZStack {
                 profileManager.getFinishImage()
@@ -60,7 +60,7 @@ struct FinishMenuView: View {
                     recordManager.updateViewMode()
                 }) {
                     Text("Registrar atividade")
-                        .foregroundColor(profileManager.getProfileColor())
+                        .foregroundColor(profileManager.getEditingProfileColor())
                 }
                 .frame(width: 220, height: 50)
                 .background(.white)
