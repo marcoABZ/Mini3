@@ -89,17 +89,17 @@ struct DesempenhoView: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 22)
             
-            SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo))
+            SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo, student: profileManager.selectedProfile!))
     
             Text(recordManager.getLastRecordTeacher(game: jogo, student: profileManager.selectedProfile!) ?? "Nenhum registro")
             Button(action: {
                 recordManager.viewRecordDetail(game: jogo)
             }) {
                 Text("Acessar anotações")
-                    .foregroundColor(.white)
+                    .foregroundColor(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!) ? .gray : .white )
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
                     .frame(width: 246, height: 36)
-                    .background(profileManager.getProfileColor())
+                    .background(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!) ? Color("neutralColor") : profileManager.getProfileColor())
                     .cornerRadius(17)
             }
             .padding(.vertical, 30)

@@ -43,7 +43,7 @@ struct DesempenhoDetalheView: View {
                             Image("\(satisfaction)Colored")
                                 .resizable()
                                 .frame(width: 24, height: 24)
-                            Text("\(recordManager.getSatisfactionRates(jogo: recordManager.currentGame)[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100, specifier: "%.f")%")
+                            Text("\(recordManager.getSatisfactionRates(jogo: recordManager.currentGame, student: profileManager.selectedProfile!)[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100, specifier: "%.f")%")
                                 .foregroundColor(.white)
                         }
                         .frame(width: 80, height: 36)

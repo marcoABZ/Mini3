@@ -99,7 +99,10 @@ struct SideBarView: View {
             }
             .listRowBackground(Color("neutralColor"))
             .simultaneousGesture(
-                TapGesture().onEnded { profileManager.addingProfile = true }
+                TapGesture().onEnded {
+                    profileManager.addingProfile = true
+                    profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: .gray, image: "")
+                }
             )
         }
         .listStyle(PlainListStyle())
