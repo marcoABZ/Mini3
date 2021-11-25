@@ -60,4 +60,12 @@ class PuzzleManager: ObservableObject {
     func updateGameStatus() {
         isOver = puzzle.isDone()
     }
+    
+    func reset() {
+        let pieces = settings.image.slice(verticalPieces: settings.verticalDivision, horizontalPieces: settings.horizontalDivision)
+        let puzzlePieces = (0..<pieces.count).map { PuzzlePieceManager<UIImage>(content: pieces[$0], index: $0, shouldMoveBack: settings.voltarPeca, shouldPlaySound: settings.som) }
+        
+        self.puzzle = Puzzle<UIImage>(pieces: puzzlePieces)
+        self.shuffledPieces = getShuffledPieces()
+    }
 }

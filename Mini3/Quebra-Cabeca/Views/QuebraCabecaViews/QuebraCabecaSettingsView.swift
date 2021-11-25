@@ -199,6 +199,5 @@ struct QuebraCabecaSettingsView: View {
             }
             .isDetailLink(false)
         }.navigationBarHidden(true)
-//        .onChange(of: presenting) { _ in presentationMode.wrappedValue.dismiss() }
     }
 }

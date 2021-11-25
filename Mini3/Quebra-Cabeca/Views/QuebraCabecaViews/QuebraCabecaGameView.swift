@@ -10,7 +10,7 @@ import AVFoundation
 
 struct QuebraCabecaGameView: View {
     @EnvironmentObject var student: ProfileManager
-    @ObservedObject var puzzleManager: PuzzleManager
+    @StateObject var puzzleManager: PuzzleManager
     @Environment(\.presentationMode) var presentationMode
     @State var isGameOver: Bool? = false
     @State var sound: AVAudioPlayer?
@@ -52,9 +52,6 @@ struct QuebraCabecaGameView: View {
             presenting = true
             presentationMode.wrappedValue.dismiss()
         }
-//        .onChange(of: presenting) {_ in
-//            shouldPopToRoot.toggle()
-//        }
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,
                            shouldPopToRoot: $shouldPopToRoot
@@ -65,6 +62,7 @@ struct QuebraCabecaGameView: View {
                 .background(BackgroundBlurView())
                 .ignoresSafeArea()
         }
+        .onDisappear { puzzleManager.reset() }
     }
 
     //MARK: Constantes
