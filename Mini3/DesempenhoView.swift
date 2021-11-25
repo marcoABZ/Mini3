@@ -58,6 +58,7 @@ struct DesempenhoView: View {
         VStack {
             Text("Registro dos jogos")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
+                .foregroundColor(profileManager.getProfileColor())
             
             ScrollView(.horizontal) {
                 HStack(spacing: 24) {

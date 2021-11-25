@@ -69,28 +69,32 @@ struct SideBarView: View {
     }
     
     @ViewBuilder func makeList() -> some View {
-        List(0 ..< profileManager.profiles.count) { i in
-            Button(action: {
-                if profileManager.selectedProfile != profileManager.profiles[i] {
-                    profileManager.selectedProfile = profileManager.profiles[i]
-                    dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
-                    profileManager.coverUpdate.toggle()
-                }
-                
-            }) {
+        List() {
+            ForEach(profileManager.profiles, id: \.id) { profile in
                 if dashboardManager.profileListShowing {
                     HStack {
-                        Text(profileManager.profiles[i].name)
+                        Text(profile.name)
                         Spacer()
                     }
+                    .listRowBackground(profileManager.selectedProfile == profile && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
+                    .gesture(
+                        TapGesture()
+                            .onEnded {
+                                if profileManager.selectedProfile != profile {
+                                    profileManager.selectedProfile = profile
+                                    dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
+                                    profileManager.coverUpdate.toggle()
+                                }
+                            }
+                    )
                 }
             }
-            .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
+            
+            NavigationLink(destination: ProfileView()) {
+                Text("Novo aluno")
+            }.listRowBackground(Color("neutralColor"))
         }
         .listStyle(PlainListStyle())
-//        .if(dashboardManager.profileListShowing) { view in
-//            view.listStyle(PlainListStyle())
-//        }
     }
 }
 
@@ -132,6 +136,7 @@ struct MainView: View {
                             hasSidebar = false
 //                            dashboardManager.hasSidebar = false
                             profileManager.isEditingProfile = true
+                            profileManager.getProfile()
                         }
                     )
                     .padding()
