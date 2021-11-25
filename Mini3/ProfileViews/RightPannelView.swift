@@ -69,7 +69,6 @@ struct RightPannelView: View {
 
             Button(action: {
                 profileManager.saveProfile(image: im!)
-                dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
                 presentation.wrappedValue.dismiss()
             }) {
                 Text(profileManager.addingProfile ? "Criar" : "Salvar")

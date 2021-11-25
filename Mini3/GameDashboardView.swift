@@ -24,11 +24,11 @@ struct GameDashboardView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 30) {
                     //TODO: Iterar sobre os casos de Game ao invés de covers
-                    ForEach(dashboardManager.covers, id: \.title) { cover in
+                    ForEach(Game.allCases, id: \.rawValue) { game in
                         VStack(alignment: .leading, spacing: 6) {
-                            if cover.game.isAvailable() {
+                            if game.isAvailable() {
                                 NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
-                                        cover.image
+                                        game.getCoverImage(mascote: profileManager.selectedProfile!.mascote)
                                             .resizable()
                                             .cornerRadius(16)
                                             .aspectRatio(contentMode: .fit)
@@ -44,7 +44,7 @@ struct GameDashboardView: View {
                                 )
                             } else {
                                 ZStack {
-                                    cover.image
+                                    game.getCoverImage(mascote: profileManager.selectedProfile!.mascote)
                                         .resizable()
                                         .cornerRadius(16)
                                         .aspectRatio(contentMode: .fit)
@@ -60,9 +60,9 @@ struct GameDashboardView: View {
                                         .font(.system(size: 64))
                                 }
                             }
-                            Text(cover.title)
+                            Text(game.rawValue)
                                 .font(.system(size: 17, weight: .bold, design: .rounded))
-                            Text(cover.description)
+                            Text(game.getDescription())
                                 .font(.system(size: 14, weight: .regular, design: .rounded))
                         }
                         .padding(.bottom,32)
@@ -70,7 +70,6 @@ struct GameDashboardView: View {
                     }
                 }
             }
-//            Spacer()
-        }.onAppear { dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile?.mascote ?? .chiba) }
+        }
     }
 }

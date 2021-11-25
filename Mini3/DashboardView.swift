@@ -82,7 +82,6 @@ struct SideBarView: View {
                             .onEnded {
                                 if profileManager.selectedProfile != profile {
                                     profileManager.selectedProfile = profile
-                                    dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile!.mascote)
                                     profileManager.coverUpdate.toggle()
                                 }
                             }

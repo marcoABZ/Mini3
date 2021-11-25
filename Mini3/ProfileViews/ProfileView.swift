@@ -60,7 +60,6 @@ struct ProfileView: View {
                     .background(.white)
                     .cornerRadius(30)
                     .onTapGesture {
-                        dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile?.mascote ?? .coelho)
                         self.presentation.wrappedValue.dismiss()
                     }
                 }
@@ -68,15 +67,10 @@ struct ProfileView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(profileManager.addingProfile ? "Novo Perfil" : "Editar Perfil")
-//            .onAppear() {
-//                profileManager.getProfile()
-//            }
+            .onDisappear() {
+                profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color("neutralColor"), image: "placeholder")
+            }
             .ignoresSafeArea()
-            //TODO: Criar um manager para as imagens
-            //Apagar
-//            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-//                ImagePicker(image: self.$inputImage, sourceType: self.sourceType)
-//            }
     }
 
 }
