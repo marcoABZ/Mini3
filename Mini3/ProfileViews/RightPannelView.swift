@@ -66,7 +66,6 @@ struct RightPannelView: View {
             }
             .font(.system(size: 24, weight: .bold, design: .rounded))
             
-
             Button(action: {
                 profileManager.saveProfile(image: im!)
                 presentation.wrappedValue.dismiss()
@@ -75,6 +74,7 @@ struct RightPannelView: View {
                     .font(.system(size: 24).bold())
                     .foregroundColor(.white)
             }
+            .disabled(profileManager.editingProfile.name.isEmpty)
             .frame(width: 240, height: 55)
             .background(profileManager.editingProfile.selectedColor)
             .cornerRadius(30)

@@ -58,7 +58,7 @@ struct SideBarView: View {
                     },
                 label:
                     { Image(systemName: "sidebar.leading")
-                        .foregroundColor(.primary)
+                        .foregroundColor(dashboardManager.isSidebarOpen ? .primary : .white)
                         .padding()
                         .font(.system(size: 24))
                     }
@@ -74,6 +74,7 @@ struct SideBarView: View {
                 if dashboardManager.profileListShowing {
                     HStack {
                         Text(profile.name)
+                            .foregroundColor(profileManager.selectedProfile == profile ? .white : .primary)
                         Spacer()
                     }
                     .listRowBackground(profileManager.selectedProfile == profile && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
