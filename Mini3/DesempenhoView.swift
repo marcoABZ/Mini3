@@ -81,7 +81,7 @@ struct DesempenhoView: View {
                 VStack(alignment: .leading) {
                     Text("Jogo \(jogo.rawValue)")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    Text(recordManager.getLastRecordDate(game: jogo) ?? "Nenhum registro")
+                    Text(recordManager.getLastRecordDate(game: jogo, student: profileManager.selectedProfile!) ?? "Nenhum registro")
                         .font(.system(size: 14, weight: .regular, design: .rounded))
                 }
                 Spacer()
@@ -91,7 +91,7 @@ struct DesempenhoView: View {
             
             SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo))
     
-            Text(recordManager.getLastRecordTeacher(game: jogo) ?? "Nenhum registro")
+            Text(recordManager.getLastRecordTeacher(game: jogo, student: profileManager.selectedProfile!) ?? "Nenhum registro")
             Button(action: {
                 recordManager.viewRecordDetail(game: jogo)
             }) {
@@ -103,7 +103,7 @@ struct DesempenhoView: View {
                     .cornerRadius(17)
             }
             .padding(.vertical, 30)
-            .disabled(recordManager.checkRecordsSaved(game: jogo))
+            .disabled(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!))
         }
         .cornerRadius(24)
         .background(

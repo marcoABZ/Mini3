@@ -124,6 +124,7 @@ class RecordManager: ObservableObject {
         editingRecord.student = student
         registeredRecords.append(editingRecord)
         editingRecord = RecordModel()
+        print(registeredRecords)
     }
     
     func eraseRecord(record: RecordModel) {
@@ -156,13 +157,13 @@ class RecordManager: ObservableObject {
         }
     }
     
-    func checkRecordsSaved(game: Game) -> Bool {
-        let check = registeredRecords.filter { $0.game == game }
+    func checkRecordsSaved(game: Game, student: ProfileModel) -> Bool {
+        let check = registeredRecords.filter { $0.game == game && $0.student == student }
         return check.count == 0
     }
     
-    func getLastRecordTeacher(game: Game) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game }
+    func getLastRecordTeacher(game: Game, student: ProfileModel) -> String? {
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student }
         
         if gameRecords.isEmpty {
             return nil
@@ -180,8 +181,8 @@ class RecordManager: ObservableObject {
         return "Último registro: \(lastRecord.teacher.nome)"
     }
     
-    func getLastRecordDate(game: Game) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game }
+    func getLastRecordDate(game: Game, student: ProfileModel) -> String? {
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student}
         
         if gameRecords.isEmpty {
             return nil
@@ -198,13 +199,13 @@ class RecordManager: ObservableObject {
         return "Jogado em \(dateFormatter.string(from: lastDate))"
     }
     
-    func getRecordByGame(game: Game) -> [RecordModel] {
-        let result = registeredRecords.filter { $0.game == game }
+    func getRecordByGame(game: Game, student: ProfileModel) -> [RecordModel] {
+        let result = registeredRecords.filter { $0.game == game && $0.student == student }
         return result
     }
     
-    func getRecordIndex(record: RecordModel) -> Int {
-        let records = getRecordByGame(game: currentGame)
+    func getRecordIndex(record: RecordModel, student: ProfileModel) -> Int {
+        let records = getRecordByGame(game: currentGame, student: student)
         let index = records.firstIndex(of: record)!
         return index + 1
     }
