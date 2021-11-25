@@ -69,10 +69,10 @@ struct DesempenhoDetalheView: View {
             
             ScrollView(.vertical) {
                 VStack {
-                    ForEach(recordManager.getRecordByGame(game: recordManager.currentGame), id: \.self) { record in
+                    ForEach(recordManager.getRecordByGame(game: recordManager.currentGame, student: profileManager.selectedProfile!), id: \.self) { record in
                         VStack(spacing: 0) {
                             HStack(alignment: .center) {
-                                Text("Relatório \(recordManager.getRecordIndex(record: record)) | Prof.(a): \(record.teacher.nome) | \(Text("\(recordManager.dateToString(date: record.dateSaved))").fontWeight(.regular))")
+                                Text("Relatório \(recordManager.getRecordIndex(record: record, student: profileManager.selectedProfile!)) | Prof.(a): \(record.teacher.nome) | \(Text("\(recordManager.dateToString(date: record.dateSaved))").fontWeight(.regular))")
                                     .foregroundColor(.white)
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                                     .padding()

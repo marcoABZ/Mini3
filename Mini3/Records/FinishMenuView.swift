@@ -50,7 +50,7 @@ struct FinishMenuView: View {
             }
             ZStack {
                 profileManager.getFinishImage()
-                profileManager.selectedProfile!.image
+                profileManager.editingProfile.image
                     .resizable()
                     .frame(width: 180, height: 180)
                     .overlay(
@@ -99,21 +99,21 @@ struct FinishMenuView: View {
         }
     }
 }
-//
-//struct FinishMenuView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            ProfileManager().availableColors[0]
-//                .cornerRadius(20)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(.white.opacity(0.3), lineWidth: 5)
-//                )
-//                .ignoresSafeArea()
-//            FinishMenuView()
-//                .environmentObject(RecordManager())
-//                .environmentObject(ProfileManager())
-//        }
-//        .previewInterfaceOrientation(.landscapeLeft)
-//    }
-//}
+
+struct FinishMenuView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            ProfileManager().availableColors[0]
+                .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.white.opacity(0.3), lineWidth: 5)
+                )
+                .ignoresSafeArea()
+            FinishMenuView(presented: .constant(true), shouldPopToRoot: .constant(true))
+                .environmentObject(RecordManager())
+                .environmentObject(ProfileManager())
+        }
+        .previewInterfaceOrientation(.landscapeLeft)
+    }
+}

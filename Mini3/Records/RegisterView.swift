@@ -90,7 +90,7 @@ struct RegisterView: View {
                 }
                 
                 Button(action: {
-                    recordManager.saveRecord(student: profileManager.selectedProfile!)
+                    recordManager.saveRecord(student: profileManager.editingProfile)
                     presented.toggle()
                     shouldPopToRoot.toggle()
 //                    profileManager.unwindToDashboard = false
