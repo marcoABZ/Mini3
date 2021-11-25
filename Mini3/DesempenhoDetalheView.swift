@@ -10,6 +10,8 @@ import SwiftUI
 struct DesempenhoDetalheView: View {
     @EnvironmentObject var recordManager: RecordManager
     @EnvironmentObject var profileManager: ProfileManager
+    
+    
     var body: some View {
         VStack {
             ZStack {
@@ -17,7 +19,9 @@ struct DesempenhoDetalheView: View {
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(profileManager.getProfileColor())
                 HStack {
-                    Button(action: {}) {
+                    Button(action: {
+                        recordManager.detailSheetShowing = false
+                    }) {
                         Image(systemName: "arrow.left.circle")
                             .font(.system(size: 34))
                             .foregroundColor(profileManager.getProfileColor())

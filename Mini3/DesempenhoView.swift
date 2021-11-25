@@ -68,6 +68,9 @@ struct DesempenhoView: View {
                 .padding(40)
             }
         }
+        .fullScreenCover(isPresented: $recordManager.detailSheetShowing, onDismiss: {}) {
+            DesempenhoDetalheView()
+        }
     }
     
     func createCardViews(jogo: Game) -> some View {
@@ -88,7 +91,9 @@ struct DesempenhoView: View {
             SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo))
     
             Text(recordManager.getLastRecordTeacher(game: jogo) ?? "Nenhum registro")
-            Button(action: {}) {
+            Button(action: {
+                recordManager.viewRecordDetail(game: jogo)
+            }) {
                 Text("Acessar anotações")
                     .foregroundColor(.white)
                     .font(.system(size: 15, weight: .semibold, design: .rounded))

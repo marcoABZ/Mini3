@@ -42,6 +42,10 @@ class RecordManager: ObservableObject {
     
     @Published var selectedRecordId: UUID
     
+    @Published var detailSheetShowing: Bool
+    
+    @Published var savingProfile: ProfileModel
+    
     
     init() {
         self.registeredTeachers = []
@@ -51,6 +55,8 @@ class RecordManager: ObservableObject {
         self.selectedTeacher = Teacher(nome: "")
         
         self.selectedRecordId = UUID()
+        self.detailSheetShowing = false
+        self.savingProfile = ProfileModel(name: "", birthdate: Date(), color: .clear, image: "")
         
         // Dados de teste
         self.registeredTeachers.append(Teacher(nome: "Teste 1"))
@@ -69,7 +75,7 @@ class RecordManager: ObservableObject {
         self.registeredRecords[2].satisfaction = .overSatisfied
         self.registeredRecords[0].game = .quebraCabeca
         self.registeredRecords[1].game = .quebraCabeca
-        self.registeredRecords[2].game = .quebraCabeca
+        self.registeredRecords[2].game = .formas
         self.registeredRecords[0].annotation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam non nisi est sit amet facilisis magna. Vitae elementum curabitur vitae nunc sed velit dignissim. A cras semper auctor neque vitae. Pulvinar mattis nunc sed blandit libero. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Eu turpis egestas pretium aenean pharetra. Donec ac odio tempor orci dapibus ultrices in iaculis. Magna sit amet purus gravida quis blandit turpis cursus. Sapien et ligula ullamcorper malesuada proin libero nunc. Ullamcorper malesuada proin libero nunc consequat. Velit laoreet id donec ultrices tincidunt arcu non."
         
         self.selectedTeacher = registeredTeachers[0]
@@ -100,6 +106,7 @@ class RecordManager: ObservableObject {
         selectedTeacher = Teacher(nome: addingTeacher)
         registeredTeachers.append(Teacher(nome: addingTeacher))
         updateViewMode()
+        addingTeacher = ""
     }
     
     func editTeacher() {
@@ -116,6 +123,7 @@ class RecordManager: ObservableObject {
         editingRecord.game = currentGame
         editingRecord.student = student
         registeredRecords.append(editingRecord)
+        editingRecord = RecordModel()
     }
     
     func eraseRecord(record: RecordModel) {
@@ -205,5 +213,10 @@ class RecordManager: ObservableObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/YY"
         return dateFormatter.string(from: date)
+    }
+    
+    func viewRecordDetail(game: Game) {
+        detailSheetShowing = true
+        currentGame = game
     }
 }
