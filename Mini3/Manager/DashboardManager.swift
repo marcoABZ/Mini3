@@ -18,7 +18,6 @@ class DashboardManager: ObservableObject {
     @Published var profileListShowing: Bool
     @Published var pickerSelection: ViewModes
     @Published var isSidebarOpen: Bool = false
-    @Published var hasSidebar: Bool = true
     
     //Forçar update do picker
     @Published var renderView: Bool = false

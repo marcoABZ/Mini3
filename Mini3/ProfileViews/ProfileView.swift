@@ -61,7 +61,6 @@ struct ProfileView: View {
                     .cornerRadius(30)
                     .onTapGesture {
                         dashboardManager.getGamesAvailable(mascote: profileManager.selectedProfile?.mascote ?? .coelho)
-                        dashboardManager.hasSidebar = true
                         self.presentation.wrappedValue.dismiss()
                     }
                 }
@@ -71,7 +70,6 @@ struct ProfileView: View {
             .navigationTitle(profileManager.addingProfile ? "Novo Perfil" : "Editar Perfil")
             .onAppear() {
                 profileManager.getProfile()
-                dashboardManager.hasSidebar = false
             }
             .ignoresSafeArea()
             //TODO: Criar um manager para as imagens

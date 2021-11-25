@@ -13,6 +13,7 @@ struct GameDashboardView: View {
     
     //recordmanager instanciado para poder captar o dado do jogo atual
     @EnvironmentObject var recordManager: RecordManager
+    @Binding var hasSidebar: Bool
     
     var body: some View {
         VStack {
@@ -20,7 +21,7 @@ struct GameDashboardView: View {
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(profileManager.getProfileColor())
                 .padding(.bottom)
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 30) {
                     //TODO: Iterar sobre os casos de Game ao invés de covers
                     ForEach(dashboardManager.covers, id: \.title) { cover in
@@ -37,7 +38,7 @@ struct GameDashboardView: View {
                                 }
                                 .simultaneousGesture(
                                     TapGesture().onEnded {
-                                        dashboardManager.hasSidebar = false
+                                        hasSidebar = false
                                         recordManager.currentGame = .quebraCabeca
                                     }
                                 )

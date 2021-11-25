@@ -87,10 +87,10 @@ struct SideBarView: View {
             }
             .listRowBackground(profileManager.selectedProfile == profileManager.profiles[i] && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
         }
-        .listStyle(SidebarListStyle())
-        .if(dashboardManager.profileListShowing) { view in
-            view.listStyle(PlainListStyle())
-        }
+        .listStyle(PlainListStyle())
+//        .if(dashboardManager.profileListShowing) { view in
+//            view.listStyle(PlainListStyle())
+//        }
     }
 }
 
@@ -100,6 +100,7 @@ struct MainView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @Binding var hasSidebar: Bool
     
     var body: some View {
         NavigationView {
@@ -128,7 +129,8 @@ struct MainView: View {
                         }
                     }.simultaneousGesture(
                         TapGesture().onEnded {
-                            dashboardManager.hasSidebar = false
+                            hasSidebar = false
+//                            dashboardManager.hasSidebar = false
                             profileManager.isEditingProfile = true
                         }
                     )
@@ -169,6 +171,7 @@ struct MainView: View {
 //                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
                 
                 UISegmentedControl.appearance().selectedSegmentTintColor = .white
+                hasSidebar = true
             }
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)
@@ -195,7 +198,7 @@ struct MainView: View {
     @ViewBuilder func generateContent() -> some View {
         switch dashboardManager.pickerSelection {
         case .games:
-            GameDashboardView()
+            GameDashboardView(hasSidebar: $hasSidebar)
         case .performance:
             DesempenhoView()
         }
@@ -207,14 +210,15 @@ struct DashboardView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @State var hasSidebar: Bool = true
     
     var body: some View {
         HStack(spacing: 0) {
-            if dashboardManager.hasSidebar {
+            if hasSidebar {
                 SideBarView()
 //                    .frame(width: 300)
             }
-            MainView()
+            MainView(hasSidebar: $hasSidebar)
         }
 //        .gesture (
 //            DragGesture()

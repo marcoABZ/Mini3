@@ -47,7 +47,6 @@ struct QuebraCabecaStartView: View {
                      Image(systemName: "arrow.backward.circle")
                      .foregroundColor(.white)
                      .onTapGesture {
-                         dashboardManager.hasSidebar = true
                          self.presentation.wrappedValue.dismiss()
                      }
                   }
