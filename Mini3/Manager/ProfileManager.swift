@@ -16,11 +16,11 @@ class ProfileManager: ObservableObject {
     
     @Published var profileNotSelected: Bool = true
     
-    @Published var editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color.init(red: 242/255, green: 242/255, blue: 247/255), image: "placeholder")
+    @Published var editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color.init(red: 35/255, green: 37/255, blue: 38/255), image: "placeholder")
     
     @Published var selectedProfile: ProfileModel?
     
-    let neutralColor = Color.init(red: 242/255, green: 242/255, blue: 247/255)
+    let neutralColor = Color.init(red: 35/255, green: 37/255, blue: 38/255)
     
     @Published var coverUpdate: Bool = false
     

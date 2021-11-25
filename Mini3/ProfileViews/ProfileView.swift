@@ -68,7 +68,7 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(profileManager.addingProfile ? "Novo Perfil" : "Editar Perfil")
             .onDisappear() {
-                profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color("neutralColor"), image: "placeholder")
+                profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color("noColor"), image: "placeholder")
             }
             .ignoresSafeArea()
     }
