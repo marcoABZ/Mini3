@@ -100,8 +100,9 @@ struct SideBarView: View {
             .listRowBackground(Color("neutralColor"))
             .simultaneousGesture(
                 TapGesture().onEnded {
+//                    profileManager.getProfile()
+//                    profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: .gray, image: "")
                     profileManager.addingProfile = true
-                    profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: .gray, image: "")
                 }
             )
         }
@@ -188,6 +189,7 @@ struct MainView: View {
                 
                 UISegmentedControl.appearance().selectedSegmentTintColor = .white
                 hasSidebar = true
+                profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color("noColor"), image: "placeholder")
             }
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)

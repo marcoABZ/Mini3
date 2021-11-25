@@ -46,6 +46,7 @@ struct GameDashboardView: View {
                                     TapGesture().onEnded {
                                         hasSidebar = false
                                         recordManager.currentGame = .quebraCabeca
+                                        profileManager.editingProfile = profileManager.selectedProfile!
                                     }
                                 )
                             } else {

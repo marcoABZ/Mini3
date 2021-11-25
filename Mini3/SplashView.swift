@@ -63,7 +63,7 @@ struct ProfileListView: View {
                         TapGesture().onEnded {
                             profileManager.profileNotSelected = false
                             profileManager.selectedProfile = profileManager.profiles[index]
-                            profileManager.editingProfile = profileManager.selectedProfile!
+//                            profileManager.editingProfile = profileManager.selectedProfile!
                         }
                     )
                 }

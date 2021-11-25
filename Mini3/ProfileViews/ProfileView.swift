@@ -61,7 +61,9 @@ struct ProfileView: View {
                     .cornerRadius(30)
                     .onTapGesture {
                         self.presentation.wrappedValue.dismiss()
-                        profileManager.editingProfile = profileManager.selectedProfile!
+//                        profileManager.editingProfile = profileManager.selectedProfile!
+//                        profileManager.addingProfile = false
+//                        profileManager.isEditingProfile = false
                     }
                 }
             }
