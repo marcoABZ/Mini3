@@ -84,6 +84,8 @@ struct SideBarView: View {
                                 if profileManager.selectedProfile != profile {
                                     profileManager.selectedProfile = profile
                                     profileManager.coverUpdate.toggle()
+                                    withAnimation(.easeOut(duration: 0.3))
+                                        { dashboardManager.isSidebarOpen.toggle() }
                                 }
                             }
                     )
@@ -92,7 +94,11 @@ struct SideBarView: View {
             
             NavigationLink(destination: ProfileView()) {
                 Text("Novo aluno")
-            }.listRowBackground(Color("neutralColor"))
+            }
+            .listRowBackground(Color("neutralColor"))
+            .simultaneousGesture(
+                TapGesture().onEnded { profileManager.addingProfile = true }
+            )
         }
         .listStyle(PlainListStyle())
     }

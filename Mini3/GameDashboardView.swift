@@ -38,8 +38,8 @@ struct GameDashboardView: View {
                                             .cornerRadius(16)
                                             .aspectRatio(contentMode: .fit)
         //                                    .frame(width: 220, height: 320)
-                                            .padding(.bottom, 10)
-                                            .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                                            .padding(.vertical, 10)
+                                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
                                 }
                                 .isDetailLink(false)
                                 .simultaneousGesture(
@@ -55,12 +55,12 @@ struct GameDashboardView: View {
                                         .cornerRadius(16)
                                         .aspectRatio(contentMode: .fit)
     //                                    .frame(width: 220, height: 320)
-                                        .padding(.bottom, 10)
-                                        .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                                        .padding(.vertical, 10)
+                                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
                                     Color.black
                                         .cornerRadius(16)
                                         .opacity(0.5)
-                                        .padding(.bottom, 10)
+                                        .padding(.vertical, 10)
                                     Image(systemName: "lock.slash.fill")
                                         .foregroundColor(.white)
                                         .font(.system(size: 64))
