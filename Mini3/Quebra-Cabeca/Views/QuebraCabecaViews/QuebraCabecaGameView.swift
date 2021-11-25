@@ -14,43 +14,57 @@ struct QuebraCabecaGameView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var isGameOver: Bool? = false
     @State var sound: AVAudioPlayer?
+    @State var presenting: Bool = false
+    @Binding var presentingSettings: Bool
+    @Binding var shouldPopToRoot: Bool
     
     var body: some View {
-        student.getProfileColor()
-            .ignoresSafeArea(.all)
-            .overlay {
-                ZStack(alignment: .top) {
-                    HStack {
-                        Spacer()
-                        PuzzleBoardView(puzzleManager: puzzleManager)
-                        Spacer()
-                        Divider()
-                            .background(student.getProfileColor())
-                        Spacer()
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
-                            // TODO: Setar ordenação com letras
-                            ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
-                                PuzzlePieceView(
-                                    puzzleManager: puzzleManager,
-                                    piece: piece)
-                            }
+        ZStack {
+            student.getProfileColor()
+                .ignoresSafeArea(.all)
+            ZStack(alignment: .top) {
+                HStack {
+                    Spacer()
+                    PuzzleBoardView(puzzleManager: puzzleManager)
+                    Spacer()
+                    Divider()
+                        .background(student.getProfileColor())
+                    Spacer()
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
+                        // TODO: Setar ordenação com letras
+                        ForEach(puzzleManager.shuffledPieces, id: \.i) { (piece, index) in
+                            PuzzlePieceView(
+                                puzzleManager: puzzleManager,
+                                piece: piece)
                         }
-                        Spacer()
                     }
-                    .frame(width: settingsPlusImageWidth, height: settingsHeight)
-                    .background()
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
-                    if (puzzleManager.piecesCount <= 35) {
-                        QuebraCabecaProgressView(puzzleManager: puzzleManager)
-                    }
+                    Spacer()
                 }
-            }.fullScreenCover(isPresented: $puzzleManager.isOver) {
-                GameFinishView()
-                    .padding(.horizontal, 90)
-                    .padding(.vertical, 80)
-                    .background(BackgroundBlurView())
-                    .ignoresSafeArea()
+                .frame(width: settingsPlusImageWidth, height: settingsHeight)
+                .background()
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
+                if (puzzleManager.piecesCount <= 35) {
+                    QuebraCabecaProgressView(puzzleManager: puzzleManager)
+                }
             }
+        }
+        .onChange(of: puzzleManager.isOver) {_ in
+            presenting = true
+            presentationMode.wrappedValue.dismiss()
+        }
+//        .onChange(of: presenting) {_ in
+//            shouldPopToRoot.toggle()
+//        }
+        .fullScreenCover(isPresented: $presenting) {
+            GameFinishView(presented: $presenting,
+                           shouldPopToRoot: $shouldPopToRoot
+//                           , presentingSettings: $presentingSettings
+            )
+                .padding(.horizontal, 90)
+                .padding(.vertical, 80)
+                .background(BackgroundBlurView())
+                .ignoresSafeArea()
+        }
     }
 
     //MARK: Constantes

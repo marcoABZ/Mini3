@@ -12,6 +12,8 @@ struct QuebraCabecaSettingsView: View {
     @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
     @State var letterOrderingAvailable: Bool = true
+    @State var presenting: Bool = true
+    @Binding var rootIsActive: Bool
     
     var body: some View {
         VStack (alignment: .center, spacing: 30) {
@@ -182,7 +184,10 @@ struct QuebraCabecaSettingsView: View {
             }
                 
             
-            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings))) {
+            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings)
+                                                             ,presentingSettings: $presenting,
+                                                             shouldPopToRoot: $rootIsActive
+                                                            )) {
                 Text("Começar")
                     .font(.system(size: 24, weight: .bold, design: .default))
                     .foregroundColor(.white)
@@ -192,6 +197,8 @@ struct QuebraCabecaSettingsView: View {
                             .foregroundColor(student.getProfileColor())
                     )
             }
+            .isDetailLink(false)
         }.navigationBarHidden(true)
+//        .onChange(of: presenting) { _ in presentationMode.wrappedValue.dismiss() }
     }
 }

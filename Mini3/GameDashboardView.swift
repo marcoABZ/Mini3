@@ -14,6 +14,7 @@ struct GameDashboardView: View {
     //recordmanager instanciado para poder captar o dado do jogo atual
     @EnvironmentObject var recordManager: RecordManager
     @Binding var hasSidebar: Bool
+    @State var isActive: Bool = false
     
     var body: some View {
         VStack {
@@ -27,7 +28,11 @@ struct GameDashboardView: View {
                     ForEach(Game.allCases, id: \.rawValue) { game in
                         VStack(alignment: .leading, spacing: 6) {
                             if game.isAvailable() {
-                                NavigationLink(destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()))) {
+                                NavigationLink(
+                                    destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                                                                       rootIsActive: $isActive),
+                                    isActive: $isActive
+                                ) {
                                         game.getCoverImage(mascote: profileManager.selectedProfile!.mascote)
                                             .resizable()
                                             .cornerRadius(16)
@@ -36,6 +41,7 @@ struct GameDashboardView: View {
                                             .padding(.bottom, 10)
                                             .shadow(color: .gray, radius: 10, x: 0, y: 0)
                                 }
+                                .isDetailLink(false)
                                 .simultaneousGesture(
                                     TapGesture().onEnded {
                                         hasSidebar = false

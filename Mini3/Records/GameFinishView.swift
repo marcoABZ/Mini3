@@ -10,6 +10,9 @@ import SwiftUI
 struct GameFinishView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
+    @Binding var presented: Bool
+    @Binding var shouldPopToRoot: Bool
+//    @Binding var presentingSettings: Bool
     
     var body: some View {
         ZStack {
@@ -32,7 +35,10 @@ struct GameFinishView: View {
             }
             switch recordManager.recordViewMode {
             case .menu:
-                FinishMenuView()
+                FinishMenuView(presented: $presented,
+                               shouldPopToRoot: $shouldPopToRoot
+//                               , presentingSettings: $presentingSettings
+                )
                     .environmentObject(profileManager)
                     .environmentObject(recordManager)
             case .teacherEdit:
@@ -40,7 +46,8 @@ struct GameFinishView: View {
                     .environmentObject(profileManager)
                     .environmentObject(recordManager)
             case .input:
-                RegisterView()
+                RegisterView(presented: $presented,
+                    shouldPopToRoot: $shouldPopToRoot)
                     .environmentObject(profileManager)
                     .environmentObject(recordManager)
             }
@@ -55,12 +62,12 @@ struct GameFinishView: View {
     
 }
 
-struct GameFinishView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameFinishView()
-            .padding()
-            .environmentObject(ProfileManager())
-            .environmentObject(RecordManager())
-            .previewInterfaceOrientation(.landscapeLeft)
-    }
-}
+//struct GameFinishView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameFinishView()
+//            .padding()
+//            .environmentObject(ProfileManager())
+//            .environmentObject(RecordManager())
+//            .previewInterfaceOrientation(.landscapeLeft)
+//    }
+//}

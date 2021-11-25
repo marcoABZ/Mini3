@@ -10,6 +10,10 @@ import SwiftUI
 struct FinishMenuView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
+    @Binding var presented: Bool
+    @Binding var shouldPopToRoot: Bool
+//    @Binding var presentingSettings: Bool
+    
     var body: some View {
         VStack {
             Text("Parabéns!")
@@ -67,7 +71,7 @@ struct FinishMenuView: View {
                 .cornerRadius(30)
                 .padding()
                 
-                Button(action: {}) {
+                Button(action: { presented.toggle() }) {
                     Text("Jogar novamente")
                         .foregroundColor(.white)
                 }
@@ -78,7 +82,10 @@ struct FinishMenuView: View {
                 )
                 .padding()
                 
-                Button(action: {}) {
+                Button(action: {
+                    presented.toggle()
+                    shouldPopToRoot.toggle()
+                }) {
                     Text("Voltar para o início")
                         .foregroundColor(.white)
                 }
@@ -92,21 +99,21 @@ struct FinishMenuView: View {
         }
     }
 }
-
-struct FinishMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            ProfileManager().availableColors[0]
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            FinishMenuView()
-                .environmentObject(RecordManager())
-                .environmentObject(ProfileManager())
-        }
-        .previewInterfaceOrientation(.landscapeLeft)
-    }
-}
+//
+//struct FinishMenuView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            ProfileManager().availableColors[0]
+//                .cornerRadius(20)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .stroke(.white.opacity(0.3), lineWidth: 5)
+//                )
+//                .ignoresSafeArea()
+//            FinishMenuView()
+//                .environmentObject(RecordManager())
+//                .environmentObject(ProfileManager())
+//        }
+//        .previewInterfaceOrientation(.landscapeLeft)
+//    }
+//}

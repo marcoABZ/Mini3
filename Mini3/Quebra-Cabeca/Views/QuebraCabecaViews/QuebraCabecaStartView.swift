@@ -12,6 +12,7 @@ struct QuebraCabecaStartView: View {
     @EnvironmentObject var student: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     @State var puzzleManager: PuzzleManager
+    @Binding var rootIsActive: Bool
     
     var body: some View {
 //        NavigationView {
@@ -28,7 +29,7 @@ struct QuebraCabecaStartView: View {
                         Divider()
                             .background(student.getProfileColor())
                         
-                        QuebraCabecaSettingsView(settings: puzzleManager.settings)
+                        QuebraCabecaSettingsView(settings: puzzleManager.settings, rootIsActive: $rootIsActive)
                             .padding(.horizontal, settingsItemsSpacing)
                             .frame(maxWidth: settingsWidth)
                     }
