@@ -113,7 +113,9 @@ struct SplashView: View {
 //                    .environmentObject(profileManager)
 //                    .environmentObject(dashboardManager)
 //            }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .statusBar(hidden: true)
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
     }
 }
