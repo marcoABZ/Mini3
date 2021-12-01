@@ -11,6 +11,8 @@ struct LeftPannelView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     
+    @Binding var editingProfile: ProfileModel
+    
     //Apagar
     @State private var image: Image?
     @State private var showingImagePicker = false
@@ -19,7 +21,7 @@ struct LeftPannelView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
     var body: some View {
-        let im: Image? = image ?? profileManager.editingProfile.image
+        let im: Image? = image ?? editingProfile.image
         
         VStack {
             Text("Foto de perfil")
@@ -44,7 +46,7 @@ struct LeftPannelView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(.white)
                             .frame(width: 64, height: 64)
-                            .background(profileManager.editingProfile.selectedColor)
+                            .background(editingProfile.selectedColor)
                             .cornerRadius(32)
                             .offset(x: 105, y: 105)
                         }
@@ -67,7 +69,7 @@ struct LeftPannelView: View {
                 .padding(.top,42)
                 .padding(.bottom, 24)
             
-            BackgroundColorPickerView()
+            BackgroundColorPickerView(editingProfile: $editingProfile)
         }
         .frame(maxWidth: 492)
         .font(.system(size: 24, weight: .bold, design: .rounded))
@@ -82,7 +84,7 @@ struct LeftPannelView: View {
         }
         
         image = Image(uiImage: inputImage.resizeImageTo(size: CGSize(width: 165, height: 165)) ?? inputImage)
-        profileManager.editingProfile.image = image!
+        editingProfile.image = image!
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class ProfileManager: ObservableObject {
-    
+
     @Published var addingProfile: Bool = false
     
     @Published var isEditingProfile: Bool = false
@@ -53,13 +53,13 @@ class ProfileManager: ObservableObject {
     var profiles: [ProfileModel] = []
     
     init() {
-        for i in 0..<testProfiles.count {
-            profiles.append(
-                ProfileModel(name: testProfiles[i], birthdate: testBirthdates[i]!, color: availableColors.randomElement()!, image: testProfilesImages.randomElement()!)
-            )
-        }
-        selectedProfile = profiles[0]
-        profiles[1].mascote = .gato
+//        for i in 0..<testProfiles.count {
+//            profiles.append(
+//                ProfileModel(name: testProfiles[i], birthdate: testBirthdates[i]!, color: availableColors.randomElement()!, image: testProfilesImages.randomElement()!)
+//            )
+//        }
+//        selectedProfile = profiles[0]
+//        profiles[1].mascote = .gato
     }
     
     func dismissProfileView() {
@@ -88,19 +88,22 @@ class ProfileManager: ObservableObject {
 
     }
     
-    func saveProfile(image: Image) {
+    func save(profile: ProfileModel, withImage image: Image) {
         if isEditingProfile {
+            print("entrou editing")
 //            editingProfile.image = image
             for i in 0..<profiles.count {
                 if profiles[i] == selectedProfile! {
-                    profiles[i] = editingProfile
-                    selectedProfile = editingProfile
+                    print("encontrou")
+                    profiles[i] = profile
+                    selectedProfile = profiles[i]
                 }
             }
         } else if addingProfile {
+            print("entrou adding")
 //            editingProfile.image = image
-            profiles.append(editingProfile)
-            selectedProfile = editingProfile
+            profiles.append(profile)
+            selectedProfile = profiles.last
         }
         dismissProfileView()
     }
@@ -135,5 +138,9 @@ class ProfileManager: ObservableObject {
         }
         
         return nil
+    }
+    
+    static func getDefaultProfile() -> ProfileModel {
+        ProfileModel(name: "", birthdate: Date(), color: Color.init(red: 35/255, green: 37/255, blue: 38/255), image: "placeholder")
     }
 }

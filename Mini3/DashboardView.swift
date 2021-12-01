@@ -83,8 +83,6 @@ struct SideBarView: View {
                             .onEnded {
                                 if profileManager.selectedProfile != profile {
                                     profileManager.selectedProfile = profile
-                                    profileManager.editingProfile = profileManager.selectedProfile!
-                                    profileManager.editingIndex = profileManager.profiles.firstIndex(of: profileManager.editingProfile)!
                                     profileManager.coverUpdate.toggle()
                                     withAnimation(.easeOut(duration: 0.3))
                                         { dashboardManager.isSidebarOpen.toggle() }
@@ -122,7 +120,7 @@ struct MainView: View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    NavigationLink(destination: ProfileView()) {
+                    NavigationLink(destination: ProfileView(editingProfile: profileManager.selectedProfile!)) {
                         ZStack {
                             profileManager.selectedProfile?.image
                                 .font(.system(size: 70))
@@ -146,9 +144,7 @@ struct MainView: View {
                     }.simultaneousGesture(
                         TapGesture().onEnded {
                             hasSidebar = false
-//                            dashboardManager.hasSidebar = false
                             profileManager.isEditingProfile = true
-                            profileManager.getProfile()
                         }
                     )
                     .padding()
@@ -189,7 +185,6 @@ struct MainView: View {
                 
                 UISegmentedControl.appearance().selectedSegmentTintColor = .white
                 hasSidebar = true
-                profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color("noColor"), image: "placeholder")
             }
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)

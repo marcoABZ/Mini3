@@ -18,7 +18,6 @@ struct ProfileListView: View {
 
         ScrollView(.horizontal) {
             HStack {
-                
                 NavigationLink(destination: ProfileView()) {
                     VStack {
                         Rectangle()
@@ -41,11 +40,11 @@ struct ProfileListView: View {
                     TapGesture().onEnded { profileManager.addingProfile = true }
                 )
                 
-                ForEach(0..<profileManager.profiles.count) { index in
+                ForEach(profileManager.profiles) { prof in
 
                     NavigationLink(destination: DashboardView()) {
                         VStack {
-                            profileManager.profiles[index].image
+                            prof.image
                                 .frame(width: 165, height: 165)
                                 .cornerRadius(16)
                                 .overlay(
@@ -54,7 +53,7 @@ struct ProfileListView: View {
                                 )
                                 .padding(.horizontal,8)
                             
-                            Text(profileManager.profiles[index].name)
+                            Text(prof.name)
                                 .foregroundColor(.white)
                                 .font(.system(size: 17).bold())
                                 .padding(.top,8)
@@ -62,7 +61,7 @@ struct ProfileListView: View {
                     }.simultaneousGesture(
                         TapGesture().onEnded {
                             profileManager.profileNotSelected = false
-                            profileManager.selectedProfile = profileManager.profiles[index]
+                            profileManager.selectedProfile = prof
 //                            profileManager.editingProfile = profileManager.selectedProfile!
                         }
                     )
@@ -73,11 +72,6 @@ struct ProfileListView: View {
             .padding(.vertical,120)
         }
         .frame(maxHeight: 210)
-//        .onAppear {
-//            sound = createSoundPlayer(sound: "tiruliru", type: "wav")
-//            sound?.numberOfLoops = -1
-//            sound?.play()
-//        }
     }
 }
 
