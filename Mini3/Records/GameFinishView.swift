@@ -12,62 +12,38 @@ struct GameFinishView: View {
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
-//    @Binding var presentingSettings: Bool
+    @Binding var selectedProfile: ProfileModel
     
     var body: some View {
         ZStack {
-            if profileManager.editingIndex == 1 {
-                profileManager.getEditingProfileColor()
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.white.opacity(0.3), lineWidth: 5)
-                    )
-                    .ignoresSafeArea()
-            } else {
-                profileManager.getEditingProfileColor()
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.white.opacity(0.3), lineWidth: 5)
-                    )
-                    .ignoresSafeArea()
-            }
+            selectedProfile.selectedColor
+                .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.white.opacity(0.3), lineWidth: 5)
+                )
+                .ignoresSafeArea()
+            
             switch recordManager.recordViewMode {
             case .menu:
                 FinishMenuView(presented: $presented,
-                               shouldPopToRoot: $shouldPopToRoot
-//                               , presentingSettings: $presentingSettings
-                )
-                    .environmentObject(profileManager)
-                    .environmentObject(recordManager)
+                               shouldPopToRoot: $shouldPopToRoot,
+                               selectedProfile: $selectedProfile)
             case .teacherEdit:
                 TeacherRegisterView()
-                    .environmentObject(profileManager)
-                    .environmentObject(recordManager)
             case .input:
                 RegisterView(presented: $presented,
-                    shouldPopToRoot: $shouldPopToRoot)
-                    .environmentObject(profileManager)
-                    .environmentObject(recordManager)
+                             shouldPopToRoot: $shouldPopToRoot,
+                             selectedProfile: selectedProfile)
             }
         }
         .frame(width: 1014, height: 660)
         .onAppear {   
             recordManager.recordViewMode = .menu
+            //MARK: Ajustar acesso direto à propriedade
             recordManager.savingProfile = profileManager.selectedProfile!
         }
     }
     
     
 }
-
-//struct GameFinishView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameFinishView()
-//            .padding()
-//            .environmentObject(ProfileManager())
-//            .environmentObject(RecordManager())
-//            .previewInterfaceOrientation(.landscapeLeft)
-//    }
-//}

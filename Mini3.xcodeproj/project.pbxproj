@@ -52,6 +52,7 @@
 		FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */; };
 		FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */; };
 		FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB11B2735BB130027D188 /* ImagePicker.swift */; };
+		FA7D6B1027580A6C005112FB /* SelectedProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */; };
 		FA9356FE273999550005776C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FD273999550005776C /* ImageExtension.swift */; };
 		FADE63D4274C10E200F0E8E9 /* tiruliru.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D1274C10E200F0E8E9 /* tiruliru.wav */; };
 		FADE63D5274C10E200F0E8E9 /* mimimimimi.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */; };
@@ -107,6 +108,7 @@
 		FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaSettingsView.swift; sourceTree = "<group>"; };
 		FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImagePickerView.swift; sourceTree = "<group>"; };
 		FA4EB11B2735BB130027D188 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProfileManager.swift; sourceTree = "<group>"; };
 		FA9356FD273999550005776C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		FADE63D1274C10E200F0E8E9 /* tiruliru.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tiruliru.wav; sourceTree = "<group>"; };
 		FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mimimimimi.wav; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				5B5BF03C273C50640045AAEB /* DashboardManager.swift */,
 				5B5BF043273C70D70045AAEB /* ProfileManager.swift */,
 				5B31D8B4274581EB0066FE4F /* RecordManager.swift */,
+				FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				FA34DE492746DB4B00559930 /* ToggleSettingView.swift in Sources */,
 				5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
+				FA7D6B1027580A6C005112FB /* SelectedProfileManager.swift in Sources */,
 				FA261AB2274818AC00890053 /* QuebraCabecaProgressView.swift in Sources */,
 				FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */,
 				FA21EAD4274D37DC0009AAC0 /* RightPannelView.swift in Sources */,

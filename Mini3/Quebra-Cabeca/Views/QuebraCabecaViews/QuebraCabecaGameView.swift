@@ -17,7 +17,7 @@ struct QuebraCabecaGameView: View {
     @State var presenting: Bool = false
     @Binding var presentingSettings: Bool
     @Binding var shouldPopToRoot: Bool
-    
+
     var body: some View {
         ZStack {
             student.getProfileColor()
@@ -54,7 +54,8 @@ struct QuebraCabecaGameView: View {
         }
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,
-                           shouldPopToRoot: $shouldPopToRoot
+                           shouldPopToRoot: $shouldPopToRoot,
+                           selectedProfile: $student.selectedProfile
 //                           , presentingSettings: $presentingSettings
             )
                 .padding(.horizontal, 90)

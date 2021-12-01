@@ -15,7 +15,7 @@ struct BackgroundColorPickerView: View {
     var body: some View {
         HStack(spacing: 24) {
             Button(action: {
-                editingProfile.selectedColor = profileManager.neutralColor
+                editingProfile.selectedColor = Color("noColor")
             }) {
                 Rectangle()
                     .fill(.clear)
@@ -38,19 +38,6 @@ struct BackgroundColorPickerView: View {
                     ColorPickerView(editingProfile: $editingProfile, index: i)
                 }
             }
-
-//            VStack(spacing: 24) {
-//                HStack(spacing: 24) {
-//                    ForEach(0..<profileManager.availableColors.count/2) { i in
-//                        ColorPickerView(index: i)
-//                    }
-//                }
-//                HStack(spacing: 24) {
-//                    ForEach(profileManager.availableColors.count/2..<profileManager.availableColors.count) { i in
-//                        ColorPickerView(index: i)
-//                    }
-//                }
-//            }
         }.padding(.bottom, 56)
     }
 }

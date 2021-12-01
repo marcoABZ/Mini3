@@ -12,7 +12,8 @@ struct FinishMenuView: View {
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
-//    @Binding var presentingSettings: Bool
+    @Binding var selectedProfile: ProfileModel
+    
     
     var body: some View {
         VStack {
@@ -24,16 +25,16 @@ struct FinishMenuView: View {
                     .font(.system(size: 17, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                Picker("Perfis", selection: $profileManager.editingIndex) {
-                    ForEach(0..<profileManager.profiles.count) { index in
+                Picker("", selection: $selectedProfile) {
+                    ForEach(profileManager.profiles) { prof in
                         HStack {
-                            Text(profileManager.profiles[index].name)
-                                .tag(index)
+                            Text(prof.name)
                         }
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
-                .accentColor(profileManager.getEditingProfileColor())
+                // MARK: Arrumar acesso direto à propriedade
+                .accentColor(selectedProfile.selectedColor)
                 .padding(.leading, 20)
                 .padding(.trailing, 40)
                 .background(.white)
@@ -45,12 +46,12 @@ struct FinishMenuView: View {
                         .offset(x: 30)
                 )
             }
-            .onChange(of: profileManager.editingIndex) { newValue in
-                profileManager.updateEditingProfile(index: newValue)
-            }
+
             ZStack {
+                // MARK: Rever essa chamada
                 profileManager.getFinishImage()
-                profileManager.editingProfile.image
+                // MARK: Arrumar acesso direto à variável
+                selectedProfile.image
                     .resizable()
                     .frame(width: 180, height: 180)
                     .overlay(
@@ -64,7 +65,8 @@ struct FinishMenuView: View {
                     recordManager.updateViewMode()
                 }) {
                     Text("Registrar atividade")
-                        .foregroundColor(profileManager.getEditingProfileColor())
+                        // MARK: Arrumar acesso direto à variável
+                        .foregroundColor(selectedProfile.selectedColor)
                 }
                 .frame(width: 220, height: 50)
                 .background(.white)
@@ -97,23 +99,5 @@ struct FinishMenuView: View {
                 .padding()
             }
         }
-    }
-}
-
-struct FinishMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            ProfileManager().availableColors[0]
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            FinishMenuView(presented: .constant(true), shouldPopToRoot: .constant(true))
-                .environmentObject(RecordManager())
-                .environmentObject(ProfileManager())
-        }
-        .previewInterfaceOrientation(.landscapeLeft)
     }
 }

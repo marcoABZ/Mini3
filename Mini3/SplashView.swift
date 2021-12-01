@@ -11,8 +11,6 @@ import AVFAudio
 struct ProfileListView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
-//    @Environment(\.presentationMode) var presentationMode
-//    @State var sound: AVAudioPlayer?
     
     var body: some View {
 
@@ -60,9 +58,7 @@ struct ProfileListView: View {
                         }
                     }.simultaneousGesture(
                         TapGesture().onEnded {
-                            profileManager.profileNotSelected = false
                             profileManager.selectedProfile = prof
-//                            profileManager.editingProfile = profileManager.selectedProfile!
                         }
                     )
                 }
@@ -89,36 +85,16 @@ struct SplashView: View {
                         .font(.system(size: 36).bold())
                         .foregroundColor(.white)
                         .padding(.top, 64)
-//                    if profileManager.addingProfile {
                     ProfileListView()
                         .padding(.top, 40)
                         .environmentObject(profileManager)
-//                    } else {
-//                        ProfileListView()
-//                            .padding(.top, 40)
-//                            .environmentObject(profileManager)
-//                    }
                     
                 }
             }.navigationBarHidden(true)
             .ignoresSafeArea(.all)
-//            .fullScreenCover(isPresented: $profileManager.addingProfile, onDismiss: {profileManager.addingProfile = false}) {
-//                ProfileView()
-//                    .environmentObject(profileManager)
-//                    .environmentObject(dashboardManager)
-//            }
         }
         .statusBar(hidden: true)
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
     }
 }
-
-//struct SplashView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SplashView()
-//            .previewInterfaceOrientation(.landscapeLeft)
-//            .environmentObject(ProfileManager())
-//            .environmentObject(DashboardManager())
-//    }
-//}

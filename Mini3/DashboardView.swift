@@ -122,7 +122,7 @@ struct MainView: View {
                 HStack(alignment: .top) {
                     NavigationLink(destination: ProfileView(editingProfile: profileManager.selectedProfile!)) {
                         ZStack {
-                            profileManager.selectedProfile?.image
+                            profileManager.selectedProfile!.image
                                 .font(.system(size: 70))
                                 .foregroundColor(.gray)
                                 .frame(width: 110, height: 110)
@@ -135,7 +135,7 @@ struct MainView: View {
                                         .font(.system(size: 24, weight: .bold))
                                         .foregroundColor(.white)
                                     .frame(width: 36, height: 36)
-                                    .background(profileManager.selectedProfile?.selectedColor)
+                                    .background(profileManager.getProfileColor())
                                     .cornerRadius(18)
                                     .offset(x: 55, y: 55)
                                 }
@@ -204,7 +204,7 @@ struct MainView: View {
         .padding(.trailing,64)
         .padding(.vertical,34)
         .onAppear() {
-            UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.selectedColor : .gray)
+            UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.getProfileColor())
         }
     }
     

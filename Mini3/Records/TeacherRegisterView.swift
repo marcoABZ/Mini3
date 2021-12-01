@@ -10,6 +10,8 @@ import SwiftUI
 struct AddTeacherView: View {
     @EnvironmentObject var recordManager: RecordManager
     @EnvironmentObject var profileManager: ProfileManager
+    @State var selectedProfile: ProfileModel
+    
     var body: some View {
         VStack {
             Spacer()
@@ -54,7 +56,7 @@ struct AddTeacherView: View {
                 }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(profileManager.getEditingProfileColor())
+                        .foregroundColor(selectedProfile.selectedColor)
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)
@@ -74,6 +76,8 @@ struct AddTeacherView: View {
 struct ManageTeacherView: View {
     @EnvironmentObject var recordManager: RecordManager
     @EnvironmentObject var profileManager: ProfileManager
+    @State var selectedProfile: ProfileModel
+    
     var body: some View {
         VStack {
             Text("Registro de professores")
@@ -112,7 +116,7 @@ struct ManageTeacherView: View {
                             path.move(to: CGPoint(x: 17, y: 0))
                             path.addLine(to: CGPoint(x: 790, y: 0))
                         }
-                        .stroke(profileManager.getEditingProfileColor(), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                        .stroke(selectedProfile.selectedColor, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         .frame(height: 3)
                     }
                 }
@@ -121,7 +125,7 @@ struct ManageTeacherView: View {
             }
             .listStyle(PlainListStyle())
             .background(
-                profileManager.getEditingProfileColor().overlay(Color.black.opacity(0.2))
+                selectedProfile.selectedColor.overlay(Color.black.opacity(0.2))
             )
             .cornerRadius(24)
             .frame(maxHeight: 250)
@@ -162,7 +166,7 @@ struct ManageTeacherView: View {
                 }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(profileManager.getProfileColor())
+                        .foregroundColor(selectedProfile.selectedColor)
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)
@@ -186,32 +190,9 @@ struct TeacherRegisterView: View {
     @EnvironmentObject var profileManager: ProfileManager
     var body: some View {
         if recordManager.registeredTeachers.count == 0 {
-            AddTeacherView()
-                .environmentObject(recordManager)
-                .environmentObject(profileManager)
+            AddTeacherView(selectedProfile: profileManager.selectedProfile!)
         } else {
-            ManageTeacherView()
-                .environmentObject(recordManager)
-                .environmentObject(profileManager)
+            ManageTeacherView(selectedProfile: profileManager.selectedProfile!)
         }
-    }
-}
-
-struct TeacherRegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            ProfileManager().availableColors[0]
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            TeacherRegisterView()
-                .environmentObject(RecordManager())
-                .environmentObject(ProfileManager())
-        }
-        .previewInterfaceOrientation(.landscapeLeft)
-        
     }
 }
