@@ -13,11 +13,11 @@ struct GameFinishView: View {
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
-    @Binding var selectedProfile: ProfileModel
+    @State var selectedProfile: ProfileModel
     
     var body: some View {
         ZStack {
-            selectedProfile.selectedColor
+            selectedProfilemanager.getProfileColor()
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
@@ -29,19 +29,18 @@ struct GameFinishView: View {
             case .menu:
                 FinishMenuView(presented: $presented,
                                shouldPopToRoot: $shouldPopToRoot,
-                               selectedProfile: $selectedProfile)
+                               selectedProfile: selectedProfilemanager.getID())
             case .teacherEdit:
                 TeacherRegisterView()
             case .input:
                 RegisterView(presented: $presented,
                              shouldPopToRoot: $shouldPopToRoot,
-                             selectedProfile: selectedProfile)
+                             selectedProfile: selectedProfilemanager.getProfile())
             }
         }
         .frame(width: 1014, height: 660)
         .onAppear {   
             recordManager.recordViewMode = .menu
-            //MARK: Ajustar acesso direto à propriedade
             recordManager.savingProfile = selectedProfilemanager.getProfile()
         }
     }

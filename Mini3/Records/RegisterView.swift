@@ -140,22 +140,3 @@ struct RegisterView: View {
         }
     }
 }
-
-//struct RegisterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            ProfileManager().availableColors[0]
-//                .cornerRadius(20)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(.white.opacity(0.3), lineWidth: 5)
-//                )
-//                .ignoresSafeArea()
-//            RegisterView()
-//                .environmentObject(RecordManager())
-//                .environmentObject(ProfileManager())
-//        }
-//        .previewInterfaceOrientation(.landscapeLeft)
-//
-//    }
-//}

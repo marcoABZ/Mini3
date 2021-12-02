@@ -10,7 +10,6 @@
 		5B232D77273D8E4300C157BE /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D76273D8E4300C157BE /* SplashView.swift */; };
 		5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7B273DB18600C157BE /* ProfileModel.swift */; };
 		5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */; };
-		5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B232D85273DDD1600C157BE /* InnerRing.swift */; };
 		5B290318273AF45300F52700 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B290317273AF45300F52700 /* DashboardView.swift */; };
 		5B2AB098274EB9BC0001B90C /* DesempenhoDetalheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */; };
 		5B2CF1CE27480DF6004D2A50 /* FinishMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */; };
@@ -63,7 +62,6 @@
 		5B232D76273D8E4300C157BE /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		5B232D7B273DB18600C157BE /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
-		5B232D85273DDD1600C157BE /* InnerRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerRing.swift; sourceTree = "<group>"; };
 		5B290317273AF45300F52700 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoDetalheView.swift; sourceTree = "<group>"; };
 		5B2CF1CD27480DF6004D2A50 /* FinishMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMenuView.swift; sourceTree = "<group>"; };
@@ -132,14 +130,6 @@
 				5B2CF1D327482555004D2A50 /* PlaceholderModifier.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		5B232D82273DDCE200C157BE /* Shapes */ = {
-			isa = PBXGroup;
-			children = (
-				5B232D85273DDD1600C157BE /* InnerRing.swift */,
-			);
-			path = Shapes;
 			sourceTree = "<group>";
 		};
 		5B2CFAD2274C108F00239705 /* Effects */ = {
@@ -276,7 +266,6 @@
 				FADE63D0274C10D500F0E8E9 /* Sounds */,
 				5B2CFAD2274C108F00239705 /* Effects */,
 				5BE980B12746E23800A49498 /* Records */,
-				5B232D82273DDCE200C157BE /* Shapes */,
 				5B232D7D273DBE9800C157BE /* Extensions */,
 				5B5BF040273C5BD30045AAEB /* Model */,
 				5B5BF03B273C4FFD0045AAEB /* Manager */,
@@ -433,7 +422,6 @@
 				FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */,
 				FA21EAD4274D37DC0009AAC0 /* RightPannelView.swift in Sources */,
 				FA2A3C4127441A0600DD26AA /* PuzzlePieceView.swift in Sources */,
-				5B232D86273DDD1600C157BE /* InnerRing.swift in Sources */,
 				5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */,
 				5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */,
 				FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */,

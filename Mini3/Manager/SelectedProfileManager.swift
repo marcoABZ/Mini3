@@ -45,6 +45,10 @@ class SelectedProfileManager: ObservableObject, CustomStringConvertible {
         selectedProfile.mascote
     }
     
+    func getID() -> UUID {
+        selectedProfile.id
+    }
+    
     func getIdade() -> Int {
         let calendar = Calendar.current
         let birthdate = calendar.dateComponents([.year, .month, .day], from: selectedProfile.birthdate)

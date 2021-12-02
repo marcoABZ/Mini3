@@ -13,7 +13,7 @@ struct FinishMenuView: View {
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
-    @Binding var selectedProfile: ProfileModel
+    @State var selectedProfile: UUID
     
     
     var body: some View {
@@ -26,16 +26,17 @@ struct FinishMenuView: View {
                     .font(.system(size: 17, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                Picker("", selection: $selectedProfile) {
+                Picker(selection: $selectedProfile, label: Text("")) {
                     ForEach(profileManager.profiles) { prof in
                         HStack {
                             Text(prof.name)
+                                .tag(prof.id)
                         }
                     }
                 }
+                .id(UUID())
                 .pickerStyle(MenuPickerStyle())
-                // MARK: Arrumar acesso direto à propriedade
-                .accentColor(selectedProfile.selectedColor)
+                .accentColor(selectedProfileManager.getProfileColor())
                 .padding(.leading, 20)
                 .padding(.trailing, 40)
                 .background(.white)
@@ -49,10 +50,8 @@ struct FinishMenuView: View {
             }
 
             ZStack {
-                // MARK: Rever essa chamada
                 selectedProfileManager.getFinishImage()
-                // MARK: Arrumar acesso direto à variável
-                selectedProfile.image
+                selectedProfileManager.getImage()
                     .resizable()
                     .frame(width: 180, height: 180)
                     .overlay(
@@ -66,8 +65,7 @@ struct FinishMenuView: View {
                     recordManager.updateViewMode()
                 }) {
                     Text("Registrar atividade")
-                        // MARK: Arrumar acesso direto à variável
-                        .foregroundColor(selectedProfile.selectedColor)
+                        .foregroundColor(selectedProfileManager.getProfileColor())
                 }
                 .frame(width: 220, height: 50)
                 .background(.white)
@@ -99,6 +97,6 @@ struct FinishMenuView: View {
                 )
                 .padding()
             }
-        }
+        }.onChange(of: selectedProfile, perform: {newValue in selectedProfileManager.setSelectedProfile(profile: profileManager.profiles.first { $0.id == selectedProfile }!)})
     }
 }

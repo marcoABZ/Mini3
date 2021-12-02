@@ -55,7 +55,7 @@ struct QuebraCabecaGameView: View {
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,
                            shouldPopToRoot: $shouldPopToRoot,
-                           selectedProfile: $selectedProfileManager.selectedProfile
+                           selectedProfile: selectedProfileManager.getProfile()
 //                           , presentingSettings: $presentingSettings
             )
                 .padding(.horizontal, 90)
