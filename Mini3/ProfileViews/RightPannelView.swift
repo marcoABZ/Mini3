@@ -73,7 +73,7 @@ struct RightPannelView: View {
                 selectedProfileManager.setSelectedProfile(profile: editingProfile)
                 presentation.wrappedValue.dismiss()
             }) {
-                Text(profileManager.addingProfile ? "Criar" : "Salvar")
+                Text(profileManager.mode == .add ? "Criar" : "Salvar")
                     .font(.system(size: 24).bold())
                     .foregroundColor(.white)
             }

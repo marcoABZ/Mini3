@@ -62,14 +62,13 @@ struct ProfileView: View {
                 .background(.white)
                 .cornerRadius(30)
                 .onTapGesture {
-                    profileManager.dismissProfileView()
                     self.presentation.wrappedValue.dismiss()
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(profileManager.addingProfile ? "Novo Perfil" : "Editar Perfil")
+        .navigationTitle(profileManager.mode == .add ? "Novo Perfil" : "Editar Perfil")
         .background()
         .ignoresSafeArea()
     }

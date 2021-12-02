@@ -10,12 +10,13 @@ import SwiftUI
 
 class ProfileManager: ObservableObject {
 
-    @Published var addingProfile: Bool = false
-    @Published var isEditingProfile: Bool = false
+    enum ProfileViewStatus {
+        case add
+        case edit
+    }
     
-    @Published var coverUpdate: Bool = false
-    
-    var profiles: [ProfileModel] = []
+    var mode: ProfileViewStatus = .add
+    @Published var profiles: [ProfileModel] = []
     
     let availableColors = [
         Color.init(red: 123/255, green: 86/255, blue: 202/255),
@@ -25,26 +26,19 @@ class ProfileManager: ObservableObject {
         Color.init(red: 236/255, green: 109/255, blue: 92/255),
         Color.init(red: 222/255, green: 127/255, blue: 178/255),
     ]
-    
-    func dismissProfileView() {
-        self.isEditingProfile = false
-        self.addingProfile = false
-    }
-    
+
     func save(profile: ProfileModel, withImage image: Image) {
-        if isEditingProfile {
-            print("entrou editing")
+        switch mode {
+        case .edit:
             for i in 0..<profiles.count {
                 if profiles[i].id == profile.id {
                     print("encontrou")
                     profiles[i] = profile
                 }
             }
-        } else if addingProfile {
-            print("entrou adding")
+        case .add:
             profiles.append(profile)
         }
-        dismissProfileView()
     }
     
     static func getDefaultProfile() -> ProfileModel {

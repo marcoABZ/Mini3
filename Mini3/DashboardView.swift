@@ -36,11 +36,7 @@ struct SideBarView: View {
                     .font(.system(size: 20, design: .rounded).bold())
                 }
                 if dashboardManager.profileListShowing {
-                    if profileManager.coverUpdate {
-                        makeList()
-                    } else {
-                        makeList()
-                    }
+                    makeList()
                 } else {
                     Spacer()
                 }
@@ -66,7 +62,6 @@ struct SideBarView: View {
             )
         }
         .navigationViewStyle(StackNavigationViewStyle())
-//        .background(Color("neutralColor"))
     }
     
     @ViewBuilder func makeList() -> some View {
@@ -84,7 +79,6 @@ struct SideBarView: View {
                             .onEnded {
                                 if selectedProfileManager.getProfile() != profile {
                                     self.selectedProfileManager.setSelectedProfile(profile: profile)
-                                    profileManager.coverUpdate.toggle()
                                     withAnimation(.easeOut(duration: 0.3))
                                         { dashboardManager.isSidebarOpen.toggle() }
                                 }
@@ -101,9 +95,7 @@ struct SideBarView: View {
             .listRowBackground(Color("neutralColor"))
             .simultaneousGesture(
                 TapGesture().onEnded {
-//                    profileManager.getProfile()
-//                    profileManager.editingProfile = ProfileModel(name: "", birthdate: Date(), color: .gray, image: "")
-                    profileManager.addingProfile = true
+                    profileManager.mode = .add
                 }
             )
         }
@@ -151,7 +143,7 @@ struct MainView: View {
                     }.simultaneousGesture(
                         TapGesture().onEnded {
                             hasSidebar = false
-                            profileManager.isEditingProfile = true
+                            profileManager.mode = .edit
                         }
                     )
                     .padding()
@@ -172,15 +164,12 @@ struct MainView: View {
             }
             .padding(.top)
             .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
-//            .onChange(of: selectedProfile) { _ in
-//                dashboardManager.renderView.toggle()
-//            }
             .onAppear() {
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
                 
                 // TODO: Linkar com a cor do perfil selecionado
-//                UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.selectedColor)
+                UISegmentedControl.appearance().backgroundColor = UIColor(selectedProfileManager.getProfileColor())
                 
                 UISegmentedControl.appearance().selectedSegmentTintColor = .white
                 hasSidebar = true
@@ -228,7 +217,6 @@ struct DashboardView: View {
         HStack(spacing: 0) {
             if hasSidebar {
                 SideBarView(selectedProfileManager: selectedProfileManager)
-//                    .frame(width: 300)
             }
             MainView(selectedProfileManager: selectedProfileManager, hasSidebar: $hasSidebar)
         }

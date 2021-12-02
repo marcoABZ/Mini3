@@ -36,7 +36,9 @@ struct ProfileListView: View {
                     .padding(.leading,profileManager.profiles.count > 4 ? 120 : 0)
                     .padding(.trailing,16)
                 }.simultaneousGesture(
-                    TapGesture().onEnded { profileManager.addingProfile = true }
+                    TapGesture().onEnded {
+                        profileManager.mode = .add
+                    }
                 )
                 
                 ForEach(profileManager.profiles) { prof in
