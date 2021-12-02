@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PuzzleBoardView: View {
-    
-    @EnvironmentObject var student: ProfileManager
+
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @State var showAnswer: Bool = false
     
@@ -25,7 +25,7 @@ struct PuzzleBoardView: View {
                                 GeometryReader { geo in
                                     Rectangle()
 //                                        .stroke(Color(uiColor: .systemGray2))
-                                        .stroke(student.getProfileColor())
+                                        .stroke(selectedProfileManager.getProfileColor())
                                         .onAppear {
                                             puzzleManager.pieces[i].setGoalPosition(at: geo.frame(in: .global))
                                         }
@@ -41,7 +41,7 @@ struct PuzzleBoardView: View {
                 .padding()
                 .background(
                     Capsule()
-                        .foregroundColor(student.getProfileColor())
+                        .foregroundColor(selectedProfileManager.getProfileColor())
                 )
                 .gesture (
                     DragGesture(minimumDistance: 0)

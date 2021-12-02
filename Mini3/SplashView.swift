@@ -39,8 +39,10 @@ struct ProfileListView: View {
                 )
                 
                 ForEach(profileManager.profiles) { prof in
-
-                    NavigationLink(destination: DashboardView()) {
+                    let manager = SelectedProfileManager(profile: prof)
+                    NavigationLink(destination:
+                                    DashboardView(selectedProfileManager: manager)
+                    ) {
                         VStack {
                             prof.image
                                 .frame(width: 165, height: 165)
@@ -56,11 +58,7 @@ struct ProfileListView: View {
                                 .font(.system(size: 17).bold())
                                 .padding(.top,8)
                         }
-                    }.simultaneousGesture(
-                        TapGesture().onEnded {
-                            profileManager.selectedProfile = prof
-                        }
-                    )
+                    }
                 }
             }
             .padding(.trailing, 80)

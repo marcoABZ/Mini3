@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameFinishView: View {
+    @EnvironmentObject var selectedProfilemanager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
@@ -41,7 +42,7 @@ struct GameFinishView: View {
         .onAppear {   
             recordManager.recordViewMode = .menu
             //MARK: Ajustar acesso direto à propriedade
-            recordManager.savingProfile = profileManager.selectedProfile!
+            recordManager.savingProfile = selectedProfilemanager.getProfile()
         }
     }
     

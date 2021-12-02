@@ -12,8 +12,6 @@ class ProfileManager: ObservableObject {
 
     @Published var addingProfile: Bool = false
     @Published var isEditingProfile: Bool = false
-    @Published var editingProfile = ProfileModel(name: "", birthdate: Date(), color: Color.init(red: 35/255, green: 37/255, blue: 38/255), image: "placeholder")
-    @Published var selectedProfile: ProfileModel?
     
     @Published var coverUpdate: Bool = false
     
@@ -35,67 +33,22 @@ class ProfileManager: ObservableObject {
         self.addingProfile = false
     }
     
-    func getProfileColor() -> Color {
-        if selectedProfile != nil {
-            return selectedProfile!.selectedColor
-        } else {
-            return Color("neutralColor")
-        }
-    }
-    
-    func getEditingProfileColor() -> Color {
-        return editingProfile.selectedColor
-    }
-    
     func save(profile: ProfileModel, withImage image: Image) {
         if isEditingProfile {
             print("entrou editing")
 //            editingProfile.image = image
             for i in 0..<profiles.count {
-                if profiles[i] == selectedProfile! {
+                if profiles[i] == profile {
                     print("encontrou")
                     profiles[i] = profile
-                    selectedProfile = profiles[i]
                 }
             }
         } else if addingProfile {
             print("entrou adding")
             profiles.append(profile)
-            selectedProfile = profiles.last
+//            selectedProfile = profiles.last
         }
         dismissProfileView()
-    }
-    
-    func getFinishImage() -> Image {
-//        selectedProfile = profiles[editingIndex]
-        switch selectedProfile!.mascote {
-        case .chiba:
-            return Image("chibaFinish")
-        case.gato:
-            return Image("gatoFinish")
-        case .coelho:
-            return Image("coelhoFinish")
-        }
-    }
-    
-    func updateEditingProfile(index: Int) {
-        editingProfile = profiles[index]
-    }
-    
-    func getIdade() -> Int? {
-        if let selectedProfile = selectedProfile {
-            let calendar = Calendar.current
-            let birthdate = calendar.dateComponents([.year, .month, .day], from: selectedProfile.birthdate)
-            let age: Int
-            //Calculate age
-            let now = calendar.dateComponents([.year, .month, .day], from: Date())
-            let ageComponents = calendar.dateComponents([.year], from: birthdate, to: now)
-            age = ageComponents.year!
-            
-            return age
-        }
-        
-        return nil
     }
     
     static func getDefaultProfile() -> ProfileModel {

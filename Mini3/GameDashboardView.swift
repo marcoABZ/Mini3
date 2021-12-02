@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameDashboardView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
-    @EnvironmentObject var profileManager: ProfileManager
+    @StateObject var selectedProfileManager: SelectedProfileManager
     
     //recordmanager instanciado para poder captar o dado do jogo atual
     @EnvironmentObject var recordManager: RecordManager
@@ -20,7 +20,7 @@ struct GameDashboardView: View {
         VStack {
             Text("Jogos Disponíveis")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(profileManager.getProfileColor())
+                .foregroundColor(selectedProfileManager.getProfileColor())
                 .padding(.bottom)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 30) {
@@ -29,11 +29,14 @@ struct GameDashboardView: View {
                         VStack(alignment: .leading, spacing: 6) {
                             if game.isAvailable() {
                                 NavigationLink(
-                                    destination: QuebraCabecaStartView(puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                                                                       rootIsActive: $isActive),
+                                    destination:
+                                        QuebraCabecaStartView(
+                                            puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                                            rootIsActive: $isActive)
+                                                .environmentObject(selectedProfileManager),
                                     isActive: $isActive
                                 ) {
-                                        game.getCoverImage(mascote: profileManager.selectedProfile!.mascote)
+                                    game.getCoverImage(mascote: selectedProfileManager.getMascote())
                                             .resizable()
                                             .cornerRadius(16)
                                             .aspectRatio(contentMode: .fit)
@@ -51,7 +54,7 @@ struct GameDashboardView: View {
                                 )
                             } else {
                                 ZStack {
-                                    game.getCoverImage(mascote: profileManager.selectedProfile!.mascote)
+                                    game.getCoverImage(mascote: selectedProfileManager.getMascote())
                                         .resizable()
                                         .cornerRadius(16)
                                         .aspectRatio(contentMode: .fit)

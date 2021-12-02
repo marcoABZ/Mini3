@@ -8,15 +8,37 @@
 import Foundation
 import SwiftUI
 
-class SelectedProfileManager: ObservableObject {
+class SelectedProfileManager: ObservableObject, CustomStringConvertible {
+    var description: String { "Nome: \(selectedProfile.name) " }
+    
     @Published var selectedProfile: ProfileModel
     
     init(profile: ProfileModel) {
         selectedProfile = profile
     }
     
-    func getProfile() -> Color {
+    func getProfile() -> ProfileModel {
+        selectedProfile
+    }
+    
+    func setSelectedProfile(profile: ProfileModel) {
+        selectedProfile = profile
+    }
+    
+    func getImage() -> Image {
+        selectedProfile.image
+    }
+    
+    func getName() -> String {
+        selectedProfile.name
+    }
+    
+    func getProfileColor() -> Color {
         selectedProfile.selectedColor
+    }
+    
+    func getMascote() -> Mascotes {
+        selectedProfile.mascote
     }
     
     func getIdade() -> Int {
@@ -29,5 +51,17 @@ class SelectedProfileManager: ObservableObject {
         age = ageComponents.year!
         
         return age
+    }
+    
+    func getFinishImage() -> Image {
+//        selectedProfile = profiles[editingIndex]
+        switch selectedProfile.mascote {
+        case .chiba:
+            return Image("chibaFinish")
+        case.gato:
+            return Image("gatoFinish")
+        case .coelho:
+            return Image("coelhoFinish")
+        }
     }
 }

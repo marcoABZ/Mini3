@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FinishMenuView: View {
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
@@ -49,7 +50,7 @@ struct FinishMenuView: View {
 
             ZStack {
                 // MARK: Rever essa chamada
-                profileManager.getFinishImage()
+                selectedProfileManager.getFinishImage()
                 // MARK: Arrumar acesso direto à variável
                 selectedProfile.image
                     .resizable()

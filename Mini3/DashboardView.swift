@@ -10,6 +10,7 @@ import SwiftUI
 struct SideBarView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @StateObject var selectedProfileManager: SelectedProfileManager
     
     var body: some View {
         VStack (alignment: .leading){
@@ -49,7 +50,7 @@ struct SideBarView: View {
             }
         }
         .frame(width: dashboardManager.isSidebarOpen ? 300 : 60)
-        .background(dashboardManager.isSidebarOpen ? Color("neutralColor") : profileManager.getProfileColor())
+        .background(dashboardManager.isSidebarOpen ? Color("neutralColor") : selectedProfileManager.getProfileColor())
         .overlay(alignment: .topLeading) {
             Button(
                 action:
@@ -70,19 +71,19 @@ struct SideBarView: View {
     
     @ViewBuilder func makeList() -> some View {
         List() {
-            ForEach(profileManager.profiles, id: \.id) { profile in
+            ForEach(profileManager.profiles) { profile in
                 if dashboardManager.profileListShowing {
                     HStack {
                         Text(profile.name)
-                            .foregroundColor(profileManager.selectedProfile == profile ? .white : .primary)
+                            .foregroundColor(selectedProfileManager.getProfile() == profile ? .white : .primary)
                         Spacer()
                     }
-                    .listRowBackground(profileManager.selectedProfile == profile && dashboardManager.profileListShowing ? profileManager.selectedProfile!.selectedColor : Color("neutralColor"))
+                    .listRowBackground(selectedProfileManager.getProfile() == profile && dashboardManager.profileListShowing ? selectedProfileManager.getProfileColor() : Color("neutralColor"))
                     .gesture(
                         TapGesture()
                             .onEnded {
-                                if profileManager.selectedProfile != profile {
-                                    profileManager.selectedProfile = profile
+                                if selectedProfileManager.getProfile() != profile {
+                                    self.selectedProfileManager.setSelectedProfile(profile: profile)
                                     profileManager.coverUpdate.toggle()
                                     withAnimation(.easeOut(duration: 0.3))
                                         { dashboardManager.isSidebarOpen.toggle() }
@@ -114,15 +115,16 @@ struct MainView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @StateObject var selectedProfileManager: SelectedProfileManager
     @Binding var hasSidebar: Bool
     
     var body: some View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    NavigationLink(destination: ProfileView(editingProfile: profileManager.selectedProfile!)) {
+                    NavigationLink(destination: ProfileView(editingProfile: selectedProfileManager.getProfile())) {
                         ZStack {
-                            profileManager.selectedProfile!.image
+                            selectedProfileManager.getImage()
                                 .font(.system(size: 70))
                                 .foregroundColor(.gray)
                                 .frame(width: 110, height: 110)
@@ -135,7 +137,7 @@ struct MainView: View {
                                         .font(.system(size: 24, weight: .bold))
                                         .foregroundColor(.white)
                                     .frame(width: 36, height: 36)
-                                    .background(profileManager.getProfileColor())
+                                    .background(selectedProfileManager.getProfileColor())
                                     .cornerRadius(18)
                                     .offset(x: 55, y: 55)
                                 }
@@ -149,33 +151,25 @@ struct MainView: View {
                     )
                     .padding()
                     VStack(alignment: .leading) {
-                        Text(profileManager.selectedProfile != nil ? profileManager.selectedProfile!.name : "Maria")
+                        Text(selectedProfileManager.getName())
                             .font(.system(size: 24, design: .rounded).bold())
                         
-                        if let age = profileManager.getIdade() {
+                        if let age = selectedProfileManager.getIdade() {
                         Text("\(age) anos")
                             .font(.system(size: 14, design: .rounded))
                             .padding(.vertical, 2)
                         }
                     }
                     .padding()
-                    if dashboardManager.renderView {
-                        makePicker()
-                    } else {
-                        makePicker()
-                    }
+                    makePicker()
                 }
-                if dashboardManager.renderView {
-                    generateContent()
-                } else {
-                    generateContent()
-                }
+                generateContent()
             }
             .padding(.top)
             .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
-            .onChange(of: profileManager.selectedProfile) { _ in
-                dashboardManager.renderView.toggle()
-            }
+//            .onChange(of: selectedProfile) { _ in
+//                dashboardManager.renderView.toggle()
+//            }
             .onAppear() {
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
@@ -204,14 +198,14 @@ struct MainView: View {
         .padding(.trailing,64)
         .padding(.vertical,34)
         .onAppear() {
-            UISegmentedControl.appearance().backgroundColor = UIColor(profileManager.getProfileColor())
+            UISegmentedControl.appearance().backgroundColor = UIColor(selectedProfileManager.getProfileColor())
         }
     }
     
     @ViewBuilder func generateContent() -> some View {
         switch dashboardManager.pickerSelection {
         case .games:
-            GameDashboardView(hasSidebar: $hasSidebar)
+            GameDashboardView(selectedProfileManager: selectedProfileManager, hasSidebar: $hasSidebar)
         case .performance:
             DesempenhoView()
         }
@@ -221,43 +215,18 @@ struct MainView: View {
 
 struct DashboardView: View {
     
-    @EnvironmentObject var dashboardManager: DashboardManager
-    @EnvironmentObject var profileManager: ProfileManager
+    @StateObject var selectedProfileManager: SelectedProfileManager
     @State var hasSidebar: Bool = true
     
     var body: some View {
         HStack(spacing: 0) {
             if hasSidebar {
-                SideBarView()
+                SideBarView(selectedProfileManager: selectedProfileManager)
 //                    .frame(width: 300)
             }
-            MainView(hasSidebar: $hasSidebar)
+            MainView(selectedProfileManager: selectedProfileManager, hasSidebar: $hasSidebar)
         }
-//        .gesture (
-//            DragGesture()
-//                .onChanged({gesture in
-//                    if gesture.startLocation.x < CGFloat(100.0) && !dashboardManager.isSidebarOpen {
-//                        withAnimation(.easeIn(duration: 0.3)) {
-//                            dashboardManager.isSidebarOpen = true
-//                        }
-//                    }
-//                 })
-//        )
-//        .fullScreenCover(isPresented: $profileManager.profileNotSelected, onDismiss: {}) {
-//            SplashView()
-//        }
-//        .fullScreenCover(isPresented: $profileManager.isEditingProfile, onDismiss: {}) {
-//            ProfileView()
-//        }
         .navigationBarHidden(true)
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView()
-            .environmentObject(DashboardManager())
-            .environmentObject(ProfileManager())
-            .previewInterfaceOrientation(.landscapeLeft)
-    }
-}

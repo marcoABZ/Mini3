@@ -187,12 +187,13 @@ struct ManageTeacherView: View {
 
 struct TeacherRegisterView: View {
     @EnvironmentObject var recordManager: RecordManager
-    @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
+    
     var body: some View {
         if recordManager.registeredTeachers.count == 0 {
-            AddTeacherView(selectedProfile: profileManager.selectedProfile!)
+            AddTeacherView(selectedProfile: selectedProfileManager.getProfile())
         } else {
-            ManageTeacherView(selectedProfile: profileManager.selectedProfile!)
+            ManageTeacherView(selectedProfile: selectedProfileManager.getProfile())
         }
     }
 }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DesempenhoDetalheView: View {
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var recordManager: RecordManager
-    @EnvironmentObject var profileManager: ProfileManager
     
     
     var body: some View {
@@ -17,14 +17,14 @@ struct DesempenhoDetalheView: View {
             ZStack {
                 Text("Jogo \(recordManager.currentGame.rawValue)")
                     .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(profileManager.getProfileColor())
+                    .foregroundColor(selectedProfileManager.getProfileColor())
                 HStack {
                     Button(action: {
                         recordManager.detailSheetShowing = false
                     }) {
                         Image(systemName: "arrow.left.circle")
                             .font(.system(size: 34))
-                            .foregroundColor(profileManager.getProfileColor())
+                            .foregroundColor(selectedProfileManager.getProfileColor())
                     }
                     Spacer()
                 }
@@ -43,15 +43,15 @@ struct DesempenhoDetalheView: View {
                             Image("\(satisfaction)Colored")
                                 .resizable()
                                 .frame(width: 24, height: 24)
-                            Text("\(recordManager.getSatisfactionRates(jogo: recordManager.currentGame, student: profileManager.selectedProfile!)[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100, specifier: "%.f")%")
+                            Text("\(recordManager.getSatisfactionRates(jogo: recordManager.currentGame, student: selectedProfileManager.getProfile())[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100, specifier: "%.f")%")
                                 .foregroundColor(.white)
                         }
                         .frame(width: 80, height: 36)
-                        .background(profileManager.getProfileColor())
+                        .background(selectedProfileManager.getProfileColor())
                         .cornerRadius(8)
                     }
                 }
-                Text("Melhora de \(Text("23%").foregroundColor(profileManager.getProfileColor())) comparada ao último jogo")
+                Text("Melhora de \(Text("23%").foregroundColor(selectedProfileManager.getProfileColor())) comparada ao último jogo")
                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                     .padding(.leading, 30)
                 Spacer()
@@ -69,10 +69,10 @@ struct DesempenhoDetalheView: View {
             
             ScrollView(.vertical) {
                 VStack {
-                    ForEach(recordManager.getRecordByGame(game: recordManager.currentGame, student: profileManager.selectedProfile!), id: \.self) { record in
+                    ForEach(recordManager.getRecordByGame(game: recordManager.currentGame, student: selectedProfileManager.getProfile()), id: \.self) { record in
                         VStack(spacing: 0) {
                             HStack(alignment: .center) {
-                                Text("Relatório \(recordManager.getRecordIndex(record: record, student: profileManager.selectedProfile!)) | Prof.(a): \(record.teacher.nome) | \(Text("\(recordManager.dateToString(date: record.dateSaved))").fontWeight(.regular))")
+                                Text("Relatório \(recordManager.getRecordIndex(record: record, student: selectedProfileManager.getProfile())) | Prof.(a): \(record.teacher.nome) | \(Text("\(recordManager.dateToString(date: record.dateSaved))").fontWeight(.regular))")
                                     .foregroundColor(.white)
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                                     .padding()
@@ -101,7 +101,7 @@ struct DesempenhoDetalheView: View {
                                     }
                                 
                             }
-                            .background(profileManager.getProfileColor())
+                            .background(selectedProfileManager.getProfileColor())
                             .cornerRadius(16)
                             
                             if record.id == recordManager.selectedRecordId && !record.annotation.isEmpty {
@@ -125,14 +125,14 @@ struct DesempenhoDetalheView: View {
                                         }
                                     }
                                     .padding(.top, 12)
-                                    .foregroundColor(profileManager.getProfileColor())
+                                    .foregroundColor(selectedProfileManager.getProfileColor())
                                     .font(.system(size: 17, weight: .bold))
                                 }
                                 .padding(20)
                                 .padding(.top, 30)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 16)
-                                        .stroke(profileManager.getProfileColor(), lineWidth: 2)
+                                        .stroke(selectedProfileManager.getProfileColor(), lineWidth: 2)
                                 )
                                 .offset(y: -40)
                             }
