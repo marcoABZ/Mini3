@@ -40,7 +40,6 @@ struct GameDashboardView: View {
                                             .resizable()
                                             .cornerRadius(16)
                                             .aspectRatio(contentMode: .fit)
-        //                                    .frame(width: 220, height: 320)
                                             .padding(.vertical, 10)
                                             .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
                                 }
@@ -49,7 +48,6 @@ struct GameDashboardView: View {
                                     TapGesture().onEnded {
                                         hasSidebar = false
                                         recordManager.currentGame = .quebraCabeca
-//                                        profileManager.editingProfile = profileManager.selectedProfile!
                                     }
                                 )
                             } else {
@@ -58,7 +56,6 @@ struct GameDashboardView: View {
                                         .resizable()
                                         .cornerRadius(16)
                                         .aspectRatio(contentMode: .fit)
-    //                                    .frame(width: 220, height: 320)
                                         .padding(.vertical, 10)
                                         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
                                     Color.black

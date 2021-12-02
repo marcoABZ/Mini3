@@ -43,8 +43,6 @@ struct ProfileModel: Equatable, Hashable, Identifiable {
     var darkModeEnabled: Bool
     var mascote: Mascotes
     var id = UUID()
-    //TODO: Interesses
-    
     var image: Image
     
     init(name: String, birthdate: Date, color: Color, image: String, darkModeEnabled: Bool = false) {

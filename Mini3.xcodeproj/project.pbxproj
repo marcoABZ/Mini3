@@ -126,8 +126,10 @@
 		5B232D7D273DBE9800C157BE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FA9356FD273999550005776C /* ImageExtension.swift */,
 				5B232D7E273DBEA800C157BE /* ConditionalModifier.swift */,
 				5B2CF1D327482555004D2A50 /* PlaceholderModifier.swift */,
+				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +156,7 @@
 		5B5BF040273C5BD30045AAEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5B2CF1D127481B13004D2A50 /* Game.swift */,
 				5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */,
 				5B232D7B273DB18600C157BE /* ProfileModel.swift */,
 				5B2CF1D727484146004D2A50 /* RecordModel.swift */,
@@ -187,7 +190,7 @@
 			path = QuebraCabecaViews;
 			sourceTree = "<group>";
 		};
-		FA21EAD1274D37BA0009AAC0 /* ProfileViews */ = {
+		FA21EAD1274D37BA0009AAC0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				5B5BF041273C66760045AAEB /* ProfileView.swift */,
@@ -196,7 +199,7 @@
 				FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */,
 				FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */,
 			);
-			path = ProfileViews;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		FA24B59B273C394C00364D00 /* Quebra-Cabeca */ = {
@@ -263,9 +266,9 @@
 		FA4EB1022735A4870027D188 /* Mini3 */ = {
 			isa = PBXGroup;
 			children = (
+				FA5EB900275959DC00B907F1 /* Views */,
 				FADE63D0274C10D500F0E8E9 /* Sounds */,
 				5B2CFAD2274C108F00239705 /* Effects */,
-				5BE980B12746E23800A49498 /* Records */,
 				5B232D7D273DBE9800C157BE /* Extensions */,
 				5B5BF040273C5BD30045AAEB /* Model */,
 				5B5BF03B273C4FFD0045AAEB /* Manager */,
@@ -274,18 +277,8 @@
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
 				FA4EB1092735A48A0027D188 /* Preview Content */,
-				FA21EAD1274D37BA0009AAC0 /* ProfileViews */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
-				FA9356FD273999550005776C /* ImageExtension.swift */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
-				5B290317273AF45300F52700 /* DashboardView.swift */,
-				5B232D76273D8E4300C157BE /* SplashView.swift */,
-				5B2CF1D127481B13004D2A50 /* Game.swift */,
-				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
-				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
-				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
-				FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */,
-				5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */,
 			);
 			path = Mini3;
 			sourceTree = "<group>";
@@ -298,9 +291,32 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		FA5EB8FF275959C900B907F1 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5B290317273AF45300F52700 /* DashboardView.swift */,
+				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
+				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
+				5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		FA5EB900275959DC00B907F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B232D76273D8E4300C157BE /* SplashView.swift */,
+				FA5EB8FF275959C900B907F1 /* Dashboard */,
+				FA21EAD1274D37BA0009AAC0 /* Profile */,
+				5BE980B12746E23800A49498 /* Records */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FADE63D0274C10D500F0E8E9 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FADE63D7274C11B100F0E8E9 /* PlaySoundMethod.swift */,
 				FADE63D2274C10E200F0E8E9 /* mimimimimi.wav */,
 				FADE63D3274C10E200F0E8E9 /* ptu.wav */,
 				FADE63D1274C10E200F0E8E9 /* tiruliru.wav */,

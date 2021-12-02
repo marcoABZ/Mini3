@@ -65,7 +65,6 @@ struct ProfileListView: View {
                 }
             }
             .padding(.trailing, 80)
-            
             .padding(.vertical,120)
         }
         .frame(maxHeight: 210)
