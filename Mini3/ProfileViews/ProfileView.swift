@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     @Environment(\.presentationMode) var presentation

@@ -13,6 +13,10 @@ class SelectedProfileManager: ObservableObject, CustomStringConvertible {
     
     @Published var selectedProfile: ProfileModel
     
+    init() {
+        selectedProfile = ProfileManager.getDefaultProfile()
+    }
+    
     init(profile: ProfileModel) {
         selectedProfile = profile
     }

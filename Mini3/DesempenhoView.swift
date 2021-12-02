@@ -117,13 +117,3 @@ struct DesempenhoView: View {
     }
     
 }
-
-struct DesempenhoView_Previews: PreviewProvider {
-    static var previews: some View {
-        DesempenhoView()
-            .previewInterfaceOrientation(.landscapeLeft)
-            .environmentObject(ProfileManager())
-            .environmentObject(DashboardManager())
-            .environmentObject(RecordManager())
-    }
-}

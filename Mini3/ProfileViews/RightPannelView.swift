@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RightPannelView: View {
     
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     @Environment(\.presentationMode) var presentation
@@ -69,6 +70,7 @@ struct RightPannelView: View {
             
             Button(action: {
                 profileManager.save(profile: editingProfile, withImage: im!)
+                selectedProfileManager.setSelectedProfile(profile: editingProfile)
                 presentation.wrappedValue.dismiss()
             }) {
                 Text(profileManager.addingProfile ? "Criar" : "Salvar")

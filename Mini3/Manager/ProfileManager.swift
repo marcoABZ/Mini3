@@ -15,8 +15,6 @@ class ProfileManager: ObservableObject {
     
     @Published var coverUpdate: Bool = false
     
-    @Published var editingIndex: Int = 0
-    
     var profiles: [ProfileModel] = []
     
     let availableColors = [
@@ -36,9 +34,8 @@ class ProfileManager: ObservableObject {
     func save(profile: ProfileModel, withImage image: Image) {
         if isEditingProfile {
             print("entrou editing")
-//            editingProfile.image = image
             for i in 0..<profiles.count {
-                if profiles[i] == profile {
+                if profiles[i].id == profile.id {
                     print("encontrou")
                     profiles[i] = profile
                 }
@@ -46,7 +43,6 @@ class ProfileManager: ObservableObject {
         } else if addingProfile {
             print("entrou adding")
             profiles.append(profile)
-//            selectedProfile = profiles.last
         }
         dismissProfileView()
     }

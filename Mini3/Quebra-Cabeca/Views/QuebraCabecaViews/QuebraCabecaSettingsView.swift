@@ -184,10 +184,12 @@ struct QuebraCabecaSettingsView: View {
             }
                 
             
-            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings)
-                                                             ,presentingSettings: $presenting,
-                                                             shouldPopToRoot: $rootIsActive
-                                                            )) {
+            NavigationLink(destination:
+                            QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings),
+                                                 presentingSettings: $presenting,
+                                                 shouldPopToRoot: $rootIsActive)
+                                .environmentObject(selectedProfileManager)
+            ) {
                 Text("Começar")
                     .font(.system(size: 24, weight: .bold, design: .default))
                     .foregroundColor(.white)

@@ -16,7 +16,8 @@ struct ProfileListView: View {
 
         ScrollView(.horizontal) {
             HStack {
-                NavigationLink(destination: ProfileView()) {
+                NavigationLink(destination: ProfileView()
+                                .environmentObject(SelectedProfileManager())) {
                     VStack {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0)]), startPoint: .topTrailing, endPoint: .bottomLeading))

@@ -93,7 +93,9 @@ struct SideBarView: View {
                 }
             }
             
-            NavigationLink(destination: ProfileView()) {
+            NavigationLink(destination:
+                            ProfileView()
+                                .environmentObject(selectedProfileManager)) {
                 Text("Novo aluno")
             }
             .listRowBackground(Color("neutralColor"))
@@ -122,7 +124,10 @@ struct MainView: View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    NavigationLink(destination: ProfileView(editingProfile: selectedProfileManager.getProfile())) {
+                    NavigationLink(destination:
+                                    ProfileView(editingProfile: selectedProfileManager.getProfile())
+                                        .environmentObject(selectedProfileManager))
+                    {
                         ZStack {
                             selectedProfileManager.getImage()
                                 .font(.system(size: 70))
@@ -208,6 +213,7 @@ struct MainView: View {
             GameDashboardView(selectedProfileManager: selectedProfileManager, hasSidebar: $hasSidebar)
         case .performance:
             DesempenhoView()
+                .environmentObject(selectedProfileManager)
         }
     }
 }
