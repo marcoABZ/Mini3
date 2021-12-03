@@ -59,22 +59,28 @@ class RecordManager: ObservableObject {
     }
     
     func updateViewMode() {
-        if recordViewMode == .menu {
-            if registeredTeachers.count > 0 {
+        withAnimation(.easeIn) {
+            if recordViewMode == .menu {
+                if registeredTeachers.count > 0 {
+                    recordViewMode = .input
+                } else {
+                    recordViewMode = .teacherEdit
+                }
+            } else if recordViewMode == .teacherEdit {
                 recordViewMode = .input
-            } else {
-                recordViewMode = .teacherEdit
             }
-        } else if recordViewMode == .teacherEdit {
-            recordViewMode = .input
         }
     }
     
     func returnToView() {
-        if recordViewMode == .teacherEdit && registeredTeachers.count > 0 {
-            recordViewMode = .input
-        } else {
-            recordViewMode = .menu
+        withAnimation(.easeOut) {
+            if recordViewMode == .teacherEdit && registeredTeachers.count > 0 {
+                recordViewMode = .input
+            } else {
+                
+                recordViewMode = .menu
+                
+            }
         }
     }
     
@@ -86,7 +92,9 @@ class RecordManager: ObservableObject {
     }
     
     func editTeacher() {
-        recordViewMode = .teacherEdit
+        withAnimation(.easeIn) {
+            recordViewMode = .teacherEdit
+        }
     }
     
     func eraseTeacher(teacher: Teacher) {

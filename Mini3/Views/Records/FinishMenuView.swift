@@ -15,6 +15,8 @@ struct FinishMenuView: View {
     @Binding var shouldPopToRoot: Bool
     @State var selectedProfile: UUID
     
+    //Animation:
+    @State var opacity = 0.0
     
     var body: some View {
         VStack {
@@ -59,6 +61,12 @@ struct FinishMenuView: View {
                             .stroke(.white, lineWidth: 2)
                     )
                     .offset(x: 120, y: -60)
+            }
+            .opacity(opacity)
+            .onAppear {
+                withAnimation(.easeIn(duration: 2.5)) {
+                    opacity += 1
+                }
             }
             HStack {
                 Button(action: {
