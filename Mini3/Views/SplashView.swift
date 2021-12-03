@@ -33,7 +33,7 @@ struct ProfileListView: View {
                             .font(.system(size: 21).bold())
                             .padding(.top, 16)
                     }
-                    .padding(.leading,profileManager.profiles.count > 4 ? 120 : 0)
+                    .padding(.leading,profileManager.profiles.count > 4 ? 120 : DashboardManager.getSplashViewSpacing(screenWidth: Int(UIScreen.main.bounds.width), itemsCount: profileManager.profiles.count))
                     .padding(.trailing,16)
                 }.simultaneousGesture(
                     TapGesture().onEnded {
@@ -79,6 +79,7 @@ struct SplashView: View {
         NavigationView {
             ZStack {
                 Image("SplashBackground")
+                    .resizable()
                 VStack {
                     Image("logo")
                     Text("Crie um perfil para começar!")
@@ -96,5 +97,15 @@ struct SplashView: View {
         .statusBar(hidden: true)
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
+    }
+}
+
+struct SplashView_Preview: PreviewProvider {
+
+    static var previews: some View {
+        SplashView()
+            .environmentObject(ProfileManager())
+            .environmentObject(DashboardManager())
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

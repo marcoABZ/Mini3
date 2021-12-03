@@ -26,4 +26,8 @@ class DashboardManager: ObservableObject {
         self.profileListShowing = true
         self.pickerSelection = .games
     }
+    
+    static func getSplashViewSpacing(screenWidth: Int, itemsCount: Int) -> CGFloat {
+        return CGFloat(screenWidth - 204 * (1 + itemsCount)) / 2
+    }
 }
