@@ -10,8 +10,6 @@ import SwiftUI
 struct GameDashboardView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @StateObject var selectedProfileManager: SelectedProfileManager
-    
-    //recordmanager instanciado para poder captar o dado do jogo atual
     @EnvironmentObject var recordManager: RecordManager
     @Binding var hasSidebar: Bool
     @State var isActive: Bool = false
@@ -24,53 +22,26 @@ struct GameDashboardView: View {
                 .padding(.bottom)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 30) {
-                    //TODO: Iterar sobre os casos de Game ao invés de covers
                     ForEach(Game.allCases, id: \.rawValue) { game in
-                        VStack(alignment: .leading, spacing: 6) {
-                            if game.isAvailable() {
-                                NavigationLink(
-                                    destination:
-                                        QuebraCabecaStartView(
-                                            puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                                            rootIsActive: $isActive)
-                                                .environmentObject(selectedProfileManager),
-                                    isActive: $isActive
-                                ) {
-                                    game.getCoverImage(mascote: selectedProfileManager.getMascote())
-                                            .resizable()
-                                            .cornerRadius(16)
-                                            .aspectRatio(contentMode: .fit)
-                                            .padding(.vertical, 10)
-                                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
+                        NavigationLink(
+                            destination:
+                                QuebraCabecaStartView(
+                                    puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                                    rootIsActive: $isActive)
+                                        .environmentObject(selectedProfileManager),
+                            isActive: $isActive
+                        ) {
+                            GameCard(game: game, mascote: selectedProfileManager.getMascote())
+                        }
+                        .isDetailLink(false)
+                        .disabled(!game.isAvailable())
+                        .if(game.isAvailable()) { view in
+                            view.simultaneousGesture(
+                                TapGesture().onEnded {
+                                    hasSidebar = false
+                                    recordManager.currentGame = .quebraCabeca
                                 }
-                                .isDetailLink(false)
-                                .simultaneousGesture(
-                                    TapGesture().onEnded {
-                                        hasSidebar = false
-                                        recordManager.currentGame = .quebraCabeca
-                                    }
-                                )
-                            } else {
-                                ZStack {
-                                    game.getCoverImage(mascote: selectedProfileManager.getMascote())
-                                        .resizable()
-                                        .cornerRadius(16)
-                                        .aspectRatio(contentMode: .fit)
-                                        .padding(.vertical, 10)
-                                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
-                                    Color.black
-                                        .cornerRadius(16)
-                                        .opacity(0.5)
-                                        .padding(.vertical, 10)
-                                    Image(systemName: "lock.slash.fill")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 64))
-                                }
-                            }
-                            Text(game.rawValue)
-                                .font(.system(size: 17, weight: .bold, design: .rounded))
-                            Text(game.getDescription())
-                                .font(.system(size: 14, weight: .regular, design: .rounded))
+                            )
                         }
                         .padding(.bottom,32)
                         .padding(.leading)

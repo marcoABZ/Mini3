@@ -13,6 +13,8 @@ struct NavAppearanceModifier: ViewModifier {
         navBarAppearance.configureWithTransparentBackground()
         navBarAppearance.titleTextAttributes = [.foregroundColor: foregroundColor]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: foregroundColor]
+//        navBarAppearance.titleTextAttributes = [.foregroundColor: foregroundColor, .font: UIFont.systemFont(ofSize: 24, weight: .bold)]
+//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: foregroundColor, .font: UIFont.systemFont(ofSize: 24, weight: .bold)]
         navBarAppearance.backgroundColor = .clear
         navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.backward.circle"), transitionMaskImage:  UIImage(systemName: "arrow.backward.circle"))
         if hideSeparator {

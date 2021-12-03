@@ -50,6 +50,7 @@
 		FA4EB1162735B2C90027D188 /* QuebraCabecaSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */; };
 		FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */; };
 		FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4EB11B2735BB130027D188 /* ImagePicker.swift */; };
+		FA5EB902275A905700B907F1 /* GameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EB901275A905700B907F1 /* GameCard.swift */; };
 		FA7D6B1027580A6C005112FB /* SelectedProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */; };
 		FA9356FE273999550005776C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9356FD273999550005776C /* ImageExtension.swift */; };
 		FADE63D4274C10E200F0E8E9 /* tiruliru.wav in Resources */ = {isa = PBXBuildFile; fileRef = FADE63D1274C10E200F0E8E9 /* tiruliru.wav */; };
@@ -104,6 +105,7 @@
 		FA4EB1152735B2C80027D188 /* QuebraCabecaSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaSettingsView.swift; sourceTree = "<group>"; };
 		FA4EB1172735B85E0027D188 /* QuebraCabecaImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaImagePickerView.swift; sourceTree = "<group>"; };
 		FA4EB11B2735BB130027D188 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FA5EB901275A905700B907F1 /* GameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCard.swift; sourceTree = "<group>"; };
 		FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProfileManager.swift; sourceTree = "<group>"; };
 		FA9356FD273999550005776C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		FADE63D1274C10E200F0E8E9 /* tiruliru.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tiruliru.wav; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
 				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
 				5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */,
+				FA5EB901275A905700B907F1 /* GameCard.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				5B232D77273D8E4300C157BE /* SplashView.swift in Sources */,
 				5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */,
 				5B2CF1D427482555004D2A50 /* PlaceholderModifier.swift in Sources */,
+				FA5EB902275A905700B907F1 /* GameCard.swift in Sources */,
 				FA2A3C3F274419DA00DD26AA /* PuzzleBoardView.swift in Sources */,
 				5B2CF1D027480F74004D2A50 /* TeacherRegisterView.swift in Sources */,
 				FA4EB1062735A4870027D188 /* ContentView.swift in Sources */,

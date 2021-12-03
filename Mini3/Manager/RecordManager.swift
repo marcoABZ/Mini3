@@ -46,7 +46,6 @@ class RecordManager: ObservableObject {
     
     @Published var savingProfile: ProfileModel
     
-    
     init() {
         self.registeredTeachers = []
         self.addingTeacher = ""
