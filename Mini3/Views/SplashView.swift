@@ -97,6 +97,9 @@ struct SplashView: View {
         .statusBar(hidden: true)
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
+        .onAppear {
+            SoundManager.instance.playMusic(sound: .theme)
+        }
     }
 }
 
