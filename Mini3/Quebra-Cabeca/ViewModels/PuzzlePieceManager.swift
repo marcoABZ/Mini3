@@ -54,6 +54,7 @@ class PuzzlePieceManager<Element>: ObservableObject {
 //            if shouldPlaySound {
 //                sound?.play()
 //            }
+            SoundManager.instance.playMusic(sound: .puzzleMount)
         } else {
             if shouldMoveBack {
                 acumulatedDisplacement = .zero

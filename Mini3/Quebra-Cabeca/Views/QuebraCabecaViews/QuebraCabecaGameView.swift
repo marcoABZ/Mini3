@@ -51,6 +51,7 @@ struct QuebraCabecaGameView: View {
         .onChange(of: puzzleManager.isOver) {_ in
             presenting = true
             presentationMode.wrappedValue.dismiss()
+            SoundManager.instance.playMusic(sound: .gameFinish)
         }
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,

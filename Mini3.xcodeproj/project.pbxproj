@@ -25,6 +25,7 @@
 		5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */; };
 		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
 		5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF043273C70D70045AAEB /* ProfileManager.swift */; };
+		5BD43C93275A98D2006F1A6D /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD43C92275A98D2006F1A6D /* SoundManager.swift */; };
 		FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */; };
 		FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */; };
 		FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */; };
@@ -78,6 +79,7 @@
 		5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoverModel.swift; sourceTree = "<group>"; };
 		5B5BF041273C66760045AAEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5B5BF043273C70D70045AAEB /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		5BD43C92275A98D2006F1A6D /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDashboardView.swift; sourceTree = "<group>"; };
 		FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoView.swift; sourceTree = "<group>"; };
 		FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavAppearenceModifier.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				5B5BF043273C70D70045AAEB /* ProfileManager.swift */,
 				5B31D8B4274581EB0066FE4F /* RecordManager.swift */,
 				FA7D6B0F27580A6C005112FB /* SelectedProfileManager.swift */,
+				5BD43C92275A98D2006F1A6D /* SoundManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */,
 				5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */,
 				FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */,
+				5BD43C93275A98D2006F1A6D /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

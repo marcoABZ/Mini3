@@ -14,6 +14,7 @@ struct Mini3App: App {
     @StateObject var recordManager = RecordManager()
     @StateObject var dashboardManager = DashboardManager()
     
+    
     var body: some Scene {
         WindowGroup {
             SplashView()
