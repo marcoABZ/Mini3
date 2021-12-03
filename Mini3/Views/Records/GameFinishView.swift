@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct BackgroundView: View {
+    @EnvironmentObject var selectedProfilemanager: SelectedProfileManager
+    var body: some View {
+        selectedProfilemanager.getProfileColor()
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white.opacity(0.3), lineWidth: 5)
+            )
+            .ignoresSafeArea()
+    }
+}
+
 struct GameFinishView: View {
     @EnvironmentObject var selectedProfilemanager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
@@ -17,26 +30,31 @@ struct GameFinishView: View {
     
     var body: some View {
         ZStack {
-            selectedProfilemanager.getProfileColor()
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            
             switch recordManager.recordViewMode {
             case .menu:
-                FinishMenuView(presented: $presented,
-                               shouldPopToRoot: $shouldPopToRoot,
-                               selectedProfile: selectedProfilemanager.getID())
+                ZStack {
+                    BackgroundView()
+                    FinishMenuView(presented: $presented,
+                                   shouldPopToRoot: $shouldPopToRoot,
+                                   selectedProfile: selectedProfilemanager.getID())
+                }
+                .transition(.scale)
             case .teacherEdit:
-                TeacherRegisterView()
+                ZStack {
+                    BackgroundView()
+                    TeacherRegisterView()
+                }
+                .transition(.slide)
             case .input:
-                RegisterView(presented: $presented,
-                             shouldPopToRoot: $shouldPopToRoot,
-                             selectedProfile: selectedProfilemanager.getProfile())
+                ZStack {
+                    BackgroundView()
+                    RegisterView(presented: $presented,
+                                 shouldPopToRoot: $shouldPopToRoot,
+                                 selectedProfile: selectedProfilemanager.getProfile())
+                }
+                .transition(.opacity)
             }
+                
         }
         .frame(width: 1014, height: 660)
         .onAppear {   
