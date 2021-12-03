@@ -10,11 +10,12 @@ import SwiftUI
 struct BackgroundColorPickerView: View {
     
     @EnvironmentObject var profileManager: ProfileManager
+    @Binding var editingProfile: ProfileModel
     
     var body: some View {
         HStack(spacing: 24) {
             Button(action: {
-                profileManager.editingProfile.selectedColor = profileManager.neutralColor
+                editingProfile.selectedColor = Color("noColor")
             }) {
                 Rectangle()
                     .fill(.clear)
@@ -34,22 +35,9 @@ struct BackgroundColorPickerView: View {
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
                 ForEach(0..<profileManager.availableColors.count) { i in
-                    ColorPickerView(index: i)
+                    ColorPickerView(editingProfile: $editingProfile, index: i)
                 }
             }
-
-//            VStack(spacing: 24) {
-//                HStack(spacing: 24) {
-//                    ForEach(0..<profileManager.availableColors.count/2) { i in
-//                        ColorPickerView(index: i)
-//                    }
-//                }
-//                HStack(spacing: 24) {
-//                    ForEach(profileManager.availableColors.count/2..<profileManager.availableColors.count) { i in
-//                        ColorPickerView(index: i)
-//                    }
-//                }
-//            }
         }.padding(.bottom, 56)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuebraCabecaImagePickerView: View {
-    @EnvironmentObject private var student: ProfileManager
+    @EnvironmentObject private var selectedProfileManager: SelectedProfileManager
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var showingAlert = false
@@ -29,7 +29,7 @@ struct QuebraCabecaImagePickerView: View {
                     .padding()
                     .background {
                         Circle()
-                            .foregroundColor(student.getProfileColor())
+                            .foregroundColor(selectedProfileManager.getProfileColor())
                     }
             }
             .offset(x: cameraIconXOffset, y: cameraIconYOffset)

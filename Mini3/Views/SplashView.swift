@@ -11,15 +11,13 @@ import AVFAudio
 struct ProfileListView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
-//    @Environment(\.presentationMode) var presentationMode
-//    @State var sound: AVAudioPlayer?
     
     var body: some View {
 
         ScrollView(.horizontal) {
             HStack {
-                
-                NavigationLink(destination: ProfileView()) {
+                NavigationLink(destination: ProfileView()
+                                .environmentObject(SelectedProfileManager())) {
                     VStack {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0)]), startPoint: .topTrailing, endPoint: .bottomLeading))
@@ -38,14 +36,18 @@ struct ProfileListView: View {
                     .padding(.leading,profileManager.profiles.count > 4 ? 120 : 0)
                     .padding(.trailing,16)
                 }.simultaneousGesture(
-                    TapGesture().onEnded { profileManager.addingProfile = true }
+                    TapGesture().onEnded {
+                        profileManager.mode = .add
+                    }
                 )
                 
-                ForEach(0..<profileManager.profiles.count) { index in
-
-                    NavigationLink(destination: DashboardView()) {
+                ForEach(profileManager.profiles) { prof in
+                    let manager = SelectedProfileManager(profile: prof)
+                    NavigationLink(destination:
+                                    DashboardView(selectedProfileManager: manager)
+                    ) {
                         VStack {
-                            profileManager.profiles[index].image
+                            prof.image
                                 .frame(width: 165, height: 165)
                                 .cornerRadius(16)
                                 .overlay(
@@ -54,30 +56,18 @@ struct ProfileListView: View {
                                 )
                                 .padding(.horizontal,8)
                             
-                            Text(profileManager.profiles[index].name)
+                            Text(prof.name)
                                 .foregroundColor(.white)
                                 .font(.system(size: 17).bold())
                                 .padding(.top,8)
                         }
-                    }.simultaneousGesture(
-                        TapGesture().onEnded {
-                            profileManager.profileNotSelected = false
-                            profileManager.selectedProfile = profileManager.profiles[index]
-//                            profileManager.editingProfile = profileManager.selectedProfile!
-                        }
-                    )
+                    }
                 }
             }
             .padding(.trailing, 80)
-            
             .padding(.vertical,120)
         }
         .frame(maxHeight: 210)
-//        .onAppear {
-//            sound = createSoundPlayer(sound: "tiruliru", type: "wav")
-//            sound?.numberOfLoops = -1
-//            sound?.play()
-//        }
     }
 }
 
@@ -95,36 +85,16 @@ struct SplashView: View {
                         .font(.system(size: 36).bold())
                         .foregroundColor(.white)
                         .padding(.top, 64)
-//                    if profileManager.addingProfile {
                     ProfileListView()
                         .padding(.top, 40)
                         .environmentObject(profileManager)
-//                    } else {
-//                        ProfileListView()
-//                            .padding(.top, 40)
-//                            .environmentObject(profileManager)
-//                    }
                     
                 }
             }.navigationBarHidden(true)
             .ignoresSafeArea(.all)
-//            .fullScreenCover(isPresented: $profileManager.addingProfile, onDismiss: {profileManager.addingProfile = false}) {
-//                ProfileView()
-//                    .environmentObject(profileManager)
-//                    .environmentObject(dashboardManager)
-//            }
         }
         .statusBar(hidden: true)
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationAppearance(foregroundColor: .white, tintColor: .white, hideSeparator: true)
     }
 }
-
-//struct SplashView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SplashView()
-//            .previewInterfaceOrientation(.landscapeLeft)
-//            .environmentObject(ProfileManager())
-//            .environmentObject(DashboardManager())
-//    }
-//}

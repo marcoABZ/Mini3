@@ -3,4 +3,114 @@
    uuid = "D8783AEF-5644-4111-AB08-99F6F7C1277B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mini3/Records/FinishMenuView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "FinishMenuView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - 96ee42b61a18af79"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Mini3.FinishMenuView.selectedProfile : Foundation.UUID"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "82">
+               </Location>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - 7a6b83ac0a582a43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mini3.FinishMenuView.selectedProfile.getter : Foundation.UUID"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "167">
+               </Location>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - de79e5039a755e4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mini3.FinishMenuView.selectedProfile.setter : Foundation.UUID"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "238">
+               </Location>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - 919beaefccdc1140"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mini3.FinishMenuView.selectedProfile.modify : Foundation.UUID"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "289">
+               </Location>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - 44ab3dc7777f834f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mini3.FinishMenuView.selectedProfile.modify : Foundation.UUID with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "8DB2404F-1D38-49F8-80CC-A20F32119445 - 9a8285833ba8b207"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mini3.FinishMenuView.$selectedProfile.getter : SwiftUI.Binding&lt;Foundation.UUID&gt;"
+                  moduleName = "Mini3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcozulian/Desktop/Academy/Projetos/11.%20Mini%20Challenge%203%20-%20Animautas/Mini3/Mini3/Records/FinishMenuView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "167">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

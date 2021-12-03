@@ -10,11 +10,12 @@ import SwiftUI
 struct ColorPickerView: View {
     
     @EnvironmentObject var profileManager: ProfileManager
+    @Binding var editingProfile: ProfileModel
     var index: Int
     
     var body: some View {
         Button(action: {
-            profileManager.editingProfile.selectedColor = profileManager.availableColors[index]
+            editingProfile.selectedColor = profileManager.availableColors[index]
         }) {
             Rectangle()
                 .fill(profileManager.availableColors[index])

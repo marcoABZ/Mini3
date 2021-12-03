@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct QuebraCabecaGameView: View {
-    @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @StateObject var puzzleManager: PuzzleManager
     @Environment(\.presentationMode) var presentationMode
     @State var isGameOver: Bool? = false
@@ -17,10 +17,10 @@ struct QuebraCabecaGameView: View {
     @State var presenting: Bool = false
     @Binding var presentingSettings: Bool
     @Binding var shouldPopToRoot: Bool
-    
+
     var body: some View {
         ZStack {
-            student.getProfileColor()
+            selectedProfileManager.getProfileColor()
                 .ignoresSafeArea(.all)
             ZStack(alignment: .top) {
                 HStack {
@@ -28,7 +28,7 @@ struct QuebraCabecaGameView: View {
                     PuzzleBoardView(puzzleManager: puzzleManager)
                     Spacer()
                     Divider()
-                        .background(student.getProfileColor())
+                        .background(selectedProfileManager.getProfileColor())
                     Spacer()
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 50), count: puzzleManager.settings.horizontalDivision)) {
                         // TODO: Setar ordenação com letras
@@ -54,7 +54,8 @@ struct QuebraCabecaGameView: View {
         }
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,
-                           shouldPopToRoot: $shouldPopToRoot
+                           shouldPopToRoot: $shouldPopToRoot,
+                           selectedProfile: selectedProfileManager.getProfile()
 //                           , presentingSettings: $presentingSettings
             )
                 .padding(.horizontal, 90)

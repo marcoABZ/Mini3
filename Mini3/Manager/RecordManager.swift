@@ -57,29 +57,6 @@ class RecordManager: ObservableObject {
         self.selectedRecordId = UUID()
         self.detailSheetShowing = false
         self.savingProfile = ProfileModel(name: "", birthdate: Date(), color: .clear, image: "")
-        
-        // Dados de teste
-//        self.registeredTeachers.append(Teacher(nome: "Teste 1"))
-//        self.registeredTeachers.append(Teacher(nome: "Teste 2"))
-//        self.registeredTeachers.append(Teacher(nome: "Teste 3"))
-//        self.registeredTeachers.append(Teacher(nome: "Teste 4"))
-//
-//        self.registeredRecords.append(RecordModel())
-//        self.registeredRecords.append(RecordModel())
-//        self.registeredRecords.append(RecordModel())
-//        self.registeredRecords[0].teacher = registeredTeachers[0]
-//        self.registeredRecords[1].teacher = registeredTeachers[1]
-//        self.registeredRecords[2].teacher = registeredTeachers[2]
-//        self.registeredRecords[0].satisfaction = .notSatisfied
-//        self.registeredRecords[1].satisfaction = .satisfied
-//        self.registeredRecords[2].satisfaction = .overSatisfied
-//        self.registeredRecords[0].game = .quebraCabeca
-//        self.registeredRecords[1].game = .quebraCabeca
-//        self.registeredRecords[2].game = .formas
-//        self.registeredRecords[0].annotation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam non nisi est sit amet facilisis magna. Vitae elementum curabitur vitae nunc sed velit dignissim. A cras semper auctor neque vitae. Pulvinar mattis nunc sed blandit libero. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Eu turpis egestas pretium aenean pharetra. Donec ac odio tempor orci dapibus ultrices in iaculis. Magna sit amet purus gravida quis blandit turpis cursus. Sapien et ligula ullamcorper malesuada proin libero nunc. Ullamcorper malesuada proin libero nunc consequat. Velit laoreet id donec ultrices tincidunt arcu non."
-//
-//        self.selectedTeacher = registeredTeachers[0]
-        //
     }
     
     func updateViewMode() {
@@ -135,7 +112,7 @@ class RecordManager: ObservableObject {
         if registeredRecords.filter({$0.game == jogo && $0.student == student}).isEmpty {
             return [0,0,0]
         } else {
-            let gameRecords = registeredRecords.filter { $0.game == jogo }
+            let gameRecords = registeredRecords.filter { $0.game == jogo && $0.student == student }
             var satisfiedCount = 0
             var notSatisfiedCount = 0
             var overSatisfiedCount = 0

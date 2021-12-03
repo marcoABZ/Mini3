@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuebraCabecaStartView: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     @State var puzzleManager: PuzzleManager
     @Binding var rootIsActive: Bool
@@ -17,7 +17,7 @@ struct QuebraCabecaStartView: View {
     var body: some View {
 //        NavigationView {
 
-        student.getProfileColor()
+        selectedProfileManager.getProfileColor()
             .ignoresSafeArea(.all)
             .overlay {
                     HStack {
@@ -27,7 +27,7 @@ struct QuebraCabecaStartView: View {
                         
                         //TODO: Estudar possibilidade/complexidade de trocar Divider por uma linha
                         Divider()
-                            .background(student.getProfileColor())
+                            .background(selectedProfileManager.getProfileColor())
                         
                         QuebraCabecaSettingsView(settings: puzzleManager.settings, rootIsActive: $rootIsActive)
                             .padding(.horizontal, settingsItemsSpacing)

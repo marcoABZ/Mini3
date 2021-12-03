@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PuzzlePieceView: View {
-    @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
     @ObservedObject var piece: PuzzlePieceManager<UIImage>
     var preview: Bool = false
@@ -35,7 +35,7 @@ struct PuzzlePieceView: View {
                                 .if(puzzleManager.settings.horizontalDivision != 1) { v in
                                     v.frame(width: piece.content.size.width)
                                 }
-                                .background(student.getProfileColor())
+                                .background(selectedProfileManager.getProfileColor())
 
                         }
                 } else {
@@ -56,7 +56,7 @@ struct PuzzlePieceView: View {
                         print(puzzleManager.isOver)
                     }
             )
-            .shadow(color: student.getProfileColor(), radius: piece.isCorrect ? 10 : 0)
+            .shadow(color: selectedProfileManager.getProfileColor(), radius: piece.isCorrect ? 10 : 0)
             .overlay(
                 GeometryReader { geo in
                     Color.clear

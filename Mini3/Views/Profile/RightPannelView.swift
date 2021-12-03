@@ -9,20 +9,22 @@ import SwiftUI
 
 struct RightPannelView: View {
     
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var dashboardManager: DashboardManager
     @Environment(\.presentationMode) var presentation
 
     @State private var image: Image?
+    @Binding var editingProfile: ProfileModel
     
     var body: some View {
         
-        let im: Image? = image ?? profileManager.editingProfile.image
+        let im: Image? = image ?? editingProfile.image
         
         VStack {
             VStack(alignment: .leading) {
                 Text("Nome")
-                TextField("Nome", text: $profileManager.editingProfile.name)
+                TextField("Nome", text: $editingProfile.name)
                     .font(.system(size: 21, weight: .regular, design: .rounded))
                     .padding(.leading)
                     .padding(12)
@@ -33,7 +35,7 @@ struct RightPannelView: View {
                             .stroke(Color.gray.opacity(0.5), lineWidth: 1)
                     )
                 
-                DatePicker("Data de Nascimento", selection: $profileManager.editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
+                DatePicker("Data de Nascimento", selection: $editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
                     .padding(.top, 24)
                 
                 Text("Escolher Mascote")
@@ -42,7 +44,7 @@ struct RightPannelView: View {
                     Spacer()
                     ForEach(0..<Mascotes.allCases.count) { i in
                         Button(action: {
-                            profileManager.editingProfile.mascote = Mascotes.allCases[i]
+                            editingProfile.mascote = Mascotes.allCases[i]
                         }) {
                             Image(Mascotes.getImageIconName(animal: Mascotes.allCases[i]))
                                 .resizable()
@@ -52,31 +54,32 @@ struct RightPannelView: View {
                                 .cornerRadius(16)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 19)
-                                        .stroke(profileManager.editingProfile.selectedColor, lineWidth: profileManager.editingProfile.mascote == Mascotes.allCases[i] ? 8 : 0)
+                                        .stroke(editingProfile.selectedColor, lineWidth: editingProfile.mascote == Mascotes.allCases[i] ? 8 : 0)
                                         .frame(width: 100, height: 100)
                                 )
                         }
                     }
                 }
                 
-                Toggle("Modo escuro", isOn: $profileManager.editingProfile.darkModeEnabled)
+                Toggle("Modo escuro", isOn: $editingProfile.darkModeEnabled)
                     .padding(.top, 24)
-                    .toggleStyle(SwitchToggleStyle(tint: profileManager.editingProfile.selectedColor))
+                    .toggleStyle(SwitchToggleStyle(tint: editingProfile.selectedColor))
                 
             }
             .font(.system(size: 24, weight: .bold, design: .rounded))
             
             Button(action: {
-                profileManager.saveProfile(image: im!)
+                profileManager.save(profile: editingProfile, withImage: im!)
+                selectedProfileManager.setSelectedProfile(profile: editingProfile)
                 presentation.wrappedValue.dismiss()
             }) {
-                Text(profileManager.addingProfile ? "Criar" : "Salvar")
+                Text(profileManager.mode == .add ? "Criar" : "Salvar")
                     .font(.system(size: 24).bold())
                     .foregroundColor(.white)
             }
-            .disabled(profileManager.editingProfile.name.isEmpty)
+            .disabled(editingProfile.name.isEmpty)
             .frame(width: 240, height: 55)
-            .background(profileManager.editingProfile.selectedColor)
+            .background(editingProfile.selectedColor)
             .cornerRadius(30)
             .padding(.top,42)
         }

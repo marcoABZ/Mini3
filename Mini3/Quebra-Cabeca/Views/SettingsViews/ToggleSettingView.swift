@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ToggleSettingView: View {
     
-    @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     let iconName: String?
     let title: String
     let subtitle: String?
@@ -23,7 +23,7 @@ struct ToggleSettingView: View {
                     if let iconName = iconName {
                         Image(systemName: iconName)
                             .font(.system(size: 24, weight: .bold, design: .default))
-                            .foregroundColor(student.getProfileColor())
+                            .foregroundColor(selectedProfileManager.getProfileColor())
                     }
                     VStack (alignment: .leading) {
                         Text(title)
@@ -39,6 +39,6 @@ struct ToggleSettingView: View {
                     }
                 }
             }
-        }.toggleStyle(SwitchToggleStyle(tint: student.getProfileColor()))
+        }.toggleStyle(SwitchToggleStyle(tint: selectedProfileManager.getProfileColor()))
     }
 }

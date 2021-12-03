@@ -12,6 +12,7 @@ struct RegisterView: View {
     @EnvironmentObject var profileManager: ProfileManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
+    @State var selectedProfile: ProfileModel
 
 //    @Environment(\.presentationMode) var presentation
     var body: some View {
@@ -30,7 +31,7 @@ struct RegisterView: View {
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                             .padding(.horizontal)
                     }
-                    .foregroundColor(profileManager.getEditingProfileColor())
+                    .foregroundColor(selectedProfile.selectedColor)
                     .frame(width: 260, height: 50)
                     .background(.white)
                     .cornerRadius(25)
@@ -68,7 +69,7 @@ struct RegisterView: View {
                 
                 Button(action: {}) {
                     Image(systemName: "mic.fill")
-                        .foregroundColor(profileManager.getEditingProfileColor())
+                        .foregroundColor(selectedProfile.selectedColor)
                         .font(.system(size: 30))
                         .frame(width: 92, height: 92)
                         .background(.white)
@@ -90,14 +91,14 @@ struct RegisterView: View {
                 }
                 
                 Button(action: {
-                    recordManager.saveRecord(student: profileManager.editingProfile)
+                    recordManager.saveRecord(student: selectedProfile)
                     presented.toggle()
                     shouldPopToRoot.toggle()
 //                    profileManager.unwindToDashboard = false
                 }) {
                     Text("Salvar informações")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(profileManager.getEditingProfileColor())
+                        .foregroundColor(selectedProfile.selectedColor)
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)
@@ -139,22 +140,3 @@ struct RegisterView: View {
         }
     }
 }
-
-//struct RegisterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            ProfileManager().availableColors[0]
-//                .cornerRadius(20)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(.white.opacity(0.3), lineWidth: 5)
-//                )
-//                .ignoresSafeArea()
-//            RegisterView()
-//                .environmentObject(RecordManager())
-//                .environmentObject(ProfileManager())
-//        }
-//        .previewInterfaceOrientation(.landscapeLeft)
-//
-//    }
-//}

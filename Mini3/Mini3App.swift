@@ -20,7 +20,7 @@ struct Mini3App: App {
                 .environmentObject(profileManager)
                 .environmentObject(dashboardManager)
                 .environmentObject(recordManager)
-                .environment(\.colorScheme, profileManager.selectedProfile?.darkModeEnabled ?? false ? .dark : .light)
+//                .environment(\.colorScheme, profileManager.selectedProfile.darkModeEnabled)
                 .accentColor(.primary)
         }
     }

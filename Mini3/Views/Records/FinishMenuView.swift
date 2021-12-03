@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct FinishMenuView: View {
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
     @Binding var presented: Bool
     @Binding var shouldPopToRoot: Bool
-//    @Binding var presentingSettings: Bool
+    @State var selectedProfile: UUID
+    
     
     var body: some View {
         VStack {
@@ -24,16 +26,17 @@ struct FinishMenuView: View {
                     .font(.system(size: 17, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                Picker("Perfis", selection: $profileManager.editingIndex) {
-                    ForEach(0..<profileManager.profiles.count) { index in
+                Picker(selection: $selectedProfile, label: Text("")) {
+                    ForEach(profileManager.profiles) { prof in
                         HStack {
-                            Text(profileManager.profiles[index].name)
-                                .tag(index)
+                            Text(prof.name)
+                                .tag(prof.id)
                         }
                     }
                 }
+                .id(UUID())
                 .pickerStyle(MenuPickerStyle())
-                .accentColor(profileManager.getEditingProfileColor())
+                .accentColor(selectedProfileManager.getProfileColor())
                 .padding(.leading, 20)
                 .padding(.trailing, 40)
                 .background(.white)
@@ -45,12 +48,10 @@ struct FinishMenuView: View {
                         .offset(x: 30)
                 )
             }
-            .onChange(of: profileManager.editingIndex) { newValue in
-                profileManager.updateEditingProfile(index: newValue)
-            }
+
             ZStack {
-                profileManager.getFinishImage()
-                profileManager.editingProfile.image
+                selectedProfileManager.getFinishImage()
+                selectedProfileManager.getImage()
                     .resizable()
                     .frame(width: 180, height: 180)
                     .overlay(
@@ -64,7 +65,7 @@ struct FinishMenuView: View {
                     recordManager.updateViewMode()
                 }) {
                     Text("Registrar atividade")
-                        .foregroundColor(profileManager.getEditingProfileColor())
+                        .foregroundColor(selectedProfileManager.getProfileColor())
                 }
                 .frame(width: 220, height: 50)
                 .background(.white)
@@ -96,24 +97,6 @@ struct FinishMenuView: View {
                 )
                 .padding()
             }
-        }
-    }
-}
-
-struct FinishMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            ProfileManager().availableColors[0]
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white.opacity(0.3), lineWidth: 5)
-                )
-                .ignoresSafeArea()
-            FinishMenuView(presented: .constant(true), shouldPopToRoot: .constant(true))
-                .environmentObject(RecordManager())
-                .environmentObject(ProfileManager())
-        }
-        .previewInterfaceOrientation(.landscapeLeft)
+        }.onChange(of: selectedProfile, perform: {newValue in selectedProfileManager.setSelectedProfile(profile: profileManager.profiles.first { $0.id == selectedProfile }!)})
     }
 }

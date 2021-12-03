@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SatisfactionView: View {
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     
     let fractions: [Float]
     let width = 254
@@ -36,7 +37,7 @@ struct SatisfactionView: View {
                     .frame(width: 80, height: 36)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(profileManager.getProfileColor(), lineWidth: 2)
+                            .stroke(selectedProfileManager.getProfileColor(), lineWidth: 2)
                     )
                 }
             }
@@ -48,8 +49,8 @@ struct SatisfactionView: View {
 struct DesempenhoView: View {
     
     @EnvironmentObject var dashboardManager: DashboardManager
-    @EnvironmentObject var profileManager: ProfileManager
     @EnvironmentObject var recordManager: RecordManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     
     //Apagar animacao e variavel abaixo
     @State var pct: Double = 0.0
@@ -58,7 +59,7 @@ struct DesempenhoView: View {
         VStack {
             Text("Registro dos jogos")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(profileManager.getProfileColor())
+                .foregroundColor(selectedProfileManager.getProfileColor())
             
             ScrollView(.horizontal) {
                 HStack(spacing: 24) {
@@ -76,12 +77,12 @@ struct DesempenhoView: View {
     
     func createCardViews(jogo: Game) -> some View {
         return VStack {
-            Image(Mascotes.getCardCoverImages(animal: profileManager.selectedProfile!.mascote, jogo: jogo))
+            Image(Mascotes.getCardCoverImages(animal: selectedProfileManager.getMascote(), jogo: jogo))
             HStack {
                 VStack(alignment: .leading) {
                     Text("Jogo \(jogo.rawValue)")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    Text(recordManager.getLastRecordDate(game: jogo, student: profileManager.selectedProfile!) ?? "Nenhum registro")
+                    Text(recordManager.getLastRecordDate(game: jogo, student: selectedProfileManager.getProfile()) ?? "Nenhum registro")
                         .font(.system(size: 14, weight: .regular, design: .rounded))
                 }
                 Spacer()
@@ -89,21 +90,21 @@ struct DesempenhoView: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 22)
             
-            SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo, student: profileManager.selectedProfile!))
+            SatisfactionView(fractions: recordManager.getSatisfactionRates(jogo: jogo, student: selectedProfileManager.getProfile()))
     
-            Text(recordManager.getLastRecordTeacher(game: jogo, student: profileManager.selectedProfile!) ?? "Nenhum registro")
+            Text(recordManager.getLastRecordTeacher(game: jogo, student: selectedProfileManager.getProfile()) ?? "Nenhum registro")
             Button(action: {
                 recordManager.viewRecordDetail(game: jogo)
             }) {
                 Text("Acessar anotações")
-                    .foregroundColor(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!) ? .gray : .white )
+                    .foregroundColor(recordManager.checkRecordsSaved(game: jogo, student: selectedProfileManager.getProfile()) ? .gray : .white )
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
                     .frame(width: 246, height: 36)
-                    .background(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!) ? Color("neutralColor") : profileManager.getProfileColor())
+                    .background(recordManager.checkRecordsSaved(game: jogo, student: selectedProfileManager.getProfile()) ? Color("neutralColor") : selectedProfileManager.getProfileColor())
                     .cornerRadius(17)
             }
             .padding(.vertical, 30)
-            .disabled(recordManager.checkRecordsSaved(game: jogo, student: profileManager.selectedProfile!))
+            .disabled(recordManager.checkRecordsSaved(game: jogo, student: selectedProfileManager.getProfile()))
         }
         .cornerRadius(24)
         .background(
@@ -115,14 +116,4 @@ struct DesempenhoView: View {
         
     }
     
-}
-
-struct DesempenhoView_Previews: PreviewProvider {
-    static var previews: some View {
-        DesempenhoView()
-            .previewInterfaceOrientation(.landscapeLeft)
-            .environmentObject(ProfileManager())
-            .environmentObject(DashboardManager())
-            .environmentObject(RecordManager())
-    }
 }

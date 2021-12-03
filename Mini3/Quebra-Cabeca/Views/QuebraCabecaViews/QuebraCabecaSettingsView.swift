@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuebraCabecaSettingsView: View {
-    @EnvironmentObject var student: ProfileManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @ObservedObject var settings: PuzzleConfiguration
     @State var isGameOn : Bool = false
     @State var letterOrderingAvailable: Bool = true
@@ -21,7 +21,7 @@ struct QuebraCabecaSettingsView: View {
                 HStack (alignment: .top){
                     Image(systemName: "divide.circle")
                         .font(.system(size: 24, weight: .bold, design: .default))
-                        .foregroundColor(student.getProfileColor())
+                        .foregroundColor(selectedProfileManager.getProfileColor())
                     VStack (alignment: .leading, spacing: 5) {
                         Text("Quantidade de divisoes")
                             .font(.system(size: 21, weight: .bold, design: .default))
@@ -38,7 +38,7 @@ struct QuebraCabecaSettingsView: View {
                                     }
                                 }
                                 label: { Image(systemName: "minus.circle") }
-                                .foregroundColor(settings.horizontalDivision > 1 ? student.getProfileColor() : .gray)
+                                .foregroundColor(settings.horizontalDivision > 1 ? selectedProfileManager.getProfileColor() : .gray)
                                 .disabled(settings.horizontalDivision <= 1)
                                 .font(.system(size: 21, weight: .medium, design: .default))
                             
@@ -59,7 +59,7 @@ struct QuebraCabecaSettingsView: View {
                                     }
                                 }
                                 label: { Image(systemName: "plus.circle") }
-                                .foregroundColor(settings.horizontalDivision < 10 ? student.getProfileColor() : .gray)
+                                .foregroundColor(settings.horizontalDivision < 10 ? selectedProfileManager.getProfileColor() : .gray)
                                 .disabled(settings.horizontalDivision >= 10)
                                 .font(.system(size: 21, weight: .medium, design: .default))
                         }.padding(.top, 5)
@@ -76,7 +76,7 @@ struct QuebraCabecaSettingsView: View {
                                   }
                                 }
                                 label: { Image(systemName: "minus.circle") }
-                                .foregroundColor(settings.verticalDivision > 1 ? student.getProfileColor() : .gray)
+                                .foregroundColor(settings.verticalDivision > 1 ? selectedProfileManager.getProfileColor() : .gray)
                                 .disabled(settings.verticalDivision <= 1)
                                 .font(.system(size: 21, weight: .medium, design: .default))
                             
@@ -97,7 +97,7 @@ struct QuebraCabecaSettingsView: View {
                                     }
                                 }
                                 label: { Image(systemName: "plus.circle") }
-                                .foregroundColor(settings.verticalDivision < 10 ? student.getProfileColor() : .gray)
+                                .foregroundColor(settings.verticalDivision < 10 ? selectedProfileManager.getProfileColor() : .gray)
                                 .disabled(settings.verticalDivision >= 10)
                                 .font(.system(size: 21, weight: .medium, design: .default))
                         }
@@ -121,7 +121,7 @@ struct QuebraCabecaSettingsView: View {
                 HStack (alignment: .top){
                     Image(systemName: "rectangle.and.pencil.and.ellipsis")
                         .font(.system(size: 24, weight: .bold, design: .default))
-                        .foregroundColor(student.getProfileColor())
+                        .foregroundColor(selectedProfileManager.getProfileColor())
                     HStack (alignment: .center) {
                         VStack (alignment: .leading, spacing: 5) {
                             Text("Incluir ordenação")
@@ -143,7 +143,7 @@ struct QuebraCabecaSettingsView: View {
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .none ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .none ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                            .foregroundColor(settings.ordenacao == .none ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
                         
@@ -157,7 +157,7 @@ struct QuebraCabecaSettingsView: View {
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .letter ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .letter ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                            .foregroundColor(settings.ordenacao == .letter ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
                             .disabled(settings.horizontalDivision * settings.verticalDivision > 26)
@@ -175,7 +175,7 @@ struct QuebraCabecaSettingsView: View {
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .number ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .number ? student.getProfileColor() : Color(uiColor: .systemGray5))
+                                            .foregroundColor(settings.ordenacao == .number ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
                                     )
                             }
                         
@@ -184,17 +184,19 @@ struct QuebraCabecaSettingsView: View {
             }
                 
             
-            NavigationLink(destination: QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings)
-                                                             ,presentingSettings: $presenting,
-                                                             shouldPopToRoot: $rootIsActive
-                                                            )) {
+            NavigationLink(destination:
+                            QuebraCabecaGameView(puzzleManager: PuzzleManager(settings: settings),
+                                                 presentingSettings: $presenting,
+                                                 shouldPopToRoot: $rootIsActive)
+                                .environmentObject(selectedProfileManager)
+            ) {
                 Text("Começar")
                     .font(.system(size: 24, weight: .bold, design: .default))
                     .foregroundColor(.white)
                     .frame(width: 240, height: 56)
                     .background(
                         Capsule()
-                            .foregroundColor(student.getProfileColor())
+                            .foregroundColor(selectedProfileManager.getProfileColor())
                     )
             }
             .isDetailLink(false)
