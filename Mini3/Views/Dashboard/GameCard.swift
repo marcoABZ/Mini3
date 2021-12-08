@@ -16,6 +16,9 @@ struct GameCard: View {
     @State var isFaceUp: Bool = true
     
     @EnvironmentObject var recordManager: RecordManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
+    @Binding var isActive: Bool
+    @Binding var hasSidebar: Bool
     
     @State var fractions: [Float]
     let width = 254
@@ -23,10 +26,30 @@ struct GameCard: View {
     
     var body: some View {
         VStack (alignment: .leading) {
-            VStack {
-                backFace
+            NavigationLink(
+                destination:
+                    QuebraCabecaStartView(
+                        puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                        rootIsActive: $isActive),
+                isActive: $isActive
+            ) {
+                VStack {
+                    backFace
+                }
+                .cardify(isFaceUp: isFaceUp, background: AnyView(frontFace))
             }
-            .cardify(isFaceUp: isFaceUp, background: AnyView(frontFace))
+            .isDetailLink(false)
+            .disabled(!game.isAvailable())
+            .if(game.isAvailable()) { view in
+                view.simultaneousGesture(
+                    TapGesture().onEnded {
+                        hasSidebar = false
+                        recordManager.currentGame = .quebraCabeca
+                    }
+                )
+            }
+            .padding(.vertical,32)
+            .padding(.leading)
             
             Text(game.rawValue)
                 .font(.system(size: 17, weight: .bold, design: .rounded))
