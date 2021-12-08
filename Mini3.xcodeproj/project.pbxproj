@@ -42,7 +42,7 @@
 		FA2C15442760EDC5003C7235 /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C15432760EDC5003C7235 /* RoundedCornerModifier.swift */; };
 		FA2C15462760EE38003C7235 /* SatisfactionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C15452760EE38003C7235 /* SatisfactionIndicator.swift */; };
 		FA2C154A27612368003C7235 /* CardifyModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C154927612368003C7235 /* CardifyModifier.swift */; };
-		FA2C154E276123B5003C7235 /* BlockedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C154D276123B5003C7235 /* BlockedModifier.swift */; };
+		FA2C155027612790003C7235 /* BlockedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C154F27612790003C7235 /* BlockedModifier.swift */; };
 		FA308120273D079B007D94D2 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811F273D079B007D94D2 /* Puzzle.swift */; };
 		FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */; };
 		FA34DE492746DB4B00559930 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA34DE482746DB4B00559930 /* ToggleSettingView.swift */; };
@@ -99,7 +99,7 @@
 		FA2C15432760EDC5003C7235 /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
 		FA2C15452760EE38003C7235 /* SatisfactionIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatisfactionIndicator.swift; sourceTree = "<group>"; };
 		FA2C154927612368003C7235 /* CardifyModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardifyModifier.swift; sourceTree = "<group>"; };
-		FA2C154D276123B5003C7235 /* BlockedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedModifier.swift; sourceTree = "<group>"; };
+		FA2C154F27612790003C7235 /* BlockedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedModifier.swift; sourceTree = "<group>"; };
 		FA30811F273D079B007D94D2 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaGameView.swift; sourceTree = "<group>"; };
 		FA308129273DA6CE007D94D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */,
 				FA2C15432760EDC5003C7235 /* RoundedCornerModifier.swift */,
 				FA2C154927612368003C7235 /* CardifyModifier.swift */,
-				FA2C154D276123B5003C7235 /* BlockedModifier.swift */,
+				FA2C154F27612790003C7235 /* BlockedModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 				5B232D7C273DB18600C157BE /* ProfileModel.swift in Sources */,
 				FA4EB1042735A4870027D188 /* Mini3App.swift in Sources */,
 				FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */,
-				FA2C154E276123B5003C7235 /* BlockedModifier.swift in Sources */,
+				FA2C155027612790003C7235 /* BlockedModifier.swift in Sources */,
 				FADE63D8274C11B100F0E8E9 /* PlaySoundMethod.swift in Sources */,
 				FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */,
 				5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */,
