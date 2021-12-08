@@ -19,7 +19,7 @@ struct GameDashboardView: View {
             Text("Jogos Disponíveis")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(selectedProfileManager.getProfileColor())
-                .padding(.bottom)
+//                .padding(.bottom)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 30) {
                     ForEach(Game.allCases, id: \.rawValue) { game in
@@ -31,10 +31,11 @@ struct GameDashboardView: View {
                                         .environmentObject(selectedProfileManager),
                             isActive: $isActive
                         ) {
-                            GameCard(game: game, mascote: selectedProfileManager.getMascote())
+                            GameCard(game: game, mascote: selectedProfileManager.getMascote(), profile: selectedProfileManager.getProfile(), fractions: recordManager.getSatisfactionRates(jogo: game, student: selectedProfileManager.getProfile()))
+                                .zIndex(3)
                         }
                         .isDetailLink(false)
-                        .disabled(!game.isAvailable())
+//                        .disabled(!game.isAvailable())
                         .if(game.isAvailable()) { view in
                             view.simultaneousGesture(
                                 TapGesture().onEnded {
@@ -43,11 +44,12 @@ struct GameDashboardView: View {
                                 }
                             )
                         }
-                        .padding(.bottom,32)
+//                        .padding(.top)
+                        .padding(.vertical,32)
                         .padding(.leading)
                     }
                 }
-            }
+            }.zIndex(1)
         }
     }
 }

@@ -114,7 +114,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     NavigationLink(destination:
                                     ProfileView(editingProfile: selectedProfileManager.getProfile())
@@ -158,20 +158,20 @@ struct MainView: View {
                         }
                     }
                     .padding()
-                    makePicker()
+//                    makePicker()
                 }
                 generateContent()
             }
             .padding(.top)
             .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
             .onAppear() {
-                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
-                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-                
-                // TODO: Linkar com a cor do perfil selecionado
-                UISegmentedControl.appearance().backgroundColor = UIColor(selectedProfileManager.getProfileColor())
-                
-                UISegmentedControl.appearance().selectedSegmentTintColor = .white
+//                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+//                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+//                
+//                // TODO: Linkar com a cor do perfil selecionado
+//                UISegmentedControl.appearance().backgroundColor = UIColor(selectedProfileManager.getProfileColor())
+//                
+//                UISegmentedControl.appearance().selectedSegmentTintColor = .white
                 hasSidebar = true
             }
             .navigationBarHidden(true)

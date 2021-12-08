@@ -24,7 +24,7 @@ enum Game: String, CaseIterable {
         return false
     }
     
-    func getCoverImage(mascote: Mascotes) -> Image {
+    func getCoverImage(mascote: Mascotes) -> String {
         var aux = ""
         switch self {
         case .quebraCabeca:
@@ -41,11 +41,11 @@ enum Game: String, CaseIterable {
         
         switch mascote {
             case .coelho:
-                return Image("coelhoMini\(aux)Cover")
+                return "coelhoMini\(aux)Cover"
             case .chiba:
-                return Image("chibaMini\(aux)Cover")
+                return "chibaMini\(aux)Cover"
             case .gato:
-                return Image("gatoMini\(aux)Cover")
+                return "gatoMini\(aux)Cover"
         }
     }
     
