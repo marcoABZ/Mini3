@@ -43,6 +43,7 @@
 		FA2C15462760EE38003C7235 /* SatisfactionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C15452760EE38003C7235 /* SatisfactionIndicator.swift */; };
 		FA2C154A27612368003C7235 /* CardifyModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C154927612368003C7235 /* CardifyModifier.swift */; };
 		FA2C155027612790003C7235 /* BlockedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C154F27612790003C7235 /* BlockedModifier.swift */; };
+		FA2C155327622E5B003C7235 /* DragAndDropGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C155227622E5B003C7235 /* DragAndDropGame.swift */; };
 		FA308120273D079B007D94D2 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30811F273D079B007D94D2 /* Puzzle.swift */; };
 		FA308128273D652D007D94D2 /* QuebraCabecaGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */; };
 		FA34DE492746DB4B00559930 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA34DE482746DB4B00559930 /* ToggleSettingView.swift */; };
@@ -100,6 +101,7 @@
 		FA2C15452760EE38003C7235 /* SatisfactionIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatisfactionIndicator.swift; sourceTree = "<group>"; };
 		FA2C154927612368003C7235 /* CardifyModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardifyModifier.swift; sourceTree = "<group>"; };
 		FA2C154F27612790003C7235 /* BlockedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedModifier.swift; sourceTree = "<group>"; };
+		FA2C155227622E5B003C7235 /* DragAndDropGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropGame.swift; sourceTree = "<group>"; };
 		FA30811F273D079B007D94D2 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		FA308127273D652D007D94D2 /* QuebraCabecaGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaGameView.swift; sourceTree = "<group>"; };
 		FA308129273DA6CE007D94D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -252,6 +254,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		FA2C155127622E2D003C7235 /* DragAndDropGame */ = {
+			isa = PBXGroup;
+			children = (
+				FA2C155227622E5B003C7235 /* DragAndDropGame.swift */,
+			);
+			path = DragAndDropGame;
+			sourceTree = "<group>";
+		};
 		FA34DE472746DB3300559930 /* SettingsViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +300,7 @@
 				FA4EB1052735A4870027D188 /* ContentView.swift */,
 				FA4EB1072735A48A0027D188 /* Assets.xcassets */,
 				FA4EB1092735A48A0027D188 /* Preview Content */,
+				FA2C155127622E2D003C7235 /* DragAndDropGame */,
 				FA24B59B273C394C00364D00 /* Quebra-Cabeca */,
 				FA4EB11B2735BB130027D188 /* ImagePicker.swift */,
 			);
@@ -452,6 +463,7 @@
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
 				FA34DE492746DB4B00559930 /* ToggleSettingView.swift in Sources */,
 				5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */,
+				FA2C155327622E5B003C7235 /* DragAndDropGame.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
 				FA7D6B1027580A6C005112FB /* SelectedProfileManager.swift in Sources */,
 				FA261AB2274818AC00890053 /* QuebraCabecaProgressView.swift in Sources */,

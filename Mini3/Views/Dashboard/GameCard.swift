@@ -30,7 +30,8 @@ struct GameCard: View {
                 destination:
                     QuebraCabecaStartView(
                         puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                        rootIsActive: $isActive),
+                        rootIsActive: $isActive)
+                    .environmentObject(selectedProfileManager),
                 isActive: $isActive
             ) {
                 VStack {

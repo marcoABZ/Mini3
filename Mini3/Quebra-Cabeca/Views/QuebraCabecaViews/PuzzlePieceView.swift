@@ -10,7 +10,7 @@ import SwiftUI
 struct PuzzlePieceView: View {
     @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
-    @ObservedObject var piece: PuzzlePieceManager<UIImage>
+    @State var piece: PuzzlePieceManager<UIImage>
     var preview: Bool = false
     let letters: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
                             "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
@@ -18,29 +18,14 @@ struct PuzzlePieceView: View {
     
     var body: some View {
             ZStack {
-                if puzzleManager.settings.ordenacao != .none {
-                    Image(uiImage: piece.content)
-                        .overlay (alignment: puzzleManager.settings.horizontalDivision == 1 ? .leading : .bottom) {
-//                            Rectangle()
-//                                .foregroundColor(student.getProfileColor())
-//                                .frame(height: 50)
-//                                .opacity(piece.isCorrect ? 0.7 : 1)
-                            Text(puzzleManager.settings.ordenacao == .number ? String(piece.index + 1) : letters[piece.index])
-                                .foregroundColor(.white)
-                                .font(.system(size: getFontSize(), weight: .bold, design: .default))
-                                .padding(puzzleManager.settings.horizontalDivision == 1 ? .horizontal : .vertical, 2)
-                                .if(puzzleManager.settings.horizontalDivision == 1) { v in
-                                    v.frame(width: 50, height: piece.content.size.height)
-                                }
-                                .if(puzzleManager.settings.horizontalDivision != 1) { v in
-                                    v.frame(width: piece.content.size.width)
-                                }
-                                .background(selectedProfileManager.getProfileColor())
-
-                        }
-                } else {
-                    Image(uiImage: piece.content)
-                }
+                Image(uiImage: piece.content)
+                    .if(puzzleManager.settings.ordenacao != .none) { v in
+                        v.ordered(
+                            text: puzzleManager.settings.ordenacao == .number ? String(piece.index + 1) : letters[piece.index],
+                            position: puzzleManager.settings.horizontalDivision == 1 ? .left : .down,
+                            fontSize: getFontSize(),
+                            backgoundColor: selectedProfileManager.getProfileColor())
+                    }
             }
             .offset(CGSize(width: piece.currentDisplacement.width + piece.acumulatedDisplacement.width, height: piece.currentDisplacement.height + piece.acumulatedDisplacement.height))
             .zIndex(piece.acumulatedDisplacement == .zero || piece.isCorrect ? 0 : 1)
