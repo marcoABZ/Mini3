@@ -10,7 +10,7 @@ import SwiftUI
 struct PuzzlePieceView: View {
     @EnvironmentObject var selectedProfileManager: SelectedProfileManager
     @ObservedObject var puzzleManager: PuzzleManager
-    @State var piece: PuzzlePieceManager<UIImage>
+    @ObservedObject var piece: PuzzlePieceManager<UIImage>
     var preview: Bool = false
     let letters: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
                             "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
@@ -29,18 +29,6 @@ struct PuzzlePieceView: View {
             }
             .offset(CGSize(width: piece.currentDisplacement.width + piece.acumulatedDisplacement.width, height: piece.currentDisplacement.height + piece.acumulatedDisplacement.height))
             .zIndex(piece.acumulatedDisplacement == .zero || piece.isCorrect ? 0 : 1)
-            .gesture(
-                DragGesture(coordinateSpace: .global)
-                    .onChanged {
-                        if !piece.isCorrect && !preview {
-                            piece.drag(forDistance: CGSize(width: $0.translation.width, height: $0.translation.height))                      }
-                    }
-                    .onEnded { _ in
-                        piece.drop()
-                        puzzleManager.updateGameStatus()
-                        print(puzzleManager.isOver)
-                    }
-            )
             .shadow(color: selectedProfileManager.getProfileColor(), radius: piece.isCorrect ? 10 : 0)
             .overlay(
                 GeometryReader { geo in

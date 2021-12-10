@@ -15,8 +15,6 @@ struct QuebraCabecaStartView: View {
     @Binding var rootIsActive: Bool
     
     var body: some View {
-//        NavigationView {
-
         selectedProfileManager.getProfileColor()
             .ignoresSafeArea(.all)
             .overlay {
@@ -37,8 +35,6 @@ struct QuebraCabecaStartView: View {
                     .background()
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
                 }
-//            .frame(width: settingsPlusImageWidth)
-//            }
             .navigationBarHidden(false)
             .navigationTitle("Quebra-cabeça")
             .navigationBarTitleDisplayMode(.inline)
@@ -52,10 +48,6 @@ struct QuebraCabecaStartView: View {
                      }
                   }
                })
-//        }
-//        .navigationViewStyle(StackNavigationViewStyle())
-//        .navigationTitle("Quebra-cabeça")
-//        .navigationBarTitleDisplayMode(.inline)
     }
     
     //MARK: Constantes

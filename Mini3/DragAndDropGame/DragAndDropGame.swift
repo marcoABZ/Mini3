@@ -16,16 +16,7 @@ struct DragAndDropGame<Piece: Dragable> {
     }
 }
 
-struct PuzzlePiece: Dragable {
-    var currentPosition: CGRect?
-    var acumulatedDisplacement: CGSize = .zero
-    var currentDisplacement: CGSize = .zero
-    var targetPosition: CGRect?
-    var isCorrect: Bool = false
-    var shouldMoveBack: Bool
-}
-
-protocol Dragable {
+protocol Dragable: AnyObject {
     var currentPosition: CGRect? { get set }
     var acumulatedDisplacement: CGSize { get set }
     var currentDisplacement: CGSize { get set }
@@ -34,8 +25,8 @@ protocol Dragable {
     var shouldMoveBack: Bool { get }
     var currentOffset: CGSize { get }
     
-    mutating func drag(forDistance distance: CGSize)
-    mutating func drop()
+    func drag(forDistance distance: CGSize)
+    func drop()
 }
 
 extension Dragable {
@@ -45,11 +36,11 @@ extension Dragable {
         }
     }
     
-    mutating func drag(forDistance distance: CGSize) {
+    func drag(forDistance distance: CGSize) {
         currentDisplacement = distance
     }
     
-    mutating func drop() {
+    func drop() {
         guard let tp = targetPosition,
               let op = currentPosition
         else { return }
@@ -70,40 +61,4 @@ extension Dragable {
             currentDisplacement = .zero
         }
     }
-}
-
-struct Ordered: ViewModifier {
-    
-    let text: String
-    let position: LabelPosition
-    let fontSize: CGFloat
-    let backgroundColor: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .overlay(alignment: position == .left ? .leading : .bottom) {
-                Text(text)
-                    .foregroundColor(.white)
-                    .font(.system(size: fontSize, weight: .bold, design: .default))
-                    .padding(position == .left ? .horizontal : .vertical, 2)
-                    .if(position == .left) { v in
-                        v.frame(minWidth: 50, maxHeight: .infinity)
-                    }
-                    .if(position == .down) { v in
-                        v.frame(maxWidth: .infinity)
-                    }
-                    .background(backgroundColor)
-            }
-    }
-}
-
-extension View {
-    func ordered(text: String, position: LabelPosition, fontSize: CGFloat, backgoundColor: Color) -> some View {
-        self.modifier(Ordered(text: text, position: position, fontSize: fontSize, backgroundColor: backgoundColor))
-    }
-}
-
-enum LabelPosition {
-    case down
-    case left
 }
