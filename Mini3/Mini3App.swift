@@ -17,7 +17,8 @@ struct Mini3App: App {
     
     var body: some Scene {
         WindowGroup {
-            CreatePathView()
+            CaminhoGameView()
+                .environmentObject(SelectedProfileManager())
 //            SplashView()
 //                .environmentObject(profileManager)
 //                .environmentObject(dashboardManager)

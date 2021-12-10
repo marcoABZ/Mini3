@@ -12,8 +12,8 @@ final class DrawScene: SKScene {
     
     var coordinates: [CGPoint] = []
     
-    let startPosition = CGPoint(x: 100, y: 600)
-    let finishPosition = CGPoint(x: 1000, y: 100)
+    let startPosition = CGPoint(x: 80, y: 570)
+    let finishPosition = CGPoint(x: 890, y: 70)
 
     let initialBox = SKSpriteNode(color: SKColor.red, size: CGSize(width: 50, height: 50))
     let finishBox = SKSpriteNode(color: SKColor.blue, size: CGSize(width: 80, height: 50))
