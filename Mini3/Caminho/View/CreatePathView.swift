@@ -8,18 +8,6 @@
 import SwiftUI
 import SpriteKit
 
-struct PathView: View {
-    let coordinates: [CGPoint]
-    var body: some View {
-        Path { path in
-            path.move(to: .zero)
-            path.addLine(to: CGPoint(x: 100, y: 10))
-            path.addLines(coordinates)
-        }
-        .stroke(Color.orange, lineWidth: 5)
-    }
-}
-
 struct CreatePathView: View {
     @StateObject var pathManager: PathManager = PathManager()
 
@@ -27,15 +15,17 @@ struct CreatePathView: View {
         VStack {
             if pathManager.switchView {
                 SpriteView(scene: pathManager.scene)
-                    .frame(width: 1200, height: 700)
+                    .frame(width: 1000, height: 700)
                     .ignoresSafeArea()
             } else {
-                PathView(coordinates: pathManager.coordinates)
+                SpriteView(scene: pathManager.scene)
+                    .frame(width: 1000, height: 700)
+                    .ignoresSafeArea()
+//                PathView(coordinates: pathManager.coordinates)
             }
             Button(action: {
-                if pathManager.switchView {
-                    pathManager.copyCoordinates()
-                }
+                pathManager.copyCoordinates()
+                pathManager.switchToDragScene()
                 pathManager.switchView.toggle()
             }) {
                 Text("Gerar Caminho")

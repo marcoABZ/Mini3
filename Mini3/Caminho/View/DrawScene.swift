@@ -29,9 +29,10 @@ final class DrawScene: SKScene {
         if coordinates.isEmpty {
             if !initialBox.contains(addingPosition) {
                 return false
+            } else {
+                coordinates.append(addingPosition)
+                return true
             }
-            coordinates.append(addingPosition)
-            return true
         } else {
             let lastAddedCoordinate = coordinates.last!
             let xDis = Float(addingPosition.x) - Float(lastAddedCoordinate.x)

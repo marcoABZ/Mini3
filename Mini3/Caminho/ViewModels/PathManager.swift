@@ -13,6 +13,7 @@ class PathManager: ObservableObject {
     @Published var switchView = true
     
     var drawScene: DrawScene?
+    var dragScene: DragScene?
     var scene: SKScene
     
     init() {
@@ -33,7 +34,16 @@ class PathManager: ObservableObject {
         return pathConverted
     }
     
+    func switchToDragScene() {
+        scene = DragScene()
+        scene.size = CGSize(width: 1200, height: 700)
+        scene.scaleMode = .fill
+
+        dragScene = scene as? DragScene
+        dragScene?.coordinates = coordinates
+    }
+    
     func copyCoordinates() {
-//        coordinates = (drawScene?.copyCoordinates())!
+        coordinates = (drawScene?.copyCoordinates())!
     }
 }
