@@ -49,10 +49,11 @@ enum Game: String, CaseIterable {
         }
     }
     
+    //TODO: Arrumar textos descritivos para os jogos
     func getDescription() -> String {
         switch self {
         case .quebraCabeca:
-            return "Organize e monte a imagem."
+            return "Organize e monte a imagem. Jogo para auxiliar na aprendizado visomotor, assim como  "
         default:
             return "Jogo em desenvolvimento"
         }

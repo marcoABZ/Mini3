@@ -28,6 +28,7 @@ struct Cardify: Animatable, ViewModifier {
             
             if rotation > 90 {
                 shape
+                    .fill(Color.clear)
                     .overlay { background.rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0)) }
             } else {
                 shape
@@ -36,9 +37,12 @@ struct Cardify: Animatable, ViewModifier {
             }
         }
         .zIndex(2)
-        .frame(width: 300, height: 428)
+        //TODO: Ajustar frame fixo
+//        .frame(minWidth: 300, minHeight: 428)
+        .aspectRatio(0.7, contentMode: ContentMode.fill)
         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
         .rotation3DEffect(Angle.degrees(rotation), axis: (0,1,0))
+        .scaleEffect(1.4 - pow(0.4, abs((rotation - 90) / 90)))
     }
 }
 

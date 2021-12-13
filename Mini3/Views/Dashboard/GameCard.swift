@@ -13,6 +13,7 @@ struct GameCard: View {
     let mascote: Mascotes
     let profile: ProfileModel
     
+    @Binding var allFaceUp: Bool
     @State var isFaceUp: Bool = true
     
     @EnvironmentObject var recordManager: RecordManager
@@ -25,52 +26,58 @@ struct GameCard: View {
     
     
     var body: some View {
-        VStack (alignment: .leading) {
-            NavigationLink(
-                destination:
-                    QuebraCabecaStartView(
-                        puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                        rootIsActive: $isActive)
-                    .environmentObject(selectedProfileManager),
-                isActive: $isActive
-            ) {
-                VStack {
-                    backFace
+        VStack {
+            backFace
+                .onTapGesture {
+                    withAnimation { isFaceUp.toggle() }
                 }
-                .cardify(isFaceUp: isFaceUp, background: AnyView(frontFace))
-            }
-            .isDetailLink(false)
-            .disabled(!game.isAvailable())
-            .if(game.isAvailable()) { view in
-                view.simultaneousGesture(
-                    TapGesture().onEnded {
-                        hasSidebar = false
-                        recordManager.currentGame = .quebraCabeca
-                    }
-                )
-            }
-            .padding(.vertical,32)
-            .padding(.leading)
-            
-            Text(game.rawValue)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
-            Text(game.getDescription())
-                .font(.system(size: 14, weight: .regular, design: .rounded))
-            
-            Button(action: {
-                withAnimation() {
-                    isFaceUp.toggle()
-                }
-            }) { Text("Trocar") }
         }
+        .cardify(isFaceUp: isFaceUp, background: AnyView(frontFace))
+        .onChange(of: allFaceUp, perform: { _ in
+            withAnimation { isFaceUp = allFaceUp }
+        })
+        .padding(.leading)
     }
     
     var frontFace: some View {
-        Image(game.getCoverImage(mascote: mascote))
-                .resizable()
-                .cornerRadius(16)
-                .aspectRatio(contentMode: .fit)
-                .blocked(!game.isAvailable())
+        //TODO: Generalizar para mais jogos - provavelmente vai precisar de um @ViewBuilder
+        NavigationLink(
+            destination:
+                QuebraCabecaStartView(
+                    puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                    rootIsActive: $isActive)
+                .environmentObject(selectedProfileManager),
+            isActive: $isActive
+        ) {
+            ZStack(alignment: .bottomTrailing) {
+                Image(game.getCoverImage(mascote: mascote))
+                        .resizable()
+                        .cornerRadius(16)
+                        .aspectRatio(contentMode: .fit)
+                        .blocked(!game.isAvailable())
+                Button(action: {
+                    withAnimation() {
+                        isFaceUp.toggle()
+                    }
+                })
+                {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.white)
+                        .font(.system(size: 32, weight: .semibold, design: .default))
+                        .padding()
+                }
+            }
+        }
+        .isDetailLink(false)
+        .disabled(!game.isAvailable())
+        .if(game.isAvailable()) { view in
+            view.simultaneousGesture(
+                TapGesture().onEnded {
+    //                        hasSidebar = false
+                    recordManager.currentGame = .quebraCabeca
+                }
+            )
+        }
     }
     
     var backFace: some View {
@@ -80,13 +87,13 @@ struct GameCard: View {
                 .cornerRadius(16, corners: [.topLeft, .topRight])
                 .aspectRatio(contentMode: .fit)
             
-            Spacer()
-            
             HStack {
                 VStack(alignment: .leading) {
                     Text("Jogo \(game.rawValue)")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                     Text(recordManager.getLastRecordDate(game: game, student: profile) ?? "Nenhum registro")
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
+                    Text(game.getDescription())
                         .font(.system(size: 14, weight: .regular, design: .rounded))
                 }
                 Spacer()
@@ -115,8 +122,6 @@ struct GameCard: View {
             }
             
             Spacer()
-    
-            Text(recordManager.getLastRecordTeacher(game: game, student: profile) ?? "Nenhum registro")
             
             Button(action: {
                 recordManager.viewRecordDetail(game: game)

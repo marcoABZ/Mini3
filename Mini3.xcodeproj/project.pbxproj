@@ -26,13 +26,14 @@
 		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
 		5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF043273C70D70045AAEB /* ProfileManager.swift */; };
 		FA08CFA52745562F003A8ED6 /* GameDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */; };
-		FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */; };
 		FA08CFA927457B90003A8ED6 /* NavAppearenceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */; };
 		FA21EAD4274D37DC0009AAC0 /* RightPannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD3274D37DC0009AAC0 /* RightPannelView.swift */; };
 		FA21EAD6274D3B0B0009AAC0 /* LeftPannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD5274D3B0B0009AAC0 /* LeftPannelView.swift */; };
 		FA21EAD8274D3BCB0009AAC0 /* BackgroundColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */; };
 		FA21EADA274D4DDE0009AAC0 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */; };
 		FA261AB2274818AC00890053 /* QuebraCabecaProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */; };
+		FA26D8482767709D00086AD8 /* ViewWillDisapearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26D8472767709D00086AD8 /* ViewWillDisapearModifier.swift */; };
+		FA26D84A27678D0B00086AD8 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26D84927678D0B00086AD8 /* ProfileHeader.swift */; };
 		FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */; };
 		FA2A3C372744178E00DD26AA /* PuzzlePieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */; };
 		FA2A3C39274417C100DD26AA /* PuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A3C38274417C100DD26AA /* PuzzleManager.swift */; };
@@ -86,13 +87,14 @@
 		5B5BF041273C66760045AAEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5B5BF043273C70D70045AAEB /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDashboardView.swift; sourceTree = "<group>"; };
-		FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesempenhoView.swift; sourceTree = "<group>"; };
 		FA08CFA827457B90003A8ED6 /* NavAppearenceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavAppearenceModifier.swift; sourceTree = "<group>"; };
 		FA21EAD3274D37DC0009AAC0 /* RightPannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightPannelView.swift; sourceTree = "<group>"; };
 		FA21EAD5274D3B0B0009AAC0 /* LeftPannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPannelView.swift; sourceTree = "<group>"; };
 		FA21EAD7274D3BCB0009AAC0 /* BackgroundColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorPickerView.swift; sourceTree = "<group>"; };
 		FA21EAD9274D4DDE0009AAC0 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		FA261AB1274818AC00890053 /* QuebraCabecaProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaProgressView.swift; sourceTree = "<group>"; };
+		FA26D8472767709D00086AD8 /* ViewWillDisapearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWillDisapearModifier.swift; sourceTree = "<group>"; };
+		FA26D84927678D0B00086AD8 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		FA28F5D427431FDD00B128C3 /* QuebraCabecaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuebraCabecaPreview.swift; sourceTree = "<group>"; };
 		FA2A3C362744178E00DD26AA /* PuzzlePieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceManager.swift; sourceTree = "<group>"; };
 		FA2A3C38274417C100DD26AA /* PuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleManager.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				FA2C154927612368003C7235 /* CardifyModifier.swift */,
 				FA2C154F27612790003C7235 /* BlockedModifier.swift */,
 				FA2AE7C02763DBEE005A153A /* OrderedModifier.swift */,
+				FA26D8472767709D00086AD8 /* ViewWillDisapearModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -325,8 +328,8 @@
 			isa = PBXGroup;
 			children = (
 				5B290317273AF45300F52700 /* DashboardView.swift */,
+				FA26D84927678D0B00086AD8 /* ProfileHeader.swift */,
 				FA08CFA42745562F003A8ED6 /* GameDashboardView.swift */,
-				FA08CFA6274556E6003A8ED6 /* DesempenhoView.swift */,
 				5B2AB097274EB9BC0001B90C /* DesempenhoDetalheView.swift */,
 				FA5EB901275A905700B907F1 /* GameCard.swift */,
 				FA2C15452760EE38003C7235 /* SatisfactionIndicator.swift */,
@@ -441,6 +444,7 @@
 				FA2C15462760EE38003C7235 /* SatisfactionIndicator.swift in Sources */,
 				5B232D77273D8E4300C157BE /* SplashView.swift in Sources */,
 				5B5BF044273C70D70045AAEB /* ProfileManager.swift in Sources */,
+				FA26D84A27678D0B00086AD8 /* ProfileHeader.swift in Sources */,
 				5B2CF1D427482555004D2A50 /* PlaceholderModifier.swift in Sources */,
 				FA5EB902275A905700B907F1 /* GameCard.swift in Sources */,
 				FA2C15442760EDC5003C7235 /* RoundedCornerModifier.swift in Sources */,
@@ -450,7 +454,6 @@
 				5B2CF1D227481B13004D2A50 /* Game.swift in Sources */,
 				FA21EADA274D4DDE0009AAC0 /* ColorPickerView.swift in Sources */,
 				FA4EB1182735B85E0027D188 /* QuebraCabecaImagePickerView.swift in Sources */,
-				FA08CFA7274556E6003A8ED6 /* DesempenhoView.swift in Sources */,
 				FA2A3C3D274419B000DD26AA /* PuzzleConfiguration.swift in Sources */,
 				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				5B2CF1D827484146004D2A50 /* RecordModel.swift in Sources */,
@@ -470,6 +473,7 @@
 				FA49159F27396B1D004F410B /* QuebraCabecaStartView.swift in Sources */,
 				FA34DE492746DB4B00559930 /* ToggleSettingView.swift in Sources */,
 				5B232D7F273DBEA900C157BE /* ConditionalModifier.swift in Sources */,
+				FA26D8482767709D00086AD8 /* ViewWillDisapearModifier.swift in Sources */,
 				FA2C155327622E5B003C7235 /* DragAndDropGame.swift in Sources */,
 				FA9356FE273999550005776C /* ImageExtension.swift in Sources */,
 				FA7D6B1027580A6C005112FB /* SelectedProfileManager.swift in Sources */,
