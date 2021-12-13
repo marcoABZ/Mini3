@@ -59,5 +59,9 @@ struct GameDashboardView: View {
                 Spacer()
             }
         }
+        .fullScreenCover(isPresented: $recordManager.detailSheetShowing, onDismiss: {}) {
+            DesempenhoDetalheView()
+                .environmentObject(selectedProfileManager)
+        }
     }
 }

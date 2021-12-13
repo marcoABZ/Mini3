@@ -28,6 +28,7 @@ struct GameCard: View {
     var body: some View {
         VStack {
             backFace
+                .contentShape(Rectangle())
                 .onTapGesture {
                     withAnimation { isFaceUp.toggle() }
                 }

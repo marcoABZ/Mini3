@@ -137,12 +137,12 @@ struct MainView: View {
                 .onAppear() {
                     hasSidebar = true
                 }
-                .onWillDisappear {
+//                .onWillDisappear {
+//                    hasSidebar = false
+//                }
+                .onDisappear() {
                     hasSidebar = false
                 }
-    //            .onDisappear() {
-    //                hasSidebar = false
-    //            }
                 .navigationBarHidden(true)
                 .navigationBarTitleDisplayMode(.inline)
             }.navigationViewStyle(StackNavigationViewStyle())
