@@ -8,7 +8,8 @@
 import SwiftUI
 import AVFAudio
 
-class PuzzlePieceManager<Element>: ObservableObject {
+class PuzzlePieceManager<Element>: ObservableObject, Dragable {
+
     let content: Element
     let index: Int
     @Published var currentPosition: CGRect?
@@ -34,37 +35,6 @@ class PuzzlePieceManager<Element>: ObservableObject {
     
     func setStartPosition(at position: CGRect) {
         currentPosition = position
-    }
-    
-    func drag(forDistance distance: CGSize) {
-        currentDisplacement = distance
-    }
-    
-    func drop() {
-        guard let tp = targetPosition,
-              let op = currentPosition
-        else { return }
-        
-        let dropPos = CGPoint(x: op.midX + currentDisplacement.width + acumulatedDisplacement.width, y: op.midY + currentDisplacement.height + acumulatedDisplacement.height)
-        
-        if tp.contains(dropPos) {
-            isCorrect = true
-            currentDisplacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
-            acumulatedDisplacement = .zero
-//            if shouldPlaySound {
-//                sound?.play()
-//            }
-            SoundManager.instance.playMusic(sound: .puzzleMount)
-        } else {
-            if shouldMoveBack {
-                acumulatedDisplacement = .zero
-            } else {
-                acumulatedDisplacement = CGSize(width: acumulatedDisplacement.width + currentDisplacement.width, height: acumulatedDisplacement.height + currentDisplacement.height)
-            }
-            
-            currentDisplacement = .zero
-        }
-    
     }
     
 }

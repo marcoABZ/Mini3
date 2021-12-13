@@ -118,69 +118,15 @@ struct QuebraCabecaSettingsView: View {
 
                 Divider()
                 
-                HStack (alignment: .top){
-                    Image(systemName: "rectangle.and.pencil.and.ellipsis")
-                        .font(.system(size: 24, weight: .bold, design: .default))
-                        .foregroundColor(selectedProfileManager.getProfileColor())
-                    HStack (alignment: .center) {
-                        VStack (alignment: .leading, spacing: 5) {
-                            Text("Incluir ordenação")
-                                .font(.system(size: 21, weight: .bold, design: .default))
-                            Text("Cada pedaço da imagem poderá receber uma letra ou número organizados em ordem.")
-                                .font(.system(size: 14, weight: .regular, design: .default))
-                                .foregroundColor(.gray)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.leading)
-                                .lineLimit(nil)
-                        }
-                        Spacer()
-                        Button
-                            { settings.ordenacao = .none }
-                            label: { Text("X")
-                                    .font(.system(size: 32, weight: .bold, design: .default))
-                                    .foregroundColor(settings.ordenacao == .none ? .white : .black)
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .none ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .none ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
-                                    )
-                            }
-                        
-                        if (letterOrderingAvailable) {
-                        Button
-                            { settings.ordenacao = .letter }
-                            label: { Text("A")
-                                    .font(.system(size: 32, weight: .bold, design: .default))
-                                    .foregroundColor(settings.ordenacao == .letter ? .white : .black)
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .letter ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .letter ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
-                                    )
-                            }
-                            .disabled(settings.horizontalDivision * settings.verticalDivision > 26)
-//                            .if(settings.horizontalDivision * settings.verticalDivision > 26) {v in
-//                                v.opacity(0.5)
-//                            }
-                        }
-                        
-                        Button
-                            { settings.ordenacao = .number }
-                            label: { Text("1")
-                                    .font(.system(size: 32, weight: .bold, design: .default))
-                                    .foregroundColor(settings.ordenacao == .number ? .white : .black)
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .addBorder(Color(uiColor: .systemGray3), width: settings.ordenacao == .number ? 0 : 2, cornerRadius: 8)
-                                            .foregroundColor(settings.ordenacao == .number ? selectedProfileManager.getProfileColor() : Color(uiColor: .systemGray5))
-                                    )
-                            }
-                        
-                    }
-                }
+                PickerSettingsView(
+                    iconName: "rectangle.and.pencil.and.ellipsis",
+                    title: "Incluir ordenação",
+                    subtitle: "Cada pedaço da imagem poderá receber uma letra ou número organizados em ordem.",
+                    values: letterOrderingAvailable ?
+                        [PuzzleConfiguration.Ordenacao.none, PuzzleConfiguration.Ordenacao.letter, PuzzleConfiguration.Ordenacao.number] :
+                        [PuzzleConfiguration.Ordenacao.none, PuzzleConfiguration.Ordenacao.number],
+                    controlledVariable: $settings.ordenacao)
+                
             }
                 
             

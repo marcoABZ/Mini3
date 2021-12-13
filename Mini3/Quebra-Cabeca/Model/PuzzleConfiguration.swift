@@ -29,9 +29,12 @@ class PuzzleConfiguration: ObservableObject {
         image = im
     }
     
-    enum Ordenacao {
-        case none
-        case letter
-        case number
+    enum Ordenacao: String, CaseIterable, Identifiable {
+        var id: Self { self }
+        
+        case none = "X"
+        case letter = "A"
+        case number = "1"
     }
 }
+

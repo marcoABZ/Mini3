@@ -36,6 +36,18 @@ struct QuebraCabecaGameView: View {
                             PuzzlePieceView(
                                 puzzleManager: puzzleManager,
                                 piece: piece)
+                                .gesture(
+                                    DragGesture(coordinateSpace: .global)
+                                        .onChanged {
+                                            if !piece.isCorrect {
+                                                piece.drag(forDistance: CGSize(width: $0.translation.width, height: $0.translation.height))                      }
+                                        }
+                                        .onEnded { _ in
+                                            piece.drop()
+                                            puzzleManager.updateGameStatus()
+                                            print(puzzleManager.isOver)
+                                        }
+                                )
                         }
                     }
                     Spacer()

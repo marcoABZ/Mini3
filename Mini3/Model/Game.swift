@@ -24,7 +24,7 @@ enum Game: String, CaseIterable {
         return false
     }
     
-    func getCoverImage(mascote: Mascotes) -> Image {
+    func getCoverImage(mascote: Mascotes) -> String {
         var aux = ""
         switch self {
         case .quebraCabeca:
@@ -41,18 +41,19 @@ enum Game: String, CaseIterable {
         
         switch mascote {
             case .coelho:
-                return Image("coelhoMini\(aux)Cover")
+                return "coelhoMini\(aux)Cover"
             case .chiba:
-                return Image("chibaMini\(aux)Cover")
+                return "chibaMini\(aux)Cover"
             case .gato:
-                return Image("gatoMini\(aux)Cover")
+                return "gatoMini\(aux)Cover"
         }
     }
     
+    //TODO: Arrumar textos descritivos para os jogos
     func getDescription() -> String {
         switch self {
         case .quebraCabeca:
-            return "Organize e monte a imagem."
+            return "Organize e monte a imagem. Jogo para auxiliar na aprendizado visomotor, assim como  "
         default:
             return "Jogo em desenvolvimento"
         }

@@ -13,41 +13,55 @@ struct GameDashboardView: View {
     @EnvironmentObject var recordManager: RecordManager
     @Binding var hasSidebar: Bool
     @State var isActive: Bool = false
+    @State var allFaceUp: Bool = true
     
     var body: some View {
-        VStack {
-            Text("Jogos Disponíveis")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(selectedProfileManager.getProfileColor())
-                .padding(.bottom)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 30) {
-                    ForEach(Game.allCases, id: \.rawValue) { game in
-                        NavigationLink(
-                            destination:
-                                QuebraCabecaStartView(
-                                    puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                                    rootIsActive: $isActive)
-                                        .environmentObject(selectedProfileManager),
-                            isActive: $isActive
-                        ) {
-                            GameCard(game: game, mascote: selectedProfileManager.getMascote())
+        GeometryReader { geo in
+            VStack {
+                Text("Jogos Disponíveis")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundColor(selectedProfileManager.getProfileColor())
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 30) {
+                        ForEach(Game.allCases, id: \.rawValue) { game in
+                                GameCard(
+                                    game: game,
+                                    mascote: selectedProfileManager.getMascote(),
+                                    profile: selectedProfileManager.getProfile(),
+                                    allFaceUp: $allFaceUp,
+                                    isActive: $isActive,
+                                    hasSidebar: $hasSidebar,
+                                    fractions: recordManager.getSatisfactionRates(jogo: game, student: selectedProfileManager.getProfile()))
+                                    .environmentObject(selectedProfileManager)
+                                    .padding(.vertical)
                         }
-                        .isDetailLink(false)
-                        .disabled(!game.isAvailable())
-                        .if(game.isAvailable()) { view in
-                            view.simultaneousGesture(
-                                TapGesture().onEnded {
-                                    hasSidebar = false
-                                    recordManager.currentGame = .quebraCabeca
-                                }
-                            )
-                        }
-                        .padding(.bottom,32)
-                        .padding(.leading)
                     }
+                }.frame(height: geo.size.height * 0.8)
+                
+                Spacer()
+                
+                Button(action: {allFaceUp.toggle()})
+                {
+                    HStack {
+                        Image(systemName: allFaceUp ? "book" : "gamecontroller")
+                        Text(allFaceUp ? "registros e informações" : "jogos educativos")
+                    }
+                    .font(.system(size: 21, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .background(
+                        Capsule()
+                            .frame(minWidth: 368, idealWidth: 368, maxWidth: 368, minHeight: geo.size.height * 0.1, idealHeight: geo.size.height * 0.1)
+                            .foregroundColor(selectedProfileManager.getProfileColor())
+                    )
                 }
+                
+                Spacer()
             }
+        }
+        .fullScreenCover(isPresented: $recordManager.detailSheetShowing, onDismiss: {}) {
+            DesempenhoDetalheView()
+                .environmentObject(selectedProfileManager)
         }
     }
 }

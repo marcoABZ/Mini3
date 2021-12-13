@@ -11,50 +11,135 @@ struct GameCard: View {
     
     let game: Game
     let mascote: Mascotes
+    let profile: ProfileModel
+    
+    @Binding var allFaceUp: Bool
+    @State var isFaceUp: Bool = true
+    
+    @EnvironmentObject var recordManager: RecordManager
+    @EnvironmentObject var selectedProfileManager: SelectedProfileManager
+    @Binding var isActive: Bool
+    @Binding var hasSidebar: Bool
+    
+    @State var fractions: [Float]
+    let width = 254
+    
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            game.getCoverImage(mascote: mascote)
-                    .resizable()
-                    .cornerRadius(16)
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.vertical, 10)
-                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 4)
-                    .blocked(!game.isAvailable())
-            
-            Text(game.rawValue)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
-            Text(game.getDescription())
-                .font(.system(size: 14, weight: .regular, design: .rounded))
+        VStack {
+            backFace
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation { isFaceUp.toggle() }
+                }
+        }
+        .cardify(isFaceUp: isFaceUp, background: AnyView(frontFace))
+        .onChange(of: allFaceUp, perform: { _ in
+            withAnimation { isFaceUp = allFaceUp }
+        })
+        .padding(.leading)
+    }
+    
+    var frontFace: some View {
+        //TODO: Generalizar para mais jogos - provavelmente vai precisar de um @ViewBuilder
+        NavigationLink(
+            destination:
+                QuebraCabecaStartView(
+                    puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                    rootIsActive: $isActive)
+                .environmentObject(selectedProfileManager),
+            isActive: $isActive
+        ) {
+            ZStack(alignment: .bottomTrailing) {
+                Image(game.getCoverImage(mascote: mascote))
+                        .resizable()
+                        .cornerRadius(16)
+                        .aspectRatio(contentMode: .fit)
+                        .blocked(!game.isAvailable())
+                Button(action: {
+                    withAnimation() {
+                        isFaceUp.toggle()
+                    }
+                })
+                {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.white)
+                        .font(.system(size: 32, weight: .semibold, design: .default))
+                        .padding()
+                }
+            }
+        }
+        .isDetailLink(false)
+        .disabled(!game.isAvailable())
+        .if(game.isAvailable()) { view in
+            view.simultaneousGesture(
+                TapGesture().onEnded {
+    //                        hasSidebar = false
+                    recordManager.currentGame = .quebraCabeca
+                }
+            )
         }
     }
     
-}
-
-
-struct Blocked: ViewModifier {
-    var condition: Bool
-    func body(content: Content) -> some View {
-        if condition {
-            content
-                .overlay {
-                    Color.black
-                        .cornerRadius(16)
-                        .opacity(0.5)
-                        .padding(.vertical, 10)
-                    Image(systemName: "lock.slash.fill")
-                        .foregroundColor(.white)
-                        .font(.system(size: 64))
+    var backFace: some View {
+        VStack {
+            Image(Mascotes.getCardCoverImages(animal: mascote, jogo: game))
+                .resizable()
+                .cornerRadius(16, corners: [.topLeft, .topRight])
+                .aspectRatio(contentMode: .fit)
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Jogo \(game.rawValue)")
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .padding(.top)
+                    Text(recordManager.getLastRecordDate(game: game, student: profile) ?? "Nenhum registro")
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
+                    Text(game.getDescription())
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
                 }
+                Spacer()
+            }
+            .padding(.horizontal, 22)
+            
+            Spacer()
+            
+            VStack {
+                HStack(spacing: 0) {
+                    ForEach(Satisfaction.allCases, id: \.self) { satisfaction in
+                        Rectangle()
+                            .fill(Color("\(satisfaction)Color"))
+                            .frame(width: Double(fractions[Satisfaction.allCases.firstIndex(of: satisfaction)!]) * Double(width), height: 10)
+                    }
+                }
+                .cornerRadius(10)
+                
+                HStack(spacing: 12) {
+                    ForEach(Satisfaction.allCases, id: \.self) { satisfaction in
+                        SatisfactionIndicator(satisfaction: satisfaction,
+                                              percentage: fractions[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100,
+                                              color: profile.selectedColor)
+                    }
+                }
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                recordManager.viewRecordDetail(game: game)
+            }) {
+                Text("Acessar anotações")
+                    .foregroundColor(recordManager.checkRecordsSaved(game: game, student: profile) ? .gray : .white )
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .frame(width: 246, height: 36)
+                    .background(recordManager.checkRecordsSaved(game: game, student: profile) ? Color("neutralColor") : profile.selectedColor)
+                    .cornerRadius(17)
+            }
+            .disabled(recordManager.checkRecordsSaved(game: game, student: profile))
+            
+            Spacer()
         }
-        else {
-            content
-        }
+        .blocked(!game.isAvailable())
     }
 }
 
-extension View {
-    func blocked(_ condition: Bool) -> some View {
-        modifier(Blocked(condition: condition))
-    }
-}
