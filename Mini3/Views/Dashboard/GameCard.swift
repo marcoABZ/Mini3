@@ -92,6 +92,7 @@ struct GameCard: View {
                 VStack(alignment: .leading) {
                     Text("Jogo \(game.rawValue)")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .padding(.top)
                     Text(recordManager.getLastRecordDate(game: game, student: profile) ?? "Nenhum registro")
                         .font(.system(size: 14, weight: .regular, design: .rounded))
                     Text(game.getDescription())
