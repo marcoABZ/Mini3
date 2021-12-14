@@ -19,13 +19,11 @@ class PuzzlePieceManager<Element>: ObservableObject, Dragable {
     @Published var isCorrect: Bool = false
     var shouldMoveBack: Bool
     var shouldPlaySound: Bool
-//    var sound: AVAudioPlayer?
     
     init(content: Element, index: Int, shouldMoveBack: Bool = false, shouldPlaySound: Bool = false) {
         self.content = content
         self.index = index
         self.shouldMoveBack = shouldMoveBack
-//        self.sound = createSoundPlayer(sound: "ptu", type: "wav")
         self.shouldPlaySound = shouldPlaySound
     }
     
@@ -35,6 +33,31 @@ class PuzzlePieceManager<Element>: ObservableObject, Dragable {
     
     func setStartPosition(at position: CGRect) {
         currentPosition = position
+    }
+    
+    func drop() {
+        guard let tp = targetPosition,
+              let op = currentPosition
+        else { return }
+        
+        let dropPos = CGPoint(x: op.midX + currentDisplacement.width + acumulatedDisplacement.width, y: op.midY + currentDisplacement.height + acumulatedDisplacement.height)
+        
+        if tp.contains(dropPos) {
+            isCorrect = true
+            currentDisplacement = CGSize(width: tp.minX - op.minX, height: tp.minY - op.minY)
+            acumulatedDisplacement = .zero
+            if shouldPlaySound {
+                SoundManager.instance.playMusic(sound: .puzzleMount)
+            }
+        } else {
+            if shouldMoveBack {
+                acumulatedDisplacement = .zero
+            } else {
+                acumulatedDisplacement = CGSize(width: acumulatedDisplacement.width + currentDisplacement.width, height: acumulatedDisplacement.height + currentDisplacement.height)
+            }
+            
+            currentDisplacement = .zero
+        }
     }
     
 }

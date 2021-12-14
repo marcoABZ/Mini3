@@ -49,21 +49,12 @@ struct ProfileView: View {
             .frame(maxHeight: 640)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    Image(systemName: "arrow.left.circle")
-                        .font(.system(size: 28).bold())
-                    Text("voltar")
-                        .padding(.horizontal)
-                        .font(.system(size: 24).bold())
-                }
-                .foregroundColor(editingProfile.selectedColor)
-                .frame(width: 200, height: 55)
-                .background(.white)
-                .cornerRadius(30)
-                .onTapGesture {
-                    self.presentation.wrappedValue.dismiss()
-                }
+            ToolbarItem (placement: .navigation)  {
+               Image(systemName: "arrow.backward.circle")
+               .foregroundColor(.white)
+               .onTapGesture {
+                   self.presentation.wrappedValue.dismiss()
+               }
             }
         }
         .navigationBarBackButtonHidden(true)

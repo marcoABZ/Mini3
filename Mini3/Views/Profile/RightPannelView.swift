@@ -22,7 +22,11 @@ struct RightPannelView: View {
         let im: Image? = image ?? editingProfile.image
         
         VStack {
+            
+            Spacer()
+            
             VStack(alignment: .leading) {
+                
                 Text("Nome")
                 TextField("Nome", text: $editingProfile.name)
                     .font(.system(size: 21, weight: .regular, design: .rounded))
@@ -37,6 +41,8 @@ struct RightPannelView: View {
                 
                 DatePicker("Data de Nascimento", selection: $editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
                     .padding(.top, 24)
+            
+//                Spacer()
                 
                 Text("Escolher Mascote")
                     .padding(.top, 24)
@@ -61,12 +67,17 @@ struct RightPannelView: View {
                     }
                 }
                 
-                Toggle("Modo escuro", isOn: $editingProfile.darkModeEnabled)
-                    .padding(.top, 24)
-                    .toggleStyle(SwitchToggleStyle(tint: editingProfile.selectedColor))
+//                Spacer()
+                
+//                Toggle("Modo escuro", isOn: $editingProfile.darkModeEnabled)
+//                    .padding(.top, 24)
+//                    .toggleStyle(SwitchToggleStyle(tint: editingProfile.selectedColor))
+//                    .opacity(0)
                 
             }
             .font(.system(size: 24, weight: .bold, design: .rounded))
+            
+            Spacer()
             
             Button(action: {
                 profileManager.save(profile: editingProfile, withImage: im!)
@@ -82,6 +93,8 @@ struct RightPannelView: View {
             .background(editingProfile.selectedColor)
             .cornerRadius(30)
             .padding(.top,42)
+            
+            Spacer()
         }
         .padding(.trailing, 80)
         .padding(.leading, 36)

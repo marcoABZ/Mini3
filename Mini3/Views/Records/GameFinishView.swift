@@ -61,6 +61,7 @@ struct GameFinishView: View {
             recordManager.recordViewMode = .menu
             recordManager.savingProfile = selectedProfilemanager.getProfile()
         }
+        .onDisappear { SoundManager.instance.playMusic(sound: .theme) }
     }
     
     

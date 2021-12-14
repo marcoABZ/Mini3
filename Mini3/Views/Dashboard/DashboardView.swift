@@ -45,7 +45,7 @@ struct SideBarView: View {
                 Spacer()
             }
         }
-        .frame(width: dashboardManager.isSidebarOpen ? 300 : 60)
+        .frame(width: dashboardManager.isSidebarOpen ? 300 : 70)
         .background(dashboardManager.isSidebarOpen ? Color("neutralColor") : selectedProfileManager.getProfileColor())
         .overlay(alignment: .topLeading) {
             Button(
@@ -57,7 +57,7 @@ struct SideBarView: View {
                     { Image(systemName: "sidebar.leading")
                         .foregroundColor(dashboardManager.isSidebarOpen ? .primary : .white)
                         .padding()
-                        .font(.system(size: 24))
+                        .font(.system(size: 32))
                     }
             )
         }
@@ -74,6 +74,7 @@ struct SideBarView: View {
                         Spacer()
                     }
                     .listRowBackground(selectedProfileManager.getProfile() == profile && dashboardManager.profileListShowing ? selectedProfileManager.getProfileColor() : Color("neutralColor"))
+                    .contentShape(Rectangle())
                     .gesture(
                         TapGesture()
                             .onEnded {
@@ -85,7 +86,7 @@ struct SideBarView: View {
                             }
                     )
                 }
-            }
+            }.onDelete(perform: delete)
             
             NavigationLink(destination:
                             ProfileView()
@@ -100,6 +101,10 @@ struct SideBarView: View {
             )
         }
         .listStyle(PlainListStyle())
+    }
+    
+    func delete(at offsets: IndexSet) {
+        profileManager.profiles.remove(atOffsets: offsets)
     }
 }
 
@@ -133,7 +138,7 @@ struct MainView: View {
                     
                 }
                 .padding(.top)
-                .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
+                .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 50)
                 .onAppear() {
                     hasSidebar = true
                 }

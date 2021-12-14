@@ -63,7 +63,9 @@ struct QuebraCabecaGameView: View {
         .onChange(of: puzzleManager.isOver) {_ in
             presenting = true
             presentationMode.wrappedValue.dismiss()
-            SoundManager.instance.playMusic(sound: .gameFinish)
+            if puzzleManager.settings.som {
+                SoundManager.instance.playMusic(sound: .gameFinish)
+            }
         }
         .fullScreenCover(isPresented: $presenting) {
             GameFinishView(presented: $presenting,
@@ -76,7 +78,12 @@ struct QuebraCabecaGameView: View {
                 .background(BackgroundBlurView())
                 .ignoresSafeArea()
         }
-        .onDisappear { puzzleManager.reset() }
+        .onDisappear {
+            puzzleManager.reset()
+        }
+        .onAppear {
+            SoundManager.instance.stopMusic(sound: .theme)
+        }
     }
 
     //MARK: Constantes
