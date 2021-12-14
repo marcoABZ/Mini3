@@ -45,7 +45,7 @@ struct SideBarView: View {
                 Spacer()
             }
         }
-        .frame(width: dashboardManager.isSidebarOpen ? 300 : 60)
+        .frame(width: dashboardManager.isSidebarOpen ? 300 : 70)
         .background(dashboardManager.isSidebarOpen ? Color("neutralColor") : selectedProfileManager.getProfileColor())
         .overlay(alignment: .topLeading) {
             Button(
@@ -57,7 +57,7 @@ struct SideBarView: View {
                     { Image(systemName: "sidebar.leading")
                         .foregroundColor(dashboardManager.isSidebarOpen ? .primary : .white)
                         .padding()
-                        .font(.system(size: 24))
+                        .font(.system(size: 32))
                     }
             )
         }
