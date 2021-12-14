@@ -38,10 +38,10 @@ class SoundManager {
         }
     }
     
-//    func stopMusic(sound: SoundTypes) {
-//        let index = SoundTypes.allCases.firstIndex(of: sound)!
-//        audioPlayer[index].stop()
-//    }
+    func stopMusic(sound: SoundTypes) {
+        let index = SoundTypes.allCases.firstIndex(of: sound)!
+        audioPlayer[index].stop()
+    }
     
     func playMusic(sound: SoundTypes) {
         let index = SoundTypes.allCases.firstIndex(of: sound)!
@@ -54,6 +54,5 @@ class SoundManager {
         
         audio.prepareToPlay()
         audio.play()
-    
     }
 }

@@ -76,7 +76,12 @@ struct QuebraCabecaGameView: View {
                 .background(BackgroundBlurView())
                 .ignoresSafeArea()
         }
-        .onDisappear { puzzleManager.reset() }
+        .onDisappear {
+            puzzleManager.reset()
+        }
+        .onAppear {
+            SoundManager.instance.stopMusic(sound: .theme)
+        }
     }
 
     //MARK: Constantes
