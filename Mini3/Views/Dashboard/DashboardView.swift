@@ -133,7 +133,7 @@ struct MainView: View {
                     
                 }
                 .padding(.top)
-                .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 80)
+                .padding(.leading, dashboardManager.isSidebarOpen ? 0 : 50)
                 .onAppear() {
                     hasSidebar = true
                 }
