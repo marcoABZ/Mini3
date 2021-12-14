@@ -74,6 +74,7 @@ struct SideBarView: View {
                         Spacer()
                     }
                     .listRowBackground(selectedProfileManager.getProfile() == profile && dashboardManager.profileListShowing ? selectedProfileManager.getProfileColor() : Color("neutralColor"))
+                    .contentShape(Rectangle())
                     .gesture(
                         TapGesture()
                             .onEnded {
