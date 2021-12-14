@@ -85,7 +85,7 @@ struct SideBarView: View {
                             }
                     )
                 }
-            }
+            }.onDelete(perform: delete)
             
             NavigationLink(destination:
                             ProfileView()
@@ -100,6 +100,10 @@ struct SideBarView: View {
             )
         }
         .listStyle(PlainListStyle())
+    }
+    
+    func delete(at offsets: IndexSet) {
+        profileManager.profiles.remove(atOffsets: offsets)
     }
 }
 
