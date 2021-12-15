@@ -15,7 +15,7 @@ struct BackgroundColorPickerView: View {
     var body: some View {
         HStack(spacing: 24) {
             Button(action: {
-                editingProfile.selectedColor = Color("noColor")
+                editingProfile.selectedColor = UIColor(named: "noColor")!
             }) {
                 Rectangle()
                     .fill(.clear)

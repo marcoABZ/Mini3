@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Profile" representedClassName=".Profile" syncable="YES" codeGenerationType="class">
+        <attribute name="birthdate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="color" attributeType="String"/>
+        <attribute name="darkModeEnabled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" attributeType="Binary"/>
+        <attribute name="mascote" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Profile" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Entity" positionX="-54" positionY="45" width="128" height="29"/>
+    </elements>
+</model>

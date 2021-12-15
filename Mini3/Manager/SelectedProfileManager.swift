@@ -30,7 +30,7 @@ class SelectedProfileManager: ObservableObject, CustomStringConvertible {
     }
     
     func getImage() -> Image {
-        selectedProfile.image
+        Image(uiImage: selectedProfile.image)
     }
     
     func getName() -> String {
@@ -38,7 +38,7 @@ class SelectedProfileManager: ObservableObject, CustomStringConvertible {
     }
     
     func getProfileColor() -> Color {
-        selectedProfile.selectedColor
+        Color(selectedProfile.selectedColor)
     }
     
     func getMascote() -> Mascotes {

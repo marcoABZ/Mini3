@@ -1,0 +1,101 @@
+//
+//  CoreDataManager.swift
+//  Mini3
+//
+//  Created by Marco Zulian on 14/12/21.
+//
+
+import Foundation
+import CoreData
+import UIKit
+
+class CoreDataManager {
+    
+    static var shared = CoreDataManager()
+    
+    let persistentContainter: NSPersistentContainer
+    
+    private init() {
+        persistentContainter = NSPersistentContainer(name: "Mini3DataModel")
+        persistentContainter.loadPersistentStores { (description, error) in
+            if let error = error {
+                fatalError("Core Data Store failed \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    
+    func deleteProfile(profile: ProfileModel) {
+        
+        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+        
+        do {
+            let profiles = try persistentContainter.viewContext.fetch(fetchRequest)
+            let deletingProfile = profiles.first { $0.id == profile.id }!
+            persistentContainter.viewContext.delete(deletingProfile)
+            try persistentContainter.viewContext.save()
+        } catch {
+            persistentContainter.viewContext.rollback()
+            print("Failed to save context \(error)")
+        }
+    }
+    
+    func getAllProfiles() -> [ProfileModel] {
+        
+        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+        
+        do {
+           let profiles = try persistentContainter.viewContext.fetch(fetchRequest)
+            
+            return profiles.map {
+                ProfileModel(name: $0.name!, birthdate: $0.birthdate!, color: $0.selectedColor as! UIColor, image: UIImage(data: $0.image!)!.resizeImageTo(size: CGSize(width: 110, height: 110))!, mascote: Mascotes(rawValue: $0.mascote)!, id: $0.id!, darkModeEnabled: $0.darkModeEnabled)
+            }
+            
+        } catch {
+            return []
+        }
+        
+    }
+    
+    func save(profile: ProfileModel) {
+        
+        let savingProfile = Profile(context: persistentContainter.viewContext)
+        
+        savingProfile.name = profile.name
+        savingProfile.birthdate = profile.birthdate
+        savingProfile.id = profile.id
+        savingProfile.darkModeEnabled = profile.darkModeEnabled
+        savingProfile.mascote = profile.mascote.rawValue
+        savingProfile.image = profile.image.jpegData(compressionQuality: 1.0)
+        savingProfile.selectedColor = profile.selectedColor
+        
+        do {
+            try persistentContainter.viewContext.save()
+        } catch {
+            print("Failed to save profile \(error)")
+        }
+        
+    }
+    
+    func update(profile: ProfileModel) {
+        
+        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+        
+        do {
+            let profiles = try persistentContainter.viewContext.fetch(fetchRequest)
+            let updatingProfile = profiles.first { $0.id == profile.id }!
+            
+            updatingProfile.name = profile.name
+            updatingProfile.birthdate = profile.birthdate
+            updatingProfile.id = profile.id
+            updatingProfile.darkModeEnabled = profile.darkModeEnabled
+            updatingProfile.mascote = profile.mascote.rawValue
+            updatingProfile.image = profile.image.jpegData(compressionQuality: 1.0)
+            updatingProfile.selectedColor = profile.selectedColor
+            
+            try persistentContainter.viewContext.save()
+        } catch {
+            persistentContainter.viewContext.rollback()
+        }
+    }
+}

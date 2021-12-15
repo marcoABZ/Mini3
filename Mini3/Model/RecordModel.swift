@@ -19,7 +19,7 @@ struct RecordModel: Hashable {
     var teacher: Teacher
     var game: Game
     var dateSaved: Date
-    var student: ProfileModel
+    var studentID: ProfileModel
     
     var id = UUID()
     
@@ -29,7 +29,7 @@ struct RecordModel: Hashable {
         self.teacher = Teacher(nome: "")
         self.game = .quebraCabeca
         self.dateSaved = Date()
-        self.student = ProfileModel(name: "", birthdate: Date(), color: .clear, image: "")
+        self.studentID = ProfileModel(name: "", birthdate: Date(), color: .clear, image: "")
     }
     
     func hash(into hasher: inout Hasher) {

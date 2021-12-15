@@ -24,7 +24,7 @@ struct ProfileView: View {
     
     var body: some View {
         ZStack {
-            editingProfile.selectedColor
+            Color(editingProfile.selectedColor)
                 .ignoresSafeArea(.all)
             HStack {
                 
@@ -37,7 +37,7 @@ struct ProfileView: View {
                         path.addLine(to: CGPoint(x: 0, y: 560))
                         
                     }
-                    .stroke(editingProfile.selectedColor, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                    .stroke(Color(editingProfile.selectedColor), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                     .frame(width: 3, height: 560)
                     Spacer()
                 }

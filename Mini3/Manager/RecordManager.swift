@@ -27,23 +27,14 @@ enum GameFinishMode {
 
 class RecordManager: ObservableObject {
     @Published var registeredTeachers: [Teacher]
-    
     @Published var addingTeacher: String
-    
     @Published var editingRecord: RecordModel
-    
     @Published var recordViewMode: GameFinishMode
-    
     @Published var selectedTeacher: Teacher
-    
     @Published var registeredRecords: [RecordModel] = []
-    
     @Published var currentGame: Game = .quebraCabeca
-    
     @Published var selectedRecordId: UUID
-    
     @Published var detailSheetShowing: Bool
-    
     @Published var savingProfile: ProfileModel
     
     init() {
@@ -77,9 +68,7 @@ class RecordManager: ObservableObject {
             if recordViewMode == .teacherEdit && registeredTeachers.count > 0 {
                 recordViewMode = .input
             } else {
-                
                 recordViewMode = .menu
-                
             }
         }
     }
@@ -105,7 +94,7 @@ class RecordManager: ObservableObject {
         editingRecord.teacher = selectedTeacher
         editingRecord.dateSaved = Date()
         editingRecord.game = currentGame
-        editingRecord.student = student
+        editingRecord.studentID = student
         registeredRecords.append(editingRecord)
         editingRecord = RecordModel()
         print(registeredRecords)
@@ -116,10 +105,10 @@ class RecordManager: ObservableObject {
     }
     
     func getSatisfactionRates(jogo: Game, student: ProfileModel) -> [Float] {
-        if registeredRecords.filter({$0.game == jogo && $0.student == student}).isEmpty {
+        if registeredRecords.filter({$0.game == jogo && $0.studentID == student}).isEmpty {
             return [0,0,0]
         } else {
-            let gameRecords = registeredRecords.filter { $0.game == jogo && $0.student == student }
+            let gameRecords = registeredRecords.filter { $0.game == jogo && $0.studentID == student }
             var satisfiedCount = 0
             var notSatisfiedCount = 0
             var overSatisfiedCount = 0
@@ -142,12 +131,12 @@ class RecordManager: ObservableObject {
     }
     
     func checkRecordsSaved(game: Game, student: ProfileModel) -> Bool {
-        let check = registeredRecords.filter { $0.game == game && $0.student == student }
+        let check = registeredRecords.filter { $0.game == game && $0.studentID == student }
         return check.count == 0
     }
     
     func getLastRecordTeacher(game: Game, student: ProfileModel) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student }
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.studentID == student }
         
         if gameRecords.isEmpty {
             return nil
@@ -166,7 +155,7 @@ class RecordManager: ObservableObject {
     }
     
     func getLastRecordDate(game: Game, student: ProfileModel) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student}
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.studentID == student}
         
         if gameRecords.isEmpty {
             return nil
@@ -184,7 +173,7 @@ class RecordManager: ObservableObject {
     }
     
     func getRecordByGame(game: Game, student: ProfileModel) -> [RecordModel] {
-        let result = registeredRecords.filter { $0.game == game && $0.student == student }
+        let result = registeredRecords.filter { $0.game == game && $0.studentID == student }
         return result
     }
     

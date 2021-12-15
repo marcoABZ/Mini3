@@ -10,6 +10,7 @@ import SwiftUI
 struct SideBarView: View {
     @EnvironmentObject var dashboardManager: DashboardManager
     @EnvironmentObject var profileManager: ProfileManager
+    @EnvironmentObject var recordManager: RecordManager
     @StateObject var selectedProfileManager: SelectedProfileManager
     
     var body: some View {
@@ -104,7 +105,10 @@ struct SideBarView: View {
     }
     
     func delete(at offsets: IndexSet) {
-        profileManager.profiles.remove(atOffsets: offsets)
+        let profile = offsets.map { self.profileManager.profiles[$0] }.first!
+        
+        recordManager.registeredRecords.removeAll { $0.studentID == profile }
+        profileManager.delete(profile: profile)
     }
 }
 

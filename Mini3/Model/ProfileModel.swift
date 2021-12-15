@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Mascotes: CaseIterable {
+@objc enum Mascotes: Int16, CaseIterable {
     case coelho
     case chiba
     case gato
@@ -39,19 +39,29 @@ enum Mascotes: CaseIterable {
 struct ProfileModel: Equatable, Hashable, Identifiable {
     var name: String
     var birthdate: Date
-    var selectedColor: Color
+    var selectedColor: UIColor
     var darkModeEnabled: Bool
     var mascote: Mascotes
     var id = UUID()
-    var image: Image
+    var image: UIImage
     
-    init(name: String, birthdate: Date, color: Color, image: String, darkModeEnabled: Bool = false) {
+    init(name: String, birthdate: Date, color: UIColor, image: String, darkModeEnabled: Bool = false) {
         self.name = name
         self.birthdate = birthdate
         self.selectedColor = color
-        self.image = Image(image)
+        self.image = UIImage(named: image) ?? UIImage(named: "placeholder")!
         self.darkModeEnabled = darkModeEnabled
         self.mascote = .coelho
+    }
+    
+    init(name: String, birthdate: Date, color: UIColor, image: UIImage, mascote: Mascotes, id: UUID, darkModeEnabled: Bool = false) {
+        self.name = name
+        self.birthdate = birthdate
+        self.selectedColor = color
+        self.image = image
+        self.darkModeEnabled = darkModeEnabled
+        self.mascote = mascote
+        self.id = id
     }
     
     func hash(into hasher: inout Hasher) {

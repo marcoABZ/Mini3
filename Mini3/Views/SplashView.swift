@@ -47,7 +47,7 @@ struct ProfileListView: View {
                                     DashboardView(selectedProfileManager: manager)
                     ) {
                         VStack {
-                            prof.image
+                            Image(uiImage: prof.image)
                                 .frame(width: 165, height: 165)
                                 .cornerRadius(16)
                                 .overlay(
