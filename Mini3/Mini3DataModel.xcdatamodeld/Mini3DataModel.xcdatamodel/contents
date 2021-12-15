@@ -9,7 +9,11 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="selectedColor" attributeType="Transformable"/>
     </entity>
+    <entity name="TeacherModel" representedClassName="TeacherModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Profile" positionX="-45" positionY="0" width="128" height="134"/>
+        <element name="TeacherModel" positionX="-45" positionY="54" width="128" height="44"/>
     </elements>
 </model>

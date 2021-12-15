@@ -10,10 +10,6 @@ import SwiftUI
 struct Teacher: Hashable {
     let nome: String
     
-    init(nome: String) {
-        self.nome = nome
-    }
-    
     func hash(into hasher: inout Hasher) {
         hasher.combine(nome)
     }
@@ -37,12 +33,12 @@ class RecordManager: ObservableObject {
     @Published var detailSheetShowing: Bool
     @Published var savingProfile: ProfileModel
     
-    init() {
-        self.registeredTeachers = []
+    init(registeredTeachers: [Teacher] = CoreDataManager.shared.getAllTeachers()) {
+        self.registeredTeachers = registeredTeachers
         self.addingTeacher = ""
         self.editingRecord = RecordModel()
         self.recordViewMode = .menu
-        self.selectedTeacher = Teacher(nome: "")
+        self.selectedTeacher = registeredTeachers.first ?? Teacher(nome: "")
         
         self.selectedRecordId = UUID()
         self.detailSheetShowing = false
@@ -76,6 +72,7 @@ class RecordManager: ObservableObject {
     func registerTeacher() {
         selectedTeacher = Teacher(nome: addingTeacher)
         registeredTeachers.append(Teacher(nome: addingTeacher))
+        CoreDataManager.shared.save(teacher: Teacher(nome: addingTeacher))
         updateViewMode()
         addingTeacher = ""
     }
@@ -88,6 +85,7 @@ class RecordManager: ObservableObject {
     
     func eraseTeacher(teacher: Teacher) {
         registeredTeachers = registeredTeachers.filter { $0 != teacher }
+        CoreDataManager.shared.deleteTeacher(teacher: teacher)
     }
     
     func saveRecord(student: ProfileModel) {

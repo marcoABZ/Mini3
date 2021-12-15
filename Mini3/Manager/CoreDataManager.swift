@@ -40,6 +40,22 @@ class CoreDataManager {
         }
     }
     
+    func deleteTeacher(teacher: Teacher) {
+        
+        let fetchRequest: NSFetchRequest<TeacherModel> = TeacherModel.fetchRequest()
+        
+        do {
+            let teachers = try persistentContainter.viewContext.fetch(fetchRequest)
+            let deletingProfile = teachers.first { $0.name == teacher.nome }!
+            persistentContainter.viewContext.delete(deletingProfile)
+            try persistentContainter.viewContext.save()
+        } catch {
+            persistentContainter.viewContext.rollback()
+            print("Failed to save context \(error)")
+        }
+        
+    }
+    
     func getAllProfiles() -> [ProfileModel] {
         
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
@@ -50,6 +66,21 @@ class CoreDataManager {
             return profiles.map {
                 ProfileModel(name: $0.name!, birthdate: $0.birthdate!, color: $0.selectedColor as! UIColor, image: UIImage(data: $0.image!)!.resizeImageTo(size: CGSize(width: 110, height: 110))!, mascote: Mascotes(rawValue: $0.mascote)!, id: $0.id!, darkModeEnabled: $0.darkModeEnabled)
             }
+            
+        } catch {
+            return []
+        }
+        
+    }
+    
+    func getAllTeachers() -> [Teacher] {
+        
+        let fetchRequest: NSFetchRequest<TeacherModel> = TeacherModel.fetchRequest()
+        
+        do {
+           let teachers = try persistentContainter.viewContext.fetch(fetchRequest)
+            
+            return teachers.map { Teacher(nome: $0.name!) }
             
         } catch {
             return []
@@ -75,6 +106,19 @@ class CoreDataManager {
             print("Failed to save profile \(error)")
         }
         
+    }
+    
+    func save(teacher: Teacher) {
+        
+        let savingTeacher = TeacherModel(context: persistentContainter.viewContext)
+        
+        savingTeacher.name = teacher.nome
+        
+        do {
+            try persistentContainter.viewContext.save()
+        } catch {
+            print("Failed to save teacher \(error)")
+        }
     }
     
     func update(profile: ProfileModel) {
