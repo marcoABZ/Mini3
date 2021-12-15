@@ -57,7 +57,7 @@ struct RegisterView: View {
             HStack(alignment: .top, spacing: 22) {
                 TextEditor(text: $recordManager.editingRecord.annotation)
                     .padding()
-                    .placeholder(when: recordManager.addingTeacher.isEmpty) {
+                    .placeholder(when: recordManager.editingRecord.annotation.isEmpty) {
                         Text("Descreva com mais detalhes sobre a experiência.")
                             .foregroundColor(.white)
                             .padding(.leading,20)
