@@ -20,7 +20,7 @@ struct CaminhoSettingsView: View {
     
     var body: some View {
         ZStack{
-            editingProfile.selectedColor
+            Color(editingProfile.selectedColor)
             VStack{
                 Text("Caminho")
                     .padding()
@@ -35,7 +35,7 @@ struct CaminhoSettingsView: View {
                     ZStack{
                     RoundedRectangle(cornerRadius: 24)
                         .frame(width: 440, height: 320, alignment: .leading)
-                        .foregroundColor(editingProfile.selectedColor)
+                        .foregroundColor(Color(editingProfile.selectedColor))
                         .opacity(0.3)
 
                         Button(action: {
@@ -45,7 +45,7 @@ struct CaminhoSettingsView: View {
                                 .foregroundColor(.white)
                         }
                         .frame(width: 80, height: 80)
-                        .background(editingProfile.selectedColor)
+                        .background(Color(editingProfile.selectedColor))
                         .cornerRadius(40)
                         .padding(.leading, 380)
                         .padding(.top, 256)
@@ -62,8 +62,8 @@ struct CaminhoSettingsView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 456, height: 48)
                     .onAppear {
-                        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(editingProfile.selectedColor)
-                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(editingProfile.selectedColor)], for: .normal)
+                        UISegmentedControl.appearance().selectedSegmentTintColor = editingProfile.selectedColor
+                    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: editingProfile.selectedColor], for: .normal)
                         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
                     }
                     
@@ -76,7 +76,7 @@ struct CaminhoSettingsView: View {
                             .foregroundColor(.white)
                     }
                     .frame(width: 452, height: 44)
-                    .background(selectedLevel == .personalize ? editingProfile.selectedColor : Color(.systemGray6))
+                    .background(selectedLevel == .personalize ? Color(editingProfile.selectedColor) : Color(.systemGray6))
                     .cornerRadius(30)
 //                    .opacity(selectedLevel == .personalize ? 0.6 : 1)
                     
@@ -96,7 +96,7 @@ struct CaminhoSettingsView: View {
                     HStack (alignment: .top) {
                         Image(systemName: "scribble")
                             .font(.system(size: 21).bold())
-                            .foregroundColor(editingProfile.selectedColor)
+                            .foregroundColor(Color(editingProfile.selectedColor))
                         
                         VStack(alignment: .leading){
                         Text("Espessura do Caminho: \(sliderValue, specifier: "%.0f")")
@@ -122,7 +122,7 @@ struct CaminhoSettingsView: View {
                             .foregroundColor(.white)
                     }
                     .frame(width: 240, height: 55, alignment: .center)
-                    .background(editingProfile.selectedColor)
+                    .background(Color(editingProfile.selectedColor))
                     .cornerRadius(30)
                     .padding(.leading, 100.0)
 

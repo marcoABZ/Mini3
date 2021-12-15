@@ -88,6 +88,7 @@ class RecordManager: ObservableObject {
         registeredTeachers = registeredTeachers.filter { $0 != teacher }
         CoreDataManager.shared.deleteTeacher(teacher: teacher)
         let recordsToDelete = registeredRecords.filter { $0.teacher == teacher }
+        registeredRecords = registeredRecords.filter { $0.teacher != teacher }
         for record in recordsToDelete {
             CoreDataManager.shared.deleteRecord(record: record)
         }

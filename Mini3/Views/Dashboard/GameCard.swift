@@ -42,42 +42,44 @@ struct GameCard: View {
     
     var frontFace: some View {
         //TODO: Generalizar para mais jogos - provavelmente vai precisar de um @ViewBuilder
-        NavigationLink(
-            destination:
-                QuebraCabecaStartView(
-                    puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
-                    rootIsActive: $isActive)
-                .environmentObject(selectedProfileManager),
-            isActive: $isActive
-        ) {
-            ZStack(alignment: .bottomTrailing) {
-                Image(game.getCoverImage(mascote: mascote))
-                        .resizable()
-                        .cornerRadius(16)
-                        .aspectRatio(contentMode: .fit)
-                        .blocked(!game.isAvailable())
-                Button(action: {
-                    withAnimation() {
-                        isFaceUp.toggle()
-                    }
-                })
-                {
-                    Image(systemName: "info.circle")
-                        .foregroundColor(.white)
-                        .font(.system(size: 32, weight: .semibold, design: .default))
-                        .padding()
-                }
+        ZStack(alignment: .bottomTrailing) {
+            NavigationLink(
+                destination:
+                    QuebraCabecaStartView(
+                        puzzleManager: PuzzleManager(settings: PuzzleConfiguration()),
+                        rootIsActive: $isActive)
+                    .environmentObject(selectedProfileManager),
+                isActive: $isActive
+            ) {
+                    Image(game.getCoverImage(mascote: mascote))
+                            .resizable()
+                            .cornerRadius(16)
+                            .aspectRatio(contentMode: .fit)
+                            .blocked(!game.isAvailable())
             }
-        }
-        .isDetailLink(false)
-        .disabled(!game.isAvailable())
-        .if(game.isAvailable()) { view in
-            view.simultaneousGesture(
-                TapGesture().onEnded {
-    //                        hasSidebar = false
-                    recordManager.currentGame = .quebraCabeca
+            .isDetailLink(false)
+            .disabled(!game.isAvailable())
+            .if(game.isAvailable()) { view in
+                view.simultaneousGesture(
+                    TapGesture().onEnded {
+                        hasSidebar = false
+                        recordManager.currentGame = .quebraCabeca
+                    }
+                )
+            }
+            
+            Button(action: {
+                withAnimation() {
+                    isFaceUp.toggle()
                 }
-            )
+            })
+            {
+                Image(systemName: "info.circle")
+                    .foregroundColor(.white)
+                    .font(.system(size: 32, weight: .semibold, design: .default))
+                    .padding()
+            }
+
         }
     }
     

@@ -39,15 +39,16 @@ struct QuebraCabecaStartView: View {
             .navigationTitle("Quebra-cabeça")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-               .toolbar(content: {
-                  ToolbarItem (placement: .navigation)  {
-                     Image(systemName: "arrow.backward.circle")
-                     .foregroundColor(.white)
-                     .onTapGesture {
-                         self.presentation.wrappedValue.dismiss()
-                     }
-                  }
-               })
+            .toolbar(content: {
+                ToolbarItem (placement: .navigation)  {
+                    Image(systemName: "arrow.backward.circle")
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                            self.presentation.wrappedValue.dismiss()
+                        }
+                }
+            })
+               
     }
     
     //MARK: Constantes
