@@ -10,10 +10,6 @@ import SwiftUI
 struct Teacher: Hashable {
     let nome: String
     
-    init(nome: String) {
-        self.nome = nome
-    }
-    
     func hash(into hasher: inout Hasher) {
         hasher.combine(nome)
     }
@@ -27,31 +23,23 @@ enum GameFinishMode {
 
 class RecordManager: ObservableObject {
     @Published var registeredTeachers: [Teacher]
-    
     @Published var addingTeacher: String
-    
     @Published var editingRecord: RecordModel
-    
     @Published var recordViewMode: GameFinishMode
-    
     @Published var selectedTeacher: Teacher
-    
-    @Published var registeredRecords: [RecordModel] = []
-    
+    @Published var registeredRecords: [RecordModel]
     @Published var currentGame: Game = .quebraCabeca
-    
     @Published var selectedRecordId: UUID
-    
     @Published var detailSheetShowing: Bool
-    
     @Published var savingProfile: ProfileModel
     
-    init() {
-        self.registeredTeachers = []
+    init(registeredTeachers: [Teacher] = CoreDataManager.shared.getAllTeachers()) {
+        self.registeredTeachers = registeredTeachers
+        self.registeredRecords = CoreDataManager.shared.getAllRecords()
         self.addingTeacher = ""
         self.editingRecord = RecordModel()
         self.recordViewMode = .menu
-        self.selectedTeacher = Teacher(nome: "")
+        self.selectedTeacher = registeredTeachers.first ?? Teacher(nome: "")
         
         self.selectedRecordId = UUID()
         self.detailSheetShowing = false
@@ -77,9 +65,7 @@ class RecordManager: ObservableObject {
             if recordViewMode == .teacherEdit && registeredTeachers.count > 0 {
                 recordViewMode = .input
             } else {
-                
                 recordViewMode = .menu
-                
             }
         }
     }
@@ -87,6 +73,7 @@ class RecordManager: ObservableObject {
     func registerTeacher() {
         selectedTeacher = Teacher(nome: addingTeacher)
         registeredTeachers.append(Teacher(nome: addingTeacher))
+        CoreDataManager.shared.save(teacher: Teacher(nome: addingTeacher))
         updateViewMode()
         addingTeacher = ""
     }
@@ -99,27 +86,44 @@ class RecordManager: ObservableObject {
     
     func eraseTeacher(teacher: Teacher) {
         registeredTeachers = registeredTeachers.filter { $0 != teacher }
+        CoreDataManager.shared.deleteTeacher(teacher: teacher)
+        let recordsToDelete = registeredRecords.filter { $0.teacher == teacher }
+        for record in recordsToDelete {
+            CoreDataManager.shared.deleteRecord(record: record)
+        }
     }
     
     func saveRecord(student: ProfileModel) {
         editingRecord.teacher = selectedTeacher
         editingRecord.dateSaved = Date()
         editingRecord.game = currentGame
-        editingRecord.student = student
+        editingRecord.studentId = student.id
         registeredRecords.append(editingRecord)
+        CoreDataManager.shared.save(record: editingRecord)
         editingRecord = RecordModel()
-        print(registeredRecords)
+        
     }
     
     func eraseRecord(record: RecordModel) {
         registeredRecords.remove(at: registeredRecords.firstIndex(of: record)!)
+        CoreDataManager.shared.deleteRecord(record: record)
+    }
+    
+    func eraseAllRecords(forStudent student: ProfileModel) {
+        
+        registeredRecords.removeAll { $0.studentId == student.id }
+        
+        let recordsToDelete = registeredRecords.filter { $0.studentId == student.id }
+        for record in recordsToDelete {
+            CoreDataManager.shared.deleteRecord(record: record)
+        }
     }
     
     func getSatisfactionRates(jogo: Game, student: ProfileModel) -> [Float] {
-        if registeredRecords.filter({$0.game == jogo && $0.student == student}).isEmpty {
+        if registeredRecords.filter({$0.game == jogo && $0.studentId == student.id}).isEmpty {
             return [0,0,0]
         } else {
-            let gameRecords = registeredRecords.filter { $0.game == jogo && $0.student == student }
+            let gameRecords = registeredRecords.filter { $0.game == jogo && $0.studentId == student.id }
             var satisfiedCount = 0
             var notSatisfiedCount = 0
             var overSatisfiedCount = 0
@@ -142,12 +146,12 @@ class RecordManager: ObservableObject {
     }
     
     func checkRecordsSaved(game: Game, student: ProfileModel) -> Bool {
-        let check = registeredRecords.filter { $0.game == game && $0.student == student }
+        let check = registeredRecords.filter { $0.game == game && $0.studentId == student.id }
         return check.count == 0
     }
     
     func getLastRecordTeacher(game: Game, student: ProfileModel) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student }
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.studentId == student.id }
         
         if gameRecords.isEmpty {
             return nil
@@ -166,7 +170,7 @@ class RecordManager: ObservableObject {
     }
     
     func getLastRecordDate(game: Game, student: ProfileModel) -> String? {
-        let gameRecords = registeredRecords.filter { $0.game == game && $0.student == student}
+        let gameRecords = registeredRecords.filter { $0.game == game && $0.studentId == student.id }
         
         if gameRecords.isEmpty {
             return nil
@@ -184,7 +188,7 @@ class RecordManager: ObservableObject {
     }
     
     func getRecordByGame(game: Game, student: ProfileModel) -> [RecordModel] {
-        let result = registeredRecords.filter { $0.game == game && $0.student == student }
+        let result = registeredRecords.filter { $0.game == game && $0.studentId == student.id }
         return result
     }
     

@@ -56,7 +56,7 @@ struct AddTeacherView: View {
                 }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(selectedProfile.selectedColor)
+                        .foregroundColor(Color(selectedProfile.selectedColor))
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)
@@ -116,7 +116,7 @@ struct ManageTeacherView: View {
                             path.move(to: CGPoint(x: 17, y: 0))
                             path.addLine(to: CGPoint(x: 790, y: 0))
                         }
-                        .stroke(selectedProfile.selectedColor, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                        .stroke(Color(selectedProfile.selectedColor), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         .frame(height: 3)
                     }
                 }
@@ -125,7 +125,7 @@ struct ManageTeacherView: View {
             }
             .listStyle(PlainListStyle())
             .background(
-                selectedProfile.selectedColor.overlay(Color.black.opacity(0.2))
+                Color(selectedProfile.selectedColor).overlay(Color.black.opacity(0.2))
             )
             .cornerRadius(24)
             .frame(maxHeight: 250)
@@ -166,7 +166,7 @@ struct ManageTeacherView: View {
                 }) {
                     Text("Registrar professor")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(selectedProfile.selectedColor)
+                        .foregroundColor(Color(selectedProfile.selectedColor))
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)

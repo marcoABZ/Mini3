@@ -31,7 +31,7 @@ struct RegisterView: View {
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                             .padding(.horizontal)
                     }
-                    .foregroundColor(selectedProfile.selectedColor)
+                    .foregroundColor(Color(selectedProfile.selectedColor))
                     .frame(width: 260, height: 50)
                     .background(.white)
                     .cornerRadius(25)
@@ -69,7 +69,7 @@ struct RegisterView: View {
                 
                 Button(action: {}) {
                     Image(systemName: "mic.fill")
-                        .foregroundColor(selectedProfile.selectedColor)
+                        .foregroundColor(Color(selectedProfile.selectedColor))
                         .font(.system(size: 30))
                         .frame(width: 92, height: 92)
                         .background(.white)
@@ -98,7 +98,7 @@ struct RegisterView: View {
                 }) {
                     Text("Salvar informações")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(selectedProfile.selectedColor)
+                        .foregroundColor(Color(selectedProfile.selectedColor))
                         .frame(width: 220, height: 50)
                         .background(.white)
                         .cornerRadius(25)

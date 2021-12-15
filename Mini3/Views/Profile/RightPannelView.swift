@@ -19,7 +19,7 @@ struct RightPannelView: View {
     
     var body: some View {
         
-        let im: Image? = image ?? editingProfile.image
+        let im: Image? = image ?? Image(uiImage: editingProfile.image)
         
         VStack {
             
@@ -60,7 +60,7 @@ struct RightPannelView: View {
                                 .cornerRadius(16)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 19)
-                                        .stroke(editingProfile.selectedColor, lineWidth: editingProfile.mascote == Mascotes.allCases[i] ? 8 : 0)
+                                        .stroke(Color(editingProfile.selectedColor), lineWidth: editingProfile.mascote == Mascotes.allCases[i] ? 8 : 0)
                                         .frame(width: 100, height: 100)
                                 )
                         }
@@ -90,7 +90,7 @@ struct RightPannelView: View {
             }
             .disabled(editingProfile.name.isEmpty)
             .frame(width: 240, height: 55)
-            .background(editingProfile.selectedColor)
+            .background(Color(editingProfile.selectedColor))
             .cornerRadius(30)
             .padding(.top,42)
             

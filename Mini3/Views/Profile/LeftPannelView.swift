@@ -21,7 +21,7 @@ struct LeftPannelView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
     var body: some View {
-        let im: Image? = image ?? editingProfile.image
+        let im: Image? = image ?? Image(uiImage: editingProfile.image)
         
         VStack {
             Text("Foto de perfil")
@@ -46,7 +46,7 @@ struct LeftPannelView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(.white)
                             .frame(width: 64, height: 64)
-                            .background(editingProfile.selectedColor)
+                            .background(Color(editingProfile.selectedColor))
                             .cornerRadius(32)
                             .offset(x: 105, y: 105)
                         }
@@ -84,7 +84,7 @@ struct LeftPannelView: View {
         }
         
         image = Image(uiImage: inputImage.resizeImageTo(size: CGSize(width: 165, height: 165)) ?? inputImage)
-        editingProfile.image = image!
+        editingProfile.image = inputImage.resizeImageTo(size: CGSize(width: 165, height: 165)) ?? inputImage
     }
 }
 

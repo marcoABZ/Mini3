@@ -118,7 +118,7 @@ struct GameCard: View {
                     ForEach(Satisfaction.allCases, id: \.self) { satisfaction in
                         SatisfactionIndicator(satisfaction: satisfaction,
                                               percentage: fractions[Satisfaction.allCases.firstIndex(of: satisfaction)!] * 100,
-                                              color: profile.selectedColor)
+                                              color: selectedProfileManager.getProfileColor())
                     }
                 }
             }
@@ -132,7 +132,7 @@ struct GameCard: View {
                     .foregroundColor(recordManager.checkRecordsSaved(game: game, student: profile) ? .gray : .white )
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
                     .frame(width: 246, height: 36)
-                    .background(recordManager.checkRecordsSaved(game: game, student: profile) ? Color("neutralColor") : profile.selectedColor)
+                    .background(recordManager.checkRecordsSaved(game: game, student: profile) ? Color("neutralColor") : selectedProfileManager.getProfileColor())
                     .cornerRadius(17)
             }
             .disabled(recordManager.checkRecordsSaved(game: game, student: profile))

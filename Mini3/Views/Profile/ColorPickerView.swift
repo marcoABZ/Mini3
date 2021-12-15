@@ -18,7 +18,7 @@ struct ColorPickerView: View {
             editingProfile.selectedColor = profileManager.availableColors[index]
         }) {
             Rectangle()
-                .fill(profileManager.availableColors[index])
+                .fill(Color(profileManager.availableColors[index]))
                 .frame(width: 64, height: 64)
                 .cornerRadius(16)
         }
