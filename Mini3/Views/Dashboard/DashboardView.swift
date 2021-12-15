@@ -107,7 +107,7 @@ struct SideBarView: View {
     func delete(at offsets: IndexSet) {
         let profile = offsets.map { self.profileManager.profiles[$0] }.first!
         
-        recordManager.registeredRecords.removeAll { $0.studentID == profile }
+        recordManager.registeredRecords.removeAll { $0.studentId == profile.id }
         profileManager.delete(profile: profile)
     }
 }

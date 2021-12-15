@@ -9,11 +9,21 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="selectedColor" attributeType="Transformable"/>
     </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+        <attribute name="annotation" attributeType="String"/>
+        <attribute name="dateSaved" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="game" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="satisfaction" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="studentId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="teacher" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="TeacherModel" representedClassName="TeacherModel" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
         <element name="Profile" positionX="-45" positionY="0" width="128" height="134"/>
         <element name="TeacherModel" positionX="-45" positionY="54" width="128" height="44"/>
+        <element name="Record" positionX="-36" positionY="63" width="128" height="134"/>
     </elements>
 </model>

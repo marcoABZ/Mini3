@@ -56,6 +56,22 @@ class CoreDataManager {
         
     }
     
+    func deleteRecord(record: RecordModel) {
+        
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        
+        do {
+            let records = try persistentContainter.viewContext.fetch(fetchRequest)
+            let deletingRecord = records.first { $0.id == record.id }!
+            persistentContainter.viewContext.delete(deletingRecord)
+            try persistentContainter.viewContext.save()
+        } catch {
+            persistentContainter.viewContext.rollback()
+            print("Failed to save context \(error)")
+        }
+        
+    }
+    
     func getAllProfiles() -> [ProfileModel] {
         
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
@@ -66,6 +82,21 @@ class CoreDataManager {
             return profiles.map {
                 ProfileModel(name: $0.name!, birthdate: $0.birthdate!, color: $0.selectedColor as! UIColor, image: UIImage(data: $0.image!)!.resizeImageTo(size: CGSize(width: 110, height: 110))!, mascote: Mascotes(rawValue: $0.mascote)!, id: $0.id!, darkModeEnabled: $0.darkModeEnabled)
             }
+            
+        } catch {
+            return []
+        }
+        
+    }
+    
+    func getAllRecords() -> [RecordModel] {
+        
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        
+        do {
+           let records = try persistentContainter.viewContext.fetch(fetchRequest)
+            
+            return records.map { RecordModel(satisfaction: Satisfaction(rawValue: $0.satisfaction)!, annotation: $0.annotation!, teacher: Teacher(nome: $0.teacher!), game: Game(rawValue: $0.game!)!, dateSaved: $0.dateSaved!, studentId: $0.studentId!, id: $0.id!) }
             
         } catch {
             return []
@@ -118,6 +149,25 @@ class CoreDataManager {
             try persistentContainter.viewContext.save()
         } catch {
             print("Failed to save teacher \(error)")
+        }
+    }
+    
+    func save(record: RecordModel) {
+        
+        let savingRecord = Record(context: persistentContainter.viewContext)
+        
+        savingRecord.satisfaction = record.satisfaction.rawValue
+        savingRecord.annotation = record.annotation
+        savingRecord.teacher = record.teacher.nome
+        savingRecord.game = record.game.rawValue
+        savingRecord.dateSaved = record.dateSaved
+        savingRecord.studentId = record.studentId
+        savingRecord.id = record.id
+        
+        do {
+            try persistentContainter.viewContext.save()
+        } catch {
+            print("Failed to save record \(error)")
         }
     }
     
