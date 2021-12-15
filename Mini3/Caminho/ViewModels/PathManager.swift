@@ -19,7 +19,9 @@ class PathManager: ObservableObject {
     @Published var progress: Float = 0
         
     lazy var timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-        self.progress = self.getProgress()
+        withAnimation(.linear) {
+            self.progress = self.getProgress()
+        }
     }
     
     init() {

@@ -79,7 +79,6 @@ final class DragScene: SKScene {
         let touchLocation = touch.location(in: self)
         
         if rocket.contains(touchLocation) && pathNode.contains(touchLocation) {
-//            rocket.position = touchLocation
             handleColoring(location: touchLocation)
         }
     }
