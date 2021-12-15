@@ -87,6 +87,10 @@ class RecordManager: ObservableObject {
     func eraseTeacher(teacher: Teacher) {
         registeredTeachers = registeredTeachers.filter { $0 != teacher }
         CoreDataManager.shared.deleteTeacher(teacher: teacher)
+        let recordsToDelete = registeredRecords.filter { $0.teacher == teacher }
+        for record in recordsToDelete {
+            CoreDataManager.shared.deleteRecord(record: record)
+        }
     }
     
     func saveRecord(student: ProfileModel) {
@@ -103,6 +107,16 @@ class RecordManager: ObservableObject {
     func eraseRecord(record: RecordModel) {
         registeredRecords.remove(at: registeredRecords.firstIndex(of: record)!)
         CoreDataManager.shared.deleteRecord(record: record)
+    }
+    
+    func eraseAllRecords(forStudent student: ProfileModel) {
+        
+        registeredRecords.removeAll { $0.studentId == student.id }
+        
+        let recordsToDelete = registeredRecords.filter { $0.studentId == student.id }
+        for record in recordsToDelete {
+            CoreDataManager.shared.deleteRecord(record: record)
+        }
     }
     
     func getSatisfactionRates(jogo: Game, student: ProfileModel) -> [Float] {
