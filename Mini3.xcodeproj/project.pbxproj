@@ -24,6 +24,7 @@
 		5B2EDC9F2761594300016F96 /* DrawScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2EDC9E2761594300016F96 /* DrawScene.swift */; };
 		5B31D8B327457A090066FE4F /* GameFinishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B31D8B227457A090066FE4F /* GameFinishView.swift */; };
 		5B31D8B5274581EB0066FE4F /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B31D8B4274581EB0066FE4F /* RecordManager.swift */; };
+		5B4DB4372763C9740065B016 /* CaminhoGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4DB4362763C9740065B016 /* CaminhoGameView.swift */; };
 		5B5BF03D273C50640045AAEB /* DashboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03C273C50640045AAEB /* DashboardManager.swift */; };
 		5B5BF03F273C5BC90045AAEB /* GameCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */; };
 		5B5BF042273C66760045AAEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5BF041273C66760045AAEB /* ProfileView.swift */; };
@@ -94,6 +95,7 @@
 		5B2EDC9E2761594300016F96 /* DrawScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawScene.swift; sourceTree = "<group>"; };
 		5B31D8B227457A090066FE4F /* GameFinishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishView.swift; sourceTree = "<group>"; };
 		5B31D8B4274581EB0066FE4F /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
+		5B4DB4362763C9740065B016 /* CaminhoGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminhoGameView.swift; sourceTree = "<group>"; };
 		5B5BF03C273C50640045AAEB /* DashboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardManager.swift; sourceTree = "<group>"; };
 		5B5BF03E273C5BC90045AAEB /* GameCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoverModel.swift; sourceTree = "<group>"; };
 		5B5BF041273C66760045AAEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				5B2EDC992761317800016F96 /* CreatePathView.swift */,
 				5B2EDC9E2761594300016F96 /* DrawScene.swift */,
 				5B928EB1276284B700826736 /* DragScene.swift */,
+				5B4DB4362763C9740065B016 /* CaminhoGameView.swift */,
 				85C4C8092763CE1F009F33BF /* CaminhoSettingsView.swift */,
 			);
 			path = View;
@@ -512,6 +515,7 @@
 				FA28F5D527431FDD00B128C3 /* QuebraCabecaPreview.swift in Sources */,
 				5B2EDC9D276149DD00016F96 /* PathManager.swift in Sources */,
 				5B2CF1D827484146004D2A50 /* RecordModel.swift in Sources */,
+				5B4DB4372763C9740065B016 /* CaminhoGameView.swift in Sources */,
 				FA4EB11C2735BB130027D188 /* ImagePicker.swift in Sources */,
 				5B2AB098274EB9BC0001B90C /* DesempenhoDetalheView.swift in Sources */,
 				5B2CFAD4274C10A600239705 /* BackgroundBlurView.swift in Sources */,

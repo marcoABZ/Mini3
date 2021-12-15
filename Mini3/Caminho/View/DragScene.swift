@@ -14,11 +14,14 @@ final class DragScene: SKScene {
     var coloredCoordinates: [CGPoint] = []
     
     let path = UIBezierPath()
-    
+//    let maskLayer = CAShapeLayer()
     
     let rocketImage = UIImage(named: "rocket")
+    let planetImage = UIImage(named: "planetDestiny")
+    
     var pathNode: SKShapeNode!
     var coloredPathNode: SKShapeNode!
+    var planetNode: SKSpriteNode!
     
     var rocket: SKSpriteNode!
     
@@ -29,18 +32,38 @@ final class DragScene: SKScene {
             path.addLine(to: coordinate)
         }
         rocket.position = coordinates.first ?? .zero
+        rocket.zPosition = 11
         
         pathNode = SKShapeNode(path: path.cgPath)
+        
+//        maskLayer.path = path.cgPath
+//        maskLayer.lineCap = .round
+//        maskLayer.lineWidth = 50
+//        maskLayer.fillColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+//        view.layer.addSublayer(maskLayer)
+        
         coloredPathNode = SKShapeNode()
         coloredPathNode.strokeColor = UIColor.red
         coloredPathNode.lineWidth = 30
 
         pathNode.strokeColor = UIColor.white
-        pathNode.lineWidth = 100
+        pathNode.lineWidth = 60
+        pathNode.zPosition = 6
+        
+        planetNode = SKSpriteNode(texture: SKTexture(image: planetImage!))
+        planetNode.position = CGPoint(x: 890, y: 70)
+        planetNode.zPosition = 10
+        
+        addChild(planetNode)
         addChild(pathNode)
         addChild(coloredPathNode)
-        rocket.zPosition = 10
         addChild(rocket)
+        
+        let background = SKSpriteNode(imageNamed: "caminhoBackground")
+        background.size = view.frame.size
+        background.position = CGPoint(x: view.frame.midX, y: view.frame.midY)
+        background.zPosition = 0
+        addChild(background)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,7 +79,6 @@ final class DragScene: SKScene {
         let touchLocation = touch.location(in: self)
         
         if rocket.contains(touchLocation) && pathNode.contains(touchLocation) {
-//            rocket.position = touchLocation
             handleColoring(location: touchLocation)
         }
     }

@@ -17,13 +17,7 @@ struct Mini3App: App {
     
     var body: some Scene {
         WindowGroup {
-//            CreatePathView()
-            SplashView()
-                .environmentObject(profileManager)
-                .environmentObject(dashboardManager)
-                .environmentObject(recordManager)
-//                .environment(\.colorScheme, profileManager.selectedProfile.darkModeEnabled)
-                .accentColor(.primary)
+//                .environmentObject(dashboardManager)
         }
     }
 }

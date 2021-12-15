@@ -16,11 +16,19 @@ class PathManager: ObservableObject {
     var dragScene: DragScene?
     var scene: SKScene
     
+    @Published var progress: Float = 0
+        
+    lazy var timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        withAnimation(.linear) {
+            self.progress = self.getProgress()
+        }
+    }
+    
     init() {
         scene = DrawScene()
-        scene.size = CGSize(width: 1200, height: 700)
+        scene.size = CGSize(width: 986, height: 662)
         scene.scaleMode = .fill
-
+        timer.fire()
         drawScene = scene as? DrawScene
     }
     
@@ -36,7 +44,7 @@ class PathManager: ObservableObject {
     
     func switchToDragScene() {
         scene = DragScene()
-        scene.size = CGSize(width: 1200, height: 700)
+        scene.size = CGSize(width: 986, height: 662)
         scene.scaleMode = .fill
 
         dragScene = scene as? DragScene
@@ -45,5 +53,12 @@ class PathManager: ObservableObject {
     
     func copyCoordinates() {
         coordinates = (drawScene?.copyCoordinates())!
+    }
+    
+    func getProgress() -> Float {
+        let coloredNodes = dragScene?.coloredCoordinates.count ?? 0
+        let allNodes = dragScene?.coordinates.count ?? 1
+        
+        return 500 * Float(coloredNodes)/Float(allNodes)
     }
 }
