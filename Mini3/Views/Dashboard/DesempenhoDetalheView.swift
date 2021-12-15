@@ -77,13 +77,6 @@ struct DesempenhoDetalheView: View {
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                                     .padding()
                                     .padding(.trailing, 300)
-                                    .onTapGesture {
-                                        if recordManager.selectedRecordId == record.id {
-                                            recordManager.selectedRecordId = UUID()
-                                        } else {
-                                            recordManager.selectedRecordId = record.id
-                                        }
-                                    }
                                 Spacer()
                                 
                                 Image("\(record.satisfaction)Colored")
@@ -100,6 +93,14 @@ struct DesempenhoDetalheView: View {
                                         recordManager.eraseRecord(record: record)
                                     }
                                 
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if recordManager.selectedRecordId == record.id {
+                                    recordManager.selectedRecordId = UUID()
+                                } else {
+                                    recordManager.selectedRecordId = record.id
+                                }
                             }
                             .background(selectedProfileManager.getProfileColor())
                             .cornerRadius(16)
