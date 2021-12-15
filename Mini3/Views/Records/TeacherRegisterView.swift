@@ -98,9 +98,6 @@ struct ManageTeacherView: View {
                                 Image(systemName: "checkmark.seal.fill")
                             }
                             Text(" Prof. \(teacher.nome)")
-                                .onTapGesture {
-                                    recordManager.selectedTeacher = teacher
-                                }
                             Spacer()
 
                             Image(systemName: "trash")
@@ -108,6 +105,10 @@ struct ManageTeacherView: View {
                                     recordManager.eraseTeacher(teacher: teacher)
                                 }
 
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            recordManager.selectedTeacher = teacher
                         }
                         .font(.system(size: 17, design: .rounded).bold())
                         .padding()
