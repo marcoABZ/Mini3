@@ -17,6 +17,11 @@ struct Mini3App: App {
     
     var body: some Scene {
         WindowGroup {
+            SplashView()
+                .environmentObject(profileManager)
+                .environmentObject(recordManager)
+                .environmentObject(dashboardManager)
+                .accentColor(.primary)
 //                .environmentObject(dashboardManager)
         }
     }
