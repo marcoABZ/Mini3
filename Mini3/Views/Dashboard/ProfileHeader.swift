@@ -45,11 +45,11 @@ struct ProfileHeader: View {
             Text(selectedProfileManager.getName())
                 .font(.system(size: 24, design: .rounded).bold())
             
-            if let age = selectedProfileManager.getIdade() {
-            Text("\(age) anos")
-                .font(.system(size: 14, design: .rounded))
-                .padding(.vertical, 2)
-            }
+//            if let age = selectedProfileManager.getIdade() {
+//            Text("\(age) anos")
+//                .font(.system(size: 14, design: .rounded))
+//                .padding(.vertical, 2)
+//            }
         }
         .padding()
     }

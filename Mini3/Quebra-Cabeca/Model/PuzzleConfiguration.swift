@@ -21,7 +21,7 @@ class PuzzleConfiguration: ObservableObject {
         self.horizontalDivision = horizontalDivision
         self.som = som
         self.ordenacao = ordenacao
-        self.image = image
+        self.image = getRandomCoverImage().resizeImageTo(size: CGSize(width: 362, height: 476))!
         self.voltarPeca = voltarPeca
     }
     
@@ -35,6 +35,13 @@ class PuzzleConfiguration: ObservableObject {
         case none = "X"
         case letter = "A"
         case number = "1"
+    }
+    
+    func getRandomCoverImage() -> UIImage {
+        let game = Game.allCases.randomElement()!
+        let mascote = Mascotes.allCases.randomElement()!
+        let cover = game.getCoverImage(mascote: mascote)
+        return UIImage(named: cover)!
     }
 }
 

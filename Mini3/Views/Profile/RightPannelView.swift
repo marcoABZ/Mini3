@@ -39,8 +39,8 @@ struct RightPannelView: View {
                             .stroke(Color.gray.opacity(0.5), lineWidth: 1)
                     )
                 
-                DatePicker("Data de Nascimento", selection: $editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
-                    .padding(.top, 24)
+//                DatePicker("Data de Nascimento", selection: $editingProfile.birthdate, in: ...Date(), displayedComponents: .date)
+//                    .padding(.top, 24)
             
 //                Spacer()
                 

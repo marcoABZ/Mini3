@@ -26,7 +26,7 @@ struct QuebraCabecaImagePickerView: View {
                 Image(systemName: "camera")
                     .foregroundColor(.white)
                     .font(.system(size: cameraIconFontSize, weight: .bold, design: .default))
-                    .padding()
+                    .padding(25)
                     .background {
                         Circle()
                             .foregroundColor(selectedProfileManager.getProfileColor())
@@ -70,14 +70,15 @@ struct QuebraCabecaImagePickerView: View {
     let imageAspectRatio: CGFloat = 3/4
     let imageFrameWidth: CGFloat = 362
     let imageFrameHeight: CGFloat = 476
-    let cameraIconFontSize: CGFloat = 24
-    let cameraIconXOffset: CGFloat = 168
-    let cameraIconYOffset: CGFloat = 226
+    let cameraIconFontSize: CGFloat = 30
+    let cameraIconXOffset: CGFloat = 180
+    let cameraIconYOffset: CGFloat = 230
 }
 
-//struct QuebraCabecaImageView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuebraCabecaImageView()
-//.previewInterfaceOrientation(.landscapeRight)
-//    }
-//}
+struct QuebraCabecaImagePickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuebraCabecaImagePickerView(cfg: PuzzleConfiguration())
+            .environmentObject(SelectedProfileManager())
+            .previewInterfaceOrientation(.landscapeRight)
+    }
+}

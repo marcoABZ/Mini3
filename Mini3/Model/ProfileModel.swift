@@ -45,7 +45,7 @@ struct ProfileModel: Equatable, Hashable, Identifiable {
     var id = UUID()
     var image: UIImage
     
-    init(name: String, birthdate: Date, color: UIColor, image: String, darkModeEnabled: Bool = false) {
+    init(name: String, birthdate: Date = .now, color: UIColor, image: String, darkModeEnabled: Bool = false) {
         self.name = name
         self.birthdate = birthdate
         self.selectedColor = color
@@ -54,7 +54,7 @@ struct ProfileModel: Equatable, Hashable, Identifiable {
         self.mascote = .coelho
     }
     
-    init(name: String, birthdate: Date, color: UIColor, image: UIImage, mascote: Mascotes, id: UUID, darkModeEnabled: Bool = false) {
+    init(name: String, birthdate: Date = .now, color: UIColor, image: UIImage, mascote: Mascotes, id: UUID, darkModeEnabled: Bool = false) {
         self.name = name
         self.birthdate = birthdate
         self.selectedColor = color
