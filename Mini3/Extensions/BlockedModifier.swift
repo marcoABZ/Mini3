@@ -19,9 +19,14 @@ struct Blocked: ViewModifier {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(.black)
                             .opacity(0.5)
-                        Image(systemName: "lock.slash.fill")
-                            .foregroundColor(.white)
-                            .font(.system(size: 56))
+                        VStack {
+                            Image(systemName: "lock.slash.fill")
+                                .foregroundColor(.white)
+                                .font(.system(size: 56))
+                            Text("Jogo em desenvolvimento")
+                                .foregroundColor(.white)
+                                .font(.system(size: 28))
+                        }
                     }
                 }
         } else {

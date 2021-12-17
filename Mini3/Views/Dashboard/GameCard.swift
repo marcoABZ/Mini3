@@ -145,3 +145,9 @@ struct GameCard: View {
     }
 }
 
+struct GameCard_Preview: PreviewProvider {
+
+    static var previews: some View {
+        GameCard(game: .quebraCabeca, mascote: .chiba, profile: ProfileManager().profiles[0], allFaceUp: .constant(true), isActive: .constant(true), hasSidebar: .constant(false), fractions: [])
+    }
+}
