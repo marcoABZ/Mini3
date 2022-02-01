@@ -25,6 +25,7 @@ struct GameDashboardView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 30) {
                         ForEach(Game.allCases, id: \.rawValue) { game in
+                            if game == .quebraCabeca {
                                 GameCard(
                                     game: game,
                                     mascote: selectedProfileManager.getMascote(),
@@ -35,6 +36,7 @@ struct GameDashboardView: View {
                                     fractions: recordManager.getSatisfactionRates(jogo: game, student: selectedProfileManager.getProfile()))
                                     .environmentObject(selectedProfileManager)
                                     .padding(.vertical)
+                            }
                         }
                     }
                 }.frame(height: geo.size.height * 0.8)
